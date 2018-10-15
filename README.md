@@ -7,5 +7,5 @@ Check out the latest release on the `code` > `releases`
 ## If you want to program the game...
 Visit the wiki under the `Wiki` tab to learn how to help out
 
-## If you want to contribute ideas/give feedback
+## If you want to contribute ideas/give feedback...
 Visit the `Issues` tab and mark them with the proper label
