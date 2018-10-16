@@ -117,7 +117,7 @@ y = 1
 There's endless amounts of space and since GML is not a whitespace language, it just ignores all the unnecessary lines anyway. It's just for readability!
 
 ### Spaces (Horizontal spacing)
-Space can convey meaning and make what is happening in the code much clearer if we use it consstetly. I'll try to list as many examples as I can to show you when a space is appropriate and when it is not.
+Space can convey meaning and make what is happening in the code much clearer if we use it consistently. I'll try to list as many examples as I can to show you when a space is appropriate and when it is not.
 
 | Situation | Needs spaces? | Example(s) |
 | --------- | ------------- | ---------- |
