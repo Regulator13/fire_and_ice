@@ -159,7 +159,7 @@ if (speed < 5 and energy > 5){
 }
 ```
 ### Logical operators
-Use the keywords `and`, `or`, and `not` as opposed to the symbols `&&`, `||`, and `!` to improve readability. Again parentheses are typically not needed with these unless you're applying them to multiple terms.
+Use the keywords `and`, `or`, and `not` as opposed to the symbols `&&`, `||`, and `!` to improve readability. Parentheses may be needed with these if you're applying them to multiple terms.
 ```
 if (lives > 0 and health <= 0){
   //Restart
@@ -171,7 +171,7 @@ if not (speed == 5){
   speed = 5
 }
 ```
-Note the parentheses are needed or the `not` will only negate the `speed` and not the comparison `speed == 5`
+Note: The parentheses are needed or the `not` will only negate the `speed` and not the comparison `speed == 5`. No parenthesis are needed for negating boolean values, e.g. `if not is_alive{` would work if `is_alive` is a boolean.
 
 ### Some other notes
 - Use == as a comparison operator `if speed == 4`. GameMaker doesn't require this but do it anyway.
