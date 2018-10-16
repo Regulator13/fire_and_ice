@@ -145,7 +145,9 @@ Don't add an extra line between braces, just keep the all on different lines.
 ### Parentheses
 Use parentheses when necessary or when they improve readability, try not to overuse them. GML follows order of operations so `2 + 2 * 2` = 6 not 8, no parentheses required.
 
-In regard to control statements, they are not required! However, do use them if the statement is lengthy or has multiple conditions. Good:
+In regard to control statements, they are not required! However, do use them if the statement is lengthy or has multiple conditions. 
+
+Good:
 ```
 if speed < 5{
   speed += 1
@@ -160,17 +162,19 @@ if (speed < 5 and energy > 5){
 ### Logical operators
 Use the keywords `and`, `or`, and `not` as opposed to the symbols `&&`, `||`, and `!` to improve readability. Parentheses may be needed with these if you're applying them to multiple terms.
 ```
-if (lives > 0 and health <= 0){
+if lives > 0 and health <= 0{
   //Restart
 }
 ```
-or
+No parenthesis needed
+
+or:
 ```
 if not (speed == 5){
   speed = 5
 }
 ```
-Note: The parentheses are needed or the `not` will only negate the `speed` and not the comparison `speed == 5`. No parenthesis are needed for negating boolean values, e.g. `if not is_alive{` would work if `is_alive` is a boolean.
+Note: The parentheses here are needed or the `not` will only negate the `speed` and not the comparison `speed == 5`. No parenthesis are needed for negating boolean values, e.g. `if not is_alive{` would work if `is_alive` is a boolean (`true` or `false`).
 
 ### Some other notes
-- Use == as a comparison operator `if speed == 4`. GameMaker doesn't require this but do it anyway.
+- Use `==` as a comparison operator `if speed == 4`. GameMaker doesn't require this but do it anyway.
