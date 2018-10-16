@@ -1,11 +1,15 @@
 # Contributing
 
 ## Table of Contents
-### [New to Github](#new-to-github)
-### [Coding Standards](#coding-standards)
+__[New to Github](#new-to-github)__
+
+
+__[Coding Standards](#coding-standards)__
 - [Resource Naming](#resource-naming)
 - [Variable Naming](#variable-naming)
-### [Style Guide](#style-guide)
+
+
+__[Style Guide](#style-guide)__
 - [Indentation](#indentation)
 - [New Lines (Vertical Spacing)](#new-lines-vertical-spacing)
 - [Spaces (Horizontal Spacing)](#spaces-horizontal-spacing)
@@ -28,7 +32,7 @@
 11. Wait for your request to be reviewed
 
 ## Coding Standards
-Fame Games' *Dust: Fire and Ice* project is coded using GameMaker Language or GML. Coding can be done in text format but syntax highlighting is featured on GameMaker Studio 2. When programming, it is important you follow these standards to increase readability and avoid errors.
+Fame Games' *Dust: Fire and Ice* is coded using GameMaker Language or GML. Coding can be done in text format but syntax highlighting is featured on GameMaker Studio 2. When programming, it is important you follow these standards to increase readability and avoid errors.
 
 ### Resource Naming
 The following prefixes should be used when creating any resource (e.g. spr_player or rm_main)
