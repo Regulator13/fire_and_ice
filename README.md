@@ -11,4 +11,4 @@ Visit the wiki under the `Wiki` tab to learn how to help out
 Visit the `Issues` tab and mark them with the proper label
 
 
-Please note: All users and contributors must adhere to the code of conduct outlined in the CODE_OF_CONDUCT.md file. Violators will recieve a temporary or permanent ban. Give it a read! (gist is don't be a jerk)
+**Please note:** All users and contributors must adhere to the code of conduct outlined in the CODE_OF_CONDUCT.md file. Violators will recieve a temporary or permanent ban. Give it a read! (gist is don't be a jerk)
