@@ -143,7 +143,7 @@ if statement{
 Don't add an extra line between braces, just keep the all on different lines.
 
 ### Parentheses
-Use parentheses when necessary or improves readability, try not to overuse them. GML follows order of operations so `2 + 2 * 2` = 6 not 8, no parentheses required.
+Use parentheses when necessary or when they improve readability, try not to overuse them. GML follows order of operations so `2 + 2 * 2` = 6 not 8, no parentheses required.
 
 In regard to control statements, they are not required! However, do use them if the statement is lengthy or has multiple conditions. Good:
 ```
