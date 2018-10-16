@@ -16,6 +16,7 @@ __[Style Guide](#style-guide)__
 - [Braces](#braces)
 - [Parentheses](#parentheses)
 - [Logical Operators](#logical-operators)
+- [Commenting](#commenting)
 - [Some Other Notes](#some-other-notes)
 
 ## New to Github
@@ -175,6 +176,50 @@ if not (speed == 5){
 }
 ```
 Note: The parentheses here are needed or the `not` will only negate the `speed` and not the comparison `speed == 5`. No parenthesis are needed for negating boolean values, e.g. `if not is_alive{` would work if `is_alive` is a boolean (`true` or `false`).
+
+### Commenting
+Comments are critical for code that will be reviewed, shared, and edited. As is our quest in coding, knowing when and how much to comment will improve readability and manageability. There are a few different types of comments.
+
+#### Function Documentation
+These comments take place at the beginning of a function or script in GML's case. The Documentation should include the function's purpose, paramaters, and what it returns. For documentation the `///` is used. A scripts documentation of Docstring might look like this:
+```
+/// @function  convert_string_to_decimal(str)
+/// @description  Convert a string to a decimal
+/// @param str  A string containing a decimal number
+// Returns a decimal number
+
+//Actual Code
+```
+The `@function`, `@description`, and `@param` are special documentation keywords that allow the user see information about the function while coding. For example, the `@function` keyword will autocomplete the function and show the parameter `(str)` when someone tries to use it. 2 spaces should be used after these keywords for better readability.
+
+#### Event Documentation
+
+Events also have descriptions at the top which is shown on the left side where the events for an object are listed. This is automatically added to each event and looks like `/// @description  Type description here`. __A brief summary of the actions completed in the event should be included here.__ This will allow programmers to find what is happening in extremely length events (such as step events) without scrolling through the whole thing. For example, if there is 100 lines of checks and then at the end of the step in 3 lines the object checks to see if the player has died, that might be tough to find. However, with a description at the top of the event like `/// @description  check this, check that, check another thing, check if the player has died` then a programmer can do less searching when that snippet of code needs to be found two months later.
+
+#### In-line comments
+
+Finally in-line comments can help supplement code. In general, if the style guide and standards are followed, code should be fairly readable on its own. However, if further explanation is needed besided what is obvious, in-line comments are required.
+
+In-line comments use the `//` at the beginning of the line and should always take place before the code they are referring to on a seperate line, (except in the case of a long list in which each line needs a comment, then they can go on the same line).
+```
+//Comment about code
+//Code itself
+```
+In-line comments should say _why_ a certain thing is being done instead of simply restating what is happening in the code. For example:
+```
+//Check to see if the speed is less than 5, then set it to 5
+if speed<5{
+  speed = 5
+}
+```
+This is bad. The comment states the obvious. So what do you comment here? Nothing. Comments are for explaining the ambiguous, if they don't make something clear that wasn't clear before they shouldn't be included. Here's a good comment to reduce ambiguity:
+```
+//If the player is below the kill line, kill him.
+if obj_player.y < ((room_height / 64) + 8) * level{
+  instance_destroy(obj_player)
+}
+```
+The random coordinates may not be obvious to someone looking at this code for the first time. The comment explains _why_ the coordinate is used. Of course, even better might be to use a variable: `kill_line = (room_height / 64 + 8) * level` since the line `if obj_player.y < kill_line` would be self explanatory. Anyway, use in-line comments sparingly, always asking yourself if you could still explain this code in a month, or year. If not, add a comment.
 
 ### Some other notes
 - Use `==` as a comparison operator `if speed == 4`. GameMaker doesn't require this but do it anyway.
