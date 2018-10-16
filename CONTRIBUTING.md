@@ -93,7 +93,6 @@ switch (state){
   
   case 1:
     //Do second thing
-    
 }
 ```
 Note how each block of nested code is indented one more level than the last. It's easy to see where all the cases are for the switch statement because they're all at the same indenation or column. 
