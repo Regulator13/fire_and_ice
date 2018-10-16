@@ -109,7 +109,7 @@ for i=0; i<10; i++{
   }
 }
 ```
-The action code is not directly under the `for` loop and `if` statement. The `if` statement is not, itself, action code though so it has a line seperating it from the action code above it that is unrelated to it. Don't be stingy with space! Each statement deserves it's own line. Don't use `x = 1; y= 1;`, instead do:
+The action code is directly under the `for` loop and `if` statement. The `if` statement is not, itself, action code though, so it has a line seperating it from the action code above it that is unrelated to it. Don't be stingy with space! Each statement deserves it's own line. Don't use `x = 1; y= 1;`, instead do:
 ```
 x = 1
 y = 1
