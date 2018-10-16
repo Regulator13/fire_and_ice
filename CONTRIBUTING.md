@@ -131,7 +131,7 @@ Space can convey meaning and make what is happening in the code much clearer if 
 | After statements, before braces | No | `if x == true{` |
 
 ### Braces
-Include immediately after the statement, regardless of its size. End them on a different line, aligned with the beginning of the statement they refer to. GML does this automatically when you type a close bracket. Essentially don't go against GML's flow.
+Include immediately after the statement, regardless of its size. End them on a different line, aligned with the beginning of the statement they refer to. GML does this automatically when you type a close brace. Essentially don't go against GML's flow.
 ```
 if statement{
   
