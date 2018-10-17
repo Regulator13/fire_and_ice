@@ -5,7 +5,9 @@ The official *Dust: Fire and Ice* game and work environment
 Check out the latest release on `code` > `releases`
 
 ## If you want to program the game...
-Visit the [CONTRIBUTING.md](https://github.com/famegames/fire-and-ice/blob/master/CONTRIBUTING.md).
+If you're ready to program, visit the [CONTRIBUTING.md](https://github.com/famegames/fire-and-ice/blob/master/CONTRIBUTING.md). 
+
+If you want to learn GML so you can join the fun, visit the [wiki](https://github.com/famegames/fire-and-ice/wiki/Programming-Help).
 
 ## If you want to contribute ideas/give feedback...
 Visit the `Issues` tab and mark them with the proper label
