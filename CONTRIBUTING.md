@@ -70,8 +70,8 @@ Counters are variables that get incremented or decremented in a `for` or `while`
 ```
 var i
 var j
-for i=0; i<10; i+=1{
-  for j=0; j<10; j+=1{
+for (i=0; i<10; i+=1){
+  for (j=0; j<10; j+=1){
     //Code
   }
 }
@@ -106,7 +106,7 @@ Also note the usage of new lines in the above example, one after each block of c
 //Other code, unrelated to the for loop
 
 var i
-for i=0; i<10; i+=1{
+for (i=0; i<10; i+=1){
   //Do something each time
   
   if i < 5{
