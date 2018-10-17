@@ -130,7 +130,7 @@ Space can convey meaning and make what is happening in the code much clearer if 
 | Operators | Yes | `speed += 5` `height * room_height` `speed < 5`|
 | Parameter Assignment | No | `function(param=1)` |
 | `for` loop assignments | No | `for i=10` etc. |
-| `for` loop sections | Yes | `for i=10; i>0; i += 1` (After semicolons) |
+| `for` loop sections | Yes | `for (i=10; i>0; i += 1)` (After semicolons) |
 | After commas | Yes | `fuction(param1, param2, param3)` |
 | Around parentheses | No | `grid = (room_height / 64) * 5` |
 | After statements, before braces | No | `if x == true{` |
