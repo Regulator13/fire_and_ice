@@ -71,7 +71,7 @@ Counters are variables that get incremented or decremented in a `for` or `while`
 var i
 var j
 for i=0; i<10; i += 1{
-  for j=0; j<10; j+= 1{
+  for j=0; j<10; j += 1{
     //code
   }
 }
