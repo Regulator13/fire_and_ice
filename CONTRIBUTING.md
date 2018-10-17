@@ -41,10 +41,12 @@ The following prefixes should be used when creating any resource (e.g. spr_playe
 * Spites:    spr_
 * Paths:     pth_
 * Scripts:   scr_
+* Rooms:     rm_
+
+The following are all object types
 * Objects:   obj_
 * Parents:   par_
 * Particles: prt_
-* Rooms:     rm_
 
 When reasonable, an object should share the same name as its sprite, using the `obj_` prefix instead of the `spr_` prefix. This will help coordinate what belongs with what.
 
@@ -54,14 +56,14 @@ There are many types of variables and seperating which type is which will _great
 #### Local Variables
 A local variable is a variable that is only used in the current event (create, step, etc.) and then discarded. These variables should follow the standards below but should also be preceded by the `var` keyword, e.g. `var game_over`. This keyword discards the variable at the end of the event, increasing game speed.
 
+#### 'Normal' Variables
+The typical variable you define, such as `player_health` or `room_width` should be written in all lower case, with words seperated by underscores. Numeric suffixes can be added directly to the end such as `block3`. _Note:_ variable names can never start with number. Not `2_player` but `player2`.
+
 #### Global Variables
 Variables that need to be accessed outside the event or by another object can be named according to the standards below. To access another object's variable, simply use `obj_name.variable_name`. Use of the keyword `global` should be minimized.
 
 #### Constants
 Constants are definitions that do not change, ever. For example `pi` or `player_speed` (If the player always travels at the same speed). Think, "Am I ever going to change this variable? Ever?" If the answer is no, it's a constant. Constants are written in all caps, e.g. `PI` or `PLAYER_SPEED`.
-
-#### 'Normal' Variables
-The typical variable you define, such as `player_health` or `room_width` should be written in all lower case, with words seperated by underscores. Numeric suffixes can be added directly to the end such as `block3`. _Note:_ variable names can never start with number. Not `2_player` but `player2`.
 
 #### Counters
 Counters are variables that get incremented or decremented in a `for` or `while` loop. If the variable is being used specifically for counting in that loop, `i` `j` and `k` should be used. For example:
