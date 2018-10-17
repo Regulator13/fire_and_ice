@@ -70,9 +70,9 @@ Counters are variables that get incremented or decremented in a `for` or `while`
 ```
 var i
 var j
-for i=0; i<10; i += 1{
-  for j=0; j<10; j += 1{
-    //code
+for i=0; i<10; i+=1{
+  for j=0; j<10; j+=1{
+    //Code
   }
 }
 ```
@@ -103,16 +103,18 @@ Note how each block of nested code is indented one more level than the last. It'
 ### New Lines (Vertical Spacing)
 Also note the usage of new lines in the above example, one after each block of code. In general, add a newline after each loop or statement that doesn't contain the "final level" of code or the code that actually does something, action code, if you will. There is a line after the `switch` statement because it contains a `case` statement. However, there is no line after the `case 0:` or `case 1:` because they contain the action code. However! There is a line between the `case` statements because they are not action code. Here's another example:
 ```
+//Other code, unrelated to the for loop
+
 var i
-for i=0; i<10; i++{
+for i=0; i<10; i+=1{
   //Do something each time
   
-  if i<5{
+  if i < 5{
     //Do something else when i<5
   }
 }
 ```
-The action code is directly under the `for` loop and `if` statement. The `if` statement is not, itself, action code though, so it has a line seperating it from the action code above it that is unrelated to it. Don't be stingy with space! Each statement deserves it's own line. Don't use `x = 1; y= 1;`, instead do:
+Basically code is broken into blocks by newlines. The declartion `var i` is related to `for` loop so there is no blank line after it. The "Other code" however is unrelated and therefore there is a blank space after it. The action code is directly under the `for` loop and `if` statement. The `if` statement is not, itself, action code though, so it has a line seperating it from the action code above it that is unrelated to it. Don't be stingy with space! Each statement deserves it's own line. Don't use `x = 1; y= 1;`, instead do:
 ```
 x = 1
 y = 1
@@ -139,7 +141,7 @@ Include immediately after the statement, regardless of its size. End them on a d
 if statement{
   
   if statement{
-    Do stuff
+    //Do stuff
   }
 }
 ```
@@ -158,7 +160,7 @@ if speed < 5{
 ```
 Also good:
 ```
-if (speed < 5 and energy > 5){
+if (speed < 5 and energy > 5) or health < 10{
   speed += 1
 }
 ```
@@ -210,13 +212,13 @@ In-line comments use the `//` at the beginning of the line and should always tak
 In-line comments should say _why_ a certain thing is being done instead of simply restating what is happening in the code. For example:
 ```
 //Check to see if the speed is less than 5, then set it to 5
-if speed<5{
+if speed < 5{
   speed = 5
 }
 ```
 This is bad. The comment states the obvious. So what do you comment here? Nothing. Comments are for explaining the ambiguous, if they don't make something clear that wasn't clear before they shouldn't be included. Here's a good comment to reduce ambiguity:
 ```
-//If the player is below the kill line, kill him.
+//If the player is below the kill line, kill him
 if obj_player.y < ((room_height / 64) + 8) * level{
   instance_destroy(obj_player)
 }
