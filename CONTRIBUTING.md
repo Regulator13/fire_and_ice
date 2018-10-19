@@ -195,14 +195,14 @@ Comments are critical for code that will be reviewed, shared, and edited. As is 
 #### Function Documentation
 These comments take place at the beginning of a function or script in GML's case. The Documentation should include the function's purpose, paramaters, and what it returns. For documentation the `///` is used. A scripts documentation of Docstring might look like this:
 ```
-/// @function  convert_string_to_decimal(str)
+/// @function  convert_string_to_decimal(str_num)
 /// @description  Convert a string to a decimal
-/// @param str  A string containing a decimal number
+/// @param str_num str | A string containing a decimal number
 // Returns a decimal number
 
 //Actual Code
 ```
-The `@function`, `@description`, and `@param` are special documentation keywords that allow the user see information about the function while coding. For example, the `@function` keyword will autocomplete the function and show the parameter `(str)` when someone tries to use it. 2 spaces should be used after these keywords for better readability.
+The `@function`, `@description`, and `@param` are special documentation keywords that allow the user see information about the function while coding. For example, the `@function` keyword will autocomplete the function and show the parameter `(str_num)` when someone tries to use it. The `@param` line is set up as follows `/// @param ARGUMENT_NAME ARGUMENT_TYPE | ARGUMENT_DESCRIPTION; ARGUMENT_RANGE(if applicable)`. 2 spaces should be used after these keywords for better readability.
 
 #### Event Documentation
 
