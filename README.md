@@ -6,6 +6,8 @@ Check out the latest release on `code` > `releases`
 
 ![Release Location](https://github.com/famegames/fire-and-ice/blob/master/tutorial_images/Release_location.PNG "Release button is highlighted. You can't miss it. Just scroll up.")
 
+Download the source code and find the `.exe` file. Double click on that and you're player _Dust: Fire and Ice_!
+
 ## If you want to program the game...
 If you're ready to program, visit [CONTRIBUTING](https://github.com/famegames/fire-and-ice/blob/master/CONTRIBUTING.md). 
 
