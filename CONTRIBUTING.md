@@ -38,6 +38,8 @@ To increase productivity, all functions (scripts) will be equipped with [JS DOC]
 
 ![Preferences](https://github.com/famegames/fire-and-ice/blob/master/tutorial_images/Display_arguments.PNG "File>Preferences>Language>GML>Check all boxes")
 
+This will show parameter descriptions but note that you can also hit `F1` once you've typed a function name to take you directly to the script that has that function.
+
 ## Coding Standards
 Fame Games' *Dust: Fire and Ice* is coded using GameMaker Language or GML. Coding can be done in text format but syntax highlighting is featured on GameMaker Studio 2. When programming, it is important you follow these standards to increase readability and avoid errors.
 
