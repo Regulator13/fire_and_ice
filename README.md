@@ -11,11 +11,11 @@ Download the source code and find the `.exe` file. Double click on that and you'
 ## If you want to program the game...
 If you're ready to program, visit [CONTRIBUTING](https://github.com/famegames/fire-and-ice/blob/master/CONTRIBUTING.md). 
 
-If you want to learn GML so you can join the fun, visit the [wiki](https://github.com/famegames/fire-and-ice/wiki/Programming-Help).
+If you want to learn GameMakerLanguage (GML) so you can join the fun, visit the [wiki](https://github.com/famegames/fire-and-ice/wiki/Programming-Help).
 
 ## If you want to contribute ideas/give feedback...
 Visit the `Issues` tab and mark them with the proper label
 
-
+---
 
 **Please note:** All users and contributors must adhere to the code of conduct outlined in the [CODE_OF_CONDUCT](https://github.com/famegames/fire-and-ice/blob/master/CODE_OF_CONDUCT.md). Violators will recieve a temporary or permanent ban. Give it a read! (The gist is don't be a jerk)
