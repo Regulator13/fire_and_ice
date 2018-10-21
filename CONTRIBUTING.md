@@ -263,4 +263,4 @@ Once you have completed an issue:
 2. Submit a pull request on the [pull request tab](https://github.com/famegames/fire-and-ice/pulls)
 3. Type in relevant information including issue number into the prompt
 4. Go to your issue and label it with the green `pull request submitted` label so others know you have completed that issue and are just waiting on a review
-5. Don't close the issue. The reviewer will close it when he/she has ensured your code can be safely added to the `master` branch. In the meantime others will want to know that your code has not yet been added.
+5. Don't close the issue. The reviewer will close it when he/she has ensured your code can be safely added to the `master` branch. In the meantime others will want to know that your code has not yet been added
