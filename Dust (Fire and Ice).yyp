@@ -71,6 +71,14 @@
             }
         },
         {
+            "Key": "07691635-fa9b-4709-998d-b0170b3a7e32",
+            "Value": {
+                "id": "194fc129-6a0d-409c-9bf4-f1ff0d0a1355",
+                "resourcePath": "objects\\obj_water_spawn\\obj_water_spawn.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "0a7b7527-0f10-44df-9353-03236d1f59fa",
             "Value": {
                 "id": "09578b91-fc9e-4bd3-ab62-563ef62de42f",
@@ -419,6 +427,14 @@
             "Value": {
                 "id": "618acb5b-a41b-4f97-b9ed-05b46e16d35c",
                 "resourcePath": "sprites\\spr_logo\\spr_logo.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "516fb6a4-9600-450e-971d-b60f8ae74036",
+            "Value": {
+                "id": "c8aefdbb-1cc2-4cf8-8aea-a3c7b1e4c5df",
+                "resourcePath": "sprites\\spr_water_spawn\\spr_water_spawn.yy",
                 "resourceType": "GMSprite"
             }
         },
