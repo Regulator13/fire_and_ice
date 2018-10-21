@@ -98,7 +98,6 @@ The style guide is not standard, that is, it's not required, but following it wi
 Indentation is not required in GML but is highly recommended. Every level or loop of code that is nested should be indented one further than the level right above it. Here's an example:
 ```
 switch (state){
-  
   case 0:
     //Do first thing
   
@@ -109,7 +108,7 @@ switch (state){
 Note how each block of nested code is indented one more level than the last. It's easy to see where all the cases are for the switch statement because they're all at the same indenation or column. 
 
 ### New Lines (Vertical Spacing)
-Also note the usage of new lines in the above example, one after each block of code. In general, add a newline after each loop or statement that doesn't contain the "final level" of code or the code that actually does something, action code, if you will. There is a line after the `switch` statement because it contains a `case` statement. However, there is no line after the `case 0:` or `case 1:` because they contain the action code. However! There is a line between the `case` statements because they are not action code. Here's another example:
+Also note the usage of new lines in the above example, one after each block of code. In general, add a newline after each loop or statement that doesn't contain the "final level" of code or the code that actually does something: action code, if you will. The exception is that there is no new line needed when the next line is indented further than the previous line. That is, a new line of code should not be both indented _and_ have a blank line. There is no line after the `switch` statement because the `case` statement is already indented. There is no line after the `case 0:` or `case 1:` because they contain the action code. However! There is a line between the `case` statements because they are not action code. Here's another example:
 ```
 //Other code, unrelated to the for loop
 
@@ -122,10 +121,28 @@ for (i=0; i<10; i+=1){
   }
 }
 ```
-Basically code is broken into blocks by newlines. The declartion `var i` is related to `for` loop so there is no blank line after it. The "Other code" however is unrelated and therefore there is a blank space after it. The action code is directly under the `for` loop and `if` statement. The `if` statement is not, itself, action code though, so it has a line seperating it from the action code above it that is unrelated to it. Don't be stingy with space! Each statement deserves it's own line. Don't use `x = 1; y= 1;`, instead do:
+Basically code is broken into blocks by newlines. The declartion `var i` is related to `for` loop so there is no blank line after it. The "Other code" however is unrelated and therefore there is a blank space after it. The action code is directly under the `for` loop and `if` statement. The `if` statement is not, itself, action code though, so it has a line seperating it from the action code above it since it is on the same indentation as it. Don't be stingy with space! Each statement deserves it's own line. Don't use `x = 1; y= 1;`, instead do:
 ```
 x = 1
 y = 1
+```
+GameMaker also allows for control statements to all be on one line if there is only one line of code to execute. For readability, it is preferred this is avoided unless a long list of control statements all execute one line of code each.
+```
+//Bad
+if lives <  destroy_instance
+```
+```
+//Good
+if lives < 1{
+  destroy_instance()
+}
+```
+```
+//Also good
+if condition_1 action_1
+if condition_2 action_2
+if condition_3 action_3
+if condition_4 action_4
 ```
 There's endless amounts of space and since GML is not a whitespace language, it just ignores all the unnecessary lines anyway. It's just for readability!
 
@@ -147,7 +164,6 @@ Space can convey meaning and make what is happening in the code much clearer if 
 Include immediately after the statement, regardless of its size. End them on a different line, aligned with the beginning of the statement they refer to. GML does this automatically when you type a close brace. Essentially don't go against GML's flow.
 ```
 if statement{
-  
   if statement{
     //Do stuff
   }
