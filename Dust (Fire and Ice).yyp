@@ -839,6 +839,14 @@
             }
         },
         {
+            "Key": "8b923f38-08b6-4476-956a-30048732e431",
+            "Value": {
+                "id": "a8b726a2-f5e5-4330-bc83-19598eb1c43c",
+                "resourcePath": "sprites\\spr_water_drop\\spr_water_drop.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "8ceae31a-6258-4956-8233-96ba0b765939",
             "Value": {
                 "id": "d8b99818-4c97-4d8c-add7-935840f8300b",
@@ -1364,6 +1372,14 @@
                 "id": "6d4435fa-1e79-4180-920e-887c00825f4f",
                 "resourcePath": "scripts\\scr_toggleKey\\scr_toggleKey.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "f2037254-4dcf-40af-a5fa-7cfadeca9f69",
+            "Value": {
+                "id": "ee6ee825-6cd8-49ad-9cfe-b2135d2f74a7",
+                "resourcePath": "objects\\obj_water_drop\\obj_water_drop.yy",
+                "resourceType": "GMObject"
             }
         },
         {
