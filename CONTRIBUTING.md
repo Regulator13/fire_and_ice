@@ -259,6 +259,15 @@ if obj_player.y < ((room_height / 64) + 8) * level{
 ```
 The random coordinates may not be obvious to someone looking at this code for the first time. The comment explains _why_ the coordinate is used. Of course, even better might be to use a variable: `kill_line = (room_height / 64 + 8) * level` since the line `if obj_player.y < kill_line` would be self explanatory. Anyway, use in-line comments sparingly, always asking yourself if you could still explain this code in a month, or year. If not, add a comment.
 
+A short inline comment should be included before a section of code (more than 1 or 2 lines) to identify the purpose of the code, even if the code is self-explanatory. This is to allow programmers to quicky break down what's going on in an event without reading all the code.
+```
+//Release object
+with instance_destroy(other){
+  inventory -= 1
+  sprite_index -= 1
+}
+```
+
 ### Some other notes
 - Use `==` as a comparison operator `if speed == 4`. GameMaker doesn't require this but do it anyway.
 
