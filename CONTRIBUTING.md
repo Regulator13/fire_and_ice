@@ -294,7 +294,7 @@ Reviews should be clear and concise to save time for both the reviewer and the r
 a general comment can be submitted at the end of the review. Reviews should always be kind and respectful. _Suggest_ rather than _demand_ changes and be open to different ways of doing things, even if they aren't how you pictured the solution to an issue.
 
 ### What to Correct
-Reviews must be thorough, even if just to educate the reviewee. Every pull request is a learning experience. Here's what to point out to reviewees (Based on guidelines written by ryanmcdermott [here](https://github.com/ryanmcdermott/code-review-tips)):
+Reviews must be thorough, even if just to educate the reviewee. Every pull request is a learning experience. Here's what to point out to reviewees (based on guidelines written by ryanmcdermott [here](https://github.com/ryanmcdermott/code-review-tips))
 
 - __Styling issues__ - improper indentation, new lines, spaces, variable capitalization, etc. Just mention it and/or propose the proper style, don't dwell on it. If someone consistently has improper style, politely direct them to the [Style Guide](https://github.com/famegames/fire-and-ice/blob/master/CONTRIBUTING.md#style-guide) in the general review
 - __Ambiguous function names__ - If a function name is very confusing, mention it, suggest a better one if you can.
