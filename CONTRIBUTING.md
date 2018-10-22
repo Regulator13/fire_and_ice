@@ -28,6 +28,8 @@ __[Code Reviews](#code-reviews)__
 - [How to Write a Review](#how-to-write-a-review)
 - [What to Correct](#what-to-correct)
 
+__[Game Testing](#game-testing)__
+
 ## New to Github
 1. To begin contributing, download the github desktop app [here](https://desktop.github.com/)
 2. Clone the desired project: File>Clone Repositiory>Enter the URL of the repository page
@@ -306,3 +308,18 @@ Reviews must be thorough, even if just to educate the reviewee. Every pull reque
 - __Inefficient Code__ - Correct code that puts unecessary strain on the processor or server. Consider networking in all codes application. 
 - __Document TODOs__ - If code includes `TODO` comments, ensure those comments are documented either in new issues or somewhere else, don't allow the code to be too cluttered with `TODO` comments.
 - __*Avoid* submitting general game ideas or possible enhancements__ - Did the code submitted fulfill the issue it was connected to? Then your ideas for improvements belong in a new `enhancement` issue.
+
+## Game Testing
+If you want to test the game and suggest improvements, just follow these steps:
+1. Download the latest version from [releases](https://github.com/famegames/fire-and-ice/releases)
+2. Find the `.exe` file and play the game!
+3. Lots of things need testing:
+   * Current game features to make sure they work properly
+   * Networking, to make sure things connect and are not excessively laggy
+   * Different devices/platfroms to make sure the game works everywhere
+   * Suggestions for new ideas to make the game better or more fun
+4. Once you find what needs changed or have a suggestion [submit an issue](https://github.com/famegames/fire-and-ice/issues/new?template=general-request.md)
+5. Include what you want changed, whether you were playing single player or a network game, and any other relevant information to your change.
+6. __Important__: Label your issue with the `game-tester` label so we know where it came from and to ignore any formatting inconsistencies. The label can be found on the right hand side of the page and is blue.
+
+Note: Unfortunately submitting an issue doesn't guarantee that a change will occur. Your issue may be closed with no action taken. Please don't take this personally, some changes aren't reasonable fits for the game or don't work with the written code. Instead, find another issue, a different suggestion, and try again.
