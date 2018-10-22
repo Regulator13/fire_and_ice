@@ -1415,6 +1415,14 @@
             }
         },
         {
+            "Key": "fbabf08d-d0b1-4406-a3ac-1ca1f97d839b",
+            "Value": {
+                "id": "357d210b-3ec0-4d2a-ac7f-5177007bc70e",
+                "resourcePath": "sprites\\spr_frozen_water_source\\spr_frozen_water_source.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "fd9c12ca-e880-42cd-bdb5-910eb609344f",
             "Value": {
                 "id": "af873a50-d808-463a-b2c4-8ee0fc11f10f",
