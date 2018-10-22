@@ -23,7 +23,10 @@ __[Style Guide](#style-guide)__
 __[Issues](#issues)__
 - [Submitting an Issue for Review](#submitting-an-issue-for-review)
 
-__[Code Reviews](#code-reviews)
+__[Code Reviews](#code-reviews)__
+- [Types of Reviews](#types-of-reviews)
+- [How to Write a Review](#how-to-write-a-review)
+- [What to Correct](#what-to-correct)
 
 ## New to Github
 1. To begin contributing, download the github desktop app [here](https://desktop.github.com/)
@@ -282,7 +285,7 @@ Reviews can take 3 forms:
 
 The comment is just a note for the reviewee, and may be submitted by anyone as it does not give or reject approval.
 
-### How to Wite a Review
+### How to Write a Review
 Reviews should be clear and concise to save time for both the reviewer and the reviewee. When writing a review you can type suggestions directly attached to lines of code by going to the __files changed__ and clicking on the blue comment below the line. You can also suggest a correction here. In-line comments should be used when possible for smaller errors, one-time mistakes, and typos. If a larger issue is present such as:
 - Code that raises numerous errors
 - Code that effects unrelated portions of the project
