@@ -2,7 +2,7 @@
 
 if other.from_water{
 	with other{
-		instance_create_layer(x, y, "Compatibility_Instances_Depth_0", obj_water_drop)
+		instance_create_layer(x, y, "Instances", obj_water_drop)
 		instance_destroy()
 	}
 }

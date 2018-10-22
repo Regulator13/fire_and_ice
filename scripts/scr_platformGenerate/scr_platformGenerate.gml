@@ -75,9 +75,8 @@ switch(argument2) {
 		
 		//Create a water spawn below the second block from right (50% chance)
 		if place_free(dx - gridSize, dy + gridSize){
-			randomize()
 			if irandom(1){
-				instance_create_layer(dx - gridSize, dy + gridSize, "Compatibility_Instances_Depth_0", obj_water_spawn)
+				instance_create_layer(dx - gridSize, dy + gridSize, "Instances", obj_water_spawn)
 			}
 		}
 	
@@ -109,9 +108,8 @@ switch(argument2) {
 		
 		//Create a water spawn below the middle block (50% chance)
 		if place_free(dx - gridSize, dy + gridSize){
-			randomize()
 			if irandom(1){
-				instance_create_layer(dx - gridSize, dy + gridSize, "Compatibility_Instances_Depth_0", obj_water_spawn)
+				instance_create_layer(dx - gridSize, dy + gridSize, "Instances", obj_water_spawn)
 			}
 		}
 		
