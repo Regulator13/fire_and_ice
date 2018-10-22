@@ -291,7 +291,7 @@ Reviews should be clear and concise to save time for both the reviewer and the r
 - Code that effects unrelated portions of the project
 - Code that is generally inefficient
 
-a general comment can be submitted at the end of the review. Reviews should always be kind and respectful. _Suggest_ rather than _demand_ changes and be open to different ways of doing things, even if they aren't how you pictured the solution to an issue.
+A general comment can be submitted at the end of the review. Reviews should always be kind and respectful. _Suggest_ rather than _demand_ changes and be open to different ways of doing things, even if they aren't how you pictured the solution to an issue.
 
 ### What to Correct
 Reviews must be thorough, even if just to educate the reviewee. Every pull request is a learning experience. Here's what to point out to reviewees (based on guidelines written by ryanmcdermott [here](https://github.com/ryanmcdermott/code-review-tips))
