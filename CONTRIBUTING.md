@@ -23,6 +23,8 @@ __[Style Guide](#style-guide)__
 __[Issues](#issues)__
 - [Submitting an Issue for Review](#submitting-an-issue-for-review)
 
+__[Code Reviews](#code-reviews)
+
 ## New to Github
 1. To begin contributing, download the github desktop app [here](https://desktop.github.com/)
 2. Clone the desired project: File>Clone Repositiory>Enter the URL of the repository page
@@ -259,8 +261,45 @@ The random coordinates may not be obvious to someone looking at this code for th
 
 ### Submitting an Issue for Review
 Once you have completed an issue:
-1. Commit the changes to a branch named after you (if you don't have one go to `Branch>New Branch` on the GitHub Desktop)
-2. Submit a pull request on the [pull request tab](https://github.com/famegames/fire-and-ice/pulls)
-3. Type in relevant information including issue number into the prompt
-4. Go to your issue and label it with the green `pull request submitted` label so others know you have completed that issue and are just waiting on a review
-5. Don't close the issue. The reviewer will close it when he/she has ensured your code can be safely added to the `master` branch. In the meantime others will want to know that your code has not yet been added
+1. Carefully test your code. It should compile without errors, perform the intended action, and not alter unrelated sections of the game
+2. Commit the changes to a branch named after you (if you don't have one go to `Branch>New Branch` on the GitHub Desktop)
+3. Submit a pull request on the [pull request tab](https://github.com/famegames/fire-and-ice/pulls)
+4. Type in relevant information including issue number into the prompt
+5. Go to your issue and label it with the green `pull request submitted` label so others know you have completed that issue and are just waiting on a review
+6. Don't close the issue. The reviewer will close it when he/she has ensured your code can be safely added to the `master` branch. In the meantime others will want to know that your code has not yet been added
+
+## Code Reviews
+Reviewing submitted pull requests is a necessary step to building a successful project. It's not always fun, but its necessary. If you want to review code, there are some requirements you should meet:
+1. You should be familiar with GML in general
+2. You should be aware of what makes code efficient or inefficient so you can make suggestions for submitted code
+3. You should be familiar with the project in general to prevent subtle bugs from occuring in other project sections due to code that has unintended consequences, such as an effect on networking.
+
+### Types of Reviews
+Reviews can take 3 forms:
+1. Approve - Submit the review without requiring changes to the code
+2. Request Changes - Submit the review requiring changes to the code
+3. Comment - Make a suggestion without approving or rejecting the code
+
+The comment is just a note for the reviewee, and may be submitted by anyone as it does not give or reject approval.
+
+### How to Wite a Review
+Reviews should be clear and concise to save time for both the reviewer and the reviewee. When writing a review you can type suggestions directly attached to lines of code by going to the __files changed__ and clicking on the blue comment below the line. You can also suggest a correction here. In-line comments should be used when possible for smaller errors, one-time mistakes, and typos. If a larger issue is present such as:
+- Code that raises numerous errors
+- Code that effects unrelated portions of the project
+- Code that is generally inefficient
+
+a general comment can be submitted at the end of the review. Reviews should always be kind and respectful. _Suggest_ rather than _demand_ changes and be open to different ways of doing things, even if they aren't how you pictured the solution to an issue.
+
+### What to Correct
+Reviews must be thorough, even if just to educate the reviewee. Every pull request is a learning experience. Here's what to point out to reviewees (Based on guidelines written by ryanmcdermott [here](https://github.com/ryanmcdermott/code-review-tips)):
+
+- __Styling issues__ - improper indentation, new lines, spaces, variable capitalization, etc. Just mention it and/or propose the proper style, don't dwell on it. If someone consistently has improper style, politely direct them to the [Style Guide](https://github.com/famegames/fire-and-ice/blob/master/CONTRIBUTING.md#style-guide) in the general review
+- __Ambiguous function names__ - If a function name is very confusing, mention it, suggest a better one if you can.
+- __Long functions__ - If a function is very lengthy, make sure the function is only completing it's specified task. For example if the function is `scr_deal_damage`, make sure the function only deals damage, and doesn't also check if the player is dead. That should use a different function, even if the `Scr_check_if_dead` function is called during `scr_deal_damage`
+- __Lacking comments__ - If code is complex and you have to spend a lot of time interpreting it, it should be commented. Fuctions should all have proper documentation. If a strange approach is taken, a comment should explain that approach to avoid confusion later. Follow the style guide. Don't worry too much about unneeded comments unless they are excessive.
+- __Side effects__ - If code is going to cause obvious complications or is needlessly limiting, a suggestion should be made for more flexible code
+- __Error catching__ - Code should catch exceptions to prevent fatal errors. What if the modified object is destroyed? What if a different room is entered?
+- __User input__ - Along the same lines, errors regarding unexpected user input should be handled. What if the user enters a `string` where you expeceted an `int`? What if the user inputs an unexpected control or escape key?
+- __Inefficient Code__ - Correct code that puts unecessary strain on the processor or server. Consider networking in all codes application. 
+- __Document TODOs__ - If code includes `TODO` comments, ensure those comments are documented either in new issues or somewhere else, don't allow the code to be too cluttered with `TODO` comments.
+- __*Avoid* submitting general game ideas or possible enhancements__ - Did the code submitted fulfill the issue it was connected to? Then your ideas for improvements belong in a new `enhancement` issue.
