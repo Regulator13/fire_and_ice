@@ -13,8 +13,8 @@ If you're ready to program, visit [CONTRIBUTING](https://github.com/famegames/fi
 
 If you want to learn GameMaker Language (GML) so you can join the fun, visit the [wiki](https://github.com/famegames/fire-and-ice/wiki/Programming-Help).
 
-## If you want to contribute ideas/give feedback...
-Visit the `Issues` tab and mark them with the proper label
+## If you want to test the game...
+Visit [Game Testing](https://github.com/famegames/fire-and-ice/blob/master/CONTRIBUTING.md#game-testing) for instructions. You don't need to know how to code or how the GitHub website runs! Just test and submit a suggestion!
 
 ---
 
