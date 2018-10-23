@@ -106,7 +106,7 @@ repeat(3) {
 //right side lasers
 repeat(3) {
     dx = room_width-gridSize-16;
-    dy = round(irandom_range(gridSize, room_height - gridSize)/gridSize + 6)*gridSize;
+    dy = round(irandom_range(gridSize, room_height - gridSize * 6) / gridSize) * gridSize;
     //move left more to accomadate for bigger checking sprite
     if (place_free(dx-16, dy)) with (instance_create(dx, dy, obj_laser)) {
         image_index = 1;
