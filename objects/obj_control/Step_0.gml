@@ -1,4 +1,4 @@
-/// @description  @description Raise Water
+/// @description raise water
 if(water_buffer = false)
 {water_height += global.water_rate;
 }
