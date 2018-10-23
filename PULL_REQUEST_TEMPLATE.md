@@ -1,7 +1,7 @@
-### Issue Fixed
+### Number of Issue Fixed
 #
 
-#### Changes proposed in the pull request:
+#### Changes Proposed in the Pull Request:
 - 
 - 
 - 
