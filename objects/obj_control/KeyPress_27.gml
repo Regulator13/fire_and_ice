@@ -1,4 +1,4 @@
-/// @description  @description End game
+/// @description exit game
 game_end();
 
 
