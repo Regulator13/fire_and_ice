@@ -217,19 +217,13 @@ if (active) {
             else {
                 //throw
                 with(instance_create(x,y,obj_ball)) {
-                    //direction of throwing
+                    //direction of throwing based on mouse
                     if (other.inputType = CONTROLS_MOUSE) {
-                        // if network player, throw based on mouse
-                        dir = other.dir;
-                        vspeed = -(other.strength/mass)*((other.y - other.InputPlayer.mouseY)/100); //(-other.vaxis1*2);
-                        if (vspeed > -2) vspeed = -2; // keep vspeed in bounds
-                        //subtract height from distance
-                        xspeed = (other.strength/mass-abs(vspeed/4));
-                        //set only if positive
-                        if (xspeed > 0) hspeed = dir*(xspeed)*2;
-                        }
+						scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.InputPlayer.mouseX, other.InputPlayer.mouseY, other.dir)
+                    }
+					
+					//Otherwise based on arrow keys
                     else {
-                        // throw based on arrow keys
                         dir = other.dir;
                         vspeed = -(other.strength/mass)*(-other.vaxis1*2);
                         if (vspeed > -2) vspeed = -2;
@@ -237,7 +231,7 @@ if (active) {
                         xspeed = (other.strength/mass-abs(vspeed/4));
                         //set only if positive
                         if (xspeed > 0) hspeed = dir*(xspeed);
-                        }
+                    }
                     
                     //fire
                     sprite_index = spr_ballFire;
@@ -280,19 +274,13 @@ if (active) {
                 if (energy > energyFire) {
                     //throw
                     with(instance_create(x,y,obj_ball)) {
-                        //direction of throwing
+                        //Throw using mouse
                         if (other.inputType == CONTROLS_MOUSE) {
-                            // if network player, throw based on mouse
-                            dir = other.dir;
-                            vspeed = -(other.strength/mass)*((other.y - other.InputPlayer.mouseY)/100); //(-other.vaxis1*2);
-                            if (vspeed > -2) vspeed = -2; // keep vspeed in bounds
-                            //subtract height from distance
-                            xspeed = (other.strength/mass-abs(vspeed/4));
-                            //set only if positive
-                            if (xspeed > 0) hspeed = dir*(xspeed)*2;
+                            scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.InputPlayer.mouseX, other.InputPlayer.mouseY, other.dir)
                             }
+					
+						//Throw using arrow keys
                         else {
-                            // throw based on arrow keys
                             dir = other.dir;
                             vspeed = -(other.strength/mass)*(-other.vaxis1*2);
                             if (vspeed > -2) vspeed = -2;
@@ -377,19 +365,13 @@ if (active) {
                 crouch = false;
                 //throw
                 with(grabObject) {
-                    //direction of throwing
+                    //Throw using mouse
                     if (other.inputType = CONTROLS_MOUSE) {
-                        // if mouse player, throw based on mouse
-                        dir = other.dir;
-                        vspeed = -(other.strength/mass)*((other.y - other.InputPlayer.mouseY)/100); //(-other.vaxis1*2);
-                        if (vspeed > -2) vspeed = -2; // keep vspeed in bounds
-                        //subtract height from distance
-                        xspeed = (other.strength/mass-abs(vspeed/4));
-                        //set only if positive
-                        if (xspeed > 0) hspeed = dir*(xspeed);
+                        scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.InputPlayer.mouseX, other.InputPlayer.mouseY, other.dir)
                         }
+					
+					//Throw using arrow keys
                     else {
-                        // throw based on arrow keys
                         dir = other.dir;
                         vspeed = -(other.strength/mass)*(-other.vaxis1*2);
                         if (vspeed > -2) vspeed = -2;

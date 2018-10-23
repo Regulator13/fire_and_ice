@@ -9,6 +9,9 @@ hpNormal = 3;
 hpMax= 4;
 hp = hpNormal;
 
+//set mass
+mass = 16
+
 //sticky - whether or not object is sticky
 sticky = false;
 stuck = false; //whether or not block is stuck to something

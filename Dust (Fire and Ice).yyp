@@ -1031,6 +1031,14 @@
             }
         },
         {
+            "Key": "b99fdab3-4586-43bd-ae3c-953324460de1",
+            "Value": {
+                "id": "a995df67-24d4-4036-b190-e3dfb19c2b61",
+                "resourcePath": "scripts\\scr_mouse_set_throw_dir\\scr_mouse_set_throw_dir.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "ba369d37-c19a-4f0e-8d8c-88009e10dc92",
             "Value": {
                 "id": "467a4ae0-338b-419c-8bc4-619bbc2f4165",
@@ -1449,6 +1457,7 @@
         "404ad3f4-e47f-4aca-abde-35f95540000f",
         "04860cdd-6e52-44bf-b76e-5e0bf0a3f5d9",
         "206ca331-578c-4fee-8a12-b13bd0830f5e",
+        "b99fdab3-4586-43bd-ae3c-953324460de1",
         "00cab82a-41fd-43d0-8c5c-4bfcccecbd98",
         "bcccd8e4-e04d-45cc-a76b-ec892acb590d",
         "405d7ba9-3b75-42b8-b80f-1c0f575f8ffb",

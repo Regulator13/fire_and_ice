@@ -9,3 +9,5 @@ hpNormal = 3;
 hpMax = 4;
 hp = hpNormal;
 
+//mass
+mass = 20
