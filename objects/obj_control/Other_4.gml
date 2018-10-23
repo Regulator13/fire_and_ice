@@ -97,7 +97,7 @@ repeat(4) {
 //left side lasers
 repeat(3) {
     dx = gridSize;
-    dy = round(irandom_range(gridSize, room_height - gridSize)/gridSize + 6)*gridSize;
+    dy = round(irandom_range(gridSize, room_height - gridSize * 6) / gridSize) * gridSize;
     if (place_free(dx, dy)) with (instance_create(dx, dy, obj_laser)) {
         image_index = 0;
         dir = 1;
