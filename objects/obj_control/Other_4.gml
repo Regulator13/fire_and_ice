@@ -78,7 +78,7 @@ for (i = 3; i < maxY/gridSize; i += 1) {
         }
     }
 
-//madatory
+//mandatory
 for (i = 3; i < maxY/gridSize; i += 4) {
     for(j = 0; j < 1; j+=1) {
         dx = round(irandom_range(gridSize, room_width - gridSize)/gridSize)*gridSize;
@@ -126,7 +126,13 @@ repeat(3) {
     }
 //create door
 instance_create(dx+gridSize+8, dy-gridSize+4, obj_door);
-    
+
+//Destroy water spawns overlapped by blocks
+with obj_water_spawn{
+	if not place_free(x,y){
+		instance_destroy()
+	}
+}
 
 ///generate health
 if (global.continueGame) {

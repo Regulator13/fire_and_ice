@@ -71,6 +71,14 @@
             }
         },
         {
+            "Key": "07691635-fa9b-4709-998d-b0170b3a7e32",
+            "Value": {
+                "id": "194fc129-6a0d-409c-9bf4-f1ff0d0a1355",
+                "resourcePath": "objects\\obj_water_spawn\\obj_water_spawn.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "0a7b7527-0f10-44df-9353-03236d1f59fa",
             "Value": {
                 "id": "09578b91-fc9e-4bd3-ab62-563ef62de42f",
@@ -419,6 +427,14 @@
             "Value": {
                 "id": "618acb5b-a41b-4f97-b9ed-05b46e16d35c",
                 "resourcePath": "sprites\\spr_logo\\spr_logo.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "516fb6a4-9600-450e-971d-b60f8ae74036",
+            "Value": {
+                "id": "c8aefdbb-1cc2-4cf8-8aea-a3c7b1e4c5df",
+                "resourcePath": "sprites\\spr_water_spawn\\spr_water_spawn.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -820,6 +836,14 @@
                 "id": "3fdf9bf6-27d1-417b-9514-4b86eb360f07",
                 "resourcePath": "objects\\par_block\\par_block.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "8b923f38-08b6-4476-956a-30048732e431",
+            "Value": {
+                "id": "a8b726a2-f5e5-4330-bc83-19598eb1c43c",
+                "resourcePath": "sprites\\spr_water_drop\\spr_water_drop.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -1351,6 +1375,14 @@
             }
         },
         {
+            "Key": "f2037254-4dcf-40af-a5fa-7cfadeca9f69",
+            "Value": {
+                "id": "ee6ee825-6cd8-49ad-9cfe-b2135d2f74a7",
+                "resourcePath": "objects\\obj_water_drop\\obj_water_drop.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "f34c411f-acba-4f4b-951f-cbfe9872f120",
             "Value": {
                 "id": "332696f7-f6e9-4bca-a979-96816a6b4910",
@@ -1379,6 +1411,14 @@
             "Value": {
                 "id": "d04fd137-3506-4228-af18-c1c8e8227f3d",
                 "resourcePath": "sprites\\spr_blockSticky\\spr_blockSticky.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "fbabf08d-d0b1-4406-a3ac-1ca1f97d839b",
+            "Value": {
+                "id": "357d210b-3ec0-4d2a-ac7f-5177007bc70e",
+                "resourcePath": "sprites\\spr_frozen_water_source\\spr_frozen_water_source.yy",
                 "resourceType": "GMSprite"
             }
         },

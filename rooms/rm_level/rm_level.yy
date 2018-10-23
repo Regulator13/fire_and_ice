@@ -113,7 +113,7 @@
     "layers": [
         {
             "__type": "GMRInstanceLayer_Model:#YoYoStudio.MVCFormat",
-            "name": "Compatibility_Instances_Depth_0",
+            "name": "Instances",
             "id": "b03e3e44-5a9a-401e-90b6-4f4676101992",
             "depth": 0,
             "grid_x": 32,
