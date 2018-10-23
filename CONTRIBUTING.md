@@ -3,8 +3,6 @@
 ## Table of Contents
 __[New to Github](#new-to-github)__
 
-__[GMS Setup](#gms-setup)__
-
 __[Coding Standards](#coding-standards)__
 - [Resource Naming](#resource-naming)
 - [Variable Naming](#variable-naming)
@@ -42,13 +40,6 @@ __[Game Testing](#game-testing)__
 9. Click Push Origin at the top right
 10. Go to GitHub online and create a pull request under the **Pull requests** tab.
 11. Wait for your request to be reviewed
-
-## GMS Setup
-To increase productivity, all functions (scripts) will be equipped with [JS DOC](https://docs2.yoyogames.com/source/_build/1_overview/3_additional_information/jsdoc.html) comments. In order to get full usage of them you have to check the _display argument types_ and _display argument descriptions_ in Preferences, and hit __apply__ as shown below.
-
-![Preferences](https://github.com/famegames/fire-and-ice/blob/master/tutorial_images/Display_arguments.PNG "File>Preferences>Language>GML>Check all boxes")
-
-This will show parameter descriptions but note that you can also hit `F1` once you've typed a function name to take you directly to the script that has that function.
 
 ## Coding Standards
 Fame Games' *Dust: Fire and Ice* is coded using GameMaker Language or GML. Coding can be done in text format but syntax highlighting is featured on GameMaker Studio 2. When programming, it is important you follow these standards to increase readability and avoid errors.
