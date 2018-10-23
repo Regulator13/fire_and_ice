@@ -441,6 +441,13 @@ if(place_meeting(x,y,obj_pirahna))
 {hp -= 1;
 }
 
+//Collision with blown up big blocks
+with (instance_place(x, y, obj_blockBig)){
+	if hp <= 0 {
+		other.hp -= 10
+	}
+}
+
 //Kill the player if they run out of health
 if(hp < 1) {
     //create corpse
