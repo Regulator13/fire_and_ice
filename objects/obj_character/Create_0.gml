@@ -70,6 +70,8 @@ holding = 0;
 holder = noone;
 //sticky - for grabbing
 sticky = false;
+//jetpack
+has_jetpack = false
 
 //dir - direction of character
 dir = 0;

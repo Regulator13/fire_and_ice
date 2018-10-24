@@ -88,7 +88,7 @@ if (active) {
     //Find current hspeed
     if !(global.cooperativeMode) {
         if !(haxis1 > -axisBuffer and haxis1 < axisBuffer and vaxis1 > -axisBuffer and vaxis1 < axisBuffer) {
-            if (!iceIsPressed && !fireIsPressed) hspeed = haxis1*moveSpeed;
+            if (!iceIsPressed && !fireIsPressed) or has_jetpack hspeed = haxis1*moveSpeed;
             //direction
             if (hspeed != 0) dir = sign(hspeed);
             }
@@ -98,7 +98,7 @@ if (active) {
         }
     else {
         if !(haxis1 > -axisBuffer and haxis1 < axisBuffer and vaxis1 > -axisBuffer and vaxis1 < axisBuffer) {
-            if (!iceIsPressed && !fireIsPressed) hspeed += haxis1*moveSpeed;
+            if (!iceIsPressed && !fireIsPressed) or has_jetpack hspeed += haxis1*moveSpeed;
             if (hspeed > moveSpeed) hspeed = moveSpeed;
             if (hspeed < -moveSpeed) hspeed = -moveSpeed;
             //direction
@@ -168,11 +168,13 @@ if (active) {
 
     // Jump
     if (jumps > 0) {
-        if (jumpPressed) {
-            vspeed = -jumpHeight;
-            jumps -= 1;
-            }
-        }
+		if not has_jetpack{
+	        if (jumpPressed) {
+	            vspeed = -jumpHeight;
+	            jumps -= 1;
+	        }
+		}
+    }
 
     //push blocks
     with(instance_place(x+sign(hspeed)*2,y,par_physics))
@@ -206,6 +208,13 @@ if (active) {
 
     //fire
     if (fireReleased) {
+		//turn jetpack off
+		if has_jetpack{
+			if grabObject.working{
+				grabObject.image_index = 0
+			}
+		}
+		
         if (energy > energyFire) {
             if (instance_exists(grabObject)) {
                 if (grabObject.hp > grabObject.hpNormal-1 or grabObject.hp < grabObject.hpNormal+1) { //lasers subtract decimal points
@@ -248,7 +257,48 @@ if (active) {
             // if online player, unpress key
             //if (playerInput == -1) InputPlayer.inputs[RIGHTSELC_KEY] = scr_toggleKey(InputPlayer.inputs[RIGHTSELC_KEY]); //unpress key
         }
-
+	
+	//Jetpack starting boost
+	if firePressed{
+		if has_jetpack{
+			if grabObject.working{
+				if not place_free(x, y + vspeed + 2){
+					vspeed -= 2*jumpHeight/3
+					grabObject.image_index = 1
+				}
+			}
+		}
+	}
+	
+	//Jetpack flying
+	if fireIsPressed{
+		if has_jetpack{
+			if grabObject.working{
+				if energy >= grabObject.jetpack_cost{
+					if vspeed > -10{
+						//Floating
+						if vspeed > -3{
+							if place_free(x + hspeed, y + vspeed - .8){
+								vspeed -= .8
+							}
+						}
+						
+						//Flying
+						else{
+							if place_free(x + hspeed, y + vspeed - .3){
+								vspeed -=.3
+							}
+						}
+						
+						energy -= grabObject.jetpack_cost
+						grabObject.image_index = 1
+					}
+				}
+			}
+		}
+	}
+				
+	
     // freezeHoldingBuffer
     if (iceIsPressed) freezeHoldingBuffer--;
     // freeze holding block
@@ -325,6 +375,14 @@ if (active) {
         //if not already holding
         if (holding = 0) {
             grabObject = (instance_place(x+sign(dir)*4,y,par_physics));
+			
+			//jetpack
+			if instance_exists(grabObject){
+				if object_get_name(grabObject.object_index) == "obj_jetpack"{
+					has_jetpack = true
+				}
+			}
+			
             if (instance_exists(grabObject)) {//non character objects
                 if (grabObject.frozen = false) {
                     grabObject.active = false;
@@ -363,6 +421,8 @@ if (active) {
                 holding = 0;
                 //stop crouching
                 crouch = false;
+				//does not have jetpack
+				has_jetpack = false
                 //throw
                 with(grabObject) {
                     //Throw using mouse
