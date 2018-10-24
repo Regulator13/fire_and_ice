@@ -430,6 +430,14 @@ with (instance_place(x, y, obj_blockBig)){
 	}
 }
 
+//Jump on trampolines
+var min_jump_speed = 3
+if place_meeting(x, y + vspeed/4, obj_trampoline){
+	if vspeed > min_jump_speed{
+		vspeed *= -1
+	}
+}
+
 //Kill the player if they run out of health
 if(hp < 1) {
     //create corpse

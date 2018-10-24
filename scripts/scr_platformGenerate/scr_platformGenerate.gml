@@ -40,12 +40,18 @@ switch(argument2) {
 
 	case 1: //five long 'u'
 		if (place_free(dx,dy-gridSize)) instance_create(dx, dy-gridSize,  obj_blockBig);
-			for (k = 0; k < 5; k += 1) {
-				dx = sx+gridSize*k;
-				if (place_free(dx,dy)) instance_create(dx, dy,  obj_blockBig);
-			}
+		
+		for (k = 0; k < 5; k += 1) {
+			dx = sx+gridSize*k;
+			if (place_free(dx,dy)) instance_create(dx, dy,  obj_blockBig);
+		}
 			
 		if (place_free(dx,dy-gridSize)) instance_create(dx, dy-gridSize,  obj_blockBig);
+		
+		//1 in 3 chance of trampoline on left side
+		if irandom(2){
+			if (place_free(dx-gridSize*3,dy-gridSize/2)) instance_create_layer(dx, dy-gridSize/2, "Instances", obj_trampoline);
+		}
 		
 		//recharge station
 		if (place_free(dx-gridSize*2,dy-gridSize)) instance_create(dx-gridSize*2, dy-gridSize,  obj_rechargeStation);
@@ -71,7 +77,10 @@ switch(argument2) {
 			if (place_free(dx,dy)) instance_create(dx, dy,  obj_blockBig);
 		}
 		
-		//if (place_free(dx,dy-gridSize)) instance_create(dx, dy-gridSize,  obj_blockBig);
+		//1 in 3 chance of trampoline on right side
+		if irandom(2){
+			if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize/2, "Instances", obj_trampoline);
+		}
 		
 		//Create a water spawn below the second block from right (50% chance)
 		if place_free(dx - gridSize, dy + gridSize){
