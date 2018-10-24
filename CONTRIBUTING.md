@@ -285,7 +285,7 @@ Once you have completed an issue:
 ### Closing an Issue
 Generally leave closing an issue to the person who opened it or the code reviewer who pulled the solution to the issue. If an issue has had no attention and seems it will not be dealt with, submit a comment mentioning the issue creator asking if it can be closed. 
 
-If an issue is tagged `bug` and you follow the reproduce steps but can't reproduce the bugs _do not close it_. Instead label it with `could not reproduce` and await another user to confirm it.
+If an issue is tagged `bug` and you follow the reproduce steps but can't reproduce the bugs _do not close it_. Instead label it with `could not reproduce` and wait for another user to confirm it.
 
 If you're searching for an issue and can't find it, don't forget to search the closed issues as well.
 
