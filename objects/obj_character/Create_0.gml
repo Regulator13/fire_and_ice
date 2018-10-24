@@ -18,7 +18,7 @@ hp = 100;
 hp_max = 100;
 energy = 100;
 energy_max = 100;
-strength = 60;
+strength = 90;
 
 //jumps - amount of jumps character has
 jumps = 0;

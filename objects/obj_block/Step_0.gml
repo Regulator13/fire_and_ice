@@ -14,7 +14,6 @@ if (freezeBuffer < freezeBufferMax && freezeBuffer >= 1*30) {
     }
 
 /// Set block type
-// You can write your code in this editor
 
 //hp
 if (hp < 0) instance_destroy();
@@ -23,15 +22,25 @@ if (hp > hpMax) hp = hpMax;
 //freezeBuffer
 if (willFreeze) {
     //freeze buffer
-    if (freezeBuffer < 0*30) {
-        frozen = true;
-        active = true;
-        hp = hpNormal+1;
-        willFreeze = false;
-        freezeBuffer = freezeBufferMax;
-        }
-    else freezeBuffer -= 1;
+    if freezeBuffer < 0{
+		if holder == noone{
+	        frozen = true;
+	        active = true;
+	        hp = hpNormal+1;
+	        willFreeze = false;
+	        freezeBuffer = freezeBufferMax;
+		}
+		
+		//Player still holding block, reset buffer
+		else{
+			willFreeze = false
+			freezeBuffer = freezeBufferMax
+		}
     }
+		
+    else freezeBuffer -= 1;
+}
+
 //explode
 if (ignite) {
     //freeze buffer
