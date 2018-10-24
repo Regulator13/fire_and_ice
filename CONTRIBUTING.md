@@ -19,7 +19,9 @@ __[Style Guide](#style-guide)__
 - [Some Other Notes](#some-other-notes)
 
 __[Issues](#issues)__
+- [Creating Issues](#creating-issues)
 - [Submitting an Issue for Review](#submitting-an-issue-for-review)
+- [Closing an Issue](#closing-an-issue)
 
 __[Code Reviews](#code-reviews)__
 - [Types of Reviews](#types-of-reviews)
@@ -264,6 +266,13 @@ with instance_destroy(other){
 
 ## Issues
 
+### Creating an Issue
+You see a problem with the game. Or maybe something you think should be added? Time to create an issue.
+
+This is done in the `issues` tab by hitting `new issue`. Several templates will appear to help you construct a well formatted issue. If you have a bug, fill out the bug template. If you don't have a specific idea but want to discuss something or brainstorm ideas, fill out the discussion thread template (don't forget to label this issue as `discussion`). 
+
+After you fill out the issue form, label it with the correct issues, add it to related projects, milestones, etc. Well categorized isses are important if someone is trying to find issues related to a specific problem.
+
 ### Submitting an Issue for Review
 Once you have completed an issue:
 1. Carefully test your code. It should compile without errors, perform the intended action, and not alter unrelated sections of the game
@@ -272,6 +281,13 @@ Once you have completed an issue:
 4. Type in relevant information including issue number into the prompt
 5. Go to your issue and label it with the green `pull request submitted` label so others know you have completed that issue and are just waiting on a review
 6. Don't close the issue. The reviewer will close it when he/she has ensured your code can be safely added to the `master` branch. In the meantime others will want to know that your code has not yet been added
+
+### Closing an Issue
+Generally leave closing an issue to the person who opened it or the code reviewer who pulled the solution to the issue. If an issue has had no attention and seems it will not be dealt with, submit a comment mentioning the issue creator asking if it can be closed. 
+
+If an issue is tagged `bug` and you follow the reproduce steps but can't reproduce the bugs _do not close it_. Instead label it with `could not reproduce` and await another user to confirm it.
+
+If you're searching for an issue and can't find it, don't forget to search the closed issues as well.
 
 ## Code Reviews
 Reviewing submitted pull requests is a necessary step to building a successful project. It's not always fun, but its necessary. If you want to review code, there are some requirements you should meet:
