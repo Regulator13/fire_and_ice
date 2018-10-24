@@ -266,7 +266,7 @@ with instance_destroy(other){
 
 ## Issues
 
-### Creating an Issue
+### Creating Issues
 You see a problem with the game. Or maybe something you think should be added? Time to create an issue.
 
 This is done in the `issues` tab by hitting `new issue`. Several templates will appear to help you construct a well formatted issue. If you have a bug, fill out the bug template. If you don't have a specific idea but want to discuss something or brainstorm ideas, fill out the discussion thread template (don't forget to label this issue as `discussion`). 
