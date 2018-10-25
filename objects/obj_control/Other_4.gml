@@ -98,10 +98,10 @@ repeat(4) {
 repeat(2){
 	if irandom(1){
 		dx = round(irandom_range(gridSize*3, room_height - gridSize*4)/gridSize)*gridSize
-	    dy = room_height-gridSize-16
+	    dy = room_height-gridSize-32
 		
 		if (place_free(dx, dy)){
-			instance_create_layer(dx, dy, "Instances", obj_trampoline)
+			instance_create_layer(dx, dy+16, "Instances", obj_trampoline)
 		}
 	}
 }

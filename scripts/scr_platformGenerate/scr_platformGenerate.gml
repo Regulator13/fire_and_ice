@@ -57,7 +57,7 @@ switch(argument2) {
 		
 		//1 in 3 chance of trampoline on left side
 		if irandom(2){
-			if (place_free(dx - gridSize*3, dy - gridSize / 2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "Instances", obj_trampoline);
+			if (place_free(dx - gridSize*3, dy - gridSize)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "Instances", obj_trampoline);
 		}
 		
 		//recharge station
@@ -93,7 +93,7 @@ switch(argument2) {
 		
 		//1 in 2 chance of trampoline on right side
 		if irandom(1){
-			if (place_free(dx,dy-gridSize/2)) instance_create_layer(dx, dy-gridSize/2, "Instances", obj_trampoline);
+			if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize/2, "Instances", obj_trampoline);
 		}
 		
 		//Create a water spawn below the second block from right (50% chance)
