@@ -12,6 +12,9 @@ hp = hpNormal;
 //set mass
 mass = 16
 
+//Set friction
+fric = 2.4
+
 //sticky - whether or not object is sticky
 sticky = false;
 stuck = false; //whether or not block is stuck to something
