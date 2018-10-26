@@ -1,9 +1,9 @@
 ## Stats for Characters, Enemies, Items, Etc.
 
 ### Characters
-| Name | hp | energy | energyFire | strength | mass | jumpsMax | jump_height | fric |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| All | 100 | 100 | 5 | 90 | 8 | 2 | 6 | 2.4 |
+| Name | hp | energy | energyFire | strength | mass | jumpsMax | jump_height | moveSpeed | fric |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| All | 100 | 100 | 5 | 90 | 20 | 2 | 9 | 4 | 2.4 |
 
 ### Enemies/obstacles
 | Name | hp | speed | dmg |
