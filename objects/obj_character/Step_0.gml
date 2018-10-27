@@ -168,12 +168,18 @@ if (active) {
 
     // Jump
     if (jumps > 0) {
-		if not has_jetpack{
+		//if not has_jetpack{
 	        if (jumpPressed) {
-	            vspeed = -jumpHeight;
+				if instance_exists(grabObject){
+					var total_mass = mass + grabObject.mass
+				}
+			
+				else var total_mass = mass
+
+	            vspeed = -(jumpHeight - total_mass / 12);
 	            jumps -= 1;
 	        }
-		}
+		//}
     }
 
     //push blocks
@@ -258,7 +264,7 @@ if (active) {
             //if (playerInput == -1) InputPlayer.inputs[RIGHTSELC_KEY] = scr_toggleKey(InputPlayer.inputs[RIGHTSELC_KEY]); //unpress key
         }
 	
-	//Jetpack starting boost
+	/*//Jetpack starting boost
 	if firePressed{
 		if has_jetpack{
 			if grabObject.working{
@@ -269,7 +275,7 @@ if (active) {
 			}
 		}
 	}
-	
+	*/
 	//Jetpack flying
 	if fireIsPressed{
 		if has_jetpack{
