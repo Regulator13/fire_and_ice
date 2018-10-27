@@ -1,9 +1,12 @@
 /// @description Attack
 
+//Turn frozen water back to water
 if other.from_water{
-	with other{
-		instance_create_layer(x, y, "Instances", obj_water_drop)
-		instance_destroy()
+	if attack > 0{
+		with other{
+			instance_create_layer(x, y, "Instances", obj_water_drop)
+			instance_destroy()
+		}
 	}
 }
 

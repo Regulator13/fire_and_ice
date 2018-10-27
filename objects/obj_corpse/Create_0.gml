@@ -11,3 +11,6 @@ hp = hpNormal;
 
 //mass
 mass = 20
+
+//friction
+fric = 2
