@@ -94,6 +94,18 @@ repeat(4) {
     if (place_free(dx, dy-16)) with instance_create(dx, dy, obj_blockStation) sticky = true;
     }
 
+//Bottom Trampoline
+repeat(2){
+	if irandom(1){
+		dx = round(irandom_range(gridSize*3, room_height - gridSize*4)/gridSize)*gridSize
+	    dy = room_height-gridSize-32
+		
+		if (place_free(dx, dy)){
+			instance_create_layer(dx, dy+16, "Instances", obj_trampoline)
+		}
+	}
+}
+	
 //left side lasers
 repeat(3) {
     dx = gridSize;

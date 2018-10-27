@@ -10,7 +10,10 @@ hpMax= 4;
 hp = hpNormal;
 
 //set mass
-mass = 16
+mass = 12
+
+//Set friction
+fric = 2.4
 
 //sticky - whether or not object is sticky
 sticky = false;

@@ -4,7 +4,7 @@ event_inherited();
 //physics
 active = true;
 frozen = false;
-mass = 8;
+mass = 24;
 hpNormal = 100;
 
 //team - team object
@@ -30,7 +30,7 @@ if (global.cooperativeMode) {
     }
 else {
     jumpsMax = 2;
-    jumpHeight = 6;
+    jumpHeight = 8.5;
     }
 
 //gravity
@@ -70,6 +70,8 @@ holding = 0;
 holder = noone;
 //sticky - for grabbing
 sticky = false;
+//jetpack
+has_jetpack = false
 
 //dir - direction of character
 dir = 0;
