@@ -168,21 +168,59 @@ if (active) {
 
     // Jump
     if (jumps > 0) {
-		if not has_jetpack{
+		//if not has_jetpack{
 	        if (jumpPressed) {
-	            vspeed = -jumpHeight;
+				if instance_exists(grabObject){
+					var total_mass = mass + grabObject.mass
+				}
+			
+				else var total_mass = mass
+
+	            vspeed = -(jumpHeight - total_mass / 12);
 	            jumps -= 1;
 	        }
-		}
+		//}
     }
 
-    //push blocks
-    with(instance_place(x+sign(hspeed)*2,y,par_physics))
-        {
+    //block collisions
+    with(instance_place(x+sign(hspeed)*2,y,par_physics)){
+		//Push blocks
         if (id != other.grabObject && not frozen && !stuck) {
             x+=scr_contactx(other.hspeed);
             }
+		
+		//Climb blocks
+		if (id != other.grabObject) and frozen{
+			//Slide slowly down blocks' sides
+			other.hspeed = 0
+			other.vspeed = 0
+			
+			//Climb up them
+			if other.jumpPressed{
+				//While climbing
+				if other.y + other.sprite_height - 6 > y{
+					if other.energy >= .5{
+						other.vspeed = -5 
+						other.energy -= .5
+					}
+				}
+				
+				//Once at the top
+				else{
+					if other.energy >= 1{
+						other.x = x - other.dir * 3/4 * sprite_width
+						other.y = y - 16
+						with other alarm_set(1,15)
+						other.vspeed = 0
+						other.hspeed = 0
+						other.active = false
+						other.energy -= 1
+						exit
+					}
+				}
+			}
         }
+	}
 
     // Apply gravity (and jumping)
     if (vspeed < gravityMax) {
@@ -257,18 +295,6 @@ if (active) {
             // if online player, unpress key
             //if (playerInput == -1) InputPlayer.inputs[RIGHTSELC_KEY] = scr_toggleKey(InputPlayer.inputs[RIGHTSELC_KEY]); //unpress key
         }
-	
-	//Jetpack starting boost
-	if firePressed{
-		if has_jetpack{
-			if grabObject.working{
-				if not place_free(x, y + vspeed + 2){
-					vspeed -= 2*jumpHeight/3
-					grabObject.image_index = 1
-				}
-			}
-		}
-	}
 	
 	//Jetpack flying
 	if fireIsPressed{
@@ -468,82 +494,86 @@ if (active) {
 
 /// hp and energy
 if (active) {
-//Hurt the player if they fall below the water
-if(y > room_height-obj_wall.sprite_height-obj_control.water_height)
-{hp -= .4;
-}
+	//Hurt the player if they fall below the water
+	if(y > room_height-obj_wall.sprite_height-obj_control.water_height){
+		hp -= .4;
+	}
 
-//Collision with patrols
+	//Collision with patrols
     with (instance_place(x, y, par_enemy)) {
         other.hp -= dmg;
         }
 
-//Collision with pirahnas
-if(place_meeting(x,y,obj_pirahna))
-{hp -= 1;
-}
-
-//Collision with blown up big blocks
-with (instance_place(x, y, obj_blockBig)){
-	if hp <= 0 {
-		other.hp -= 10
+	//Collision with pirahnas
+	if(place_meeting(x,y,obj_pirahna)){
+		hp -= 1;
 	}
-}
 
-//Jump on trampolines
-var min_jump_speed = 3
-if place_meeting(x, y + vspeed/4, obj_trampoline){
-	if vspeed > min_jump_speed{
-		vspeed *= -1
+	//Collision with blown up big blocks
+	with (instance_place(x, y, obj_blockBig)){
+		if hp <= 0 {
+			other.hp -= 10
+		}
 	}
-}
 
-//Kill the player if they run out of health
-if(hp < 1) {
-    //create corpse
-    with (instance_create(x,y,obj_corpse)) sprite_index = other.sprite_index;
-    //create pirahna
-    with (instance_create(x,y,obj_pirahna)) {
-        playerInput = other.playerInput;
-        InputPlayer = other.InputPlayer;
-        inputType = other.inputType;
-        if (instance_exists(InputPlayer)) InputPlayer.gameCharacter = self;
-        }
-    //drop object if grabbed
-    if (instance_exists(grabObject)) {
-        //remove grabObject's holder
-        grabObject.holder = noone;
-        grabObject.active = true;
-        }
-    //subtract score
-    //team.tScore += (room_height-yMin)*global.scoreY;
-    //subtract life
-    team.tLives -= 1;
-    //keep in bounds
-    if (team.tLives < 0) team.tLives = 0;
-    //destroy self
-    instance_destroy(self);
-    }
+	//Jump on trampolines
+	var min_jump_speed = 3
+	if place_meeting(x, y + vspeed/4, obj_trampoline){
+		if vspeed > min_jump_speed{
+			vspeed *= -1
+		}
+	}
 
-    //recharge station
-    if (place_meeting(x, y, obj_rechargeStation)) {
-        if (energy < energy_max) {
-            energy +=1;
-            }
-        }
+	//Kill the player if they run out of health
+	if(hp < 1) {
+	    //create corpse
+	    with (instance_create(x,y,obj_corpse)) sprite_index = other.sprite_index;
+		
+	    //create pirahna
+	    with (instance_create(x,y,obj_pirahna)) {
+	        playerInput = other.playerInput;
+	        InputPlayer = other.InputPlayer;
+	        inputType = other.inputType;
+	        if (instance_exists(InputPlayer)) InputPlayer.gameCharacter = self;
+	        }
+			
+	    //drop object if grabbed
+	    if (instance_exists(grabObject)) {
+	        //remove grabObject's holder
+	        grabObject.holder = noone;
+	        grabObject.active = true;
+	        }
+			
+	    //subtract score
+	    //team.tScore += (room_height-yMin)*global.scoreY;
+	    //subtract life
+	    team.tLives -= 1;
+		
+	    //keep in bounds
+	    if (team.tLives < 0) team.tLives = 0;
+	    //destroy self
+	    instance_destroy(self);
+	}
+
+	//recharge station
+	if (place_meeting(x, y, obj_rechargeStation)) {
+	    if (energy < energy_max) {
+	        energy +=1;
+	        }
+	    }
     
-    //hp
-    with(instance_place(x, y, obj_health)) {
-        //add health
-        other.hp += value;
-        //add lives
-        other.team.tLives += 1;
-        //keep in bounds
-        if (other.hp > other.hp_max) other.hp = other.hp_max;
-        //destroy
-        instance_destroy();
-        }
-    }
+	//hp
+	with(instance_place(x, y, obj_health)) {
+	    //add health
+	    other.hp += value;
+	    //add lives
+	    other.team.tLives += 1;
+	    //keep in bounds
+	    if (other.hp > other.hp_max) other.hp = other.hp_max;
+	    //destroy
+	    instance_destroy();
+	}
+}
 
 ///win
 if (place_meeting(x, y, obj_door)) {
