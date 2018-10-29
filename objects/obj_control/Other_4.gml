@@ -110,33 +110,39 @@ repeat(2){
 repeat(3) {
     dx = gridSize;
     dy = round(irandom_range(gridSize, room_height - gridSize * 6) / gridSize) * gridSize;
-    if (place_free(dx, dy)) with (instance_create(dx, dy, obj_laser)) {
-        image_index = 0;
-        dir = 1;
-        }
+    if (place_free(dx, dy)) and not place_meeting(dx,dy,obj_laser){
+		with (instance_create(dx, dy, obj_laser)) {
+	        image_index = 0;
+	        dir = 1;
+		}
     }
+}
+
 //right side lasers
 repeat(3) {
     dx = room_width-gridSize-16;
     dy = round(irandom_range(gridSize, room_height - gridSize * 6) / gridSize) * gridSize;
     //move left more to accomadate for bigger checking sprite
-    if (place_free(dx-16, dy)) with (instance_create(dx, dy, obj_laser)) {
-        image_index = 1;
-        dir = -1;
-        }
+    if ((place_free(dx-16, dy)) and not place_meeting(dx,dy,obj_laser)){
+		with (instance_create(dx, dy, obj_laser)) {
+			image_index = 1;
+			dir = -1;
+		}
     }
+}
     
 //finish platform
 var dx = round(irandom_range(gridSize*3, room_width - gridSize*3)/gridSize)*gridSize;
 var dy = gridSize*2;
 
-//create bottom
+//create bottom of top platform
 var i = 0;
 repeat(3) {
     instance_create(dx+gridSize*i, dy, obj_blockBig);
     i ++;
-    }
-//create door
+}
+
+//create door in middle of top platform
 instance_create(dx+gridSize+8, dy-gridSize+4, obj_door);
 
 //Destroy water spawns overlapped by blocks
@@ -148,31 +154,33 @@ with obj_water_spawn{
 
 ///generate health
 if (global.continueGame) {
-//random x and y
-var gridSize = 32;
-var rx = 0;
-var ry = 0;
-var tries = 1; //amount of healths
-var whileTries = 0;
-var whileTriesMax = 100; //limit amount of times loop can run
-while(tries > 0) {
-    //set random coordinates
-    rx = round(irandom_range(0, room_width)/gridSize)*gridSize;
-    ry = round(irandom_range(0, room_height)/gridSize)*gridSize;
+	//random x and y
+	var gridSize = 32;
+	var rx = 0;
+	var ry = 0;
+	var tries = 1; //amount of hearts
+	var whileTries = 0;
+	var whileTriesMax = 100; //limit amount of times loop can run
+	
+	while(tries > 0) {
+	    //set random coordinates
+	    rx = round(irandom_range(0, room_width)/gridSize)*gridSize;
+	    ry = round(irandom_range(0, room_height)/gridSize)*gridSize;
     
-    //check if can place
-    if (place_free(rx, ry)) {
-        if (place_meeting(rx, ry+gridSize, obj_blockBig)) {
-            instance_create(rx+gridSize/2, ry+gridSize/2, obj_health);
-            tries -= 1;
-            }
-        }
-    //limit amount of times loop can run
-    whileTries -= 1;
-    if (whileTries > whileTriesMax) tries = 0;
-    }
-    }
+	    //check if can place
+	    if (place_free(rx, ry)) {
+	        if (place_meeting(rx, ry+gridSize, obj_blockBig)) {
+	            instance_create(rx+gridSize/2, ry+gridSize/2, obj_health);
+	            tries -= 1;
+	            }
+	        }
+	    //limit amount of times loop can run
+	    whileTries -= 1;
+	    if (whileTries > whileTriesMax) tries = 0;
+	    }
+	}
+	
 else {
     global.continueGame = true;
-    }
+}
 
