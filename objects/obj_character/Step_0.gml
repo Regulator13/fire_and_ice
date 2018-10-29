@@ -237,13 +237,13 @@ if (active) {
 			other.y += (vspeed + sign(vspeed)*other.gravityI)
 			
 			//apply friction
-			if (other.hspeed >= other.fric*3) {
-                other.hspeed -= other.fric*3;
+			if (other.hspeed >= other.fric) {
+                other.hspeed -= other.fric;
             }
-            else if (other.hspeed <= (-other.fric*3)) {
-                other.hspeed += other.fric*3;
+            else if (other.hspeed <= (-other.fric)) {
+                other.hspeed += other.fric;
             }
-            else if(abs(other.hspeed) < other.fric*3) {
+            else if(abs(other.hspeed) < other.fric) {
                 other.hspeed = 0
             }
 		}
