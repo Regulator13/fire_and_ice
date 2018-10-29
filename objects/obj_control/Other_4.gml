@@ -145,6 +145,78 @@ repeat(3) {
 //create door in middle of top platform
 instance_create(dx+gridSize+8, dy-gridSize+4, obj_door);
 
+//Platform spawns
+var gridSize = 32
+var num_vertical = 2
+var num_horizontal = 2
+var tries = 100
+var rx = 0
+var ry = 0
+
+//Vertical Platforms
+for (i=0; i<tries; i++){
+	//Set random coordinates
+	rx = round(irandom_range(0, room_width)/gridSize)*gridSize
+	ry = round(irandom_range(0, room_height)/gridSize)*gridSize;
+	var open = true
+	
+	//Check if track is free
+	for (j=0; j<8; j++){
+		if not place_free(rx, ry - j*gridSize){
+			open = false
+			break
+		}
+	}
+	
+	//Create if open
+	if open{
+		instance_create_layer(rx,ry, "Instances", obj_platform)
+		num_vertical -= 1
+	}
+	
+	//Stop creating if desired platform number is reached
+	if num_vertical <= 0{
+		break
+	}
+}
+
+//Horizontal Platforms
+for (i=0; i<tries; i++){
+	//Set random coordinates
+	rx = round(irandom_range(0, room_width)/gridSize)*gridSize
+	ry = round(irandom_range(0, room_height)/gridSize)*gridSize;
+	var open = true
+	
+	//Check if track is free
+	for (j=-3; j<4; j++){
+		if not place_free(rx + j*gridSize, ry){
+			open = false
+			break
+		}
+	}
+	
+	//Check if above track is free
+	for (j=-3; j<4; j++){
+		if not place_free(rx + j*gridSize, ry - gridSize){
+			open = false
+		}
+	}
+	
+	//Create if open
+	if open{
+		with instance_create_layer(rx,ry, "Instances", obj_platform){
+			is_vertical = false
+			image_index = 4
+			num_horizontal -= 1
+		}
+	}
+	
+	//Stop creating if desired platform number is reached
+	if num_horizontal <= 0{
+		break
+	}
+}
+
 //Destroy water spawns overlapped by blocks
 with obj_water_spawn{
 	if not place_free(x,y){
