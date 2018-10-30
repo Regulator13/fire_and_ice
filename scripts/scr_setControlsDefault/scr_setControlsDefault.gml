@@ -28,9 +28,9 @@ switch (controller) {
     case CONTROLS_MOUSE:
         global.controls[player, LEFT_KEY] = ord("A");
         global.controls[player, RIGHT_KEY] = ord("D");
-        global.controls[player, UP_KEY] = ord("W");
+        global.controls[player, UP_KEY] = vk_space;
         global.controls[player, DOWN_KEY] = ord("S");
-        global.controls[player, ACTION_KEY] = vk_space;      // jump
+        global.controls[player, ACTION_KEY] = ord("W");      // jump
         global.controls[player, ACTION2_KEY] = vk_enter;     // selection
         global.controls[player, LEFTSELC_KEY] = mb_left;     // ice
         global.controls[player, RIGHTSELC_KEY] = mb_right;   // fire

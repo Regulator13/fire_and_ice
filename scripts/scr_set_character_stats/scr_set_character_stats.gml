@@ -22,14 +22,14 @@ switch index{
 	//grinch
 	case 5:
 		other.gameCharacter.hp = 100
-		other.gameCharacter.gameCharacter.hp_max = 100
+		other.gameCharacter.hp_max = 100
 		other.gameCharacter.energy = 100
 		other.gameCharacter.energy_max = 100
 		other.gameCharacter.energyFire = 5
 		other.gameCharacter.mass = 24
-		other.gameCharacter.strength = 90
-		other.gameCharacter.jumpHeight = 8.5
-		other.gameCharacter.jumpsMax = 2
+		other.gameCharacter.strength = 60
+		other.gameCharacter.jumpHeight = 9.5
+		other.gameCharacter.jumpsMax = 1
 
 		break
 	
