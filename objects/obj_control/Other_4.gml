@@ -157,7 +157,7 @@ var ry = 0
 for (i=0; i<tries; i++){
 	//Set random coordinates
 	rx = round(irandom_range(0, room_width)/gridSize)*gridSize
-	ry = round(irandom_range(0, room_height)/gridSize)*gridSize;
+	ry = round(irandom_range(4 * gridSize, room_height - 2 * gridSize)/gridSize)*gridSize;
 	var open = true
 	
 	//Check if track is free
@@ -184,7 +184,7 @@ for (i=0; i<tries; i++){
 for (i=0; i<tries; i++){
 	//Set random coordinates
 	rx = round(irandom_range(0, room_width)/gridSize)*gridSize
-	ry = round(irandom_range(0, room_height)/gridSize)*gridSize;
+	ry = round(irandom_range(4 * gridSize, room_height - 2 * gridSize)/gridSize)*gridSize;
 	var open = true
 	
 	//Check if track is free
