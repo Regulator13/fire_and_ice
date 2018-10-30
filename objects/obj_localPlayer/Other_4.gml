@@ -15,6 +15,9 @@ if (team.tLives > 0) {
         
         //get sprite
         other.gameCharacter.sprite_index = other.sprite_index;
+		
+		//Set player stats based on their sprite
+		scr_set_character_stats(other.sprite_index)
         
         //destroy self, so other character will create elsewhere
         instance_destroy();

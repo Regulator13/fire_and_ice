@@ -43,4 +43,4 @@ if slope < min_slope{
 						
 //Normalize the slope from -1 to 1
 vspeed = ((strength / mass) + logn(max_slope, slope) * (strength / mass)) * dirY
-hspeed = (2*(strength / mass) + vspeed) * dirX 
+hspeed = (2*(strength / mass) - abs(vspeed)) * dirX 
