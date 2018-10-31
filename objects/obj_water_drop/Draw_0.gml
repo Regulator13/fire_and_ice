@@ -1,6 +1,5 @@
-/// @description Play the form animation
-draw_self()
+/// @description Draw the sprite
 
-if image_index == 10{
-	image_speed = 0
+if obj_control.animations_on or animation_end{
+	event_inherited();
 }
