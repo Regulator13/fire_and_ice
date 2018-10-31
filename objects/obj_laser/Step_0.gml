@@ -31,8 +31,10 @@ updateLaser = false;
 alarm[0] = 10;
 }
 */
-    
-with (instance_place(laserX + 1*dir, y, obj_character)) hp -= 2;
+
+if laser_on{
+	with (instance_place(laserX + 1*dir, y, obj_character)) hp -= 2;
+}
 //with (instance_place(laserX + 1*dir, y, obj_block)) hp -= .01;
 
 //die
