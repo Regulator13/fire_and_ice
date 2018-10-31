@@ -91,8 +91,15 @@ if (active) {
 		//If on the ground
 		if not place_free(x, y + 1){
 	        if !(haxis1 > -axisBuffer and haxis1 < axisBuffer and vaxis1 > -axisBuffer and vaxis1 < axisBuffer) {
-	            if (!iceIsPressed && !fireIsPressed) or has_jetpack{
-					hspeed = haxis1*moveSpeed
+				if (!iceIsPressed && !fireIsPressed) or has_jetpack{
+					//accelerate
+					if abs(hspeed) < moveSpeed{
+						hspeed += haxis1*acceleration
+					}
+					//move
+					else{
+						hspeed = haxis1*moveSpeed
+					}
 				}
 	            //direction
 	            if (hspeed != 0) dir = sign(hspeed);
