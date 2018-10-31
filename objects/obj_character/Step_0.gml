@@ -530,8 +530,12 @@ if (active) {
 
 	//Collision with patrols
     with (instance_place(x, y, par_enemy)) {
-        other.hp -= dmg;
-        }
+		if can_attack{
+			other.hp -= dmg;
+			alarm[0] = attack_delay
+			can_attack = false
+		}
+    }
 
 	//Collision with pirahnas
 	if(place_meeting(x,y,obj_pirahna)){
