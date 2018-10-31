@@ -86,23 +86,62 @@ if (active) {
         }
         
     //Find current hspeed
+	//Single Player
     if !(global.cooperativeMode) {
-        if !(haxis1 > -axisBuffer and haxis1 < axisBuffer and vaxis1 > -axisBuffer and vaxis1 < axisBuffer) {
-            if (!iceIsPressed && !fireIsPressed) or has_jetpack hspeed = haxis1*moveSpeed;
-            //direction
-            if (hspeed != 0) dir = sign(hspeed);
-            }
-        else {
-            if (!place_free(x+hspeed,y+1)) hspeed = 0;
-            }
-        }
+		//If on the ground
+		if not place_free(x, y + 1){
+	        if !(haxis1 > -axisBuffer and haxis1 < axisBuffer and vaxis1 > -axisBuffer and vaxis1 < axisBuffer) {
+	            if (!iceIsPressed && !fireIsPressed) or has_jetpack{
+					hspeed = haxis1*moveSpeed
+				}
+	            //direction
+	            if (hspeed != 0) dir = sign(hspeed);
+	        }
+			
+	        else {
+	            if (!place_free(x+hspeed,y+1)) hspeed = 0;
+	        }
+	    }
+		
+		//If in the air
+		else{
+			if !(haxis1 > -axisBuffer and haxis1 < axisBuffer and vaxis1 > -axisBuffer and vaxis1 < axisBuffer) {
+	            if (!iceIsPressed && !fireIsPressed) or has_jetpack{
+					//If moving from a stop in air
+					if hspeed == 0{
+						hspeed += haxis1 * drag
+					}
+					
+					//If going the same direction
+					if sign(hspeed) == sign(haxis1){
+						if abs(hspeed) < moveSpeed{
+							hspeed += sign(hspeed) * drag
+						}
+					}
+					
+					//If opposing direction
+					if sign(hspeed) != sign(haxis1){
+						hspeed = (abs(hspeed) - drag) * sign(hspeed)
+						
+						//Change player's direction
+						if hspeed != 0{
+							dir = sign(hspeed)
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	//Cooperative mode
     else {
         if !(haxis1 > -axisBuffer and haxis1 < axisBuffer and vaxis1 > -axisBuffer and vaxis1 < axisBuffer) {
-            if (!iceIsPressed && !fireIsPressed) or has_jetpack hspeed += haxis1*moveSpeed;
-            if (hspeed > moveSpeed) hspeed = moveSpeed;
-            if (hspeed < -moveSpeed) hspeed = -moveSpeed;
-            //direction
-            if (hspeed != 0) dir = sign(hspeed);
+				if (!iceIsPressed && !fireIsPressed) or has_jetpack hspeed += haxis1*moveSpeed;
+				if (hspeed > moveSpeed) hspeed = moveSpeed;
+				if (hspeed < -moveSpeed) hspeed = -moveSpeed;
+				
+				//direction
+				if (hspeed != 0) dir = sign(hspeed);
             }
         else {
             if (!place_free(x+hspeed,y+1)) hspeed = 0;
@@ -208,7 +247,15 @@ if (active) {
 				//Once at the top
 				else{
 					if other.energy >= 1{
-						other.x = x - other.dir * 3/4 * sprite_width
+						//If on left side
+						if other.x < x{
+							other.x = x - 3/4 * sprite_width
+						}
+						
+						else{
+							other.x = x + 3/4 * sprite_width
+						}
+						
 						other.y = y - 16
 						with other alarm_set(1,15)
 						other.vspeed = 0
@@ -548,6 +595,12 @@ if (active) {
 	//Jump on trampolines
 	var min_jump_speed = 3
 	if place_meeting(x, y + vspeed/4, obj_trampoline){
+		//Reset jump
+		if vspeed < min_jump_speed + 4{
+			jumps = jumpsMax
+		}
+		
+		//Bounce
 		if vspeed > min_jump_speed{
 			vspeed *= -1
 		}

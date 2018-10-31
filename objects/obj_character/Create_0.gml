@@ -38,6 +38,7 @@ gravityMax = 10;
 //gravityI - gravity icreasing increment
 gravityI = 0.4;
 fric = 2.4 //Set all objects friction
+drag = 0.3 // Set how quickly player's can change directions in air
 
 //playerInput
 playerInput = 0;
