@@ -33,10 +33,9 @@ else {
     jumpHeight = 8.5;
     }
 
-//gravity
-gravityMax = 10;
-//gravityI - gravity icreasing increment
-gravityI = 0.4;
+//movement
+gravityMax = 10; //maximum speed a player can fall
+gravityI = 0.4; //gravityI - gravity icreasing increment
 fric = 2.4 //Set all objects friction
 drag = 0.3 // Set how quickly player's can change directions in air
 acceleration = 0.5 // Set how quickly the player starts moving
