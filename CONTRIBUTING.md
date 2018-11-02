@@ -23,6 +23,8 @@ __[Issues](#issues)__
 - [Submitting an Issue for Review: Pull Requests](#submitting-an-issue-for-review-pull-requests)
 - [Closing an Issue](#closing-an-issue)
 
+__[Labels](#labels)__
+
 __[Code Reviews](#code-reviews)__
 - [Types of Reviews](#types-of-reviews)
 - [How to Write a Review](#how-to-write-a-review)
@@ -288,6 +290,9 @@ Generally leave closing an issue to the person who opened it or the code reviewe
 If an issue is tagged `bug` and you follow the reproduce steps but can't reproduce the bugs _do not close it_. Instead label it with `could not reproduce` and wait for another user to confirm it.
 
 If you're searching for an issue and can't find it, don't forget to search the closed issues as well.
+
+## Labels
+See the [labels](https://github.com/famegames/fire-and-ice/blob/master/Label_description.md) file for when to apply and remove labels.
 
 ## Code Reviews
 Reviewing submitted pull requests is a necessary step to building a successful project. It's not always fun, but its necessary. If you want to review code, there are some requirements you should meet:
