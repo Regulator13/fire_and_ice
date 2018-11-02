@@ -1,18 +1,13 @@
 ---
 name: Discussion Thread
-about: Create a discussion that leads to action
+about: I have general ideas or problems to discuss
 
 ---
 
-_This is a discussion thread. It can be closed when actions have been taken, such as the creation of new issues._
+**Problem/Idea** 
+Describe the problem or idea you have for the game. If the problems are totally unrelated, please create a separate issue for each. Please tag with `discussion` label.
 
-**Context** 
+**Reasoning**
+Provide reasoning as to why this idea is useful and beneficial
 
-
-**Problem/idea**
-
-
-**Example(s)**
-
-
-*Include any tags that apply. Tag a person if you are looking for a response from someone specific.*
+*This is a discussion thread. Please comment with feedback below. The issue will be closed once we decide how to address each point of content.*

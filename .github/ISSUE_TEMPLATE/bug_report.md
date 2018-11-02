@@ -1,24 +1,17 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Something is not behaving as expected
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Bug and Expected Behavior**
+Describe the bug and what is supposed to happen.
 
 **To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+1. Go to X branch or repository
+2. Play the game in X mode
+3. Do X action
+4. Do X action
 
 **Additional context**
-Add any other context about the problem here.
+Provide screenshots, exceptions, and code error/location if you think it will make this easier to solve.
