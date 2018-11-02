@@ -236,7 +236,7 @@ if (active) {
             }
 		
 		//Climb blocks
-		if (id != other.grabObject) and frozen{
+		if (id != other.grabObject) and (frozen or stuck){
 			//Slide slowly down blocks' sides
 			other.hspeed = 0
 			other.vspeed = 0
@@ -259,6 +259,7 @@ if (active) {
 							other.x = x - 3/4 * sprite_width
 						}
 						
+						//If on the right side
 						else{
 							other.x = x + 3/4 * sprite_width
 						}

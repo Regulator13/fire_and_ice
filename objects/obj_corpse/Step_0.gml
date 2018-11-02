@@ -23,14 +23,23 @@ if (hp > hpMax) hp = hpMax;
 if (willFreeze) {
     //freeze buffer
     if (freezeBuffer < 0*30) {
-        frozen = true;
-        active = true;
-        hp = hpNormal+1;
-        willFreeze = false;
-        freezeBuffer = freezeBufferMax;
-        }
-    else freezeBuffer -= 1;
+		if holder == noone{
+	        frozen = true;
+	        active = true;
+	        hp = hpNormal+1;
+	        willFreeze = false;
+	        freezeBuffer = freezeBufferMax;
+		}
+		
+		//Reset buffer if holding something
+		else{
+			willFreeze = false
+			freezeBuffer = freezeBufferMax
+		}
     }
+	else freezeBuffer -= 1;
+}
+
 //explode
 if (ignite) {
     //freeze buffer
