@@ -43,6 +43,7 @@ These are all the objects in _Dust: Fire and Ice_ as of the posting/editing of t
 - obj_inputButton
   - obj_inputControl
   - obj_inputMessage
+- obj_controlButton
 - obj_button
 - obj_textBox
 - obj_logo
