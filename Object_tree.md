@@ -1,7 +1,9 @@
 # Object Tree for _Dust: Fire and Ice_
 These are all the objects in _Dust: Fire and Ice_ as of the posting/editing of this page.
 
-## Drawn in Game Objects
+## In Game Objects
+- obj_character
+- obj_localPlayer
 - srv_basic
   - par_block
     - obj_wall
@@ -46,7 +48,6 @@ These are all the objects in _Dust: Fire and Ice_ as of the posting/editing of t
 - obj_logo
 
 ## Networking Objects
-- obj_localPlayer
 - obj_networkPlayer
 - obj_server
 - obj_client
