@@ -256,21 +256,31 @@ if (active) {
 					if other.energy >= 1{
 						//If on left side
 						if other.x < x{
-							other.x = x - 3/4 * sprite_width
+							if place_free(x - 3/4 * sprite_width, y - 16){
+								other.x = x - 3/4 * sprite_width
+								other.y = y - 16
+								with other alarm_set(1,15)
+								other.vspeed = 0
+								other.hspeed = 0
+								other.active = false
+								other.energy -= 1
+								exit
+							}
 						}
 						
 						//If on the right side
 						else{
-							other.x = x + 3/4 * sprite_width
+							if place_free(x + 3/4 * sprite_width, y - 16){
+								other.x = x + 3/4 * sprite_width
+								other.y = y - 16
+								with other alarm_set(1,15)
+								other.vspeed = 0
+								other.hspeed = 0
+								other.active = false
+								other.energy -= 1
+								exit
+							}
 						}
-						
-						other.y = y - 16
-						with other alarm_set(1,15)
-						other.vspeed = 0
-						other.hspeed = 0
-						other.active = false
-						other.energy -= 1
-						exit
 					}
 				}
 			}
