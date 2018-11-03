@@ -229,6 +229,35 @@ if (active) {
         }
     //keep gravity in bounds
     if (vspeed > gravityMax) vspeed = gravityMax;
+
+	//Match speed of platforms
+	with instance_place(x, y+vspeed, obj_platform){
+		//Vertical
+		if is_vertical{
+			other.y += (vspeed + sign(vspeed)*other.gravityI)
+			
+			//apply friction if not stopped
+			if hp < hp_max{
+				if (other.hspeed >= other.fric*3) {
+	                other.hspeed -= other.fric*3;
+	            }
+	            else if (other.hspeed <= (-other.fric*3)) {
+	                other.hspeed += other.fric*3;
+	            }
+	            else if(abs(other.hspeed) < other.fric*3) {
+	                other.hspeed = 0
+				}
+            }
+		}
+	}
+	
+	//Horizontal
+	with instance_place(x, y + 1, obj_platform){
+		if not is_vertical{
+			other.x += hspeed
+		}
+	}
+	
     
     //collide with solid objects
     while(!place_free(x+hspeed, y)) {
@@ -501,8 +530,12 @@ if (active) {
 
 	//Collision with patrols
     with (instance_place(x, y, par_enemy)) {
-        other.hp -= dmg;
-        }
+		if can_attack{
+			other.hp -= dmg;
+			alarm[0] = attack_delay
+			can_attack = false
+		}
+    }
 
 	//Collision with pirahnas
 	if(place_meeting(x,y,obj_pirahna)){
