@@ -22,9 +22,9 @@ startY = 0;
 
 if (global.haveserver) {
     // connectID - order in which client connected, used in lobby code
-    connectID = global.PlayerTotal;
+    connectID = global.player_total;
     
-    global.PlayerTotal++;
+    global.player_total++;
     }
 
 // inputs - array holding the current state of each input

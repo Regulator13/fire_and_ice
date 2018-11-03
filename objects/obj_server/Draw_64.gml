@@ -20,7 +20,7 @@ if (serverDebug) {
     draw_set_color(c_red);
     
     // draw the amount of players
-    draw_text(10,10,string_hash_to_newline("players: "+string(global.PlayerTotal)));
+    draw_text(10,10,string_hash_to_newline("players: "+string(global.player_total)));
     
     // check for clients to send confirmations
     for (i = 0; i < count; i++) { 

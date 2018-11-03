@@ -39,8 +39,8 @@ classes = ds_list_create();
 // localControls - list holding which local players are in
 localControls = ds_list_create();
 
-// PlayerTotal - the total amount of current players
-global.PlayerTotal = 0;
+// player_total - the total amount of current players
+global.player_total = 0;
 
 // localPlayers - hold all the local player input objects
 localPlayers = ds_map_create();

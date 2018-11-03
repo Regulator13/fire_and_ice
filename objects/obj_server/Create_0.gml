@@ -5,7 +5,7 @@ global.haveserver = true;
 
 //counters
 global.serverEntitySprites = 0;
-global.PlayerTotal = 0;
+global.player_total = 0;
 
 
 // create our server. Server creation may fail if there is already a server running. If it does fail, delete eveything and kill this instance

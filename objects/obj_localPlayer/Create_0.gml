@@ -21,7 +21,7 @@ startY = 0;
 /// input
 
 // connectID - order in which player connected, used in lobby code
-connectID = global.PlayerTotal++;
+connectID = global.player_total++;
 
 // controls - input index in controls array
 controls = 0;

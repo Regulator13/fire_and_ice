@@ -60,10 +60,10 @@ if (active) {
                 }
             break;
         case 0:
-            //input
+            //computer player input
             if (alarm[0] <= 0) {
                 haxis1 = choose(1, 0, -1);
-                haxis1 = choose(1, 0, -1);
+                vaxis1 = choose(1, 0, -1);
                 action = choose(false, true);
                 alarm[0] = irandom_range(10, 20);
                 }
@@ -87,7 +87,7 @@ if (active) {
         
     //Find current hspeed
 	//Single Player
-    if !(global.cooperativeMode) {
+    if !(global.cooperative_mode) {
 		//If on the ground
 		if not place_free(x, y + 1){
 	        if !(haxis1 > -axisBuffer and haxis1 < axisBuffer and vaxis1 > -axisBuffer and vaxis1 < axisBuffer) {
@@ -106,6 +106,7 @@ if (active) {
 	        }
 			
 	        else {
+				//artifact maybe friciton belong here
 	            if (!place_free(x+hspeed,y+1)) hspeed = 0;
 	        }
 	    }
@@ -193,6 +194,7 @@ if (active) {
         }
     
     //animate
+	//TODO animation broken in one direction
     if (hspeed != 0) {
         if (frameBuffer < 0) {
             frameStep += 1;
@@ -680,8 +682,8 @@ if (active) {
 ///win
 if (place_meeting(x, y, obj_door)) {
     //win score
-    team.tScore += global.scoreWin/ds_list_size(team.players);
-    if !(global.win) team.tScore += global.scoreFirst; //first
+    team.tScore += global.score_win/ds_list_size(team.players);
+    if !(global.win) team.tScore += global.score_first; //first
     global.win = true;
     instance_destroy();
     /*
@@ -703,7 +705,7 @@ if (keyboard_check_pressed(ord("U"))) {
 ///score
 with (instance_place(x, y, obj_score)) {
     //add score
-    with (other) team.tScore += round(global.scoreObject/ds_list_size(team.players));
+    with (other) team.tScore += round(global.score_object/ds_list_size(team.players));
     //destroy self
     instance_destroy();
     }

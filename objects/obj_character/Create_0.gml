@@ -1,11 +1,9 @@
 /// @description  initialize variables
-event_inherited();
 
 //physics
 active = true;
+//artifact
 frozen = false;
-mass = 24;
-hpNormal = 100;
 
 //team - team object
 team = noone;
@@ -14,8 +12,11 @@ team = noone;
 playerId = 0;
 
 //Set player variables
+mass = 24;
 hp = 100;
 hp_max = 100;
+//artifact
+hpNormal = 100;
 energy = 100;
 energy_max = 100;
 strength = 90;
@@ -24,7 +25,7 @@ strength = 90;
 jumps = 0;
 
 //jumpHeight - inital vspeed of jump
-if (global.cooperativeMode) {
+if (global.cooperative_mode) {
     jumpsMax = 1;
     jumpHeight = 6;
     }
@@ -39,15 +40,6 @@ gravityI = 0.4; //gravityI - gravity icreasing increment
 fric = 2.4 //Set all objects friction
 drag = 0.3 // Set how quickly player's can change directions in air
 acceleration = 0.5 // Set how quickly the player starts moving
-
-//playerInput
-playerInput = 0;
-// InputPlayer - player object where to get input from, local or network
-InputPlayer = noone;
-
-//inputBuffer - buffer for joystick input
-inputBuffer = 0;
-inputBufferMax = 10;
 
 //stop animation
 image_speed = 0;
@@ -66,6 +58,7 @@ crouch = false;
 //grabing
 grabObject = noone;
 //holding - 0 for let go next time, 2 to throw
+//artifact
 holding = 0;
 //holder - who is holding self
 holder = noone;
@@ -96,7 +89,17 @@ moochBuffer = 0;
 // playerName
 playerName = "";
 
+
 /// initialize input variables
+
+//playerInput
+playerInput = 0; //number of player input in input array
+// InputPlayer - player object where to get input from, local or network
+InputPlayer = noone;
+
+//inputBuffer - buffer for joystick input
+inputBuffer = 0;
+inputBufferMax = 10;
 
 // inputType - the type of input, keyboard, mouse, joystick
 inputType = CONTROLS_KEYBOARD;

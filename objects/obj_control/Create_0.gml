@@ -10,21 +10,22 @@ water_buffer = true;
 global.players = 0;
 
 //player total
-global.playerTotal = 5;
+global.player_total = 5;
 
 //score
-global.scoreWin = 100;
-global.scoreObject = 10;
-global.scoreLife = 100; //score required to get a heart
-//global.scoreY = room_height-/100; //not used
-global.scoreLVL = 5;
-global.scoreFirst = 25;
+global.score_win = 100;
+global.score_object = 10; //points for a coin
+//artifact
+global.score_life = 100; //score required to get a heart
+global.score_level = 5;
+global.score_first = 25;
 
-//global.cooperativeMode
-global.cooperativeMode = false;
+//global.cooperative_mode
+//artifact
+global.cooperative_mode = false;
 
 // small buffer to allow server to catch up
-checkWinBuffer = 60;
+check_win_buffer = 60;
 
 //whether animations are on or off
 animations_on = true

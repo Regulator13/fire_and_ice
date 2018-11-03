@@ -15,7 +15,7 @@ else {
         else {
             //global.waterDelay += 200;
             //if (global.water_rate < .1) global.water_rate += .05
-            for (i = 0; i < global.playerTotal; i += 1) {
+            for (i = 0; i < global.player_total; i += 1) {
                 global.playerScore[i] = 0;
                 }
             scr_stateSwitch(STATE_SCORE, STATE_GAME);

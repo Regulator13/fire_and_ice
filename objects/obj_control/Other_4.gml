@@ -6,7 +6,7 @@ if (global.gameStart) {
     //whether or not can continue
     global.continueGame = true;
     
-    if (global.cooperativeMode) {
+    if (global.cooperative_mode) {
         //water delay
         global.waterDelay = 1600;
         //water rate
