@@ -13,7 +13,7 @@ arc = false;
 alarm[0] = 1*30;
 
 //mass - how fast they move
-mass = 8;
+mass = 20;
 
 event_inherited();
 

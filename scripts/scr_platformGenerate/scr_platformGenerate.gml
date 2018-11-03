@@ -57,7 +57,7 @@ switch(argument2) {
 		
 		//1 in 3 chance of trampoline on left side
 		if irandom(2){
-			if (position_empty(dx - gridSize*3, dy - gridSize)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "Instances", obj_trampoline);
+			if (position_empty(dx - gridSize*3, dy - gridSize/2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "Instances", obj_trampoline);
 		}
 		
 		//recharge station

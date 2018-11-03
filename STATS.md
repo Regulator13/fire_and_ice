@@ -29,6 +29,9 @@
 ### Items
 | Name | hp | energy cost | mass | fric |
 | --- | --- | --- | --- | --- |
+| Block | 3 | NA | 16 | 2.4 |
+| Corpse | NA | NA | 20 | 2 |
+| Jetpack | breaks underwater | 1/step | 25 | 4.4 | 
 | Block | 3 | NA | 12 | 2.4 |
 | Corpse | NA | NA | 20 | 2 |
 | Jetpack | breaks underwater | 1.2/step | 25 | 4.4 | 
