@@ -70,7 +70,7 @@ maxY = room_height - gridSize*2; //max y platforms are allowed to generate at
 //For each row in the room, create a platform with 1 in x chance
 for (i = 3; i < maxY/gridSize; i += 1) {
     for(j = 0; j < 1; j+=1) {
-        if (irandom_range(0, 1) = 0) {
+        if (irandom_range(0, 3) > 0) {
             dx = round(irandom_range(gridSize, room_width - gridSize)/gridSize)*gridSize;
             dy = i*gridSize;
             scr_platformGenerate(dx, dy, irandom_range(0, 6));
