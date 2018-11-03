@@ -11,7 +11,8 @@ switch(global.NetworkState) {
     
             // Send this to the server
             var message = network_send_udp(client,ip,port,buff,buffer_tell(buff));
-            if(message <= 0){ //network_send_udp returns number less than one if message fails
+			
+            if(message < 0){ //network_send_udp returns number less than zero if message fails
                 if !(instance_exists(obj_inputMessage)) {
                 //if we can't connect, show and error and restart... could be more graceful :)
                 with (instance_create(room_width/2, room_height/2, obj_inputMessage)) {

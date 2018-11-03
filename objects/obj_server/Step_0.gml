@@ -1,4 +1,9 @@
 /// @description  client messages
+buffer_seek(bbj, buffer_seek_start, 0);
+buffer_write(bbj, buffer_s8, CLIENT_CONNECT);
+//var hlkjlk = network_send_udp(server, "127.0.0.1", 6510, bbj, buffer_tell(bbj))
+//show_debug_message(string(hlkjlk))
+
     // once a frame, we send clients any priority message, if not in game
     var count = ds_list_size(iplist); // get the amount of clients connected
 

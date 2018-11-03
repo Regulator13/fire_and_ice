@@ -1,5 +1,5 @@
 /// @description  Server network control
-
+show_debug_message("im in server async network event")
 //find buffer
 var buff = ds_map_find_value(async_load, "buffer");
 //find start since the connection is UDP and not sorted out for us

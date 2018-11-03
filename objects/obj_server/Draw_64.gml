@@ -21,37 +21,44 @@ if (serverDebug) {
     
     // draw the amount of players
     draw_text(10,10,string_hash_to_newline("players: "+string(global.PlayerTotal)));
+	draw_text(10, 30+yOffset*drawOffset++, "Server Socket: " + string(server));
     
-    // check for clients to send confirmations
-    for (i = 0; i < count; i++) { 
-        //get the ip of the client to get the message
-        var ip = ds_list_find_value(iplist, i);
+	if count = 0{
+		//Warning
+		draw_text(10, 30+yOffset*drawOffset++, "No clients in iplist!");
+	}
+	else{
+	    // check for clients to send confirmations
+	    for (i = 0; i < count; i++) {
+	        //get the ip of the client to get the message
+	        var ip = ds_list_find_value(iplist, i);
         
-        // find the type of message to send
-        var message = ds_map_find_value(clientMessages, ip);
+	        // find the type of message to send
+	        var message = ds_map_find_value(clientMessages, ip);
         
-        // get the network player
-        var inst = ds_map_find_value(Clients, ip);
+	        // get the network player
+	        var inst = ds_map_find_value(Clients, ip);
         
-        // get the latest sequence out
-        var sequenceOut = sequenceOuts[| i];
+	        // get the latest sequence out
+	        var sequenceOut = sequenceOuts[| i];
         
-        // draw RTT
+	        // draw RTT
         
-        draw_text(10, 30+yOffset*drawOffset, string_hash_to_newline(string(ip)));
-        draw_text(340, 30+yOffset*drawOffset, string_hash_to_newline(string(inst.currentRTT)));
-        draw_text(160, 30+yOffset*drawOffset, string_hash_to_newline(scr_drawNetworkState(message)));
-        if (inst.alarm[0] < inst.dropBuffer-2) {
-            draw_text(400, 30+yOffset*drawOffset, string_hash_to_newline(string(inst.alarm[0])));
-            }
-        // increment drawOffset
-        drawOffset++;
-        draw_text(10, 30+yOffset*drawOffset, string_hash_to_newline("Socket Out: " + string(inst.socketOut)));
-        draw_text(120, 30+yOffset*drawOffset, string_hash_to_newline("Message Success: " + string(inst.messageSuccess)));
-        draw_text(340, 30+yOffset*drawOffset, string_hash_to_newline("Sequence Out: " + string(sequenceOut)));
-        // increment drawOffset
-        drawOffset++;
-        }
+	        draw_text(10, 30+yOffset*drawOffset, string_hash_to_newline(string(ip)));
+	        draw_text(340, 30+yOffset*drawOffset, string_hash_to_newline(string(inst.currentRTT)));
+	        draw_text(160, 30+yOffset*drawOffset, string_hash_to_newline(scr_drawNetworkState(message)));
+	        if (inst.alarm[0] < inst.dropBuffer-2) {
+	            draw_text(400, 30+yOffset*drawOffset, string_hash_to_newline(string(inst.alarm[0])));
+	            }
+	        // increment drawOffset
+	        drawOffset++;
+	        draw_text(10, 30+yOffset*drawOffset, string_hash_to_newline("Socket Out: " + string(inst.socketOut)));
+	        draw_text(120, 30+yOffset*drawOffset, string_hash_to_newline("Message Success: " + string(inst.messageSuccess)));
+	        draw_text(340, 30+yOffset*drawOffset, string_hash_to_newline("Sequence Out: " + string(sequenceOut)));
+	        // increment drawOffset
+	        drawOffset++;
+	        }
+	}
     
     // reset alpha
     draw_set_alpha(1);
