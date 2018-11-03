@@ -20,8 +20,10 @@ __[Style Guide](#style-guide)__
 
 __[Issues](#issues)__
 - [Creating Issues](#creating-issues)
-- [Submitting an Issue for Review](#submitting-an-issue-for-review)
+- [Submitting an Issue for Review: Pull Requests](#submitting-an-issue-for-review-pull-requests)
 - [Closing an Issue](#closing-an-issue)
+
+__[Labels](#labels)__
 
 __[Code Reviews](#code-reviews)__
 - [Types of Reviews](#types-of-reviews)
@@ -132,7 +134,7 @@ y = 1
 GameMaker also allows for control statements to all be on one line if there is only one line of code to execute. For readability, it is preferred this is avoided unless a long list of control statements all execute one line of code each.
 ```
 //Bad
-if lives <  destroy_instance
+if lives < 1 destroy_instance
 ```
 ```
 //Good
@@ -216,12 +218,12 @@ These comments take place at the beginning of a function or script in GML's case
 ```
 /// @function  convert_string_to_decimal(str_num)
 /// @description  Convert a string to a decimal
-/// @param str_num str | A string containing a decimal number
-// Returns a decimal number
+/// @param str_num | A string containing a decimal number
+//  Returns a decimal number
 
 //Actual Code
 ```
-The `@function`, `@description`, and `@param` are special documentation keywords that allow the user see information about the function while coding. For example, the `@function` keyword will autocomplete the function and show the parameter `(str_num)` when someone tries to use it. The `@param` line is set up as follows `/// @param ARGUMENT_NAME ARGUMENT_TYPE | ARGUMENT_DESCRIPTION; ARGUMENT_RANGE(if applicable)`. 2 spaces should be used after these keywords for better readability.
+The `@function`, `@description`, and `@param` are special documentation keywords that allow the user see information about the function while coding. For example, the `@function` keyword will autocomplete the function and show the parameter `(str_num)` when someone tries to use it. The `@param` line is set up as follows `/// @param ARGUMENT_NAME | ARGUMENT_DESCRIPTION; ARGUMENT_RANGE(if applicable)`. 2 spaces should be used after these keywords for better readability.
 
 #### Event Documentation
 
@@ -273,7 +275,7 @@ This is done in the `issues` tab by hitting `new issue`. Several templates will 
 
 After you fill out the issue form, label it with the correct issues, add it to related projects, milestones, etc. Well categorized isses are important if someone is trying to find issues related to a specific problem.
 
-### Submitting an Issue for Review
+### Submitting an Issue for Review: Pull Requests
 Once you have completed an issue:
 1. Carefully test your code. It should compile without errors, perform the intended action, and not alter unrelated sections of the game
 2. Commit the changes to a branch named after you (if you don't have one go to `Branch>New Branch` on the GitHub Desktop)
@@ -283,11 +285,14 @@ Once you have completed an issue:
 6. Don't close the issue. The reviewer will close it when he/she has ensured your code can be safely added to the `master` branch. In the meantime others will want to know that your code has not yet been added
 
 ### Closing an Issue
-Generally leave closing an issue to the person who opened it or the code reviewer who pulled the solution to the issue. If an issue has had no attention and seems it will not be dealt with, submit a comment mentioning the issue creator asking if it can be closed. 
+Generally leave closing an issue to the person who opened it or the code reviewer who pulled the solution to the issue. If an issue has had no attention and seems it will not be dealt with, submit a comment mentioning the issue creator (@USERNAME using their username) asking if it can be closed. 
 
 If an issue is tagged `bug` and you follow the reproduce steps but can't reproduce the bugs _do not close it_. Instead label it with `could not reproduce` and wait for another user to confirm it.
 
 If you're searching for an issue and can't find it, don't forget to search the closed issues as well.
+
+## Labels
+See the [labels](https://github.com/famegames/fire-and-ice/blob/master/Label_description.md) file for when to apply and remove labels.
 
 ## Code Reviews
 Reviewing submitted pull requests is a necessary step to building a successful project. It's not always fun, but its necessary. If you want to review code, there are some requirements you should meet:
@@ -304,7 +309,7 @@ Reviews can take 3 forms:
 The comment is just a note for the reviewee, and may be submitted by anyone as it does not give or reject approval.
 
 ### How to Write a Review
-Reviews should be clear and concise to save time for both the reviewer and the reviewee. When writing a review you can type suggestions directly attached to lines of code by going to the __files changed__ and clicking on the blue comment below the line. You can also suggest a correction here. In-line comments should be used when possible for smaller errors, one-time mistakes, and typos. If a larger issue is present such as:
+Reviews should be clear and concise to save time for both the reviewer and the reviewee. When writing a review you can type suggestions directly attached to lines of code by going to the __files changed__ and clicking on the blue comment below the line. You can also suggest a correction here using `ctrl-g` that the reviewee can use to automatically change the code without submitting another commit. In-line comments should be used when possible for smaller errors, one-time mistakes, and typos. If a larger issue is present such as:
 - Code that raises numerous errors
 - Code that effects unrelated portions of the project
 - Code that is generally inefficient
@@ -316,7 +321,7 @@ Reviews must be thorough, even if just to educate the reviewee. Every pull reque
 
 - __Styling issues__ - improper indentation, new lines, spaces, variable capitalization, etc. Just mention it and/or propose the proper style, don't dwell on it. If someone consistently has improper style, politely direct them to the [Style Guide](https://github.com/famegames/fire-and-ice/blob/master/CONTRIBUTING.md#style-guide) in the general review
 - __Ambiguous function names__ - If a function name is very confusing, mention it, suggest a better one if you can.
-- __Long functions__ - If a function is very lengthy, make sure the function is only completing it's specified task. For example if the function is `scr_deal_damage`, make sure the function only deals damage, and doesn't also check if the player is dead. That should use a different function, even if the `Scr_check_if_dead` function is called during `scr_deal_damage`
+- __Long functions__ - If a function is very lengthy, make sure the function is only completing it's specified task. For example if the function is `scr_deal_damage`, make sure the function only deals damage, and doesn't also check if the player is dead. That should use a different function, even if the `scr_check_if_dead` function is called during `scr_deal_damage`
 - __Lacking comments__ - If code is complex and you have to spend a lot of time interpreting it, it should be commented. Fuctions should all have proper documentation. If a strange approach is taken, a comment should explain that approach to avoid confusion later. Follow the style guide. Don't worry too much about unneeded comments unless they are excessive.
 - __Side effects__ - If code is going to cause obvious complications or is needlessly limiting, a suggestion should be made for more flexible code
 - __Error catching__ - Code should catch exceptions to prevent fatal errors. What if the modified object is destroyed? What if a different room is entered?
@@ -331,11 +336,12 @@ If you want to test the game and suggest improvements, just follow these steps:
 2. Find the `.exe` file and play the game!
 3. Lots of things need testing:
    * Current game features to make sure they work properly
+   * Glitches - try to cheat! If you think you've found a glitch we would love to know
    * Networking, to make sure things connect and are not excessively laggy
-   * Different devices/platfroms to make sure the game works everywhere
+   * Different devices/platforms to make sure the game works everywhere
    * Suggestions for new ideas to make the game better or more fun
 4. Once you find what needs changed or have a suggestion [submit an issue](https://github.com/famegames/fire-and-ice/issues/new?template=general-request.md)
 5. Include what you want changed, whether you were playing single player or a network game, and any other relevant information to your change.
 6. __Important__: Label your issue with the `game-tester` label so we know where it came from and to ignore any formatting inconsistencies. The label can be found on the right hand side of the page and is blue.
 
-Note: Unfortunately submitting an issue doesn't guarantee that a change will occur. Your issue may be closed with no action taken. Please don't take this personally, some changes aren't reasonable fits for the game or don't work with the written code. Instead, find another issue, a different suggestion, and try again.
+Note: Unfortunately submitting an issue doesn't guarantee that a change will occur. Your issue may be closed with no action taken. Please don't take this personally, some changes aren't reasonable fits for the game or don't work with the written code. Instead, find another issue, make a different suggestion, and try again.

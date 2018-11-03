@@ -26,3 +26,6 @@ global.cooperativeMode = false;
 // small buffer to allow server to catch up
 checkWinBuffer = 60;
 
+//whether animations are on or off
+animations_on = true
+
