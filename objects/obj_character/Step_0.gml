@@ -264,6 +264,7 @@ if (active) {
 								other.hspeed = 0
 								other.active = false
 								other.energy -= 1
+								exit
 							}
 						}
 						
@@ -277,6 +278,7 @@ if (active) {
 								other.hspeed = 0
 								other.active = false
 								other.energy -= 1
+								exit
 							}
 						}
 					}
