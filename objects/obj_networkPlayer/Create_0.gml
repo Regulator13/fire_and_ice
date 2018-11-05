@@ -8,8 +8,8 @@ team = 0;
 ready = false;
 // name - player name
 name = "Player";
-//playerId - accumulative global number to identify player
-playerId = 0;
+//player_id - accumulative global number to identify player
+player_id = 0;
 //input - input player is using
 input = 0;
 //gameCharacter - character in game

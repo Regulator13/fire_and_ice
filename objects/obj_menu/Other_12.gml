@@ -33,10 +33,10 @@ if (!global.online) {
         // get the local player
         var Local = localPlayers[? key];
         // setup up player object
-        Local.playerId = ds_list_find_index(players, Local.connectID);
+        Local.player_id = ds_list_find_index(players, Local.connectID);
         Local.input = 1; //ds_list_find_value(players, connectID);
-        Local.team = ds_list_find_value(teams, Local.playerId); //temporary
-        Local.character = ds_list_find_value(classes, Local.playerId);
+        Local.team = ds_list_find_value(teams, Local.player_id); //temporary
+        Local.character = ds_list_find_value(classes, Local.player_id);
         Local.sprite_index = scr_getSprite(Local.character);
         //team
         var team = ds_map_find_value(gameTeams, Local.team);
@@ -64,10 +64,10 @@ else if (global.haveserver) {
             player = ds_map_find_value(Clients, ip);
             
             // setup up player object
-            player.playerId = ds_list_find_index(other.players, player.connectID);
+            player.player_id = ds_list_find_index(other.players, player.connectID);
             player.input = -1; //ds_list_find_value(players, connectID);
-            player.team = ds_list_find_value(other.teams, player.playerId); //temporary
-            player.character = ds_list_find_value(other.classes, player.playerId);
+            player.team = ds_list_find_value(other.teams, player.player_id); //temporary
+            player.character = ds_list_find_value(other.classes, player.player_id);
             player.sprite_index = scr_getSprite(player.character);
             //team
             var team = ds_map_find_value(other.gameTeams, player.team);

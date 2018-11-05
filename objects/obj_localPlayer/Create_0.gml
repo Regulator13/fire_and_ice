@@ -8,8 +8,8 @@ team = 0;
 ready = false;
 // name - player name
 name = "Player";
-//playerId - accumulative global number to identify player
-playerId = 0;
+//player_id - accumulative global number to identify player
+player_id = 0;
 //input - input character is using
 input = 0;
 //gameCharacter - character in game
@@ -32,10 +32,10 @@ inputs = array_create(array_length_2d(global.controls, controls));
 mouseX = 0;
 mouseY = 0;
 
-//inputBuffer - small buffer to slow down gamepad input
-inputBuffer = 0;
-//inputBufferMax
-inputBufferMax = 4;
+//input_buffer - small buffer to slow down gamepad input
+input_buffer = 0;
+//input_buffer_max
+input_buffer_max = 4;
 
 /// join lobby
 

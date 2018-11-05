@@ -25,7 +25,7 @@ water_height = 0;
 disconnectBuffer = 60;
 
 ///initialize the client
-PlayerName = global.ServerName;   //get the name that was selected (it's a server OR player name)
+player_name = global.ServerName;   //get the name that was selected (it's a server OR player name)
 
 //server IP and port, needed to send packets
 ip = global.connectip;

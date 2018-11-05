@@ -1,7 +1,7 @@
 event_inherited();
 
-//playerId - player id for score
-playerId = 0;
+//player_id - player id for score
+player_id = 0;
 
 //Set player variables
 hp = 100;
@@ -22,31 +22,31 @@ gravity_max = 10;
 gravityI = 0.4;
 fric = .4 //Set all objects friction
 
-//playerInput
-playerInput = 0;
-// InputPlayer - input player local or network
-InputPlayer = noone;
+//player_input
+player_input = 0;
+// Input_player - input player local or network
+Input_player = noone;
 
-//inputBuffer - buffer for joystick input
-inputBuffer = 0;
-inputBufferMax = 10;
+//input_buffer - buffer for joystick input
+input_buffer = 0;
+input_buffer_max = 10;
 
 //stop animation
 image_speed = 0;
 image_index = 4;
 //start frames later when biting
 bitingFrame = 9;
-//frameStep - current frame for animation
-frameStep = 0;
-//frameBuffer - slow animation
-frameBuffer = 0;
-frameBufferMax = 4;
+//frame_step - current frame for animation
+frame_step = 0;
+//frame_buffer - slow animation
+frame_buffer = 0;
+frame_buffer_max = 4;
 
 //biting - whether or not character is biting
 biting = false;
 
 //grabing
-grabObject = noone;
+grab_object = noone;
 
 //holding - 0 for let go next time, 2 to throw
 holding = 0;
@@ -54,24 +54,24 @@ holding = 0;
 //dir - direction of character
 dir = 0;
 
-//energyFire - energy it takes for a fireball
-energyFire = 5;
+//energy_fire - energy it takes for a fireball
+energy_fire = 5;
 
-//willArc - whether or not ball arcs for player
-willArc = false;
+//will_arc - whether or not ball arcs for player
+will_arc = false;
 
 //y_score - heighest y value reached
 y_score = room_height;
 
 /// initialize input variables
 
-// inputType - the type of input, keyboard, mouse, joystick
-inputType = CONTROLS_KEYBOARD;
+// input_method - the type of input, keyboard, mouse, joystick
+input_method = CONTROLS_KEYBOARD;
 
 // initiate isPressed variable outside, so they don't automatically reset
-grabIsPressed = false;
-iceIsPressed = false;
-fireIsPressed = false;
+grab_is_pressed = false;
+ice_is_pressed = false;
+fire_is_pressed = false;
 
 // mouseX - x position of mouse if mouse input
 mouseX = 0;

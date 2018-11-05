@@ -108,7 +108,7 @@
         ds_list_add(other.characterYs, y);
         ds_list_add(other.characterHPs, hp);
         ds_list_add(other.characterEnergys, energy);
-        ds_list_add(other.characterNames, playerName);
+        ds_list_add(other.characterNames, player_name);
         }
     
     // add all the lasers to send into a list

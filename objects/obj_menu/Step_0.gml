@@ -12,18 +12,18 @@ if !(instance_exists(obj_inputButton)) {
     
     // gamepad input
     var input;
-    // axisBuffer - buffer till push starts counting
-    var axisBuffer = 0.4;
+    // axis_buffer - buffer till push starts counting
+    var axis_buffer = 0.4;
     
     // get input
-    if (inputBuffer < 0) {
+    if (input_buffer < 0) {
         // gamepad input
         for (input = 0; input < 4; input++) {
             haxis = gamepad_axis_value(input, gp_axislh);
             vaxis = gamepad_axis_value(input, gp_axislv);
             // axis check
-            if (haxis < axisBuffer and haxis > -axisBuffer) haxis = 0;
-            if (vaxis < axisBuffer and vaxis > -axisBuffer) vaxis = 0;
+            if (haxis < axis_buffer and haxis > -axis_buffer) haxis = 0;
+            if (vaxis < axis_buffer and vaxis > -axis_buffer) vaxis = 0;
             // action
             if(gamepad_button_check_released(input, gp_face1)) action = true;
             }
@@ -57,7 +57,7 @@ if !(instance_exists(obj_inputButton)) {
                     }
                 // reset buffer if got input
                 if (haxis != 0 || vaxis != 0 || action != false)
-                    inputBuffer = inputBufferMax;
+                    input_buffer = input_buffer_max;
                 break;
             case STATE_LOBBY:
                 if !(global.online) {
@@ -192,11 +192,11 @@ if !(instance_exists(obj_inputButton)) {
                     }
                 // reset buffer if got input
                 if (haxis != 0 || vaxis != 0 || action != false)
-                    inputBuffer = inputBufferMax;
+                    input_buffer = input_buffer_max;
                 break;
             }
         }
-    else inputBuffer--;
+    else input_buffer--;
     }
 
 

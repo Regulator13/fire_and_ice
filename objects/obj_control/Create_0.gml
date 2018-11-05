@@ -20,10 +20,6 @@ global.score_life = 100; //score required to get a heart
 global.score_level = 5;
 global.score_first = 25;
 
-//global.cooperative_mode
-//artifact
-global.cooperative_mode = false;
-
 // small buffer to allow server to catch up
 check_win_buffer = 60;
 

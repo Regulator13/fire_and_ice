@@ -12,10 +12,10 @@ buttons = ds_list_create();
 //selected - selected button
 selected = 0;
 
-//inputBuffer - small buffer to slow down gamepad input
-inputBuffer = 0;
-//inputBufferMax
-inputBufferMax = 4;
+//input_buffer - small buffer to slow down gamepad input
+input_buffer = 0;
+//input_buffer_max
+input_buffer_max = 4;
 //inputFreeze - small amount of time inbetween menu switches
 inputFreeze = 0;
 // inputFreezeMax

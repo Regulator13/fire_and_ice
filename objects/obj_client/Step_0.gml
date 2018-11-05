@@ -40,7 +40,7 @@ switch(global.NetworkState) {
         break;
     case(NETWORK_LOGIN): //login 
         //client has connected to the server, so send our "player name"
-        scr_sendLogin(PlayerName);
+        scr_sendLogin(player_name);
         //break
         break;
     case(NETWORK_PLAY): //game is running

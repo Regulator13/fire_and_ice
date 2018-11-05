@@ -5,57 +5,57 @@
     //left, up, right, down, action - keys
     haxis1 = 0;
     vaxis1 = 0;
-    jumpPressed = false;
-    //iceIsPressed = false;
-    icePressed = false;
-    iceReleased = false;
-    handicapReleased = false;
-    grabPressed = false;
-    //grabIsPressed = false;
-    grabReleased = false;
-    //fireIsPressed = false;
-    firePressed = false;
-    fireReleased = false;
+    jump_pressed = false;
+    //ice_is_pressed = false;
+    ice_pressed = false;
+    ice_released = false;
+    handicap_released = false;
+    grab_pressed = false;
+    //grab_is_pressed = false;
+    grab_released = false;
+    //fire_is_pressed = false;
+    fire_pressed = false;
+    fire_released = false;
 
-    //inputBuffer - for joystick input
-    if (inputBuffer > 0) inputBuffer -= 1;
+    //input_buffer - for joystick input
+    if (input_buffer > 0) input_buffer -= 1;
     
-    //axisBuffer - buffer till push starts counting
-    axisBuffer = 0.4;
+    //axis_buffer - buffer till push starts counting
+    axis_buffer = 0.4;
     
     //Player
-    switch(playerInput) {
+    switch(player_input) {
         case -1:
         case 1:
             // online input
-            if(InputPlayer.inputs[LEFT_KEY]) haxis1 = -1;
-            if(InputPlayer.inputs[RIGHT_KEY]) haxis1 = 1;
-            if(InputPlayer.inputs[UP_KEY] == KEY_PRESSED) vaxis1 = -1;
-            if(InputPlayer.inputs[DOWN_KEY] == KEY_PRESSED) vaxis1 = 1;
-            if(InputPlayer.inputs[ACTION_KEY] == KEY_PRESSED) {
-                jumpPressed = true;
+            if(Input_player.inputs[LEFT_KEY]) haxis1 = -1;
+            if(Input_player.inputs[RIGHT_KEY]) haxis1 = 1;
+            if(Input_player.inputs[UP_KEY] == KEY_PRESSED) vaxis1 = -1;
+            if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) vaxis1 = 1;
+            if(Input_player.inputs[ACTION_KEY] == KEY_PRESSED) {
+                jump_pressed = true;
                 //unpress key
-                InputPlayer.inputs[ACTION_KEY] = KEY_RELEASED;
+                Input_player.inputs[ACTION_KEY] = KEY_RELEASED;
                 }
-            if(InputPlayer.inputs[LEFTSELC_KEY] == KEY_PRESSED) {
-                icePressed = true;
-                iceIsPressed = true;
-                grabPressed = true;
-                grabIsPressed = true;
+            if(Input_player.inputs[LEFTSELC_KEY] == KEY_PRESSED) {
+                ice_pressed = true;
+                ice_is_pressed = true;
+                grab_pressed = true;
+                grab_is_pressed = true;
                 }
-            if(InputPlayer.inputs[LEFTSELC_KEY] == KEY_RELEASED) {
-                iceReleased = true;
-                iceIsPressed = false;
-                grabReleased = true;
-                grabIsPressed = false;
+            if(Input_player.inputs[LEFTSELC_KEY] == KEY_RELEASED) {
+                ice_released = true;
+                ice_is_pressed = false;
+                grab_released = true;
+                grab_is_pressed = false;
                 }
-            if (InputPlayer.inputs[RIGHTSELC_KEY] == KEY_PRESSED) {
-                firePressed = true;
-                fireIsPressed = true;
+            if (Input_player.inputs[RIGHTSELC_KEY] == KEY_PRESSED) {
+                fire_pressed = true;
+                fire_is_pressed = true;
                 }
-            if (InputPlayer.inputs[RIGHTSELC_KEY] == KEY_RELEASED) {
-                fireReleased = true;
-                fireIsPressed = false;
+            if (Input_player.inputs[RIGHTSELC_KEY] == KEY_RELEASED) {
+                fire_released = true;
+                fire_is_pressed = false;
                 }
             break;
         case 0:
@@ -89,7 +89,7 @@
         }
     
     // find current hspeed
-    if !(haxis1 > -axisBuffer and haxis1 < axisBuffer and vaxis1 > -axisBuffer and vaxis1 < axisBuffer) {
+    if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
         hspeed = haxis1*move_speed;
         //direction
         if (hspeed != 0) dir = sign(hspeed);
@@ -100,11 +100,11 @@
         }
 
     // if mouse controls, set direction based on mouse
-    if (inputType == CONTROLS_MOUSE) {
-        if (InputPlayer.mouseX != mouseX) {
-            if (InputPlayer.mouseX > x) dir = 1;
+    if (input_method == CONTROLS_MOUSE) {
+        if (Input_player.mouseX != mouseX) {
+            if (Input_player.mouseX > x) dir = 1;
             else dir = -1;
-            mouseX = InputPlayer.mouseX;
+            mouseX = Input_player.mouseX;
             }
         }
              
@@ -114,26 +114,26 @@
             image_index = 4;
             break;
         case 1:
-            image_index = 5+frameStep;
+            image_index = 5+frame_step;
             break;
         case -1:
             image_index = 0;
             break
         default:
-            image_index = 4+frameStep;
+            image_index = 4+frame_step;
             break;
         }
     
     //animate
     if (hspeed != 0) {
-        if (frameBuffer < 0) {
-            frameStep += 1;
-            frameBuffer = frameBufferMax;
+        if (frame_buffer < 0) {
+            frame_step += 1;
+            frame_buffer = frame_buffer_max;
             }
-        else frameBuffer --;
+        else frame_buffer --;
         }
     //keep animation in bounds
-    if (frameStep > 3) frameStep = 0;
+    if (frame_step > 3) frame_step = 0;
     //crouching image
     if (biting) image_index += bitingFrame;
 
@@ -146,7 +146,7 @@
 
     // Jump
     if (jumps > 0) {
-        if (jumpPressed) {
+        if (jump_pressed) {
             vspeed = -jump_height;
             jumps -= 1;
             }
@@ -155,7 +155,7 @@
     //push blocks
     with(instance_place(x+sign(hspeed)*2,y,par_physics))
         {
-        if (id != other.grabObject && not frozen && !stuck) {
+        if (id != other.grab_object && not frozen && !stuck) {
             x+=scr_contactx(other.hspeed);
             }
         }
@@ -183,7 +183,7 @@
         }
 
     // destory blocks
-    if (firePressed) {
+    if (fire_pressed) {
         with (instance_place(x, y, obj_block)) instance_destroy();
         with (instance_place(x, y, obj_corpse)) instance_destroy();
         }

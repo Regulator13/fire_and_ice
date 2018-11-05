@@ -1,5 +1,5 @@
 /// @description  get input
-if (inputBuffer < 0) {
+if (input_buffer < 0) {
     var buffer = false; // whether or not input was put in
     
     // get input
@@ -40,11 +40,11 @@ if (inputBuffer < 0) {
     
     // reset input buffer if in menu
     if (global.Menu.state != STATE_GAME && buffer)
-        inputBuffer = inputBufferMax;
+        input_buffer = input_buffer_max;
     }
 else {
     // tick
-    inputBuffer --;
+    input_buffer --;
     
     // reset input
     inputs[LEFT_KEY] = 0;
