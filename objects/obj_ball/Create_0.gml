@@ -3,8 +3,8 @@
 //attack - attack to hp (-1 for ice, 1 for fire)
 attack = 0;
 
-//source - who created it
-source = noone;
+//Source - who created it
+Source = noone;
 
 //arc - whether or not ball will arc
 arc = false;

@@ -1,7 +1,7 @@
 /// @description Attack
 other.hp -= attack;
-if (instance_exists(source)) {
-    other.moochProof = source.team.team;
+if (instance_exists(Source)) {
+    other.moochProof = Source.team.team;
     }
 instance_destroy();
 

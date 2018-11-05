@@ -104,7 +104,7 @@ if (active) {
 					hspeed = haxis1*moveSpeed
 				}
 			}
-	        //direction
+	        //Find direction player is facing
 	        if (hspeed != 0) dir = sign(hspeed);
 	    }
 		
@@ -155,16 +155,19 @@ if (active) {
 		}
 	}
 	
-    // if mouse controls, set direction based on mouse
+    //Setting direction
     if (input_method == CONTROLS_MOUSE) {
         if (Input_player.mouseX != mouseX) {
+			//Set direction based on mouse
             if (Input_player.mouseX > x) dir = 1;
+			
             else dir = -1;
+			
             mouseX = Input_player.mouseX;
-            }
         }
+    }
              
-    //image
+    ///Image
     switch (dir) {
         case 0:
             image_index = 4;
@@ -180,49 +183,48 @@ if (active) {
             break;
         }
     
-    //animate
+    ///Animatation
 	//TODO animation broken in one direction
     if (hspeed != 0) {
         if (frame_buffer < 0) {
             frame_step += 1;
             frame_buffer = frame_buffer_max;
-            }
-        else frame_buffer --;
         }
+		
+        else frame_buffer --;
+    }
+	
     //keep animation in bounds
     if (frame_step > 3) frame_step = 0;
+	
     //crouching image
     if (crouch) image_index += crouch_frame;
-
-    //------------------------------------------------------------------
-    //Main Code
-    //------------------------------------------------------------------
-    
+	
+	///Score
     //update y_score
     if (y < y_score) y_score = y;
 
-    // Jump
+    ///Jump
     if (jumps > 0) {
-		//if not has_jetpack{
-	        if (jump_pressed) {
-				if instance_exists(grab_object){
-					var total_mass = mass + grab_object.mass
-				}
+	    if (jump_pressed) {
+			//Subtract mass from jump_height
+			if instance_exists(grab_object){
+				var total_mass = mass + grab_object.mass
+			}
 			
-				else var total_mass = mass
+			else var total_mass = mass
 
-	            vspeed = -(jump_height - total_mass / 12);
-	            jumps -= 1;
-	        }
-		//}
+	        vspeed = -(jump_height - total_mass / 12);
+	        jumps -= 1;
+	    }
     }
 
-    //block collisions
+    ///Block collisions
     with(instance_place(x+sign(hspeed)*2,y,par_physics)){
 		//Push blocks
         if (id != other.grab_object && not frozen && !stuck) {
             x+=scr_contactx(other.hspeed);
-            }
+        }
 		
 		//Climb blocks
 		if (id != other.grab_object) and (frozen or stuck){
@@ -276,14 +278,16 @@ if (active) {
         }
 	}
 
-    // Apply gravity (and jumping)
+    ///Gravity
     if (vspeed < gravity_max) {
         //gravity increment
         vspeed += gravityI
         }
+		
     //keep gravity in bounds
     if (vspeed > gravity_max) vspeed = gravity_max;
 
+	///Platforms
 	//Match speed of platforms
 	with instance_place(x, y+vspeed, obj_platform){
 		//Vertical
@@ -313,39 +317,47 @@ if (active) {
 	}
 	
     
-    //collide with solid objects
+    ///Collisions
+	//Horizotal collision
     while(!place_free(x+hspeed, y)) {
         hspeed = scr_reduce(hspeed);
         if hspeed = 0 break;
-        }
+    }
+	
+	//Vertical collision
     while(!place_free(x+hspeed,y+vspeed)) {
         vspeed = scr_reduce(vspeed);
         if vspeed = 0 {
             //reset jumps
             jumps = jumps_max;
             break;
-            }
         }
+    }
 
-    //fire
+    ///Fire
     if (fire_released) {
-		//turn jetpack off
+		//Turn jetpack off
 		if has_jetpack{
 			if grab_object.working{
 				grab_object.image_index = 0
 			}
 		}
 		
+		//Shoot a fireball
         if (energy > energy_fire) {
+			//Ignite if holding an object that can blow up
             if (instance_exists(grab_object)) {
                 if (grab_object.hp > grab_object.hpNormal-1 or grab_object.hp < grab_object.hpNormal+1) { //lasers subtract decimal points
                     grab_object.ignite = true;
                     grab_object.hp = grab_object.hpNormal;
-                    }
-                else grab_object.hp -= 1;
                 }
+				
+				//Otherwise perform fire action on it
+                else grab_object.hp -= 1;
+            }
+			
+			//Throw
             else {
-                //throw
                 with(instance_create_layer(x,y,"lay_instances",obj_ball)) {
                     //direction of throwing based on mouse
                     if (other.input_method = CONTROLS_MOUSE) {
@@ -363,54 +375,52 @@ if (active) {
                         if (xspeed > 0) hspeed = dir*(xspeed);
                     }
                     
-                    //fire
+                    //Initialize fireball variables
                     sprite_index = spr_ballFire;
                     attack = 1;
-                    source = other.id;
+                    Source = other.id;
                     
                     //handicap
                     if (other.will_arc) arc = true;
-                    }
-                //energy
-                energy -= energy_fire;
                 }
+
+            energy -= energy_fire;
             }
-            // if online player, unpress key
-            //if (player_input == -1) Input_player.inputs[RIGHTSELC_KEY] = scr_toggleKey(Input_player.inputs[RIGHTSELC_KEY]); //unpress key
         }
+            /* 
+			if online player, unpress key
+            if (player_input == -1) Input_player.inputs[RIGHTSELC_KEY] = scr_toggleKey(Input_player.inputs[RIGHTSELC_KEY]); //unpress key
+			*/
+    }
 	
 	//Jetpack flying
-	if fire_is_pressed{
-		if has_jetpack{
-			if grab_object.working{
-				if energy >= grab_object.jetpack_cost{
-					if vspeed > -10{
-						//Floating
-						if vspeed > -3{
-							if place_free(x + hspeed, y + vspeed - .8){
-								vspeed -= .8
-							}
-						}
-						
-						//Flying
-						else{
-							if place_free(x + hspeed, y + vspeed - .3){
-								vspeed -=.3
-							}
-						}
-						
-						energy -= grab_object.jetpack_cost
-						grab_object.image_index = 1
+	if fire_is_pressed and has_jetpack and grab_object.working{
+		if energy >= grab_object.jetpack_cost{
+			if vspeed > -10{
+				//Floating
+				if vspeed > -3{
+					if place_free(x + hspeed, y + vspeed - .8){
+						vspeed -= .8
 					}
 				}
+						
+				//Flying
+				else{
+					if place_free(x + hspeed, y + vspeed - .3){
+						vspeed -=.3
+					}
+				}
+						
+				energy -= grab_object.jetpack_cost
+				grab_object.image_index = 1
 			}
 		}
 	}
 				
-	
-    // freeze_holding_buffer
+	///Ice
     if (ice_is_pressed) freeze_holding_buffer--;
-    // freeze holding block
+	
+    //freeze the block being held
     if (freeze_holding_buffer < 0) {
         // check if enough energy
         if (energy > energy_fire) {
@@ -419,24 +429,27 @@ if (active) {
                 if (grab_object.hp > grab_object.hpNormal-1 or grab_object.hp < grab_object.hpNormal+1) { //lasers subtract decimal points
                     grab_object.willFreeze = true;
                     grab_object.hp = grab_object.hpNormal;
-                    }
-                else grab_object.hp += 1;
                 }
+				
+                else grab_object.hp += 1;
             }
         }
-    //ice
+    }
+    
+	//Ice action
     if (ice_released) {
         if (freeze_holding_buffer >= 0) {
-            // if not about to grab an object
+            //If not about to grab an object
             if !(place_meeting(x + sign(dir) * 4, y, par_physics)) {
-                // check if enough energy
+				grab_pressed = false;
+				
+				//Throw
                 if (energy > energy_fire) {
-                    //throw
                     with(instance_create_layer(x,y,"lay_instances",obj_ball)) {
                         //Throw using mouse
                         if (other.input_method == CONTROLS_MOUSE) {
                             scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
-                            }
+                        }
 					
 						//Throw using arrow keys
                         else {
@@ -447,63 +460,72 @@ if (active) {
                             xspeed = (other.strength/mass-abs(vspeed/4));
                             //set only if positive
                             if (xspeed > 0) hspeed = dir*(xspeed);
-                            }
+                        }
                         
                         //activate object
                         active = true;
                         
-                        //ice
+                        //Initialize iceball stats
                         sprite_index = spr_ballIce;
                         attack = -1; //add one health
-                        source = other.id;
+                        Source = other.id;
                         
                         //handicap
                         if (other.will_arc) arc = true;
-                        }
+                    }
                     //energy
                     energy -= energy_fire;
-                    }
-            // if online player, unpress key
-            if (player_input == -1) {
-                //Input_player.inputs[LEFTSELC_KEY] = scr_toggleKey(Input_player.inputs[LEFTSELC_KEY]); //unpress key
                 }
-            // do not grab
-            grab_pressed = false;
+            /*
+			// if online player, unpress key
+            if (player_input == -1) {
+                Input_player.inputs[LEFTSELC_KEY] = scr_toggleKey(Input_player.inputs[LEFTSELC_KEY]); //unpress key
+                }
+			*/
             }
-            }
-        else
-            grab_released = false; // do not throw
-        // reset freeze buffer
-        freeze_holding_buffer = freeze_holding_buffer_max;
         }
+		
+		//If holding a block and trying to freeze it, do not throw
+        else{
+			grab_released = false;
+		}
+		
+        //Reset freeze buffer
+        freeze_holding_buffer = freeze_holding_buffer_max;
+    }
 
-    //grab
+    ///Grabbing
     if (grab_pressed) {
         //crouch
         crouch = true;
-        //if not already holding
+		
+        //If not already holding something, attempt to grab close thing
         if (holding = 0) {
-            grab_object = (instance_place(x+sign(dir)*4,y,par_physics));
+            if !instance_exists(grab_object){
+				grab_object = (instance_place(x+sign(dir)*4,y,obj_character));
+			}
 			
-			//jetpack
+			//Initialize has_jetpack if grabbing a jetpack
 			if instance_exists(grab_object){
 				if object_get_name(grab_object.object_index) == "obj_jetpack"{
 					has_jetpack = true
 				}
 			}
 			
-            if (instance_exists(grab_object)) {//non character objects
+			//Initialize grab_object variables
+            if (instance_exists(grab_object)) {
                 if (grab_object.frozen = false) {
                     grab_object.active = false;
-                    //check if sticky
-                    if (grab_object.sticky) grab_object.stuck = false //unstick
-                    //set holder
-                    grab_object.holder = self;
-                    holding = 1;
-                    }
-                else grab_object = noone;
+                    //unstick if sticky
+                    if (grab_object.sticky) grab_object.stuck = false
+                    grab_object.holder = self; //whose holding the item
+                    holding = 1; //Number of items being held
                 }
-            if !(instance_exists(grab_object)) grab_object = (instance_place(x+sign(dir)*4,y,obj_character));
+					
+                else grab_object = noone;
+            }
+			
+			///REMOVE? Duplicate code including team check. Move team check to above?
             if (instance_exists(grab_object)) {
                 if (grab_object.team == team || grab_object.team == noone) {
                     grab_object.active = false;
@@ -512,32 +534,32 @@ if (active) {
                     //set holder
                     grab_object.holder = self;
                     holding = 1;
-                    }
-                else grab_object = noone;
                 }
+            else grab_object = noone;
             }
         }
-    //if (grab_is_pressed) {
+    }
+	
+	//Move the grabbed object with the player
     if (instance_exists(grab_object)) {
         grab_object.x = x+hspeed;
         grab_object.y = y-9+vspeed;
-        }
+    }
+	
+	//If grabbing object, throw it
     if (grab_released) {
-        //if grabbing object, throw it
         if (instance_exists(grab_object)) {
             if (holding > 1) {
-                //stop holding
                 holding = 0;
-                //stop crouching
                 crouch = false;
-				//does not have jetpack
 				has_jetpack = false
+				
                 //throw
                 with(grab_object) {
                     //Throw using mouse
                     if (other.input_method = CONTROLS_MOUSE) {
                         scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
-                        }
+                    }
 					
 					//Throw using arrow keys
                     else {
@@ -548,35 +570,38 @@ if (active) {
                         xspeed = (other.strength/mass-abs(vspeed/4));
                         //set only if positive
                         if (xspeed > 0) hspeed = dir*(xspeed);
-                        }
+                    }
                     
                     //activate object
                     active = true;
-                    }
+                }
     
-                
                 //remove grab_object's holder
                 grab_object.holder = noone;
                 grab_object = noone;
-                }
-            else holding += 1;
+				
             }
+			//REMOVE? What purpose does this serve?
+            else holding += 1;
+        }
+		
         else {
             crouch = false;
             holding = 0;
-            }
         }
+    }
     
-    //handicap
+    //Handicap
     if (handicap_released) {
         //toggle arcing
         if (will_arc) will_arc = false;
         else will_arc = true;
-        }
     }
+}
 
-/// hp and energy
-if (active) {
+///REMOVE? This is a duplicated if statment
+if active{
+	///Hp
 	//Hurt the player if they fall below the water
 	if(y > room_height-obj_wall.sprite_height-obj_control.water_height){
 		hp -= .4;
@@ -628,34 +653,31 @@ if (active) {
 	        Input_player = other.Input_player;
 	        input_method = other.input_method;
 	        if (instance_exists(Input_player)) Input_player.gameCharacter = self;
-	        }
+	    }
 			
 	    //drop object if grabbed
 	    if (instance_exists(grab_object)) {
 	        //remove grab_object's holder
 	        grab_object.holder = noone;
 	        grab_object.active = true;
-	        }
+	    }
 			
-	    //subtract score
-	    //team.tScore += (room_height-y_score)*global.scoreY;
-	    //subtract life
+	    //subtract life from team
 	    team.tLives -= 1;
-		
-	    //keep in bounds
 	    if (team.tLives < 0) team.tLives = 0;
+		
 	    //destroy self
 	    instance_destroy(self);
 	}
 
-	//recharge station
+	///Recharge Energy
 	if (place_meeting(x, y, obj_rechargeStation)) {
 	    if (energy < energy_max) {
 	        energy +=1;
 	        }
 	    }
     
-	//hp
+	//Restore health with heart
 	with(instance_place(x, y, obj_health)) {
 	    //add health
 	    other.hp += value;
@@ -668,7 +690,7 @@ if (active) {
 	}
 }
 
-///win
+///Win
 if (place_meeting(x, y, obj_door)) {
     //win score
     team.tScore += global.score_win/ds_list_size(team.players);
@@ -683,47 +705,45 @@ if (place_meeting(x, y, obj_door)) {
     */
     }
 
-/* */
-///cheats
+//TODO Add cheat enabled button
+///Cheats
 if (keyboard_check_pressed(ord("U"))) {
     vspeed = -jump_height;
     hp = hp_max;
     }
 
-/* */
-///score
+///Score
+//Pick up coins
 with (instance_place(x, y, obj_score)) {
     //add score
     with (other) team.tScore += round(global.score_object/ds_list_size(team.players));
+	
     //destroy self
     instance_destroy();
-    }
+}
 
-//height
+//Set level
 cLVL = ceil((room_height-y)/(room_height/10));
 if (cLVL > team.LVL) {
     team.LVL = cLVL;
-    }
+}
 
-/* */
-/// move camera
+///Camera
+//Move camera
 if !(global.online) {
     obj_camera.x = x;
     obj_camera.y = y;
-    }
+}
 
-/* */
-/// mooch
+///Mooch
 if (mooch_buffer < 0) {
     with (instance_place(x, y+16, obj_block)) {
         // mooch
         if (moochProof != other.team.team && moochProof != -1) {
             instance_create_layer(x, y-32, "lay_instances", prt_mooch);
             other.mooch_buffer = other.mooch_buffer_max;
-            }
         }
     }
-else mooch_buffer--;
+}
 
-/* */
-/*  */
+else mooch_buffer--;
