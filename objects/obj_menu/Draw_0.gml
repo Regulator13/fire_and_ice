@@ -217,7 +217,7 @@ if (state == STATE_PATHS) {
 if (state == STATE_GAME) {
 if (view_current == 1) {
     //display variables
-    cx = __view_get( e__VW.XView, 1 ); //current x
+    cx = camera_get_view_x(view_camera); //current x
     cy = 0; //current y
     HUDwidth = 128; //width of HUD
     HUDheight = 96; //height of HUD

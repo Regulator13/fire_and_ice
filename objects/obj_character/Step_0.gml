@@ -357,7 +357,7 @@ if (active) {
                 }
             else {
                 //throw
-                with(instance_create(x,y,obj_ball)) {
+                with(instance_create_layer(x,y,"lay_instances",obj_ball)) {
                     //direction of throwing based on mouse
                     if (other.inputType = CONTROLS_MOUSE) {
 						scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.InputPlayer.mouseX, other.InputPlayer.mouseY, other.dir)
@@ -443,7 +443,7 @@ if (active) {
                 // check if enough energy
                 if (energy > energyFire) {
                     //throw
-                    with(instance_create(x,y,obj_ball)) {
+                    with(instance_create_layer(x,y,"lay_instances",obj_ball)) {
                         //Throw using mouse
                         if (other.inputType == CONTROLS_MOUSE) {
                             scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.InputPlayer.mouseX, other.InputPlayer.mouseY, other.dir)
@@ -631,10 +631,10 @@ if (active) {
 	//Kill the player if they run out of health
 	if(hp < 1) {
 	    //create corpse
-	    with (instance_create(x,y,obj_corpse)) sprite_index = other.sprite_index;
+	    with (instance_create_layer(x,y,"lay_instances",obj_corpse)) sprite_index = other.sprite_index;
 		
 	    //create pirahna
-	    with (instance_create(x,y,obj_pirahna)) {
+	    with (instance_create_layer(x,y,"lay_instances",obj_pirahna)) {
 	        playerInput = other.playerInput;
 	        InputPlayer = other.InputPlayer;
 	        inputType = other.inputType;
@@ -729,7 +729,7 @@ if (moochBuffer < 0) {
     with (instance_place(x, y+16, obj_block)) {
         // mooch
         if (moochProof != other.team.team && moochProof != -1) {
-            instance_create(x, y-32, prt_mooch);
+            instance_create_layer(x, y-32, "lay_instances", prt_mooch);
             other.moochBuffer = other.moochBufferMax;
             }
         }

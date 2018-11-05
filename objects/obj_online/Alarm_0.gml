@@ -12,7 +12,7 @@ show_debug_message("#######################################");
     // switch menu to the lobby
     scr_stateSwitch(STATE_ONLINE, STATE_LOBBY);
     // create  client
-    instance_create(0, 0, obj_client);
+    instance_create_layer(0, 0, "lay_instances", obj_client);
     // client takes care of all networking now
     instance_destroy();
 

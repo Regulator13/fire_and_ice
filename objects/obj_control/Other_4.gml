@@ -38,7 +38,7 @@ if (global.continueGame) {
         // check if tutorial
         if (global.tutorial) {
             nseed = 2435157115;
-            instance_create(0, 0, obj_tutorial);
+            instance_create_layer(0, 0, "lay_instances", obj_tutorial);
             global.waterDelay = 2000;
             global.tutorial = false;
             }
@@ -91,7 +91,7 @@ for (i = 3; i < maxY/gridSize; i += 4) {
 repeat(4) {
     dx = round(irandom_range(gridSize*4, room_height - gridSize*4)/gridSize)*gridSize;
     dy = room_height-gridSize-16;
-    if (place_free(dx, dy-16)) with instance_create(dx, dy, obj_blockStation) sticky = true;
+    if (place_free(dx, dy-16)) with instance_create_layer(dx, dy, "lay_instances", obj_blockStation) sticky = true;
     }
 
 //Bottom Trampoline
@@ -101,7 +101,7 @@ repeat(2){
 	    dy = room_height-gridSize-32
 		
 		if (place_free(dx, dy)){
-			instance_create_layer(dx, dy+16, "Instances", obj_trampoline)
+			instance_create_layer(dx, dy+16, "lay_instances", obj_trampoline)
 		}
 	}
 }
@@ -111,7 +111,7 @@ repeat(3) {
     dx = gridSize;
     dy = round(irandom_range(gridSize, room_height - gridSize * 6) / gridSize) * gridSize;
     if (place_free(dx, dy)) and not place_meeting(dx,dy,obj_laser){
-		with (instance_create(dx, dy, obj_laser)) {
+		with (instance_create_layer(dx, dy, "lay_instances", obj_laser)) {
 	        image_index = 0;
 	        dir = 1;
 		}
@@ -124,7 +124,7 @@ repeat(3) {
     dy = round(irandom_range(gridSize, room_height - gridSize * 6) / gridSize) * gridSize;
     //move left more to accomadate for bigger checking sprite
     if ((place_free(dx-16, dy)) and not place_meeting(dx,dy,obj_laser)){
-		with (instance_create(dx, dy, obj_laser)) {
+		with (instance_create_layer(dx, dy, "lay_instances", obj_laser)) {
 			image_index = 1;
 			dir = -1;
 		}
@@ -138,12 +138,12 @@ var dy = gridSize*2;
 //create bottom of top platform
 var i = 0;
 repeat(3) {
-    instance_create(dx+gridSize*i, dy, obj_blockBig);
+    instance_create_layer(dx+gridSize*i, dy, "lay_instances", obj_blockBig);
     i ++;
 }
 
 //create door in middle of top platform
-instance_create(dx+gridSize+8, dy-gridSize+4, obj_door);
+instance_create_layer(dx+gridSize+8, dy-gridSize+4, "lay_instances", obj_door);
 
 //Platform spawns
 var gridSize = 32
@@ -170,7 +170,7 @@ for (i=0; i<tries; i++){
 	
 	//Create if open
 	if open{
-		instance_create_layer(rx,ry, "Instances", obj_platform)
+		instance_create_layer(rx,ry, "lay_instances", obj_platform)
 		num_vertical -= 1
 	}
 	
@@ -204,7 +204,7 @@ for (i=0; i<tries; i++){
 	
 	//Create if open
 	if open{
-		with instance_create_layer(rx,ry, "Instances", obj_platform){
+		with instance_create_layer(rx,ry, "lay_instances", obj_platform){
 			is_vertical = false
 			image_index = 4
 			num_horizontal -= 1
@@ -242,7 +242,7 @@ if (global.continueGame) {
 	    //check if can place
 	    if (place_free(rx, ry)) {
 	        if (place_meeting(rx, ry+gridSize, obj_blockBig)) {
-	            instance_create(rx+gridSize/2, ry+gridSize/2, obj_health);
+	            instance_create_layer(rx+gridSize/2, ry+gridSize/2, "lay_instances", obj_health);
 	            tries -= 1;
 	            }
 	        }

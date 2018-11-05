@@ -24,7 +24,7 @@ selected = 0;
         }
     ds_list_add(buttons, button);
     //yallVehicleCircles
-    var button = instance_create(room_width/2-32, 128+32, obj_button);
+    var button = instance_create_layer(room_width/2-32, 128+32, "lay_instances", obj_button);
     with(button) {
         action = "value";
         title = "Draw Command Vehicle Circles";
@@ -33,7 +33,7 @@ selected = 0;
         }
     ds_list_add(buttons, button);
     //supplyPackValue
-    var button = instance_create(room_width/2-32, 128+32*2, obj_button);
+    var button = instance_create_layer(room_width/2-32, 128+32*2, "lay_instances", obj_button);
     with(button) {
         action = "value";
         title = "Supply Pack Value";
@@ -42,19 +42,19 @@ selected = 0;
         }
     ds_list_add(buttons, button);
     */
-    var button = instance_create(room_width/2, room_height-128, obj_button);
+    var button = instance_create_layer(room_width/2, room_height-128, "lay_instances",obj_button);
     button.image_index = 9;
     button.action = "delOptions";
     button.title = "delete options";
     button.sprite_index = spr_buttonLong;
     ds_list_add(buttons, button);
-    var button = instance_create(room_width/2, room_height-80, obj_button);
+    var button = instance_create_layer(room_width/2, room_height-80, "lay_instances", obj_button);
     button.image_index = 8;
     button.action = "delMissions";
     button.title = "delete paths"
     button.sprite_index = spr_buttonLong;
     ds_list_add(buttons, button);
-    var button = instance_create(room_width/2, room_height-32, obj_button);
+    var button = instance_create_layer(room_width/2, room_height-32, "lay_instances", obj_button);
     button.image_index = 4;
     button.action = "optionsDebug";
     button.title = "options";

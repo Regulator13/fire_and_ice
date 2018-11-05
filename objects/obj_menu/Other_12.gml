@@ -41,7 +41,7 @@ if (!global.online) {
         //team
         var team = ds_map_find_value(gameTeams, Local.team);
         if (is_undefined(team)) {
-            team = instance_create(0, 0, obj_team)
+            team = instance_create_layer(0, 0, "lay_instances", obj_team)
             team.team = Local.team;
             team.nickname = "Team " + string(team.team);
             ds_map_add(gameTeams, Local.team, team);
@@ -72,7 +72,7 @@ else if (global.haveserver) {
             //team
             var team = ds_map_find_value(other.gameTeams, player.team);
             if (is_undefined(team)) {
-                team = instance_create(0, 0, obj_team)
+                team = instance_create_layer(0, 0, "lay_instances", obj_team)
                 team.team = player.team;
                 team.nickname = "Team " + string(team.team);
                 ds_map_add(other.gameTeams, player.team, team);
