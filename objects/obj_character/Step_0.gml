@@ -501,6 +501,8 @@ if (active) {
 		
         //If not already holding something, attempt to grab close thing
         if (holding = 0) {
+			grab_object = (instance_place(x+sign(dir)*4,y,par_physics));
+			
             if !instance_exists(grab_object){
 				grab_object = (instance_place(x+sign(dir)*4,y,obj_character));
 			}
