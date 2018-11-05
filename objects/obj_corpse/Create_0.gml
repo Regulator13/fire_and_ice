@@ -5,9 +5,9 @@ image_index = 4;
 event_inherited();
 
 // hp
-hpNormal = 3;
-hpMax = 4;
-hp = hpNormal;
+hp_normal = 3;
+hp_max = 4;
+hp = hp_normal;
 
 //mass
 mass = 20

@@ -1,6 +1,7 @@
 /// @description create character
 if (team.tLives > 0) {
     with (pos_character) {
+		//Initialize pos_character variables
         other.startX = x;
         other.startY = y;
         
@@ -22,8 +23,9 @@ if (team.tLives > 0) {
         //destroy self, so other character will create elsewhere
         instance_destroy();
         
+		//REMOVE? This exit statement is located at the end of an event
         //exit - only create one
         exit;
-        }
     }
+}
 

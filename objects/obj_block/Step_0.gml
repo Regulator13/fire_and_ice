@@ -17,7 +17,7 @@ if (freezeBuffer < freezeBufferMax && freezeBuffer >= 1*30) {
 
 //hp
 if (hp < 0) instance_destroy();
-if (hp > hpMax) hp = hpMax;
+if (hp > hp_max) hp = hp_max;
 
 //freezeBuffer
 if (willFreeze) {
@@ -26,7 +26,7 @@ if (willFreeze) {
 		if holder == noone{
 	        frozen = true;
 	        active = true;
-	        hp = hpNormal+1;
+	        hp = hp_normal+1;
 	        willFreeze = false;
 	        freezeBuffer = freezeBufferMax;
 		}
@@ -52,7 +52,7 @@ if (ignite) {
     }
 
 //freeze
-if (hp > hpNormal) {
+if (hp > hp_normal) {
     active = false;
     frozen = true;
     }
@@ -86,7 +86,7 @@ if (sticky) {
             }
         }
     }
-else fric = .4 + hpNormal-hp;
+else fric = .4 + hp_normal-hp;
 
 //inherited
 event_inherited();

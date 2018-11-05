@@ -1,4 +1,4 @@
-/// @description  Set Enemy Variables
+/// @description Initialize Variables
 hp = 5;
 dmg = 0;
 

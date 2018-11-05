@@ -60,5 +60,5 @@ fire_is_pressed = false;
 
 /// Artifacts
 frozen = false; //character checks frozen state of grabbed object, player throwing concern
-hpNormal = 100;
+hp_normal = 100;
 holding = 0; //holding - 0 for let go next time, 2 to throw

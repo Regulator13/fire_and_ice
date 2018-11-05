@@ -4,10 +4,10 @@ image_speed = 0;
 //inherited
 event_inherited();
 
-//hpNormal - normal hp of block
-hpNormal = 3;
-hpMax= 4;
-hp = hpNormal;
+//hp_normal - normal hp of block
+hp_normal = 3;
+hp_max= 4;
+hp = hp_normal;
 
 //set mass
 mass = 12

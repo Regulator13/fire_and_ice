@@ -1,15 +1,13 @@
-/// @description  @description Hp
+/// @description  @description Blow Up
 
 //Blow up block
 if (hp <= 0){
     hp = 0;
 	
-    //fall
     // Apply gravity (and jumping)
     if (vspeed < gravity_max){
-        //gravity increment
         vspeed += gravityI;
-        //keep gravity in bounds
+
         if (vspeed > gravity_max) vspeed = gravity_max;
 	}
 
@@ -25,13 +23,16 @@ if (hp <= 0){
     }
 }
 
-if (hp > hpMax) hp = hpMax;
+//Keep in bounds
+if (hp > hp_max){
+	hp = hp_max;
+}
 
-//set image
+//Set image
 image_index = hp;
 
 
-///collisions
+///Collisions
 with (instance_place(x, y, obj_explosion)){
     other.hp -= damage;
     }

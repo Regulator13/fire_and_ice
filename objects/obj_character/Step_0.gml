@@ -5,7 +5,7 @@ if (active) {
 	var moveSpeed;
     var gravity_max;
 	
-    ///Input initializations
+    ///Input resets
     haxis1 = 0;
     vaxis1 = 0;
     jump_pressed = false;
@@ -347,9 +347,9 @@ if (active) {
         if (energy > energy_fire) {
 			//Ignite if holding an object that can blow up
             if (instance_exists(grab_object)) {
-                if (grab_object.hp > grab_object.hpNormal-1 or grab_object.hp < grab_object.hpNormal+1) { //lasers subtract decimal points
+                if (grab_object.hp > grab_object.hp_normal-1 or grab_object.hp < grab_object.hp_normal+1) { //lasers subtract decimal points
                     grab_object.ignite = true;
-                    grab_object.hp = grab_object.hpNormal;
+                    grab_object.hp = grab_object.hp_normal;
                 }
 				
 				//Otherwise perform fire action on it
@@ -426,9 +426,9 @@ if (active) {
         if (energy > energy_fire) {
             // if holding an block, set timer to freeze it
             if (instance_exists(grab_object)) {
-                if (grab_object.hp > grab_object.hpNormal-1 or grab_object.hp < grab_object.hpNormal+1) { //lasers subtract decimal points
+                if (grab_object.hp > grab_object.hp_normal-1 or grab_object.hp < grab_object.hp_normal+1) { //lasers subtract decimal points
                     grab_object.willFreeze = true;
-                    grab_object.hp = grab_object.hpNormal;
+                    grab_object.hp = grab_object.hp_normal;
                 }
 				
                 else grab_object.hp += 1;
