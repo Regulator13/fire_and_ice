@@ -2,13 +2,13 @@
 if (freezeBuffer < freezeBufferMax && freezeBuffer >= 1*30) {
     switch (freezeBuffer) {
         case 3*30-1:
-            with (instance_create(x+8, y-16, prt_countdown)) image_index = 0;
+            with (instance_create_layer(x+8, y-16, "lay_instances", prt_countdown)) image_index = 0;
             break;
         case 2*30:
-            with (instance_create(x+8, y-16, prt_countdown)) image_index = 1;
+            with (instance_create_layer(x+8, y-16, "lay_instances", prt_countdown)) image_index = 1;
             break;
         case 1*30:
-            with (instance_create(x+8, y-16, prt_countdown)) image_index = 2;
+            with (instance_create_layer(x+8, y-16, "lay_instances", prt_countdown)) image_index = 2;
             break;
         }
     }
@@ -45,7 +45,7 @@ if (willFreeze) {
 if (ignite) {
     //freeze buffer
     if (freezeBuffer < 0*30) {
-        instance_create(x+sprite_width/2, y+sprite_height/2, obj_explosion);
+        instance_create_layer(x+sprite_width/2, y+sprite_height/2, "lay_instances", obj_explosion);
         instance_destroy();
         }
     else freezeBuffer -= 1;

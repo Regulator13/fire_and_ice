@@ -13,7 +13,7 @@
     "layers": [
         {
             "__type": "GMRInstanceLayer_Model:#YoYoStudio.MVCFormat",
-            "name": "Compatibility_Instances_Depth_0",
+            "name": "lay_instances",
             "id": "74392c45-2dbb-4d7e-8e8a-6ffff588ab3b",
             "depth": 0,
             "grid_x": 32,
@@ -39,7 +39,7 @@
         },
         {
             "__type": "GMRBackgroundLayer_Model:#YoYoStudio.MVCFormat",
-            "name": "Compatibility_Colour",
+            "name": "lay_background",
             "id": "2fba955d-0425-495e-952b-4970460e83b0",
             "animationFPS": 15,
             "animationSpeedType": "0",

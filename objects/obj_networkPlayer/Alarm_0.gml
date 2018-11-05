@@ -4,7 +4,7 @@ switch(global.Menu.state) {
         // just drop
         event_user(1);
     default:
-        with (instance_create(room_width/2, room_height/2, obj_inputMessage)) {
+        with (instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputMessage)) {
             prompt = other.name + " is not responding, drop?";
             ds_list_add(actions, "dropPlayer");
             ds_list_add(actionTitles, "yes");

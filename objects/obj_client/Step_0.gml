@@ -14,7 +14,7 @@ switch(global.NetworkState) {
             if(message <= 0){ //network_send_udp returns number less than one if message fails
                 if !(instance_exists(obj_inputMessage)) {
                 //if we can't connect, show and error and restart... could be more graceful :)
-                with (instance_create(room_width/2, room_height/2, obj_inputMessage)) {
+                with (instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputMessage)) {
                     prompt = "ERROR: Can not connect to server";
                     ds_list_add(actions, "backOnlineLobby");
                     ds_list_add(actionTitles, "Back");
@@ -28,7 +28,7 @@ switch(global.NetworkState) {
         else {
             // time for connect ran out
             if !(instance_exists(obj_inputMessage)) {
-            with (instance_create(room_width/2, room_height/2, obj_inputMessage)) {
+            with (instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputMessage)) {
                 prompt = "ERROR: Connection time ran out";
                 ds_list_add(actions, "backOnlineLobby");
                 ds_list_add(actionTitles, "Back");

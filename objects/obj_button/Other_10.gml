@@ -38,11 +38,11 @@ switch(action) {
         break;
     case "addNickname":
         //add nickname
-        with(instance_create(room_width/2, room_height/2, obj_inputButton)) action = "addNickname";
+        with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputButton)) action = "addNickname";
         break;
     case "delNickname":
         //add nickname
-        with(instance_create(room_width/2, room_height/2, obj_inputButton)) action = "delNickname";
+        with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputButton)) action = "delNickname";
         break;
     case "delOptions":
         //delete file
@@ -81,7 +81,7 @@ switch(action) {
         break;
     case "new":
         //new path
-        with(instance_create(room_width/2, room_height/2, obj_inputButton)) action = "createPath";
+        with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputButton)) action = "createPath";
         break;
     case "backMainLobby":
         // return to main menu from the online menu
