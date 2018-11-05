@@ -6,11 +6,11 @@ if (hp <= 0){
 	
     //fall
     // Apply gravity (and jumping)
-    if (vspeed < gravityMax){
+    if (vspeed < gravity_max){
         //gravity increment
         vspeed += gravityI;
         //keep gravity in bounds
-        if (vspeed > gravityMax) vspeed = gravityMax;
+        if (vspeed > gravity_max) vspeed = gravity_max;
 	}
 
     //collide with solid objects

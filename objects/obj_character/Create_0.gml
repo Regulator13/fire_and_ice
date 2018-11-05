@@ -1,115 +1,73 @@
-/// @description  initialize variables
+/// @description Initializations
 
-//physics
-active = true;
-//artifact
-frozen = false;
+active = true; //Accepting input
+team = noone; //Belongs to no team
+playerId = 0; //player id for score
+jumps = 0;
+crouch = false;
+grabObject = noone;
+holder = noone; //who is holding self
+sticky = false; //for grabbing
+has_jetpack = false
+y_score = room_height; //The heighest y coordinate the player has reached
+mouseX = 0; //temporary variable to check if there is any change in the mouse
+playerName = "";
+freezeHoldingBufferMax = 10; //buffer to activate freezing of grabbed object
+freezeHoldingBuffer = freezeHoldingBufferMax;
 
-//team - team object
-team = noone;
-
-//playerId - player id for score
-playerId = 0;
-
-//Set player variables
-mass = 24;
+//Stats (Set in scr_set_character_stats)
 hp = 100;
 hp_max = 100;
-//artifact
-hpNormal = 100;
 energy = 100;
 energy_max = 100;
 strength = 90;
+mass = 24;
+jumps_max = 1
+jump_height = 8.5
+energyFire = 5;  //energy cost per fireball
 
-//jumps - amount of jumps character has
-jumps = 0;
+//Physics
+gravity_max = 10; //maximum speed a player can fall
+gravityI = 0.4; //gravity acceleration
+fric = 2.4 //How quickly the player slows down on land
+drag = 0.3 //Set how quickly player's can change directions in air
+acceleration = 0.5 //Set how quickly the player starts moving
+willArc = true; //Will the fireball arc
 
-//jumpHeight - inital vspeed of jump
-if (global.cooperative_mode) {
-    jumpsMax = 1;
-    jumpHeight = 6;
-    }
-else {
-    jumpsMax = 2;
-    jumpHeight = 8.5;
-    }
-
-//movement
-gravityMax = 10; //maximum speed a player can fall
-gravityI = 0.4; //gravityI - gravity icreasing increment
-fric = 2.4 //Set all objects friction
-drag = 0.3 // Set how quickly player's can change directions in air
-acceleration = 0.5 // Set how quickly the player starts moving
-
-//stop animation
-image_speed = 0;
+//Animation
+image_speed = 0; //stop animation
 image_index = 4;
-//start frames later when crouching
-crouchFrame = 9;
-//frameStep - current frame for animation
-frameStep = 0;
-//frameBuffer - slow animation
-frameBuffer = 0;
+crouchFrame = 9; //start frames later when crouching
+frameStep = 0; //frameStep - current frame for animation
+frameBuffer = 0; //frameBuffer - slow animation
 frameBufferMax = 4;
-
-//crouch - whether or not character is crouching
-crouch = false;
-
-//grabing
-grabObject = noone;
-//holding - 0 for let go next time, 2 to throw
-//artifact
-holding = 0;
-//holder - who is holding self
-holder = noone;
-//sticky - for grabbing
-sticky = false;
-//jetpack
-has_jetpack = false
-
-//dir - direction of character
-dir = 0;
-
-//energyFire - energy it takes for a fireball
-energyFire = 5;
-
-//willArc - whether or not ball arcs for player
-willArc = true;
-
-//yMin - heighest y value reached
-yMin = room_height;
-
-// mouseX - temporary variable to check if there is any change in the mouse
-mouseX = 0;
-
-// moochBuffer
+dir = 0; //Direction the player is facing, left= -1, right =1
 moochBufferMax = 120;
 moochBuffer = 0;
 
-// playerName
-playerName = "";
-
-
-/// initialize input variables
-
-//playerInput
+///Input
 playerInput = 0; //number of player input in input array
-// InputPlayer - player object where to get input from, local or network
-InputPlayer = noone;
-
-//inputBuffer - buffer for joystick input
-inputBuffer = 0;
+InputPlayer = noone; //player object where to get input from, local or network
+inputBuffer = 0; //buffer for joystick input
 inputBufferMax = 10;
-
-// inputType - the type of input, keyboard, mouse, joystick
-inputType = CONTROLS_KEYBOARD;
-
+inputType = CONTROLS_KEYBOARD; //the type of input: keyboard, mouse, joystick
 // initiate isPressed variable outside, so they don't automatically reset
 grabIsPressed = false;
 iceIsPressed = false;
 fireIsPressed = false;
 
-// freezeHoldingBuffer - buffer to activate freezing of grabbed object
-freezeHoldingBufferMax = 10;
-freezeHoldingBuffer = freezeHoldingBufferMax;
 
+
+/// Artifacts
+frozen = false; //character checks frozen state of grabbed object, player throwing concern
+hpNormal = 100;
+holding = 0; //holding - 0 for let go next time, 2 to throw
+//jump_height - inital vspeed of jump
+if (global.cooperative_mode) {
+    jumps_max = 1;
+    jump_height = 6;
+    }
+else {
+    jumps_max = 2;
+    jump_height = 8.5;
+    }

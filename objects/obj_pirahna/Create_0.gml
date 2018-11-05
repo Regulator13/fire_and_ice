@@ -11,13 +11,13 @@ energy_max = 100;
 strength = 60;
 
 //jumps - amount of jumps character has
-jumpsMax = 1;
+jumps_max = 1;
 jumps = 0;
-//jumpHeight - inital vspeed of jump
-jumpHeight = 6;
+//jump_height - inital vspeed of jump
+jump_height = 6;
 
 //gravity
-gravityMax = 10;
+gravity_max = 10;
 //gravityI - gravity icreasing increment
 gravityI = 0.4;
 fric = .4 //Set all objects friction
@@ -60,8 +60,8 @@ energyFire = 5;
 //willArc - whether or not ball arcs for player
 willArc = false;
 
-//yMin - heighest y value reached
-yMin = room_height;
+//y_score - heighest y value reached
+y_score = room_height;
 
 /// initialize input variables
 

@@ -71,20 +71,20 @@
     
     // moveSpeed - speed of character
     var moveSpeed;
-    // gravityMax - maximum gravity speed
-    var gravityMax;
+    // gravity_max - maximum gravity speed
+    var gravity_max;
     // biting - whether pirahna is out of water
     var biting;
     
     // check if player is underwater
     if (y > room_height-obj_wall.sprite_height-obj_control.water_height) {
         move_speed = 4;
-        gravityMax = 1;
+        gravity_max = 1;
         biting = false;
         }
     else {
         move_speed = 1;
-        gravityMax = 10;
+        gravity_max = 10;
         biting = true;
         }
     
@@ -141,13 +141,13 @@
     //Main Code
     //------------------------------------------------------------------
     
-    //update yMin
-    if (y < yMin) yMin = y;
+    //update y_score
+    if (y < y_score) y_score = y;
 
     // Jump
     if (jumps > 0) {
         if (jumpPressed) {
-            vspeed = -jumpHeight;
+            vspeed = -jump_height;
             jumps -= 1;
             }
         }
@@ -161,12 +161,12 @@
         }
 
     // Apply gravity (and jumping)
-    if (vspeed < gravityMax) {
+    if (vspeed < gravity_max) {
         //gravity increment
         vspeed += gravityI
         }
     //keep gravity in bounds
-    if (vspeed > gravityMax) vspeed = gravityMax;
+    if (vspeed > gravity_max) vspeed = gravity_max;
     
     //collide with solid objects
     while(!place_free(x+hspeed, y)) {
@@ -177,7 +177,7 @@
         vspeed = scr_reduce(vspeed);
         if vspeed = 0 {
             //reset jumps
-            jumps = jumpsMax;
+            jumps = jumps_max;
             break;
             }
         }
@@ -190,6 +190,6 @@
 
     // reset jumps the player if is below water
     if(y > room_height-obj_wall.sprite_height-obj_control.water_height) {
-        jumps = jumpsMax;
+        jumps = jumps_max;
         }
 

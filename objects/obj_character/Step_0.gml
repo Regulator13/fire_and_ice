@@ -1,4 +1,4 @@
-/// @description  input
+/// @description Input
 
 // check if active
 if (active) {
@@ -72,17 +72,17 @@ if (active) {
     
     // moveSpeed - speed of character
     var moveSpeed;
-    // gravityMax - maximum gravity speed
-    var gravityMax;
+    // gravity_max - maximum gravity speed
+    var gravity_max;
     
     // check if player is underwater
     if (y > room_height-32-obj_control.water_height) {
         moveSpeed = 3;
-        gravityMax = 5;
+        gravity_max = 5;
         }
     else {
         moveSpeed = 4;
-        gravityMax = 10;
+        gravity_max = 10;
         }
         
     //Find current hspeed
@@ -211,8 +211,8 @@ if (active) {
     //Main Code
     //------------------------------------------------------------------
     
-    //update yMin
-    if (y < yMin) yMin = y;
+    //update y_score
+    if (y < y_score) y_score = y;
 
     // Jump
     if (jumps > 0) {
@@ -224,7 +224,7 @@ if (active) {
 			
 				else var total_mass = mass
 
-	            vspeed = -(jumpHeight - total_mass / 12);
+	            vspeed = -(jump_height - total_mass / 12);
 	            jumps -= 1;
 	        }
 		//}
@@ -288,12 +288,12 @@ if (active) {
 	}
 
     // Apply gravity (and jumping)
-    if (vspeed < gravityMax) {
+    if (vspeed < gravity_max) {
         //gravity increment
         vspeed += gravityI
         }
     //keep gravity in bounds
-    if (vspeed > gravityMax) vspeed = gravityMax;
+    if (vspeed > gravity_max) vspeed = gravity_max;
 
 	//Match speed of platforms
 	with instance_place(x, y+vspeed, obj_platform){
@@ -333,7 +333,7 @@ if (active) {
         vspeed = scr_reduce(vspeed);
         if vspeed = 0 {
             //reset jumps
-            jumps = jumpsMax;
+            jumps = jumps_max;
             break;
             }
         }
@@ -619,7 +619,7 @@ if (active) {
 	if place_meeting(x, y + vspeed/4, obj_trampoline){
 		//Reset jump
 		if vspeed < min_jump_speed + 4{
-			jumps = jumpsMax
+			jumps = jumps_max
 		}
 		
 		//Bounce
@@ -649,7 +649,7 @@ if (active) {
 	        }
 			
 	    //subtract score
-	    //team.tScore += (room_height-yMin)*global.scoreY;
+	    //team.tScore += (room_height-y_score)*global.scoreY;
 	    //subtract life
 	    team.tLives -= 1;
 		
@@ -689,7 +689,7 @@ if (place_meeting(x, y, obj_door)) {
     /*
     //subtract score for each player based on y
     for(var i=0; i<instance_number(obj_player); i++) {
-        with (instance_find(obj_player,i)) global.playerScore[playerId] -= yMin*global.scoreY;
+        with (instance_find(obj_player,i)) global.playerScore[playerId] -= y_score*global.scoreY;
         }
     */
     }
@@ -697,7 +697,7 @@ if (place_meeting(x, y, obj_door)) {
 /* */
 ///cheats
 if (keyboard_check_pressed(ord("U"))) {
-    vspeed = -jumpHeight;
+    vspeed = -jump_height;
     hp = hp_max;
     }
 

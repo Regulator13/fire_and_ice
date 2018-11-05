@@ -1,7 +1,7 @@
 /// @description  Set Physics
 mass = 10;
 //gravity
-gravityMax = 10;
+gravity_max = 10;
 //gravityI - gravity icreasing increment
 gravityI = 0.4;
 fric = .4 //Set all objects friction
