@@ -5,7 +5,7 @@ if (team.tLives > 0) {
         other.startY = y;
         
         //create character
-        other.gameCharacter = instance_create(other.startX, other.startY, obj_character);
+        other.gameCharacter = instance_create_layer(other.startX, other.startY, "lay_instances", obj_character);
         other.gameCharacter.playerInput = other.input; // negative one for client control
         other.gameCharacter.InputPlayer = other; // set network player for input
         other.gameCharacter.playerId = other.playerId;

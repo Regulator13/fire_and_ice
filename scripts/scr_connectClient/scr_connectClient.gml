@@ -19,7 +19,7 @@
         ds_list_add(sequenceOutQueues, ds_map_create());
 
         // Create a new player, and pick a random colour for that player        
-        var inst = instance_create(0,0, obj_networkPlayer);
+        var inst = instance_create_layer(0,0, "lay_instances", obj_networkPlayer);
         inst.ip = ip;
         
         //inst.image_blend = ColourArray[colourindex];

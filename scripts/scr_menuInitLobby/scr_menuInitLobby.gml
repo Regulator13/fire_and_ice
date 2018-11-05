@@ -17,7 +17,7 @@ state = STATE_LOBBY;
 selected = 0;
 
 // back
-var button = instance_create(96, room_height-32, obj_button);
+var button = instance_create_layer(96, room_height-32, "lay_instances", obj_button);
 if (previous == STATE_ONLINE) 
     button.action = "backOnlineLobby";
 else

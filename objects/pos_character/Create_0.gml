@@ -1,6 +1,6 @@
 /// @description create player
 /*
-with (instance_create(x, y, obj_character)) {
+with (instance_create_layer(x, y, "lay_instances", obj_character)) {
     //set id
     playerId = global.players;
     

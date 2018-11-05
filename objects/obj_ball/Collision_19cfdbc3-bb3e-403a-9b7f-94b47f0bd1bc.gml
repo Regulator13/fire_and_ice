@@ -4,7 +4,7 @@
 if other.from_water{
 	if attack > 0{
 		with other{
-			instance_create_layer(x, y, "Instances", obj_water_drop)
+			instance_create_layer(x, y, "lay_instances", obj_water_drop)
 			instance_destroy()
 		}
 	}

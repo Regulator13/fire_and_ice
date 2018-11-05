@@ -71,7 +71,7 @@ if !(instance_exists(obj_inputButton)) {
                                 if (keyboard_check_released(global.controls[i, ACTION2_KEY])) {
                                     // join lobby
                                     if (is_undefined(localPlayers[? i])) {
-                                        localPlayers[? i] = instance_create(0, 0, obj_localPlayer);
+                                        localPlayers[? i] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
                                         localPlayers[? i].controls = i;
                                         // update the controls
                                         ds_list_replace(localControls, ds_list_size(localControls)-1, i);
@@ -89,7 +89,7 @@ if !(instance_exists(obj_inputButton)) {
                                 if (gamepad_button_check_released(global.controls[i, KEY_TYPE], global.controls[i, ACTION2_KEY])) {
                                     // join lobby
                                     if (is_undefined(localPlayers[? i])) {
-                                        localPlayers[? i] = instance_create(0, 0, obj_localPlayer);
+                                        localPlayers[? i] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
                                         localPlayers[? i].controls = i;
                                         }
                                     else {
