@@ -1,16 +1,10 @@
-/// @description Initializations
-
-image_speed = 0
-
+/// @description Set variables
 hp = 3
 hp_max = 3
-
-//home coordinates
 start_x = x
 start_y = y
+is_vertical = true //whether the platform is positive or 
+move_speed = 2 //the platform's move speed
 
-//whether the platform is positive or 
-is_vertical = true
-
-//Set the platform speed
-move_speed = 2
+///Animation
+image_speed = 0

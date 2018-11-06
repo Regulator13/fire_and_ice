@@ -1,7 +1,5 @@
-/// @description slow down animation
-image_speed = .5;
-
-
-///initialize variables
+/// @description Set variables
 damage = 1;
 
+///Animation
+image_speed = .5;
