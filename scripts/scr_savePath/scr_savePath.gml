@@ -5,13 +5,13 @@
     //save paths
     section = "paths";
     ini_section_delete(section);
-    ini_write_string(section, "names", ds_list_write(pathNames));
+    ini_write_string(section, "names", ds_list_write(path_names));
     
     ini_section_delete("length");
     ini_section_delete("score");
     ini_section_delete("seeds");
-    for (i = 0; i < ds_list_size(pathNames); i++) {
-        key = ds_list_find_value(pathNames, i);
+    for (i = 0; i < ds_list_size(path_names); i++) {
+        key = ds_list_find_value(path_names, i);
         path = ds_map_find_value(paths, key);
         
         if !(is_undefined(key)) {

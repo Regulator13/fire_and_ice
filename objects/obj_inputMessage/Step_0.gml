@@ -27,11 +27,11 @@
             }
         
         // keyboard input
-        if (keyboard_check(vk_left) || keyboard_check(ord("A")) || keyboard_check(ord("J"))) haxis = -1;
-        if (keyboard_check(vk_right) || keyboard_check(ord("D")) || keyboard_check(ord("L"))) haxis = 1;
-        if (keyboard_check(vk_up) || keyboard_check(ord("W")) || keyboard_check(ord("I"))) vaxis = -1;
-        if (keyboard_check(vk_down) || keyboard_check(ord("S")) || keyboard_check(ord("K"))) vaxis = 1;
-        if (keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_enter)) action = true;
+        if (keyboard_check(vk_left) or keyboard_check(ord("A")) or keyboard_check(ord("J"))) haxis = -1;
+        if (keyboard_check(vk_right) or keyboard_check(ord("D")) or keyboard_check(ord("L"))) haxis = 1;
+        if (keyboard_check(vk_up) or keyboard_check(ord("W")) or keyboard_check(ord("I"))) vaxis = -1;
+        if (keyboard_check(vk_down) or keyboard_check(ord("S")) or keyboard_check(ord("K"))) vaxis = 1;
+        if (keyboard_check_pressed(vk_space) or keyboard_check_pressed(vk_enter)) action = true;
         
         // check for input
         
@@ -45,7 +45,7 @@
             }
         
         // reset input_buffer
-        if (haxis != 0 || vaxis != 0 || action != 0)
+        if (haxis != 0 or vaxis != 0 or action != 0)
             input_buffer = input_buffer_max;
         }
     else 

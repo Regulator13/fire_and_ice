@@ -30,7 +30,7 @@ if (state == STATE_GAME) {
         instance_destroy(gameCharacter);
     }
     
-if (state == STATE_GAME || state == STATE_SCORE) {
+if (state == STATE_GAME or state == STATE_SCORE) {
     // remove from team
     var index = ds_list_find_index(Team.players, self);
     ds_list_delete(Team.players, index);

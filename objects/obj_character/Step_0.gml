@@ -93,7 +93,7 @@ if (active) {
 	if not place_free(x, y + 1){
 		//Move if joystick is pushed far enough
 	    if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
-			if (!ice_is_pressed && !fire_is_pressed) or has_jetpack{
+			if (!ice_is_pressed and !fire_is_pressed) or has_jetpack{
 				//accelerate
 				if abs(hspeed) < moveSpeed{
 					hspeed += haxis1*acceleration
@@ -129,7 +129,7 @@ if (active) {
 	//If in the air
 	else{
 		if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
-	        if (!ice_is_pressed && !fire_is_pressed) or has_jetpack{
+	        if (!ice_is_pressed and !fire_is_pressed) or has_jetpack{
 				//If moving from a stop in air
 				if hspeed == 0{
 					hspeed += haxis1 * drag
@@ -222,7 +222,7 @@ if (active) {
     ///Block collisions
     with(instance_place(x+sign(hspeed)*2,y,par_physics)){
 		//Push blocks
-        if (id != other.grab_object && not frozen && !stuck) {
+        if (id != other.grab_object and not frozen and !stuck) {
             x+=scr_contactx(other.hspeed);
         }
 		
@@ -529,7 +529,7 @@ if (active) {
 			
 			///REMOVE? Duplicate code including team check. Move team check to above?
             if (instance_exists(grab_object)) {
-                if (grab_object.Team == Team || grab_object.Team == noone) {
+                if (grab_object.Team == Team or grab_object.Team == noone) {
                     grab_object.active = false;
                     //check if sticky
                     if (grab_object.sticky) grab_object.stuck = false //unstick
@@ -741,7 +741,7 @@ if !(global.online) {
 if (mooch_buffer < 0) {
     with (instance_place(x, y+16, obj_block)) {
         // mooch
-        if (mooch_proof != other.Team.Team && mooch_proof != -1) {
+        if (mooch_proof != other.Team.Team and mooch_proof != -1) {
             instance_create_layer(x, y-32, "lay_instances", prt_mooch);
             other.mooch_buffer = other.mooch_buffer_max;
         }

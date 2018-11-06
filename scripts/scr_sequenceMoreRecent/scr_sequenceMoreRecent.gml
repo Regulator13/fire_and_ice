@@ -10,9 +10,9 @@ smax = argument2;
 //start
     {
     return 
-        ( s1 > s2 ) && 
+        ( s1 > s2 ) and 
         ( s1 - s2 <= smax/2 ) 
-           ||
-        ( s2 > s1 ) && 
+           or
+        ( s2 > s1 ) and 
         ( s2 - s1  > smax/2 );
     }

@@ -10,7 +10,7 @@
 var key = argument0;
 
 // return title
-if (key > 47 && key < 40 || key > 64 && key < 91) {// || key > 96 && key < 123) {
+if (key > 47 and key < 40 or key > 64 and key < 91) {// or key > 96 and key < 123) {
     return chr(key);
     }
 else {

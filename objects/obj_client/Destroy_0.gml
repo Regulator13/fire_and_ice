@@ -21,5 +21,5 @@ ds_list_destroy(characterNames);
 ds_list_destroy(lasers);
 
 // clear menu server data
-ds_list_clear(global.Menu.serverData);
+ds_list_clear(global.Menu.server_data);
 

@@ -24,18 +24,18 @@
     buffer_write(buff, buffer_u8, STATE_PATHS);
     
     // total number of paths
-    buffer_write(buff, buffer_u8, ds_list_size(global.Menu.pathNames)); //buffer_u8 MAX: 255
+    buffer_write(buff, buffer_u8, ds_list_size(global.Menu.path_names)); //buffer_u8 MAX: 255
     
     // selected path
-    buffer_write(buff, buffer_u8, global.Menu.pathSelected); //buffer_u8 MAX: 255
+    buffer_write(buff, buffer_u8, global.Menu.path_selected); //buffer_u8 MAX: 255
     
     // delocalize buffer
     buffer = buff;
     //send player information in order
     with(global.Menu) {
-        var pathAmount = ds_list_size(pathNames); // bring loop out of loop
+        var pathAmount = ds_list_size(path_names); // bring loop out of loop
         for (var i = 0; i < pathAmount; i ++) {
-            buffer_write(other.buffer, buffer_string, ds_list_find_value(pathNames, i)); // name
+            buffer_write(other.buffer, buffer_string, ds_list_find_value(path_names, i)); // name
             path = ds_map_find_value(paths, name);
             buffer_write(other.buffer, buffer_string, string(round(ds_map_find_value(path, "score")))); // score
             buffer_write(other.buffer, buffer_string, string(ds_map_find_value(path, "length"))); // length

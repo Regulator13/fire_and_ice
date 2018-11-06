@@ -8,7 +8,7 @@ currentMessage = 0; //current message to show
 alarm[0] = showTime;
 
 //set up message
-var control = global.Menu.localControls[| 0];
+var control = global.Menu.local_controls[| 0];
 
 //set which controls to display in message
 var left = scr_getInputName(global.controls[control, LEFT_KEY], LEFT_KEY, global.controls[control, KEY_TYPE]);
@@ -21,11 +21,12 @@ switch (global.controls[control, KEY_TYPE]) {
     case CONTROLS_MOUSE:
         aim = "the mouse";
         break
+		
     case CONTROLS_KEYBOARD:
         var up = scr_getInputName(global.controls[control, UP_KEY], UP_KEY, global.controls[control, KEY_TYPE]);
         var down = scr_getInputName(global.controls[control, DOWN_KEY], DOWN_KEY, global.controls[control, KEY_TYPE]);
         aim = up + " and " + down;
-    }
+}
 
 //TODO Update tutorial
 //add message in order
