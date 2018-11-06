@@ -1,4 +1,4 @@
-/// @description Initialize variables
+/// @description Set variables
 event_inherited();
 
 ///Stats

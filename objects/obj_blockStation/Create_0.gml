@@ -1,10 +1,8 @@
-/// @description destory if out of room
+/// @description Destory if out of room
 if (x > room_width) instance_destroy();
 
-/// Create begining block
+sticky = false; //whether or not blocks are sticky
+create_buffer = 500
+
+//create begining block
 alarm[0] = 1;
-
-//sticky - whether or not blocks are sticky
-sticky = false;
-
-

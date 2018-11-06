@@ -1,5 +1,5 @@
 /// @description create character
-if (team.tLives > 0) {
+if (Team.tLives > 0) {
     with (pos_character) {
         other.startX = x;
         other.startY = y;
@@ -9,7 +9,7 @@ if (team.tLives > 0) {
         other.gameCharacter.player_input = other.input; // negative one for client control
         other.gameCharacter.Input_player = other; // set network player for input
         other.gameCharacter.player_id = other.player_id;
-        other.gameCharacter.team = other.team;
+        other.gameCharacter.Team = other.Team;
         other.gameCharacter.player_name = other.name;
         other.gameCharacter.input_method = other.inputs[KEY_TYPE];
         

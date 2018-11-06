@@ -1,12 +1,12 @@
-/// @description Initializations
+/// @description Set variables
 
 active = true; //Accepting input
-team = noone; //Belongs to no team
+Team = noone; //Belongs to no team
 player_id = 0; //player id for score
 jumps = 0;
 crouch = false;
 grab_object = noone;
-holder = noone; //who is holding self
+Holder = noone; //who is holding self
 sticky = false; //for grabbing
 has_jetpack = false
 y_score = room_height; //The heighest y coordinate the player has reached
@@ -28,7 +28,7 @@ energy_fire = 5;  //energy cost per fireball
 
 ///Physics
 gravity_max = 10; //maximum speed a player can fall
-gravityI = 0.4; //gravity acceleration
+gravity_incr = 0.4; //gravity acceleration
 fric = 2 //How quickly the player slows down on land
 drag = 0.3 //Set how quickly player's can change directions in air
 acceleration = 0.5 //Set how quickly the player starts moving

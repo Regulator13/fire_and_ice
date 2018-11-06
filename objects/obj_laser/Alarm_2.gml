@@ -1,6 +1,4 @@
 /// @description Turn laser on
-
-
 laser_flicker_num = laser_flicker_num_max
 
 //Glitch back on

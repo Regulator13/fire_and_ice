@@ -1,10 +1,9 @@
-/// @description Falling; Destroy on collision with solid;
-/// Damage player
+/// @description Physics
 
 //Start the image moving
 if image_index = image_number - 2{
 	animation_end = true
-	gravityI = 0.4
+	gravity_incr = 0.4
 	image_speed = 0
 	image_index = 9
 	vspeed = 2
@@ -14,7 +13,7 @@ if (active) {
 	// Apply gravity (and jumping)
 	if (vspeed < gravity_max) {
 		//gravity increment
-		vspeed += gravityI;
+		vspeed += gravity_incr;
 			
 		//keep gravity in bounds
 		if (vspeed > gravity_max) vspeed = gravity_max;

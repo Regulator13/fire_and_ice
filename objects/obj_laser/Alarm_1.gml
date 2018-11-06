@@ -1,6 +1,4 @@
 /// @description Activate laser glitch
-
-
 //glitch off
 alarm[3] = irandom_range(2,4)
 

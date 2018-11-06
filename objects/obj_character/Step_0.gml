@@ -281,7 +281,7 @@ if (active) {
     ///Gravity
     if (vspeed < gravity_max) {
         //gravity increment
-        vspeed += gravityI
+        vspeed += gravity_incr
         }
 		
     //keep gravity in bounds
@@ -292,7 +292,7 @@ if (active) {
 	with instance_place(x, y+vspeed, obj_platform){
 		//Vertical
 		if is_vertical{
-			other.y += (vspeed + sign(vspeed)*other.gravityI)
+			other.y += (vspeed + sign(vspeed)*other.gravity_incr)
 			
 			//apply friction if not stopped
 			if hp < hp_max{
@@ -427,7 +427,7 @@ if (active) {
             // if holding an block, set timer to freeze it
             if (instance_exists(grab_object)) {
                 if (grab_object.hp > grab_object.hp_normal-1 or grab_object.hp < grab_object.hp_normal+1) { //lasers subtract decimal points
-                    grab_object.willFreeze = true;
+                    grab_object.will_freeze = true;
                     grab_object.hp = grab_object.hp_normal;
                 }
 				
@@ -520,7 +520,7 @@ if (active) {
                     grab_object.active = false;
                     //unstick if sticky
                     if (grab_object.sticky) grab_object.stuck = false
-                    grab_object.holder = self; //whose holding the item
+                    grab_object.Holder = self; //whose holding the item
                     holding = 1; //Number of items being held
                 }
 					
@@ -529,12 +529,12 @@ if (active) {
 			
 			///REMOVE? Duplicate code including team check. Move team check to above?
             if (instance_exists(grab_object)) {
-                if (grab_object.team == team || grab_object.team == noone) {
+                if (grab_object.Team == Team || grab_object.Team == noone) {
                     grab_object.active = false;
                     //check if sticky
                     if (grab_object.sticky) grab_object.stuck = false //unstick
-                    //set holder
-                    grab_object.holder = self;
+                    //set Holder
+                    grab_object.Holder = self;
                     holding = 1;
                 }
             else grab_object = noone;
@@ -578,8 +578,8 @@ if (active) {
                     active = true;
                 }
     
-                //remove grab_object's holder
-                grab_object.holder = noone;
+                //remove grab_object's Holder
+                grab_object.Holder = noone;
                 grab_object = noone;
 				
             }
@@ -659,14 +659,14 @@ if active{
 			
 	    //drop object if grabbed
 	    if (instance_exists(grab_object)) {
-	        //remove grab_object's holder
-	        grab_object.holder = noone;
+	        //remove grab_object's Holder
+	        grab_object.Holder = noone;
 	        grab_object.active = true;
 	    }
 			
 	    //subtract life from team
-	    team.tLives -= 1;
-	    if (team.tLives < 0) team.tLives = 0;
+	    Team.tLives -= 1;
+	    if (Team.tLives < 0) Team.tLives = 0;
 		
 	    //destroy self
 	    instance_destroy(self);
@@ -684,7 +684,7 @@ if active{
 	    //add health
 	    other.hp += value;
 	    //add lives
-	    other.team.tLives += 1;
+	    other.Team.tLives += 1;
 	    //keep in bounds
 	    if (other.hp > other.hp_max) other.hp = other.hp_max;
 	    //destroy
@@ -695,8 +695,8 @@ if active{
 ///Win
 if (place_meeting(x, y, obj_door)) {
     //win score
-    team.tScore += global.score_win/ds_list_size(team.players);
-    if !(global.win) team.tScore += global.score_first; //first
+    Team.tScore += global.score_win/ds_list_size(Team.players);
+    if !(global.win) Team.tScore += global.score_first; //first
     global.win = true;
     instance_destroy();
     /*
@@ -718,7 +718,7 @@ if (keyboard_check_pressed(ord("U"))) {
 //Pick up coins
 with (instance_place(x, y, obj_score)) {
     //add score
-    with (other) team.tScore += round(global.score_object/ds_list_size(team.players));
+    with (other) Team.tScore += round(global.score_object/ds_list_size(Team.players));
 	
     //destroy self
     instance_destroy();
@@ -726,8 +726,8 @@ with (instance_place(x, y, obj_score)) {
 
 //Set level
 cLVL = ceil((room_height-y)/(room_height/10));
-if (cLVL > team.LVL) {
-    team.LVL = cLVL;
+if (cLVL > Team.LVL) {
+    Team.LVL = cLVL;
 }
 
 ///Camera
@@ -741,7 +741,7 @@ if !(global.online) {
 if (mooch_buffer < 0) {
     with (instance_place(x, y+16, obj_block)) {
         // mooch
-        if (moochProof != other.team.team && moochProof != -1) {
+        if (mooch_proof != other.Team.Team && mooch_proof != -1) {
             instance_create_layer(x, y-32, "lay_instances", prt_mooch);
             other.mooch_buffer = other.mooch_buffer_max;
         }

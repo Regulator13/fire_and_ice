@@ -1,4 +1,4 @@
-/// @description Initializations
+/// @description Set variables
 //Keep in bounds
 if (x > room_width-sprite_width) instance_destroy();
 
@@ -12,7 +12,7 @@ hp = hp_normal;
 
 ///Physics
 gravity_max = 10;
-gravityI = 0.4; //gravity icreasing increment
+gravity_incr = 0.4; //gravity icreasing increment
 
 //destroy overlaping coins
 with(instance_place(x, y, obj_score)) instance_destroy();

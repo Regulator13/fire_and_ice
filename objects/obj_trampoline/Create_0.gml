@@ -2,5 +2,5 @@
 
 //gravity
 gravity_max = 10;
-//gravityI - gravity icreasing increment
-gravityI = 0.4;
+//gravity_incr - gravity icreasing increment
+gravity_incr = 0.4;

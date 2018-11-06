@@ -1,7 +1,7 @@
-/// @description Initializations
+/// @description Set variables
 
 character = ""; //NAME? DESCR?
-team = 0; //What team the player is on 
+Team = 0; //What team the player is on 
 ready = false; //whether player is ready to move to next menu
 name = "Player"; //The player's name
 player_id = 0; //accumulative global number to identify player

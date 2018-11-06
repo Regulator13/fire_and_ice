@@ -1,4 +1,4 @@
-/// @description Initialize variables
+/// @description Set variables
 event_inherited();
 
 player_id = 0; //for score
@@ -23,7 +23,7 @@ energy_fire = 5; //energy it takes for a fireball
 
 ///Physics
 gravity_max = 10; 
-gravityI = 0.4; //Acceleration while falling
+gravity_incr = 0.4; //Acceleration while falling
 fric = .4 //friction
 
 ///Input

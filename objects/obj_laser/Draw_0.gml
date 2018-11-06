@@ -1,4 +1,4 @@
-/// @description draw self and laser
+/// @description Draw self and laser
 if !(global.online) {
     //draw laser
 	if laser_on{
@@ -7,5 +7,5 @@ if !(global.online) {
 	}
 	
     draw_self();
-    }
+}
 

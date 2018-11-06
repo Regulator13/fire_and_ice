@@ -7,7 +7,7 @@ if (global.gameStart) {
     global.continueGame = true;
     
 	//Set the water delay and rate
-    global.waterDelay = 1000;
+    global.water_delay = 1000;
     global.water_rate = .1;
 
     global.gameStart = false;
@@ -31,7 +31,7 @@ if (global.continueGame) {
         if (global.tutorial) {
             nseed = 2435157115;
             instance_create_layer(0, 0, "lay_instances", obj_tutorial);
-            global.waterDelay = 2000;
+            global.water_delay = 2000;
             global.tutorial = false;
             }
         else {
@@ -53,8 +53,8 @@ else {
     //global.continueGame = true; //set after hearts generation
     }
     
-alarm_set(0,global.waterDelay);//Set the delay before water rises
-if (global.waterDelay <= 0) water_buffer = false;
+alarm_set(0,global.water_delay);//Set the delay before water rises
+if (global.water_delay <= 0) water_buffer = false;
 
 gridSize = 32;//Set the grid size
 maxY = room_height - gridSize*2; //max y platforms are allowed to generate at

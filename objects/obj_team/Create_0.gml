@@ -1,7 +1,7 @@
 /// @description initialize variables
 
 //team
-team = 0;
+Team = 0;
 //nickname
 nickname = "";
 //players - list of players in team

@@ -1,20 +1,9 @@
-/// @description Initilize variables
-
-//attack - attack to hp (-1 for ice, 1 for fire)
-attack = 0;
-
-//Source - who created it
-Source = noone;
-
-//arc - whether or not ball will arc
-arc = false;
-
-//destroy after alarm
-alarm[0] = 1*30;
-
-//mass - how fast they move
-mass = 20;
+/// @description Set variables
 
 event_inherited();
 
-
+attack = 0; //attack to hp (-1 for ice, 1 for fire)
+Source = noone; //who created it
+arc = false; //whether or not ball will arc
+alarm[0] = 1*30; //destroy after alarm
+mass = 16;

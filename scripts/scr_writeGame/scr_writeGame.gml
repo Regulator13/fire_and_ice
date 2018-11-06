@@ -41,23 +41,23 @@
         buff = other.buffer;
         // iterate through each team
         for (var i = 0; i < teamMax; i++){
-            var team = ds_map_find_value(gameTeams, i);
-            if !(is_undefined(team)) {
+            var Team = ds_map_find_value(gameTeams, i);
+            if !(is_undefined(Team)) {
                 buffer_write(buff, buffer_bool, true); // team exists
                 
                 // amount of players
-                var size = ds_list_size(team.players);
+                var size = ds_list_size(Team.players);
                 buffer_write(buff, buffer_u8, size); // amount of players
                 
-                buffer_write(buff, buffer_string, team.nickname); // team name
-                buffer_write(buff, buffer_string, string(round(team.tScore))); // team score
-                buffer_write(buff, buffer_string, string(round(team.LVL))); // team top level
-                buffer_write(buff, buffer_string, string(round(team.tLives))); // team lives
+                buffer_write(buff, buffer_string, Team.nickname); // team name
+                buffer_write(buff, buffer_string, string(round(Team.tScore))); // team score
+                buffer_write(buff, buffer_string, string(round(Team.LVL))); // team top level
+                buffer_write(buff, buffer_string, string(round(Team.tLives))); // team lives
                 
                 // players
                 for (cp = 0; cp < size; cp++) {
                     //player
-                    var player = ds_list_find_value(team.players, cp); 
+                    var player = ds_list_find_value(Team.players, cp); 
                     
                     buffer_write(buff, buffer_s16, player.sprite_index); // player character
                     

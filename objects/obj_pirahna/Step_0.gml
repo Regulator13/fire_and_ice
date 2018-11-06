@@ -177,7 +177,7 @@ with(instance_place(x+sign(hspeed)*2,y,par_physics))
 
 ///Physics
 if (vspeed < gravity_max) {
-    vspeed += gravityI
+    vspeed += gravity_incr
 }
 
 //keep gravity in bounds

@@ -6,7 +6,7 @@ if (hp <= 0){
 	
     // Apply gravity (and jumping)
     if (vspeed < gravity_max){
-        vspeed += gravityI;
+        vspeed += gravity_incr;
 
         if (vspeed > gravity_max) vspeed = gravity_max;
 	}

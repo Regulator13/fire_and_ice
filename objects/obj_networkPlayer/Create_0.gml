@@ -3,7 +3,7 @@
 //character
 character = "";
 //team
-team = 0;
+Team = 0;
 // ready - whether player is ready to move to next menu
 ready = false;
 // name - player name
