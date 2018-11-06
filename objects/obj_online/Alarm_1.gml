@@ -3,10 +3,10 @@ var i = iServerName;
 global.ServerName = i.text;
 
 // create server
-global.Server = instance_create(0,0,obj_server);
+global.Server = instance_create_layer(0,0,"lay_instances",obj_server);
 
 // check if succesful
-if(global.haveserver == false ) {
+if(global.have_server == false ) {
     show_debug_message("Cant create server");
     }
 else {
@@ -25,7 +25,7 @@ else {
     scr_stateSwitch(STATE_ONLINE, STATE_LOBBY);
     
     // create client
-    instance_create(0, 0, obj_client);
+    instance_create_layer(0, 0, "lay_instances", obj_client);
     // client takes care of all networking now
     instance_destroy();
     }

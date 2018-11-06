@@ -1,6 +1,4 @@
-/// @description Intializations
-
-//gravity
-gravityMax = 10;
-//gravityI - gravity icreasing increment
-gravityI = 0.4;
+/// @description Set variables
+///Physics
+gravity_max = 10;
+gravity_incr = 0.4; //gravity icreasing increment

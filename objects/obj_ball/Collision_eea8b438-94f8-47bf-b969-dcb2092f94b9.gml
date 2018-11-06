@@ -4,9 +4,6 @@
 if (other.hp > 0 and attack > 0) or (other.hp < other.hp_max and attack < 0){
 	other.hp -= attack
 	other.image_index += sign(attack)
-	instance_destroy()
 }
 
-else{
-	instance_destroy()
-}
+instance_destroy()

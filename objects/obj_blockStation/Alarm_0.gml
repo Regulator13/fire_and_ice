@@ -1,7 +1,6 @@
-/// @description Create stations block
-if (sticky) {
-with (instance_create(x, y, obj_block)) sticky = true;
+/// @description Create block
+with (instance_create_layer(x, y, "lay_instances", obj_block)){
+	if (other.sticky) {
+		sticky = true;
+	}
 }
-else instance_create(x, y, obj_block);
-
-

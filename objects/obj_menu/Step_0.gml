@@ -12,18 +12,18 @@ if !(instance_exists(obj_inputButton)) {
     
     // gamepad input
     var input;
-    // axisBuffer - buffer till push starts counting
-    var axisBuffer = 0.4;
+    // axis_buffer - buffer till push starts counting
+    var axis_buffer = 0.4;
     
     // get input
-    if (inputBuffer < 0) {
+    if (input_buffer < 0) {
         // gamepad input
         for (input = 0; input < 4; input++) {
             haxis = gamepad_axis_value(input, gp_axislh);
             vaxis = gamepad_axis_value(input, gp_axislv);
             // axis check
-            if (haxis < axisBuffer and haxis > -axisBuffer) haxis = 0;
-            if (vaxis < axisBuffer and vaxis > -axisBuffer) vaxis = 0;
+            if (haxis < axis_buffer and haxis > -axis_buffer) haxis = 0;
+            if (vaxis < axis_buffer and vaxis > -axis_buffer) vaxis = 0;
             // action
             if(gamepad_button_check_released(input, gp_face1)) action = true;
             }
@@ -38,7 +38,7 @@ if !(instance_exists(obj_inputButton)) {
         // judge input based on current state
         switch(state) {
             case STATE_PATHS:
-                if (!global.online || global.online && global.haveserver) {
+                if (!global.online || global.online && global.have_server) {
                     // selector
                     selected = scr_incrementInBounds(selected, haxis, 0, ds_list_size(buttons)-1, true);
                     // path selector
@@ -57,7 +57,7 @@ if !(instance_exists(obj_inputButton)) {
                     }
                 // reset buffer if got input
                 if (haxis != 0 || vaxis != 0 || action != false)
-                    inputBuffer = inputBufferMax;
+                    input_buffer = input_buffer_max;
                 break;
             case STATE_LOBBY:
                 if !(global.online) {
@@ -71,7 +71,7 @@ if !(instance_exists(obj_inputButton)) {
                                 if (keyboard_check_released(global.controls[i, ACTION2_KEY])) {
                                     // join lobby
                                     if (is_undefined(localPlayers[? i])) {
-                                        localPlayers[? i] = instance_create(0, 0, obj_localPlayer);
+                                        localPlayers[? i] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
                                         localPlayers[? i].controls = i;
                                         // update the controls
                                         ds_list_replace(localControls, ds_list_size(localControls)-1, i);
@@ -89,7 +89,7 @@ if !(instance_exists(obj_inputButton)) {
                                 if (gamepad_button_check_released(global.controls[i, KEY_TYPE], global.controls[i, ACTION2_KEY])) {
                                     // join lobby
                                     if (is_undefined(localPlayers[? i])) {
-                                        localPlayers[? i] = instance_create(0, 0, obj_localPlayer);
+                                        localPlayers[? i] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
                                         localPlayers[? i].controls = i;
                                         }
                                     else {
@@ -192,18 +192,18 @@ if !(instance_exists(obj_inputButton)) {
                     }
                 // reset buffer if got input
                 if (haxis != 0 || vaxis != 0 || action != false)
-                    inputBuffer = inputBufferMax;
+                    input_buffer = input_buffer_max;
                 break;
             }
         }
-    else inputBuffer--;
+    else input_buffer--;
     }
 
 
 /// client input
 switch(state) {
     case STATE_LOBBY:
-        if(global.online && global.haveserver) {
+        if(global.online && global.have_server) {
             var Server = obj_server;
             // check for client input
             var count = ds_list_size(Server.iplist);

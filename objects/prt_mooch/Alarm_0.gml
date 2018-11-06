@@ -1,1 +1,2 @@
-action_kill_object();
+/// @description Destroy self
+instance_destroy();

@@ -217,7 +217,7 @@ if (state == STATE_PATHS) {
 if (state == STATE_GAME) {
 if (view_current == 1) {
     //display variables
-    cx = __view_get( e__VW.XView, 1 ); //current x
+    cx = camera_get_view_x(view_camera[0]); //current x
     cy = 0; //current y
     HUDwidth = 128; //width of HUD
     HUDheight = 96; //height of HUD
@@ -278,10 +278,10 @@ if (view_current == 1) {
     else {
         //iterate through teams
         for (var i = 0; i < teamMax; i++){
-            var team = ds_map_find_value(gameTeams, i);
-            if !(is_undefined(team)) {
+            var Team = ds_map_find_value(gameTeams, i);
+            if !(is_undefined(Team)) {
                 //draw background
-                var size = ds_list_size(team.players)-1;
+                var size = ds_list_size(Team.players)-1;
                 yscale = 1+size*.5;
                 draw_sprite_ext(spr_HUD, -1, cx, cy, 1, yscale, 0, c_white, 1);
                 //setup drawing
@@ -291,18 +291,18 @@ if (view_current == 1) {
                 draw_set_valign(fa_top);
                 //draw nickname
                 tb = 2 //text buffer
-                draw_text(cx+HUDwidth/2, cy+tb, string_hash_to_newline(team.nickname));
+                draw_text(cx+HUDwidth/2, cy+tb, string_hash_to_newline(Team.nickname));
                 //draw score and lives
                 draw_set_halign(fa_left);
-                draw_text(cx+tb, cy+tb*3+12, string_hash_to_newline("SC: " + string(round(team.tScore))));
-                draw_text(cx+tb+72, cy+tb*3+12, string_hash_to_newline("LV: " + string(round(team.LVL))));
+                draw_text(cx+tb, cy+tb*3+12, string_hash_to_newline("SC: " + string(round(Team.tScore))));
+                draw_text(cx+tb+72, cy+tb*3+12, string_hash_to_newline("LV: " + string(round(Team.LVL))));
                 draw_set_halign(fa_center);
-                draw_text(cx+HUDwidth/2+tb, cy+tb*3+24, string_hash_to_newline("Lives: " + string(team.tLives)));
+                draw_text(cx+HUDwidth/2+tb, cy+tb*3+24, string_hash_to_newline("Lives: " + string(Team.tLives)));
                 
                 //players
-                for (cp = 0; cp < ds_list_size(team.players); cp ++) {
+                for (cp = 0; cp < ds_list_size(Team.players); cp ++) {
                     //player
-                    var player = ds_list_find_value(team.players, cp);
+                    var player = ds_list_find_value(Team.players, cp);
                     
                     //draw sprite
                     var sb = 8;

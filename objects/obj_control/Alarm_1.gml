@@ -1,13 +1,13 @@
-/// @description end level
-
-//add scores
+/// @description End level
+///Add scores
 //iterate through teams
-for (var i = 0; i < obj_menu.teamMax; i++){
-    var team = ds_map_find_value(obj_menu.gameTeams, i);
-    if !(is_undefined(team)) {
-        team.tScore += team.LVL*global.scoreLVL;
-        }
+for (var i=0; i<obj_menu.teamMax; i++){
+    var Team = ds_map_find_value(obj_menu.gameTeams, i);
+	
+    if !(is_undefined(Team)) {
+        Team.tScore += Team.LVL*global.score_level;
     }
+}
 
+//switch to score menu
 scr_stateSwitch(STATE_GAME, STATE_SCORE);
-

@@ -1,11 +1,12 @@
-// Apply gravity (and jumping)
+/// @description Apply gravity
+// Apply gravity
 if (arc) {
-    if (vspeed < gravityMax) {
-        //gravity increment
-        vspeed += gravityI;
+    if (vspeed < gravity_max) {
+        vspeed += gravity_incr;
+		
         //keep gravity in bounds
-        if (vspeed > gravityMax) vspeed = gravityMax;
-        }
+        if (vspeed > gravity_max) vspeed = gravity_max;
     }
+}
 
 

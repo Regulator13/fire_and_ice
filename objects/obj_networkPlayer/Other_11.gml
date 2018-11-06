@@ -32,12 +32,12 @@ if (state == STATE_GAME) {
     
 if (state == STATE_GAME || state == STATE_SCORE) {
     // remove from team
-    var index = ds_list_find_index(team.players, self);
-    ds_list_delete(team.players, index);
+    var index = ds_list_find_index(Team.players, self);
+    ds_list_delete(Team.players, index);
     // delete team if last player
-    if (ds_list_empty(team.players)) {
-        ds_map_delete(global.Menu.gameTeams, team);
-        instance_destroy(team);
+    if (ds_list_empty(Team.players)) {
+        ds_map_delete(global.Menu.gameTeams, Team);
+        instance_destroy(Team);
         }
     }
 

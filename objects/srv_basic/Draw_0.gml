@@ -1,3 +1,3 @@
-/// @description  draw if not online
+/// @description Draw if not online
 if (view_current == 0) if !(global.online) draw_self();
 

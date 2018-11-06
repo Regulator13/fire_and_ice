@@ -12,10 +12,10 @@ buttons = ds_list_create();
 //selected - selected button
 selected = 0;
 
-//inputBuffer - small buffer to slow down gamepad input
-inputBuffer = 0;
-//inputBufferMax
-inputBufferMax = 4;
+//input_buffer - small buffer to slow down gamepad input
+input_buffer = 0;
+//input_buffer_max
+input_buffer_max = 4;
 //inputFreeze - small amount of time inbetween menu switches
 inputFreeze = 0;
 // inputFreezeMax
@@ -39,8 +39,8 @@ classes = ds_list_create();
 // localControls - list holding which local players are in
 localControls = ds_list_create();
 
-// PlayerTotal - the total amount of current players
-global.PlayerTotal = 0;
+// player_total - the total amount of current players
+global.player_total = 0;
 
 // localPlayers - hold all the local player input objects
 localPlayers = ds_map_create();
@@ -127,7 +127,7 @@ global.path = noone; //ds_map in ds_map paths
 ///globals
 global.Menu = id;
 global.online = false;
-global.haveserver = false; // set in obj_server
+global.have_server = false; // set in obj_server
 
 /* */
 /// server

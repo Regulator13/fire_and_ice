@@ -1,10 +1,6 @@
-/// @description stop animation
+/// @description Set variables
+///Animation
 image_speed = 0;
-
-//imageOpen - image where door is always open
-imageOpen = 7;
-//imageSpeed - animation speed when opening and closing
-imageSpeed = .5;
-//imageMax - number of frames
-imageMax = 13;
-
+imageOpen = 7; //image where door is fully open
+imageSpeed = .5; //animation speed when opening and closing
+imageMax = 13; //number of frames

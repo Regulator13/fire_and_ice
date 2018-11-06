@@ -8,24 +8,15 @@ if hp == hp_max{
 	vspeed = 0
 }
 
+//If in a moving state
 if hp < hp_max{
-	
-	//Calculate bounds of movement
-	//Vertical
+	///Vertical
 	if is_vertical{
+		//calculate bounds of movement
 		var upper_bound = start_y - (hp_max - hp) * grid_size * 2
 		var lower_bound = start_y
-	}
-	
-	//Horizontal
-	else{
-		var upper_bound = start_x + (hp_max - hp) * grid_size
-		var lower_bound = start_x - (hp_max - hp) * grid_size
-	}
-	
-	//Move
-	//Vertical
-	if is_vertical{
+		
+		//move
 		if vspeed <= 0{
 			vspeed = -move_speed
 		}
@@ -33,10 +24,23 @@ if hp < hp_max{
 		else{
 			vspeed = move_speed
 		}
+		
+		//turn around
+		if y <= upper_bound{
+			vspeed = move_speed
+		}
+		if y >= lower_bound{
+			vspeed = -move_speed
+		}
 	}
-
-	//Horizontal
+	
+	///Horizontal
 	else{
+		//calculate bounds of movement
+		var upper_bound = start_x + (hp_max - hp) * grid_size
+		var lower_bound = start_x - (hp_max - hp) * grid_size
+		
+		//move
 		if hspeed >= 0{
 			hspeed = move_speed
 		}
@@ -44,30 +48,14 @@ if hp < hp_max{
 		else{
 			hspeed = -move_speed
 		}
-	}
-
-	//Turn around
-	//Vertical
-	if is_vertical{
-		if y <= upper_bound{
-			vspeed = move_speed
-		}
-	
-		if y >= lower_bound{
-			vspeed = -move_speed
-		}
-	}
 		
-	//Horizontal
-	else{
+		//turn around
 		if x >= upper_bound{
 			hspeed = -move_speed
 		}
-		
 		if x <= lower_bound{
 			hspeed = move_speed
 		}
 	}
 }
-		
 	

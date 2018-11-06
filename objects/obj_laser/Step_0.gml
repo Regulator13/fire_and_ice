@@ -1,16 +1,24 @@
-//find laser length
-
-    for(var i=0; i<instance_number(obj_character); i++) {
-        with (instance_find(obj_character,i)) if (abs(y - other.y) < 100) other.updateLaser = true;
-        }
-        
+/// @description Update laser
+//set update laser if within 100 px
+for(var i=0; i<instance_number(obj_character); i++) {
+    with (instance_find(obj_character,i)){
+		if (abs(y - other.y) < 100){
+			other.updateLaser = true;
+		}
+	}
+}
+       
+//update the laser
 if (updateLaser) {
     laserX = x;
-    while !(place_meeting(laserX-dir*0, y, par_block)) && !(place_meeting(laserX-dir*0, y, obj_character)) {
+	
+    while !(place_meeting(laserX-dir*0, y, par_block)) and !(place_meeting(laserX-dir*0, y, obj_character)){
         laserX += dir*4;
-        }
-    updateLaser = false;
     }
+	
+    updateLaser = false;
+}
+
 /*
 switch (dir) {
     case -1: //left
@@ -20,7 +28,7 @@ switch (dir) {
         laserX = room_width;
         break;
     }
-    */
+*/
 
 /*
 while (collision_line(x,y, laserX, y, par_block, false, true) || collision_line(x,y, laserX, y, obj_character, false, true)) {
@@ -32,19 +40,15 @@ alarm[0] = 10;
 }
 */
 
+//hurt the player
 if laser_on{
 	with (instance_place(laserX + 1*dir, y, obj_character)) hp -= 2;
 }
-//with (instance_place(laserX + 1*dir, y, obj_block)) hp -= .01;
 
 //die
 if (hp < 0) instance_destroy();
 
-/* */
-///collisions
+//destroy
 with(instance_place(x, y, obj_explosion)) {   
     other.hp -= damage;
-    }
-
-/* */
-/*  */
+}

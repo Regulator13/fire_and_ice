@@ -1,5 +1,5 @@
 /// @description attempt to set path
-if (!global.online || (global.online && global.haveserver)) {
+if (!global.online || (global.online && global.have_server)) {
     //set path
     global.path = ds_map_find_value(paths, ds_list_find_value(pathNames, pathSelected));
     }
@@ -33,27 +33,27 @@ if (!global.online) {
         // get the local player
         var Local = localPlayers[? key];
         // setup up player object
-        Local.playerId = ds_list_find_index(players, Local.connectID);
+        Local.player_id = ds_list_find_index(players, Local.connectID);
         Local.input = 1; //ds_list_find_value(players, connectID);
-        Local.team = ds_list_find_value(teams, Local.playerId); //temporary
-        Local.character = ds_list_find_value(classes, Local.playerId);
+        Local.Team = ds_list_find_value(teams, Local.player_id); //temporary
+        Local.character = ds_list_find_value(classes, Local.player_id);
         Local.sprite_index = scr_getSprite(Local.character);
-        //team
-        var team = ds_map_find_value(gameTeams, Local.team);
-        if (is_undefined(team)) {
-            team = instance_create(0, 0, obj_team)
-            team.team = Local.team;
-            team.nickname = "Team " + string(team.team);
-            ds_map_add(gameTeams, Local.team, team);
+        //Team
+        var Team = ds_map_find_value(gameTeams, Local.Team);
+        if (is_undefined(Team)) {
+            Team = instance_create_layer(0, 0, "lay_instances", obj_team)
+            Team.Team = Local.Team;
+            Team.nickname = "Team " + string(Team.Team);
+            ds_map_add(gameTeams, Local.Team, Team);
             }
         //add player to team
-        ds_list_add(team.players, Local);
-        Local.team = team;
+        ds_list_add(Team.players, Local);
+        Local.Team = Team;
         // get the next key
         key = ds_map_find_next(localPlayers, key);
         }
     }
-else if (global.haveserver) {
+else if (global.have_server) {
     room_goto(rm_level);
     with(obj_server) {
         var count = ds_list_size(iplist);
@@ -64,22 +64,22 @@ else if (global.haveserver) {
             player = ds_map_find_value(Clients, ip);
             
             // setup up player object
-            player.playerId = ds_list_find_index(other.players, player.connectID);
+            player.player_id = ds_list_find_index(other.players, player.connectID);
             player.input = -1; //ds_list_find_value(players, connectID);
-            player.team = ds_list_find_value(other.teams, player.playerId); //temporary
-            player.character = ds_list_find_value(other.classes, player.playerId);
+            player.Team = ds_list_find_value(other.teams, player.player_id); //temporary
+            player.character = ds_list_find_value(other.classes, player.player_id);
             player.sprite_index = scr_getSprite(player.character);
             //team
-            var team = ds_map_find_value(other.gameTeams, player.team);
-            if (is_undefined(team)) {
-                team = instance_create(0, 0, obj_team)
-                team.team = player.team;
-                team.nickname = "Team " + string(team.team);
-                ds_map_add(other.gameTeams, player.team, team);
+            var Team = ds_map_find_value(other.gameTeams, player.Team);
+            if (is_undefined(Team)) {
+                Team = instance_create_layer(0, 0, "lay_instances", obj_team)
+                Team.Team = player.Team;
+                Team.nickname = "Team " + string(Team.Team);
+                ds_map_add(other.gameTeams, player.Team, Team);
                 }
-            //add player to team
-            with (team) ds_list_add(players, other.player);
-            player.team = team;
+            //add player to Team
+            with (Team) ds_list_add(players, other.player);
+            player.Team = Team;
             }
         }
     } 

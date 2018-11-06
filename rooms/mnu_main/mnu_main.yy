@@ -13,7 +13,33 @@
     "layers": [
         {
             "__type": "GMRInstanceLayer_Model:#YoYoStudio.MVCFormat",
-            "name": "Compatibility_Instances_Depth_0",
+            "name": "lay_instances",
+            "id": "2606f9d1-5566-45f5-aa5a-5ab6945ae187",
+            "depth": -100,
+            "grid_x": 32,
+            "grid_y": 32,
+            "hierarchyFrozen": false,
+            "hierarchyVisible": true,
+            "inheritLayerDepth": false,
+            "inheritLayerSettings": false,
+            "inheritSubLayers": false,
+            "inheritVisibility": false,
+            "instances": [
+
+            ],
+            "layers": [
+
+            ],
+            "m_parentID": "00000000-0000-0000-0000-000000000000",
+            "m_serialiseFrozen": false,
+            "modelName": "GMRInstanceLayer",
+            "mvc": "1.0",
+            "userdefined_depth": false,
+            "visible": true
+        },
+        {
+            "__type": "GMRInstanceLayer_Model:#YoYoStudio.MVCFormat",
+            "name": "lay_buttons",
             "id": "a8785b93-29cb-45eb-b7f3-48c578fb635e",
             "depth": 0,
             "grid_x": 32,
@@ -39,7 +65,7 @@
         },
         {
             "__type": "GMRBackgroundLayer_Model:#YoYoStudio.MVCFormat",
-            "name": "Compatibility_Colour",
+            "name": "lay_background",
             "id": "d9e04c23-ec37-4f1e-9885-8c89d929f872",
             "animationFPS": 15,
             "animationSpeedType": "0",

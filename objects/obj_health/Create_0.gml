@@ -1,4 +1,4 @@
-/// @description initialize variables
+/// @description Set variables
 value = 100;
 
 

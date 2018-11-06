@@ -1,8 +1,8 @@
-/// @description die
+/// @description Die
 
-if(hp < 1)
-{instance_create(x,y,obj_corpse);
- instance_destroy();
+if(hp <= 0){
+	instance_create_layer(x,y, "lay_instances", obj_corpse);
+	instance_destroy();
 }
 
 

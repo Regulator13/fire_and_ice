@@ -3,13 +3,13 @@
 //character
 character = "";
 //team
-team = 0;
+Team = 0;
 // ready - whether player is ready to move to next menu
 ready = false;
 // name - player name
 name = "Player";
-//playerId - accumulative global number to identify player
-playerId = 0;
+//player_id - accumulative global number to identify player
+player_id = 0;
 //input - input player is using
 input = 0;
 //gameCharacter - character in game
@@ -20,11 +20,11 @@ startY = 0;
 
 /// server
 
-if (global.haveserver) {
+if (global.have_server) {
     // connectID - order in which client connected, used in lobby code
-    connectID = global.PlayerTotal;
+    connectID = global.player_total;
     
-    global.PlayerTotal++;
+    global.player_total++;
     }
 
 // inputs - array holding the current state of each input
