@@ -2,7 +2,7 @@
 global.Server = -1; // -1 client does not have server
 global.connectip = "127.0.0.1";
 global.InitObject = id;
-global.haveserver = false;
+global.have_server = false;
 global.ServerType = network_socket_udp;
 
 serverlist = ds_list_create();

@@ -1,5 +1,5 @@
 /// @description attempt to set path
-if (!global.online || (global.online && global.haveserver)) {
+if (!global.online || (global.online && global.have_server)) {
     //set path
     global.path = ds_map_find_value(paths, ds_list_find_value(pathNames, pathSelected));
     }
@@ -53,7 +53,7 @@ if (!global.online) {
         key = ds_map_find_next(localPlayers, key);
         }
     }
-else if (global.haveserver) {
+else if (global.have_server) {
     room_goto(rm_level);
     with(obj_server) {
         var count = ds_list_size(iplist);

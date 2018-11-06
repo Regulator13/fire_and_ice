@@ -127,7 +127,7 @@ global.path = noone; //ds_map in ds_map paths
 ///globals
 global.Menu = id;
 global.online = false;
-global.haveserver = false; // set in obj_server
+global.have_server = false; // set in obj_server
 
 /* */
 /// server

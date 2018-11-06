@@ -1,7 +1,7 @@
 /// @description  Create server and initialise map
 global.counter = 0;
 image_blend = c_red;
-global.haveserver = true;
+global.have_server = true;
 
 //counters
 global.serverEntitySprites = 0;

@@ -1,8 +1,6 @@
 /// @description Create block
-if (sticky) {
-	with (instance_create_layer(x, y, "lay_instances", obj_block)){
+with (instance_create_layer(x, y, "lay_instances", obj_block)){
+	if (other.sticky) {
 		sticky = true;
 	}
 }
-
-else instance_create_layer(x, y, "lay_instances", obj_block);

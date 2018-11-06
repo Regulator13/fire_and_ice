@@ -38,7 +38,7 @@ if !(instance_exists(obj_inputButton)) {
         // judge input based on current state
         switch(state) {
             case STATE_PATHS:
-                if (!global.online || global.online && global.haveserver) {
+                if (!global.online || global.online && global.have_server) {
                     // selector
                     selected = scr_incrementInBounds(selected, haxis, 0, ds_list_size(buttons)-1, true);
                     // path selector
@@ -203,7 +203,7 @@ if !(instance_exists(obj_inputButton)) {
 /// client input
 switch(state) {
     case STATE_LOBBY:
-        if(global.online && global.haveserver) {
+        if(global.online && global.have_server) {
             var Server = obj_server;
             // check for client input
             var count = ds_list_size(Server.iplist);

@@ -9,7 +9,7 @@
 state = STATE_PATHS;
 
 // create buttons
-if (!global.online || (global.online && global.haveserver)) {
+if (!global.online || (global.online && global.have_server)) {
     var button = instance_create_layer(room_width-96, room_height-32, "lay_instances", obj_button);
     button.action = "game";
     button.title = "play";

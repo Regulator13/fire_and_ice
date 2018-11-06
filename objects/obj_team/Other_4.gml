@@ -1,3 +1,2 @@
-/// @description LVL - maximum height
-LVL = 0;
-
+/// @description Set starting level
+LVL = 0; //maximum height

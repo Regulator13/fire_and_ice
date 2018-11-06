@@ -1,4 +1,4 @@
-/// @description create player
+/// @description Create player
 /*
 with (instance_create_layer(x, y, "lay_instances", obj_character)) {
     //set id
@@ -35,6 +35,3 @@ global.players += 1;
 
 instance_destroy();
 */
-
-/* */
-/*  */

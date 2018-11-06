@@ -1,5 +1,5 @@
 /// @description shrink water delay
-if (global.online && !global.haveserver) instance_destroy();
+if (global.online && !global.have_server) instance_destroy();
 
 else {
 	if (global.continueGame) {

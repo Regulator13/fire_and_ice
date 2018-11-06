@@ -20,7 +20,7 @@ startY = 0;
 
 /// server
 
-if (global.haveserver) {
+if (global.have_server) {
     // connectID - order in which client connected, used in lobby code
     connectID = global.player_total;
     

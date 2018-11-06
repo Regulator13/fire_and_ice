@@ -1,17 +1,8 @@
-/// @description initialize variables
+/// @description Set variables
 
-//team
 Team = 0;
-//nickname
 nickname = "";
-//players - list of players in team
-players = ds_list_create();
-
-//score
-tScore = 0;
-//lives
-tLives = 3;
-
-//lastLifeScore - goal to get next life
-lastLifeScore = 0;
-
+players = ds_list_create(); //list of players in team
+tScore = 0; //team's score
+tLives = 3; //team's lives
+lastLifeScore = 0; //goal to get next life

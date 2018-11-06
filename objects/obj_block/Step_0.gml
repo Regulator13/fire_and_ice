@@ -1,5 +1,4 @@
 /// @description Freeze and explode
-event_inherited();
 
 //Countdown particle
 if (freeze_buffer < freeze_buffer_max and freeze_buffer >= 1*30) {
@@ -82,6 +81,7 @@ image_index = hp;
 
 ///Sticky Blocks
 if (sticky) {
+	//REMOVE? Couldn't the sprite be set upon creation in obj_blockStation?
     sprite_index = spr_blockSticky;
     fric = 4; //increase friction because its "sticky"
     
@@ -106,3 +106,4 @@ with(instance_place(x, y, obj_explosion)) {
     other.hp -= damage;
 }
 
+event_inherited();
