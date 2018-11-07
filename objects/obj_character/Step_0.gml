@@ -8,6 +8,7 @@ if (active) {
     ///Input resets
     haxis1 = 0;
     vaxis1 = 0;
+	down_pressed = 0
     jump_pressed = false;
     ice_pressed = false;
     ice_released = false;
@@ -34,6 +35,7 @@ if (active) {
             if(Input_player.inputs[RIGHT_KEY]) haxis1 = 1;
             if(Input_player.inputs[UP_KEY] == KEY_PRESSED) vaxis1 = -1;
             if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) vaxis1 = 1;
+			if(Input_player.inputs[DOWN_KEY]) down_pressed = 1;
             if(Input_player.inputs[ACTION_KEY] == KEY_PRESSED) {
                 jump_pressed = true;
                 //unpress key
@@ -94,14 +96,24 @@ if (active) {
 		//Move if joystick is pushed far enough
 	    if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
 			if (!ice_is_pressed && !fire_is_pressed) or has_jetpack{
-				//accelerate
-				if abs(hspeed) < moveSpeed{
-					hspeed += haxis1*acceleration
+				//down key to inch sideways
+				if down_pressed > axis_buffer{
+					if place_free(x + haxis1, y + vspeed){
+						hspeed = 0
+						x += haxis1
+					}
 				}
 				
-				//move once fully accelerated
 				else{
-					hspeed = haxis1*moveSpeed
+					//accelerate
+					if abs(hspeed) < moveSpeed{
+						hspeed += haxis1*acceleration
+					}
+				
+					//move once fully accelerated
+					else{
+						hspeed = haxis1*moveSpeed
+					}
 				}
 			}
 	        //Find direction player is facing
