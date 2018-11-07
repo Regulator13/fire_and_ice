@@ -289,6 +289,11 @@ if (active) {
 			}
         }
 	}
+	
+	///Trampoline pushing
+	with(instance_place(x + sign(hspeed)*2, y, obj_trampoline)){
+        x += scr_contactx(other.hspeed);
+    }
 
     ///Gravity
     if (vspeed < gravity_max) {
