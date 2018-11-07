@@ -119,7 +119,7 @@ if !(instance_exists(obj_inputButton)){
                             var playerIndex = ds_list_find_index(players, Local.connectID);
                             
                             // teams
-                            var newTeam = scr_incrementInBounds(ds_list_find_value(teams, playerIndex), vaxis, 0, teamMax, true);
+                            var newTeam = scr_incrementInBounds(ds_list_find_value(teams, playerIndex), vaxis, 0, team_max, true);
                             ds_list_replace(teams, playerIndex, newTeam);
 							
                             // characters
@@ -289,7 +289,7 @@ switch(state) {
                 }
                 
                 // teams
-                var newTeam = scr_incrementInBounds(ds_list_find_value(teams, playerIndex), vaxis, 0, teamMax, true);
+                var newTeam = scr_incrementInBounds(ds_list_find_value(teams, playerIndex), vaxis, 0, team_max, true);
                 ds_list_replace(teams, playerIndex, newTeam);
 				
                 // characters

@@ -32,7 +32,7 @@
     else buffer_write(buff, buffer_u16, 0);
     
     //total number of teams
-    buffer_write(buff, buffer_u8, global.Menu.teamMax); //buffer_u8 MAX: 255
+    buffer_write(buff, buffer_u8, global.Menu.team_max); //buffer_u8 MAX: 255
     
     // delocalize the write buffer
     buffer = buff;
@@ -40,8 +40,8 @@
     with(global.Menu) {
         buff = other.buffer;
         // iterate through each team
-        for (var i = 0; i < teamMax; i++){
-            var Team = ds_map_find_value(gameTeams, i);
+        for (var i = 0; i < team_max; i++){
+            var Team = ds_map_find_value(game_teams, i);
             if !(is_undefined(Team)) {
                 buffer_write(buff, buffer_bool, true); // team exists
                 

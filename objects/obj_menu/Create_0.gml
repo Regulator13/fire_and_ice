@@ -5,9 +5,9 @@ buttons = ds_list_create(); //holds menu buttons
 selected = 0; //selected button
 input_buffer = 0; //small buffer to slow down gamepad input
 input_buffer_max = 4;
-inputFreeze = 0; //small amount of time inbetween menu switches
-inputFreezeMax = 4;
-scoreMessage = ""; //either restart or continue, used with space key
+input_freeze = 0; //small amount of time inbetween menu switches
+input_freezeMax = 4;
+score_message = ""; //either restart or continue, used with space key
 tagLine = "Now with#exploding corpses!";
 version = "1.04.4";
 local_controls = ds_list_create(); //list holding which local players are in
@@ -25,9 +25,9 @@ local_players = ds_map_create(); //hold all the local player input objects
 ///Lobby menu
 class_options = ds_list_create(); //character list
 ds_list_add(class_options, "grinch", "yeti", "santa", "nutcracker", "reindeer");
-teamMax = 10;
+team_max = 10;
 teams = ds_list_create(); //used for selecting
-gameTeams = ds_map_create();
+game_teams = ds_map_create();
 names = ds_list_create();
 
 ///Online menu

@@ -4,7 +4,7 @@ if (global.online and !global.have_server){
 }
 
 else {
-	if (global.continueGame) {
+	if (global.continue_game) {
 		if global.water_delay > 300{
 			global.water_delay -= 100;
 		}

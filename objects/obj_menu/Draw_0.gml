@@ -281,8 +281,8 @@ if (state == STATE_GAME) {
 	        }
 	    else {
 	        //iterate through teams
-	        for (var i = 0; i < teamMax; i++){
-	            var Team = ds_map_find_value(gameTeams, i);
+	        for (var i = 0; i < team_max; i++){
+	            var Team = ds_map_find_value(game_teams, i);
 	            if !(is_undefined(Team)) {
 	                //draw background
 	                var size = ds_list_size(Team.players)-1;
@@ -352,7 +352,7 @@ if (global.online) {
         // index - current index in list
         var index = 0;
         // get message, continue or restart
-        scoreMessage = ds_list_find_value(server_data, index++);
+        score_message = ds_list_find_value(server_data, index++);
         var seed = ds_list_find_value(server_data, index++);
         var water_delay = ds_list_find_value(server_data, index++);
         
@@ -416,7 +416,7 @@ if (global.online) {
         }
         
         //message
-        draw_text(room_width/2, 160 + 26*i + 100, string_hash_to_newline("Press SPACE to " + string(scoreMessage)));
+        draw_text(room_width/2, 160 + 26*i + 100, string_hash_to_newline("Press SPACE to " + string(score_message)));
         draw_text(room_width/2, 160 + 26*i + 132, string_hash_to_newline("Your room seed was: " + string(seed)));
         draw_text(room_width/2, 160 + 26*i + 160, string_hash_to_newline("Water Delay: " + string(water_delay)));
     }

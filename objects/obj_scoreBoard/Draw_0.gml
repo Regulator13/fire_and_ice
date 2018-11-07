@@ -9,8 +9,8 @@ if (!global.online) {
 	
 	//iterate through teams
 	var cy = 0;
-	for (var i = 0; i < obj_menu.teamMax; i++){
-	    var Team = ds_map_find_value(obj_menu.gameTeams, i);
+	for (var i = 0; i < obj_menu.team_max; i++){
+	    var Team = ds_map_find_value(obj_menu.game_teams, i);
 	    if !(is_undefined(Team)) {
 	        draw_text(room_width/2, 200 + 26*cy, string_hash_to_newline(Team.nickname + " Score: " + string(round(Team.tScore)) + " Lives:" + string(Team.tLives)));
 	        cy ++;
@@ -18,7 +18,7 @@ if (!global.online) {
 	}
 
 	//set message to display for what space does
-	if (global.continueGame) message = "continue!";
+	if (global.continue_game) message = "continue!";
 	else message = "restart!";
 	
 	//Print score screen messages

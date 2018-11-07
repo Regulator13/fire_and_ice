@@ -40,12 +40,12 @@ if (!global.online) {
         Local.sprite_index = scr_getSprite(Local.character);
 		
         //Team
-        var Team = ds_map_find_value(gameTeams, Local.Team);
+        var Team = ds_map_find_value(game_teams, Local.Team);
         if (is_undefined(Team)) {
             Team = instance_create_layer(0, 0, "lay_instances", obj_team)
             Team.Team = Local.Team;
             Team.nickname = "Team " + string(Team.Team);
-            ds_map_add(gameTeams, Local.Team, Team);
+            ds_map_add(game_teams, Local.Team, Team);
         }
 		
         //add player to team
@@ -75,12 +75,12 @@ else if (global.have_server) {
             player.sprite_index = scr_getSprite(player.character);
 			
             //team
-            var Team = ds_map_find_value(other.gameTeams, player.Team);
+            var Team = ds_map_find_value(other.game_teams, player.Team);
             if (is_undefined(Team)) {
                 Team = instance_create_layer(0, 0, "lay_instances", obj_team)
                 Team.Team = player.Team;
                 Team.nickname = "Team " + string(Team.Team);
-                ds_map_add(other.gameTeams, player.Team, Team);
+                ds_map_add(other.game_teams, player.Team, Team);
             }
 			
             //add player to Team

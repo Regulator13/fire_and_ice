@@ -2,7 +2,7 @@
 ///Initializatons
 if (global.gameStart) {
     global.level = 0; //Set level number
-    global.continueGame = true; //whether or not can continue
+    global.continue_game = true; //whether or not can continue
     global.water_delay = 1000;
     global.water_rate = .1;
     global.gameStart = false;
@@ -13,7 +13,7 @@ gotoScore = true; //Next room will be score
 
 /// Create room
 //seed the random generator
-if (global.continueGame) {
+if (global.continue_game) {
     //get seed
     seed = ds_list_find_value(ds_map_find_value(global.path, "seeds"), global.level);
     /*show_debug_message(string(global.level) + string(seed));*/
@@ -49,7 +49,7 @@ if (global.continueGame) {
 
 else {
     random_set_seed(random_get_seed());
-    /*global.continueGame = true; //set after hearts generation*/
+    /*global.continue_game = true; //set after hearts generation*/
 }
 
 //Set the delay before water rises
@@ -218,7 +218,7 @@ with obj_water_spawn{
 }
 
 ///Generate heart token (extra life) if first time on level
-if (global.continueGame) {
+if (global.continue_game) {
 	//random x and y
 	var gridSize = 32;
 	var rx = 0;
@@ -247,5 +247,5 @@ if (global.continueGame) {
 }
 
 else {
-    global.continueGame = true;
+    global.continue_game = true;
 }

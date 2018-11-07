@@ -3,8 +3,8 @@
 var restartGame = true;
 
 //unless player's still has lives
-for (var i = 0; i < obj_menu.teamMax; i++){
-    var Team = ds_map_find_value(obj_menu.gameTeams, i);
+for (var i = 0; i < obj_menu.team_max; i++){
+    var Team = ds_map_find_value(obj_menu.game_teams, i);
     if !(is_undefined(Team)) {
         if (Team.tLives > 0) {
             restartGame = false;
@@ -16,7 +16,7 @@ if (restartGame) game_restart();
 
 //otherwise reset the player's scores
 else {
-    if (global.continueGame){
+    if (global.continue_game){
 		scr_stateSwitch(STATE_SCORE, STATE_GAME);
 	}
 	

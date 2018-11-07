@@ -12,7 +12,7 @@ if (check_win_buffer < 0) {
         }
 		
         else {
-            global.continueGame = false;
+            global.continue_game = false;
         }
 		
         //go to the score screen

@@ -8,8 +8,8 @@ if !(global.gameStart) {
     highScore = 0;
 	
     //iterate through teams
-    for (var i = 0; i < teamMax; i++){
-        var Team = ds_map_find_value(gameTeams, i);
+    for (var i = 0; i < team_max; i++){
+        var Team = ds_map_find_value(game_teams, i);
         if !(is_undefined(Team)) {
             var newScore = Team.tScore;
             if (newScore > highScore) {

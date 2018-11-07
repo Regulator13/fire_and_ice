@@ -11,7 +11,7 @@ ds_list_clear(buttons);
 selected = 2; // start on host button
 
 // temporarily freeze input
-inputFreeze = inputFreezeMax;
+input_freeze = input_freezeMax;
 
 // set room width and height manually, in case of changing from game
 var rw = 1152;
