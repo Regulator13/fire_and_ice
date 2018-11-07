@@ -16,12 +16,15 @@ if (restartGame) game_restart();
 
 //otherwise reset the player's scores
 else {
-    if (global.continueGame) scr_stateSwitch(STATE_SCORE, STATE_GAME);
-        else {
-            for (i = 0; i < global.player_total; i += 1) {
-                global.playerScore[i] = 0;
-            }
-			
-            scr_stateSwitch(STATE_SCORE, STATE_GAME);
+    if (global.continueGame){
+		scr_stateSwitch(STATE_SCORE, STATE_GAME);
+	}
+	
+    else {
+        for (i = 0; i < global.player_total; i += 1) {
+            global.playerScore[i] = 0;
         }
+			
+        scr_stateSwitch(STATE_SCORE, STATE_GAME);
+    }
 }

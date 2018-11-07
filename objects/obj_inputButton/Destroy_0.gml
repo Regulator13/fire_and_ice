@@ -1,3 +1,2 @@
-/// @description  clear all input
+/// @description Clear all input
 io_clear();
-

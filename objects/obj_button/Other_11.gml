@@ -1,4 +1,4 @@
-/// @description  value action
+/// @description Value action
 switch (valueAction) {
     case "changeControlsPlayer":
         // change selected player
@@ -6,6 +6,7 @@ switch (valueAction) {
         // reset menu
         scr_stateSwitch(STATE_CONTROLS, STATE_CONTROLS);
         break;
+		
     case "changeControlsController":
         // change the controller type
         global.controls[global.Menu.controlSelected, KEY_TYPE] = value;
@@ -14,5 +15,4 @@ switch (valueAction) {
         // reset menu
         scr_stateSwitch(STATE_CONTROLS, STATE_CONTROLS);
         break;
-    }
-
+}
