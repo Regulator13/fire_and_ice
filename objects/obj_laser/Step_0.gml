@@ -31,7 +31,7 @@ switch (dir) {
 */
 
 /*
-while (collision_line(x,y, laserX, y, par_block, false, true) || collision_line(x,y, laserX, y, obj_character, false, true)) {
+while (collision_line(x,y, laserX, y, par_block, false, true) or collision_line(x,y, laserX, y, obj_character, false, true)) {
     laserX -= dir;
     }
     

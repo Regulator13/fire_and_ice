@@ -1,5 +1,2 @@
-/// @description  @description Insert description here
-// You can write your code in this edit
+/// @description  End game
 game_end();
-
-

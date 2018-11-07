@@ -1,4 +1,4 @@
-/// @description  process text box
-if (selected) text = keyboard_string;
-
-
+/// @description Process text box
+if (selected){
+	text = keyboard_string;
+}

@@ -36,7 +36,7 @@ if (input_buffer < 0) {
             mouseY = mouse_y;
 			
             // check if there was any input
-            if (keyboard_check(vk_anykey) || device_mouse_check_button(0, mb_any)){
+            if (keyboard_check(vk_anykey) or device_mouse_check_button(0, mb_any)){
                 buffer = true;
 			}
 			
@@ -48,7 +48,7 @@ if (input_buffer < 0) {
     }
     
     // reset input buffer if in menu
-    if (global.Menu.state != STATE_GAME && buffer)
+    if (global.Menu.state != STATE_GAME and buffer)
         input_buffer = input_buffer_max;
     }
 	

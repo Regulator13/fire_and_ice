@@ -1,3 +1,2 @@
-/// @description  @description Restart
+/// @description Restart
 event_user(0);
-

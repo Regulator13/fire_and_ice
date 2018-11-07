@@ -26,8 +26,8 @@ with (global.Menu) {
                     scr_menuInitLobby(from);
                     
                     // join player
-                    localPlayers[? 0] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
-                    localPlayers[? 0].controls = 0;
+                    local_players[? 0] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
+                    local_players[? 0].controls = 0;
                     break;
                 }
         case STATE_CONTROLS:

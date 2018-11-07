@@ -1,8 +1,8 @@
-/// @description attempt to set path
-if (!global.online || (global.online && global.have_server)) {
+/// @description Attempt to set path
+if (!global.online or (global.online and global.have_server)) {
     //set path
-    global.path = ds_map_find_value(paths, ds_list_find_value(pathNames, pathSelected));
-    }
+    global.path = ds_map_find_value(paths, ds_list_find_value(path_names, path_selected));
+}
 /*
 // debug
 for (i = 0; i < ds_list_size(global.path[? "seeds"]); i++;) {
@@ -10,54 +10,58 @@ for (i = 0; i < ds_list_size(global.path[? "seeds"]); i++;) {
     }
 */
 
-/* */
 ///change to game menu
 state = STATE_GAME;
 
 //clear buttons
 for (var i = 0; i < ds_list_size(buttons); i++) {
-    with(ds_list_find_value(buttons, i)) instance_destroy();
-    }
+    with(ds_list_find_value(buttons, i)){
+		instance_destroy();
+	}
+}
 ds_list_clear(buttons);
 
-
-/* */
-///create players
+///Create players
 if (!global.online) {
-    // setup
-    var amount = ds_map_size(localPlayers);
-    var key = ds_map_find_first(localPlayers);
+    //set variables
+    var amount = ds_map_size(local_players);
+    var key = ds_map_find_first(local_players);
     
     // iterate through each local player
     for (i = 0; i < amount; i++;) {
         // get the local player
-        var Local = localPlayers[? key];
+        var Local = local_players[? key];
+		
         // setup up player object
         Local.player_id = ds_list_find_index(players, Local.connectID);
         Local.input = 1; //ds_list_find_value(players, connectID);
         Local.Team = ds_list_find_value(teams, Local.player_id); //temporary
         Local.character = ds_list_find_value(classes, Local.player_id);
         Local.sprite_index = scr_getSprite(Local.character);
+		
         //Team
-        var Team = ds_map_find_value(gameTeams, Local.Team);
+        var Team = ds_map_find_value(game_teams, Local.Team);
         if (is_undefined(Team)) {
             Team = instance_create_layer(0, 0, "lay_instances", obj_team)
             Team.Team = Local.Team;
             Team.nickname = "Team " + string(Team.Team);
-            ds_map_add(gameTeams, Local.Team, Team);
-            }
+            ds_map_add(game_teams, Local.Team, Team);
+        }
+		
         //add player to team
         ds_list_add(Team.players, Local);
         Local.Team = Team;
+		
         // get the next key
-        key = ds_map_find_next(localPlayers, key);
-        }
+        key = ds_map_find_next(local_players, key);
     }
+}
+///DESCR?
 else if (global.have_server) {
     room_goto(rm_level);
     with(obj_server) {
         var count = ds_list_size(iplist);
-        for(i = 0; i < count; i++) {   
+        for(i = 0; i < count; i++){   
             //get the ip
             var ip = ds_list_find_value(iplist,i);
             //get the player instance so that we can check if it is ready
@@ -69,32 +73,24 @@ else if (global.have_server) {
             player.Team = ds_list_find_value(other.teams, player.player_id); //temporary
             player.character = ds_list_find_value(other.classes, player.player_id);
             player.sprite_index = scr_getSprite(player.character);
+			
             //team
-            var Team = ds_map_find_value(other.gameTeams, player.Team);
+            var Team = ds_map_find_value(other.game_teams, player.Team);
             if (is_undefined(Team)) {
                 Team = instance_create_layer(0, 0, "lay_instances", obj_team)
                 Team.Team = player.Team;
                 Team.nickname = "Team " + string(Team.Team);
-                ds_map_add(other.gameTeams, player.Team, Team);
-                }
+                ds_map_add(other.game_teams, player.Team, Team);
+            }
+			
             //add player to Team
             with (Team) ds_list_add(players, other.player);
             player.Team = Team;
-            }
         }
-    } 
-
-/* */
-///game menu
+    }
+} 
 
 //goto room
 room_goto(rm_level);
 
-/* */
-/// online
-
-// networkPlayer - networkPlayer object, if online
-networkPlayer = noone;
-
-/* */
-/*  */
+networkPlayer = noone; //networkPlayer object, if online

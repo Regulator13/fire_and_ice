@@ -1,11 +1,5 @@
-/// @description set up
+/// @description Set variables
 image_speed = 0;
-
-// key - what key the control button represents
-key = 0;
-
-// action - tell menu that this is a control button
-action = "controlButton";
-// title - title of button for length purposes
-title = "";
-
+key = 0; //what key the control button represents
+action = "controlButton"; // tell menu that this is a control button
+title = ""; // title of button for length purposes

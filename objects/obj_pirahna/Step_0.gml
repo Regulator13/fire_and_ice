@@ -170,7 +170,7 @@ if (jumps > 0) {
 //Push blocks
 with(instance_place(x+sign(hspeed)*2,y,par_physics))
     {
-    if (id != other.grab_object && not frozen && !stuck) {
+    if (id != other.grab_object and not frozen and not stuck) {
         x+=scr_contactx(other.hspeed);
     }
 }

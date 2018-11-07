@@ -30,13 +30,13 @@ if (state == STATE_GAME) {
         instance_destroy(gameCharacter);
     }
     
-if (state == STATE_GAME || state == STATE_SCORE) {
+if (state == STATE_GAME or state == STATE_SCORE) {
     // remove from team
     var index = ds_list_find_index(Team.players, self);
     ds_list_delete(Team.players, index);
     // delete team if last player
     if (ds_list_empty(Team.players)) {
-        ds_map_delete(global.Menu.gameTeams, Team);
+        ds_map_delete(global.Menu.game_teams, Team);
         instance_destroy(Team);
         }
     }
