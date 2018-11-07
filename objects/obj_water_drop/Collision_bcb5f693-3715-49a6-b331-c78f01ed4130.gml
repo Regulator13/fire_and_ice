@@ -4,7 +4,7 @@ instance_destroy(other)
 
 //If it's an ice ball, freeze the block
 if other.attack < 0{
-	with instance_create_layer(x, y, "lay_instances", obj_block){
+	with instance_create_layer(x + 8, y + 8, "lay_instances", obj_block){
 		hp = 4
 		from_water = true
 	}

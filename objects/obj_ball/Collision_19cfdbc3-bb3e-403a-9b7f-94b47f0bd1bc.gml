@@ -3,7 +3,14 @@
 //Turn frozen water back to water
 if other.from_water and attack > 0{
 	with other{
-		instance_create_layer(x, y, "lay_instances", obj_water_drop)
+		with instance_create_layer(x - 8, y - 8, "lay_instances", obj_water_drop){
+			//Avoid dripping animation
+			image_index = image_number - 1
+			gravity_incr = 0.4
+			image_speed = 0
+			animation_end = true
+		}
+		
 		instance_destroy()
 	}
 }
