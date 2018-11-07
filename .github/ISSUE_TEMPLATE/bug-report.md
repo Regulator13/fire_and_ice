@@ -4,8 +4,11 @@ about: Something is not behaving as expected
 
 ---
 
-**Bug and Expected Behavior**
-Describe the bug and what is supposed to happen. Please tag with `bug` label.
+**Bug**
+Describe the bug. Please tag with the `bug` label.
+
+**Expected Behavior**
+What is supposed to happen?
 
 **Steps to Reproduce**
 1. Go to X branch or repository
@@ -13,5 +16,5 @@ Describe the bug and what is supposed to happen. Please tag with `bug` label.
 3. Do X action
 4. Do X action
 
-**Additional context**
+**Additional Context**
 Provide screenshots, exceptions, and error code/location if you think it will make this easier to solve.
