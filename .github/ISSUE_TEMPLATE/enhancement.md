@@ -8,4 +8,4 @@ about: I have an idea or suggestion
 What caused you to have this idea? If it applies, explain how things currently work without your idea.
 
 **Idea**
-What is your idea? If you feel it would help, explain why you believe this is a good idea. Tag with `discussion` label if you want everyone's input.
+What is your idea? If you think it would help, explain why you this is a good idea. Do you have a plan of how to implement this? If, so describe.

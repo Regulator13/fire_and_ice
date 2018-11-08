@@ -5,7 +5,7 @@ about: Something is not behaving as expected
 ---
 
 **Bug**
-Describe the bug. Please tag with the `bug` label.
+Describe the bug.
 
 **Expected Behavior**
 What is supposed to happen?
