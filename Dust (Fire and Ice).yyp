@@ -1271,6 +1271,14 @@
             }
         },
         {
+            "Key": "d6b5ee74-3dbf-4e9b-8a59-c370d6626d23",
+            "Value": {
+                "id": "54ffe8c6-f097-4eea-9958-661c15c819d9",
+                "resourcePath": "scripts\\scr_check_num_pixels_touching\\scr_check_num_pixels_touching.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "d795b807-f92f-4942-acd6-a7c3b30d6617",
             "Value": {
                 "id": "2e1dbfab-1c48-44b6-8d46-3d17b3f780d2",
@@ -1516,6 +1524,7 @@
         "b99fdab3-4586-43bd-ae3c-953324460de1",
         "40caaa07-d556-404c-a2d8-e4b235c855ae",
         "3936e3de-1cf6-4b3b-bb15-cc02750bfcc4",
+        "d6b5ee74-3dbf-4e9b-8a59-c370d6626d23",
         "00cab82a-41fd-43d0-8c5c-4bfcccecbd98",
         "bcccd8e4-e04d-45cc-a76b-ec892acb590d",
         "405d7ba9-3b75-42b8-b80f-1c0f575f8ffb",
