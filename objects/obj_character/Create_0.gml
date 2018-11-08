@@ -5,7 +5,10 @@ Team = noone; //Belongs to no team
 player_id = 0; //player id for score
 jumps = 0;
 crouch = false;
-grab_object = noone;
+Grab_object = noone;
+holding = 0; //holding - 0 for let go next time, 2 to throw
+Equipped_objects = ds_list_create(); //the items that are equipped
+equipped = 0; //how many items are equipped
 Holder = noone; //who is holding self
 sticky = false; //for grabbing
 has_jetpack = false
@@ -53,6 +56,7 @@ input_buffer_max = 10;
 input_method = CONTROLS_KEYBOARD; //the type of input: keyboard, mouse, joystick
 // initiate isPressed variable outside, so they don't automatically reset
 grab_is_pressed = false;
+equip_is_pressed = false;
 ice_is_pressed = false;
 fire_is_pressed = false;
 
@@ -61,4 +65,3 @@ fire_is_pressed = false;
 /// Artifacts
 frozen = false; //character checks frozen state of grabbed object, player throwing concern
 hp_normal = 100;
-holding = 0; //holding - 0 for let go next time, 2 to throw

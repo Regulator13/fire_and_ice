@@ -15,6 +15,8 @@ if (active) {
     handicap_released = false;
     grab_pressed = false;
     grab_released = false;
+	equip_pressed = false;
+    equip_released = false;
     fire_pressed = false;
     fire_released = false;
 	axis_buffer = 0.4; //buffer till push starts counting
@@ -59,11 +61,15 @@ if (active) {
             if (Input_player.inputs[RIGHTSELC_KEY] == KEY_PRESSED) {
                 fire_pressed = true;
                 fire_is_pressed = true;
+				equip_pressed = true;
+				equip_is_pressed = true;
             }
 			
             else if (Input_player.inputs[RIGHTSELC_KEY] == KEY_RELEASED) {
                 fire_released = true;
                 fire_is_pressed = false;
+				equip_released = true;
+				equip_is_pressed = false;
             }
 			
             break;
@@ -220,8 +226,8 @@ if (active) {
     if (jumps > 0) {
 	    if (jump_pressed) {
 			//Subtract mass from jump_height
-			if instance_exists(grab_object){
-				var total_mass = mass + grab_object.mass
+			if instance_exists(Grab_object){
+				var total_mass = mass + Grab_object.mass
 			}
 			
 			else var total_mass = mass
@@ -234,12 +240,12 @@ if (active) {
     ///Block collisions
     with(instance_place(x+sign(hspeed)*2,y,par_physics)){
 		//Push blocks
-        if (id != other.grab_object and not frozen and !stuck) {
+        if (id != other.Grab_object and not frozen and !stuck) {
             x+=scr_contactx(other.hspeed);
         }
 		
 		//Climb blocks
-		if (id != other.grab_object) and (frozen or stuck){
+		if (id != other.Grab_object) and (frozen or stuck){
 			//Slide slowly down blocks' sides
 			other.hspeed = 0
 			other.vspeed = 0
@@ -355,22 +361,22 @@ if (active) {
     if (fire_released) {
 		//Turn jetpack off
 		if has_jetpack{
-			if grab_object.working{
-				grab_object.image_index = 0
+			if Grab_object.working{
+				Grab_object.image_index = 0
 			}
 		}
 		
 		//Shoot a fireball
         if (energy > energy_fire) {
 			//Ignite if holding an object that can blow up
-            if (instance_exists(grab_object)) {
-                if (grab_object.hp > grab_object.hp_normal-1 or grab_object.hp < grab_object.hp_normal+1) { //lasers subtract decimal points
-                    grab_object.ignite = true;
-                    grab_object.hp = grab_object.hp_normal;
+            if (instance_exists(Grab_object)) {
+                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1) { //lasers subtract decimal points
+                    Grab_object.ignite = true;
+                    Grab_object.hp = Grab_object.hp_normal;
                 }
 				
 				//Otherwise perform fire action on it
-                else grab_object.hp -= 1;
+                else Grab_object.hp -= 1;
             }
 			
 			//Throw
@@ -396,6 +402,9 @@ if (active) {
                     sprite_index = spr_ballFire;
                     attack = 1;
                     Source = other.id;
+					
+					//if carrying a gun give the ball special stats
+					scr_use_gun()
                     
                     //handicap
                     if (other.will_arc) arc = true;
@@ -411,8 +420,8 @@ if (active) {
     }
 	
 	//Jetpack flying
-	if fire_is_pressed and has_jetpack and grab_object.working{
-		if energy >= grab_object.jetpack_cost{
+	if fire_is_pressed and has_jetpack and Grab_object.working{
+		if energy >= Grab_object.jetpack_cost{
 			if vspeed > -10{
 				//Floating
 				if vspeed > -3{
@@ -428,8 +437,8 @@ if (active) {
 					}
 				}
 						
-				energy -= grab_object.jetpack_cost
-				grab_object.image_index = 1
+				energy -= Grab_object.jetpack_cost
+				Grab_object.image_index = 1
 			}
 		}
 	}
@@ -442,13 +451,13 @@ if (active) {
         // check if enough energy
         if (energy > energy_fire) {
             // if holding an block, set timer to freeze it
-            if (instance_exists(grab_object)) {
-                if (grab_object.hp > grab_object.hp_normal-1 or grab_object.hp < grab_object.hp_normal+1) { //lasers subtract decimal points
-                    grab_object.will_freeze = true;
-                    grab_object.hp = grab_object.hp_normal;
+            if (instance_exists(Grab_object)) {
+                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1) { //lasers subtract decimal points
+                    Grab_object.will_freeze = true;
+                    Grab_object.hp = Grab_object.hp_normal;
                 }
 				
-                else grab_object.hp += 1;
+                else Grab_object.hp += 1;
             }
         }
     }
@@ -486,6 +495,9 @@ if (active) {
                         sprite_index = spr_ballIce;
                         attack = -1; //add one health
                         Source = other.id;
+						
+						//if carrying a gun give the ball special stats
+						scr_use_gun()
                         
                         //handicap
                         if (other.will_arc) arc = true;
@@ -518,63 +530,63 @@ if (active) {
 		
         //If not already holding something, attempt to grab close thing
         if (holding = 0) {
-			grab_object = (instance_place(x+sign(dir)*4,y,par_physics));
+			Grab_object = (instance_place(x+sign(dir)*4,y,par_physics));
 			
-            if !instance_exists(grab_object){
-				grab_object = (instance_place(x+sign(dir)*4,y,obj_character));
+            if !instance_exists(Grab_object){
+				Grab_object = (instance_place(x+sign(dir)*4,y,obj_character));
 			}
 			
 			//Initialize has_jetpack if grabbing a jetpack
-			if instance_exists(grab_object){
-				if object_get_name(grab_object.object_index) == "obj_jetpack"{
+			if instance_exists(Grab_object){
+				if Grab_object.object_index == obj_jetpack{
 					has_jetpack = true
 				}
 			}
 			
-			//Initialize grab_object variables
-            if (instance_exists(grab_object)) {
-                if (grab_object.frozen = false) {
-                    grab_object.active = false;
+			//Initialize Grab_object variables
+            if (instance_exists(Grab_object)) {
+                if (Grab_object.frozen = false) {
+                    Grab_object.active = false;
                     //unstick if sticky
-                    if (grab_object.sticky) grab_object.stuck = false
-                    grab_object.Holder = self; //whose holding the item
+                    if (Grab_object.sticky) Grab_object.stuck = false
+                    Grab_object.Holder = self; //whose holding the item
                     holding = 1; //Number of items being held
                 }
 					
-                else grab_object = noone;
+                else Grab_object = noone;
             }
 			
-			///REMOVE? Duplicate code including team check. Move team check to above?
-            if (instance_exists(grab_object)) {
-                if (grab_object.Team == Team or grab_object.Team == noone) {
-                    grab_object.active = false;
+            if (instance_exists(Grab_object)) {
+                if (Grab_object.Team == Team or Grab_object.Team == noone) {
+                    Grab_object.active = false;
                     //check if sticky
-                    if (grab_object.sticky) grab_object.stuck = false //unstick
+                    if (Grab_object.sticky) Grab_object.stuck = false //unstick
                     //set Holder
-                    grab_object.Holder = self;
+                    Grab_object.Holder = self;
                     holding = 1;
                 }
-            else grab_object = noone;
+				
+				else Grab_object = noone;
             }
         }
     }
 	
 	//Move the grabbed object with the player
-    if (instance_exists(grab_object)) {
-        grab_object.x = x+hspeed;
-        grab_object.y = y-9+vspeed;
+    if (instance_exists(Grab_object)) {
+	    Grab_object.x = x+hspeed;
+	    Grab_object.y = y-9+vspeed;
     }
 	
 	//If grabbing object, throw it
     if (grab_released) {
-        if (instance_exists(grab_object)) {
+        if (instance_exists(Grab_object)) {
             if (holding > 1) {
                 holding = 0;
                 crouch = false;
 				has_jetpack = false
 				
                 //throw
-                with(grab_object) {
+                with(Grab_object) {
                     //Throw using mouse
                     if (other.input_method = CONTROLS_MOUSE) {
                         scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
@@ -595,12 +607,11 @@ if (active) {
                     active = true;
                 }
     
-                //remove grab_object's Holder
-                grab_object.Holder = noone;
-                grab_object = noone;
+                //remove Grab_object's Holder
+                Grab_object.Holder = noone;
+                Grab_object = noone;
 				
             }
-			//REMOVE? What purpose does this serve?
             else holding += 1;
         }
 		
@@ -609,7 +620,22 @@ if (active) {
             holding = 0;
         }
     }
-    
+	
+	///Equip
+	if (equip_pressed){
+        //Attempt to equip the item next to the player
+        if instance_exists(instance_place(x + sign(dir)*4, y, par_item)){
+			ds_list_add(Equipped_objects, instance_place(x + sign(dir)*4, y, par_item));
+
+			//Remove the item from the game
+			with Equipped_objects[| ds_list_size(Equipped_objects) - 1]{
+				active = false
+				x = 0
+				y = 0
+			}
+        }
+    }
+
     //Handicap
     if (handicap_released) {
         //toggle arcing
@@ -675,10 +701,10 @@ if active{
 	    }
 			
 	    //drop object if grabbed
-	    if (instance_exists(grab_object)) {
-	        //remove grab_object's Holder
-	        grab_object.Holder = noone;
-	        grab_object.active = true;
+	    if (instance_exists(Grab_object)) {
+	        //remove Grab_object's Holder
+	        Grab_object.Holder = noone;
+	        Grab_object.active = true;
 	    }
 			
 	    //subtract life from team
@@ -715,6 +741,7 @@ if (place_meeting(x, y, obj_door)) {
     Team.tScore += global.score_win/ds_list_size(Team.players);
     if !(global.win) Team.tScore += global.score_first; //first
     global.win = true;
+	ds_list_destroy(Equipped_objects)
     instance_destroy();
     /*
     //subtract score for each player based on y

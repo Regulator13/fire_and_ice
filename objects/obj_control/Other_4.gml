@@ -91,7 +91,7 @@ repeat(4) {
 
 //bottom trampoline creation - up to two with a 50% chance for each
 repeat(2){
-	if irandom(1){
+	if !irandom(1){
 		dx = round(irandom_range(gridSize*3, room_height - gridSize*4)/gridSize)*gridSize
 	    dy = room_height-gridSize-32
 		

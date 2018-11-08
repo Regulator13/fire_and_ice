@@ -20,10 +20,15 @@ switch(argument2) {
                 }
             }
 			
-        //patrol
+        //patrol right side
         if (place_free(dx-gridSize,dy-gridSize)) instance_create_layer(dx-gridSize, dy-gridSize+16, "lay_instances", obj_patrol);
 		
-        break;
+		//gun second block from left 1/4 chance
+		if !irandom(3){
+			if (position_empty(dx - gridSize*3, dy - gridSize/2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
+		}
+		
+		break;
 		
 	case 6: //three long platform
 		for (k = 0; k < 3; k += 1) {
@@ -38,7 +43,7 @@ switch(argument2) {
 		
 		//1 in 3 chance of jetpack on right if in second quater from bottom of room
 		if (dy > (room_height / 2)) and (dy < (3 * room_height / 4)){
-			if irandom(2){
+			if !irandom(2){
 				if (place_free(dx + gridSize/2, dy-gridSize)) instance_create_layer(dx + gridSize/2, dy-gridSize/2, "lay_instances", obj_jetpack);
 			}
 		}
@@ -55,12 +60,12 @@ switch(argument2) {
 			
 		if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
 		
-		//1 in 3 chance of trampoline on left side
-		if irandom(2){
+		//1 in 3 chance of trampoline on second from left side
+		if !irandom(2){
 			if (position_empty(dx - gridSize*3, dy - gridSize/2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_trampoline);
 		}
 		
-		//recharge station
+		//recharge station middle block
 		if (place_free(dx-gridSize*2,dy-gridSize)) instance_create_layer(dx-gridSize*2, dy-gridSize, "lay_instances", obj_rechargeStation);
 		
 		break;
@@ -76,7 +81,7 @@ switch(argument2) {
 		
 		//1 in 3 chance of jetpack on right if in second quater from bottom of room
 		if (dy > (room_height / 2)) and (dy < (3 * room_height / 4)){
-			if irandom(2){
+			if !irandom(2){
 				if (place_free(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize , dy-gridSize/2, "lay_instances", obj_jetpack);
 			}
 		}
@@ -92,15 +97,20 @@ switch(argument2) {
 		}
 		
 		//1 in 2 chance of trampoline on right side
-		if irandom(1){
+		if !irandom(1){
 			if (position_empty(dx, dy-gridSize)) instance_create_layer(dx, dy-gridSize/2, "lay_instances", obj_trampoline);
 		}
 		
 		//Create a water spawn below the second block from right (50% chance)
 		if place_free(dx - gridSize, dy + gridSize){
-			if irandom(1){
+			if !irandom(1){
 				instance_create_layer(dx - gridSize, dy + gridSize, "lay_instances", obj_water_spawn)
 			}
+		}
+		
+		//gun in middle 1/4 chance
+		if !irandom(3){
+			if (position_empty(dx - gridSize*3, dy - gridSize/2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
 		}
 	
 		break;
@@ -131,7 +141,7 @@ switch(argument2) {
 		
 		//Create a water spawn below the middle block (50% chance)
 		if place_free(dx - gridSize, dy + gridSize){
-			if irandom(1){
+			if !irandom(1){
 				instance_create_layer(dx - gridSize, dy + gridSize, "lay_instances", obj_water_spawn)
 			}
 		}
