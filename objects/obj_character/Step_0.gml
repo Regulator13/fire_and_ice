@@ -124,6 +124,7 @@ if (active) {
 			}
 	        //Find direction player is facing
 	        if (hspeed != 0) dir = sign(hspeed);
+			else dir = 0
 	    }
 		
 		//Apply friction if not moving
@@ -163,12 +164,11 @@ if (active) {
 				//If opposing direction
 				if sign(hspeed) != sign(haxis1){
 					hspeed = (abs(hspeed) - drag) * sign(hspeed)
-						
-					//Change player's direction
-					if hspeed != 0{
-						dir = sign(hspeed)
-					}
 				}
+				
+				//Change player's direction
+				if hspeed != 0 dir = sign(hspeed)
+				else dir = 0
 			}
 		}
 	}
@@ -191,18 +191,17 @@ if (active) {
             image_index = 4;
             break;
         case 1:
-            image_index = 5+frame_step;
+            image_index = 5 + frame_step;
             break;
         case -1:
-            image_index = 0;
+            image_index = 0 + frame_step;
             break
         default:
-            image_index = 4+frame_step;
+            image_index = 4 + frame_step;
             break;
         }
     
     ///Animatation
-	//TODO animation broken in one direction
     if (hspeed != 0) {
         if (frame_buffer < 0) {
             frame_step += 1;

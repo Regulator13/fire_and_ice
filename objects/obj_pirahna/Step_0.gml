@@ -97,6 +97,7 @@ if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer an
 	
     //direction
     if (hspeed != 0) dir = sign(hspeed);
+	else dir = 0
 }
 
 //Stop at obstacles
@@ -122,15 +123,15 @@ switch (dir){
         break;
 		
     case 1:
-        image_index = 5+frame_step;
+        image_index = 5 + frame_step;
         break;
 		
     case -1:
-        image_index = 0;
+        image_index = 0 + frame_step;
         break
 		
     default:
-        image_index = 4+frame_step;
+        image_index = 4 + frame_step;
         break;
 }
     
