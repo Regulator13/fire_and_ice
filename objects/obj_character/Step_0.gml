@@ -224,15 +224,18 @@ if (active) {
     ///Jump
     if (jumps > 0) {
 	    if (jump_pressed) {
-			//Subtract mass from jump_height
-			if instance_exists(Grab_object){
-				var total_mass = mass + Grab_object.mass
-			}
+			//Can only jump on ground
+			if !place_free(x, y + 2){
+				//Subtract mass from jump_height
+				if instance_exists(Grab_object){
+					var total_mass = mass + Grab_object.mass
+				}
 			
-			else var total_mass = mass
+				else var total_mass = mass
 
-	        vspeed = -(jump_height - total_mass / 12);
-	        jumps -= 1;
+		        vspeed = -(jump_height - total_mass / 12);
+		        jumps -= 1;
+			}
 	    }
     }
 
@@ -674,15 +677,10 @@ if active{
 
 	//Jump on trampolines
 	var min_jump_speed = 3
-	if place_meeting(x, y + vspeed/4, obj_trampoline){
-		//Reset jump
-		if vspeed < min_jump_speed + 4{
-			jumps = jumps_max
-		}
-		
+	if place_meeting(x, y + vspeed/4, obj_trampoline){		
 		//Bounce
 		if vspeed > min_jump_speed{
-			vspeed *= -1
+			vspeed *= -1.1
 		}
 	}
 
