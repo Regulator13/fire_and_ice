@@ -1,2 +1,2 @@
-/// @description Block climbing pause
+/// @description Set active
 active = true

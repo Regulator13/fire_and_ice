@@ -17,6 +17,10 @@ mouseX = 0; //temporary variable to check if there is any change in the mouse
 player_name = "";
 freeze_holding_buffer_max = 10; //buffer to activate freezing of grabbed object
 freeze_holding_buffer = freeze_holding_buffer_max;
+clinging = false //whether or not the player is clinging to the side of a block
+climbing = false //whether or not the player is climbing up a block
+climbing_cost = 0.2 //how much energy it costs per step of climbing
+climb_dir = 0 //direction the player is facing while climbing
 
 ///Stats (Set in scr_set_character_stats)
 hp = 100;

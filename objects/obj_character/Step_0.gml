@@ -240,63 +240,49 @@ if (active) {
     }
 
     ///Block collisions
-    with(instance_place(x+sign(hspeed)*2,y,par_physics)){
+    with(instance_place(x + sign(hspeed) * 2, y, par_physics)){
 		//Push blocks
         if (id != other.Grab_object and not frozen and !stuck) {
             x+=scr_contactx(other.hspeed);
         }
 		
-		//Climb blocks
+		///Climb blocks
 		if (id != other.Grab_object) and (frozen or stuck){
-			//Slide slowly down blocks' sides
-			other.hspeed = 0
-			other.vspeed = 0
-			
-			//Climb up them
-			if other.jump_pressed{
-				//While climbing
-				if other.y + other.sprite_height - 6 > y{
-					if other.energy >= .5{
-						other.vspeed = -5 
-						other.energy -= .5
-					}
-				}
-				
-				//Once at the top
-				else{
-					if other.energy >= 1{
-						//If on left side
-						if other.x < x{
-							if place_free(x - 3/4 * sprite_width, y - 16){
-								other.x = x - 3/4 * sprite_width
-								other.y = y - 16
-								with other alarm_set(1,15)
-								other.vspeed = 0
-								other.hspeed = 0
-								other.active = false
-								other.energy -= 1
-								exit
-							}
-						}
-						
-						//If on the right side
-						else{
-							if place_free(x + 3/4 * sprite_width, y - 16){
-								other.x = x + 3/4 * sprite_width
-								other.y = y - 16
-								with other alarm_set(1,15)
-								other.vspeed = 0
-								other.hspeed = 0
-								other.active = false
-								other.energy -= 1
-								exit
-							}
-						}
+			//Make sure the player isn't on or near the ground
+			if place_free(other.x, other.y + 32){
+				//Change the character's stats
+				with (other){
+					//give them 1 second to decide to climb or not
+					hspeed = 0
+					vspeed = 0
+					gravity_incr = 0
+					clinging = true
+					active = false
+					climb_dir = dir
+					if alarm[2] <= 0{
+						alarm[2] = 30
 					}
 				}
 			}
         }
 	}
+	
+	///Climb blockBigs or walls
+	if instance_place(x + sign(hspeed) * 2, y, obj_blockBig) or instance_place(x + sign(hspeed) * 2, y, obj_wall){
+		//Make sure the player isn't on or near the ground
+		if place_free(other.x, other.y + 32){
+			//give them 1 second to decide to climb or not
+			hspeed = 0
+			vspeed = 0
+			gravity_incr = 0
+			clinging = true
+			active = false
+			climb_dir = dir
+			if alarm[2] <= 0{
+				alarm[2] = 30
+			}
+		}
+    }
 	
 	///Trampoline pushing
 	with(instance_place(x + sign(hspeed)*2, y, obj_trampoline)){
@@ -732,6 +718,82 @@ if active{
 	}
 }
 
+///Climbing
+//if they are clinging and near the top, allow them to climb
+if clinging{
+	if (Input_player.inputs[UP_KEY] == KEY_PRESSED){
+		//if the landing location, and the climbing path are clear
+		 if place_free(x + climb_dir * 4, y - sprite_height - 24) 
+		 and place_free(x, y - sprite_height - 24) and place_free(x, y - sprite_height - 12){
+			vspeed = -2 //climb speed
+			active = false
+			clinging = false
+			climbing = true
+		}
+	}
+	
+	//Drop with down key
+	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED){
+		clinging = false
+		gravity_incr = 0.4
+		active = true
+	}
+}
+
+if climbing{
+	//Make sure the player doesn't fall after they finish climbing
+	alarm[2] = -1
+	
+	if energy >= climbing_cost{
+		//Drop with down key
+		if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED){
+			climbing = false
+			gravity_incr = 0.4
+			active = true
+		}
+		
+		//Once at the top the player can lift themselves up
+		if place_free(x + climb_dir * 4, y - 4){
+			vspeed = 0
+			//They have one second to climb up
+			if alarm[3] <= 0{
+				alarm[3] = 30
+			}
+			
+			//If they jump climb them to the top
+			if(Input_player.inputs[UP_KEY] == KEY_PRESSED) and energy >= climbing_cost * 5{
+				energy -= climbing_cost * 5
+				x += climb_dir * 4
+				y -= 4
+				climbing = false
+				//Turn off the letting go alarm so players can climb again immediately
+				alarm[3] = -1
+				//apply gravity again after it was lost
+				gravity_incr = 0.4
+				//give a short pause before allowing players to move again
+				alarm[1] = 10
+			}
+			
+		}
+		
+		//Otherwise charge the player for climbing
+		else{
+			energy -= climbing_cost
+		}
+	}
+		
+	//if the player can't afford to climb, make them fall
+	else{
+		climbing = false
+		hspeed = -climb_dir
+		gravity_incr = 0.4
+		//make the player fall for a bit
+		if alarm[1] < 0{
+			alarm[1] = 5
+		}
+	}
+}
+	
 ///Win
 if (place_meeting(x, y, obj_door)) {
     //win score
