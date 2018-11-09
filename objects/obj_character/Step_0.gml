@@ -248,19 +248,13 @@ if (active) {
 		
 		///Climb blocks
 		if (id != other.Grab_object) and (frozen or stuck){
-			//Make sure the player isn't on or near the ground
-			if place_free(other.x, other.y + 32){
-				//Change the character's stats
-				with (other){
-					//give them 1 second to decide to climb or not
-					hspeed = 0
-					vspeed = 0
-					gravity_incr = 0
-					clinging = true
-					active = false
-					climb_dir = dir
-					if alarm[2] <= 0{
-						alarm[2] = 30
+			//Change the character's stats
+			with (other){
+				//Make sure the player isn't on or near the ground
+				if place_free(x, y + 16) and place_free(x, y + 32){
+					//Make sure the player isn't using a jetpack
+					if not (has_jetpack and fire_is_pressed){
+						scr_cling_to_wall()
 					}
 				}
 			}
@@ -270,16 +264,10 @@ if (active) {
 	///Climb blockBigs or walls
 	if instance_place(x + sign(hspeed) * 2, y, obj_blockBig) or instance_place(x + sign(hspeed) * 2, y, obj_wall){
 		//Make sure the player isn't on or near the ground
-		if place_free(other.x, other.y + 32){
-			//give them 1 second to decide to climb or not
-			hspeed = 0
-			vspeed = 0
-			gravity_incr = 0
-			clinging = true
-			active = false
-			climb_dir = dir
-			if alarm[2] <= 0{
-				alarm[2] = 30
+		if place_free(x, y + 16) and place_free(x, y + 32){
+			//Make sure the player isn't using a jetpack
+			if not (has_jetpack and fire_is_pressed){
+				scr_cling_to_wall()
 			}
 		}
     }
@@ -524,10 +512,14 @@ if (active) {
 				Grab_object = (instance_place(x+sign(dir)*4,y,obj_character));
 			}
 			
-			//Initialize has_jetpack if grabbing a jetpack
+			//Initialize variables for certain objects
 			if instance_exists(Grab_object){
 				if Grab_object.object_index == obj_jetpack{
 					has_jetpack = true
+				}
+				
+				if Grab_object.object_index == obj_hang_glider{
+					has_hang_glider = true
 				}
 			}
 			
@@ -572,6 +564,9 @@ if (active) {
                 holding = 0;
                 crouch = false;
 				has_jetpack = false
+				has_hang_glider = false
+				gravity_incr = 0.4 //reset gravity from hang glider
+				gravity_max = 10 //reset gravity from hang_glider
 				
                 //throw
                 with(Grab_object) {
@@ -623,6 +618,29 @@ if (active) {
 			}
         }
     }
+	
+	///Gliding
+	if has_hang_glider{
+		if not clinging or climbing{
+			if vspeed > 0{
+				Grab_object.falling = false //for animation
+				gravity_incr = 0.02
+				gravity_max = 1
+			}
+		
+			else{
+				gravity_incr = 0.4
+				gravity_max = 10
+			}
+		}
+		
+		//Press down to fall at normal speed
+		if down_pressed{
+			gravity_incr = 0.4
+			gravity_max = 10
+			Grab_object.falling = true //for animation
+		}
+	}
 
     //Handicap
     if (handicap_released) {
@@ -721,10 +739,16 @@ if active{
 ///Climbing
 //if they are clinging and near the top, allow them to climb
 if clinging{
+	//move carried objects with the player (since the player isn't active)
+	if instance_exists(Grab_object){
+		Grab_object.x = x
+		Grab_object.y = y - 9
+	}
+	
 	if (Input_player.inputs[UP_KEY] == KEY_PRESSED){
 		//if the landing location, and the climbing path are clear
-		 if place_free(x + climb_dir * 4, y - sprite_height - 24) 
-		 and place_free(x, y - sprite_height - 24) and place_free(x, y - sprite_height - 12){
+			if place_free(x + climb_dir * 4, y - sprite_height - 24) 
+			and place_free(x, y - sprite_height - 24) and !place_meeting(x, y - sprite_height - 12, obj_block){
 			vspeed = -2 //climb speed
 			active = false
 			clinging = false
@@ -744,8 +768,10 @@ if climbing{
 	//Make sure the player doesn't fall after they finish climbing
 	alarm[2] = -1
 	//move carried objects with the player
-	Grab_object.x = x
-	Grab_object.y = y - 9
+	if instance_exists(Grab_object){
+		Grab_object.x = x
+		Grab_object.y = y - 9
+	}
 	
 	if energy >= climbing_cost{
 		//Drop with down key

@@ -12,6 +12,7 @@ equipped = 0; //how many items are equipped
 Holder = noone; //who is holding self
 sticky = false; //for grabbing
 has_jetpack = false
+has_hang_glider = false
 y_score = room_height; //The heighest y coordinate the player has reached
 mouseX = 0; //temporary variable to check if there is any change in the mouse
 player_name = "";

@@ -68,6 +68,11 @@ switch(argument2) {
 		//recharge station middle block
 		if (place_free(dx-gridSize*2,dy-gridSize)) instance_create_layer(dx-gridSize*2, dy-gridSize, "lay_instances", obj_rechargeStation);
 		
+		//hang glider second from right side 1/4 chance
+		if !irandom(3){
+			if (place_free(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize, dy-gridSize/2, "lay_instances", obj_hang_glider);
+		}
+		
 		break;
 		
     case 2: //five long right side 'L'
@@ -127,6 +132,11 @@ switch(argument2) {
 		
 		//patrol
         if (place_free(dx-gridSize*2,dy-gridSize)) instance_create_layer(dx-gridSize, dy-gridSize+16, "lay_instances", obj_patrol);
+		
+		//hang glider second from right side 1/4 chance
+		if !irandom(3){
+			if (place_free(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize, dy-gridSize/2, "lay_instances", obj_hang_glider);
+		}
 		
 		break;
 		

@@ -271,6 +271,14 @@
             }
         },
         {
+            "Key": "32fca27e-6547-4a3b-8d64-b9c88ecb305b",
+            "Value": {
+                "id": "96192784-a5b3-41ff-85f1-9b9f06ff5818",
+                "resourcePath": "scripts\\scr_cling_to_wall\\scr_cling_to_wall.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "33c3c204-b12b-438c-b3c9-1363ad0234c7",
             "Value": {
                 "id": "f2c1709f-58a6-44da-bf73-079a290af7d1",
@@ -911,6 +919,14 @@
             }
         },
         {
+            "Key": "8e124bd4-7842-465d-8f63-28afeea5e702",
+            "Value": {
+                "id": "478e8ef8-3b26-4d3b-a449-56d018fffb32",
+                "resourcePath": "sprites\\spr_hang_glider\\spr_hang_glider.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "90848415-bd13-4f51-823b-2a2aa41462a7",
             "Value": {
                 "id": "58f83dd6-f994-40d3-b4c5-f92e58d130ef",
@@ -1044,6 +1060,14 @@
                 "id": "97d0509e-2229-42c2-a46b-4108a2ce7b1e",
                 "resourcePath": "views\\aea1157a-ddf3-4264-9b77-b425086d9594.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "b064205c-78fe-4060-aece-12241b640763",
+            "Value": {
+                "id": "1eb43b57-d89e-49d9-a829-e6561ba9f9a7",
+                "resourcePath": "objects\\obj_hang_glider\\obj_hang_glider.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1525,6 +1549,7 @@
         "40caaa07-d556-404c-a2d8-e4b235c855ae",
         "3936e3de-1cf6-4b3b-bb15-cc02750bfcc4",
         "d6b5ee74-3dbf-4e9b-8a59-c370d6626d23",
+        "32fca27e-6547-4a3b-8d64-b9c88ecb305b",
         "00cab82a-41fd-43d0-8c5c-4bfcccecbd98",
         "bcccd8e4-e04d-45cc-a76b-ec892acb590d",
         "405d7ba9-3b75-42b8-b80f-1c0f575f8ffb",
