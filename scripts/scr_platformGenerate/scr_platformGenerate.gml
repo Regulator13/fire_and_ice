@@ -51,7 +51,14 @@ switch(argument2) {
 		break;
 
 	case 1: //five long 'u'
-		if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
+		if (place_free(dx,dy-gridSize)){
+			instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
+		
+			//Sentry on top of left side block
+			if place_free(dx, dy - gridSize*2){
+				instance_create_layer(dx, dy - gridSize - 16, "lay_instances", obj_sentry)
+			}
+		}
 		
 		for (k = 0; k < 5; k += 1) {
 			dx = sx+gridSize*k;
@@ -76,13 +83,19 @@ switch(argument2) {
 		break;
 		
     case 2: //five long right side 'L'
-        //if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
         for (k = 0; k < 5; k += 1) {
             dx = sx+gridSize*k;
             if (place_free(dx,dy)) instance_create_layer(dx, dy, "lay_instances", obj_blockBig);
             }
 			
-        if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
+        if (place_free(dx,dy-gridSize)){
+			instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
+			
+			//Sentry on top of right side block
+			if place_free(dx, dy - gridSize*2){
+				instance_create_layer(dx, dy - gridSize - 16, "lay_instances", obj_sentry)
+			}
+		}
 		
 		//1 in 3 chance of jetpack on right if in second quater from bottom of room
 		if (dy > (room_height / 2)) and (dy < (3 * room_height / 4)){

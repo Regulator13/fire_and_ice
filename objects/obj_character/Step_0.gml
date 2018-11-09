@@ -15,10 +15,10 @@ if (active) {
     handicap_released = false;
     grab_pressed = false;
     grab_released = false;
-	equip_pressed = false;
-    equip_released = false;
-    fire_pressed = false;
-    fire_released = false;
+	right_action_pressed = false;
+    right_action_released = false;
+    right_action_pressed = false;
+    right_action_released = false;
 	axis_buffer = 0.4; //buffer till push starts counting
 
     //input_buffer - for joystick input
@@ -59,17 +59,13 @@ if (active) {
             }
 			
             if (Input_player.inputs[RIGHTSELC_KEY] == KEY_PRESSED) {
-                fire_pressed = true;
-                fire_is_pressed = true;
-				equip_pressed = true;
-				equip_is_pressed = true;
+                right_action_pressed = true;
+                right_action_is_pressed = true;
             }
 			
             else if (Input_player.inputs[RIGHTSELC_KEY] == KEY_RELEASED) {
-                fire_released = true;
-                fire_is_pressed = false;
-				equip_released = true;
-				equip_is_pressed = false;
+                right_action_released = true;
+                right_action_is_pressed = false;
             }
 			
             break;
@@ -101,7 +97,7 @@ if (active) {
 	if not place_free(x, y + 1){
 		//Move if joystick is pushed far enough
 	    if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
-			if (!ice_is_pressed and !fire_is_pressed) or has_jetpack{
+			if (!ice_is_pressed and !right_action_is_pressed) or has_jetpack{
 				//down key to inch sideways
 				if down_pressed > axis_buffer{
 					if place_free(x + haxis1, y + vspeed){
@@ -148,7 +144,7 @@ if (active) {
 	//If in the air
 	else{
 		if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
-	        if (!ice_is_pressed and !fire_is_pressed) or has_jetpack{
+	        if (!ice_is_pressed and !right_action_is_pressed) or has_jetpack{
 				//If moving from a stop in air
 				if hspeed == 0{
 					hspeed += haxis1 * drag
@@ -253,7 +249,7 @@ if (active) {
 				//Make sure the player isn't on or near the ground
 				if place_free(x, y + 16) and place_free(x, y + 32){
 					//Make sure the player isn't using a jetpack
-					if not (has_jetpack and fire_is_pressed){
+					if not (has_jetpack and right_action_is_pressed){
 						//if the landing location, and the climbing path are clear
 						if (place_free(x + climb_dir * 4, y - sprite_height - 24) and place_free(x, y - sprite_height - 24) 
 						and !place_meeting(x, y - sprite_height - 12, obj_block)) or scr_has_climbing_pick{
@@ -270,7 +266,7 @@ if (active) {
 		//Make sure the player isn't on or near the ground
 		if place_free(x, y + 16) and place_free(x, y + 32){
 			//Make sure the player isn't using a jetpack
-			if not (has_jetpack and fire_is_pressed){
+			if not (has_jetpack and right_action_is_pressed){
 				//if the landing location, and the climbing path are clear
 				if (place_free(x + climb_dir * 4, y - sprite_height - 24) and place_free(x, y - sprite_height - 24) 
 				and !place_meeting(x, y - sprite_height - 12, obj_block)) or scr_has_climbing_pick() {
@@ -342,7 +338,7 @@ if (active) {
     }
 
     ///Fire
-    if (fire_released) {
+    if (right_action_released) {
 		//Turn jetpack off
 		if has_jetpack{
 			if Grab_object.working{
@@ -404,7 +400,7 @@ if (active) {
     }
 	
 	//Jetpack flying
-	if fire_is_pressed and has_jetpack and Grab_object.working{
+	if right_action_is_pressed and has_jetpack and Grab_object.working{
 		if energy >= Grab_object.jetpack_cost{
 			if vspeed > -10{
 				//Floating
@@ -613,7 +609,7 @@ if (active) {
     }
 	
 	///Equip
-	if (equip_pressed){
+	if (right_action_pressed){
         //Attempt to equip the item next to the player
         if instance_exists(instance_place(x + sign(dir)*4, y, par_item)){
 			ds_list_add(Equipped_objects, instance_place(x + sign(dir)*4, y, par_item));
@@ -674,6 +670,12 @@ if active{
 			can_attack = false
 		}
     }
+	
+	//Collision with laser beam
+	with instance_place(x, y, obj_laser_beam){
+		other.hp -= dmg
+		instance_destroy()
+	}
 
 	//Collision with pirahnas
 	if(place_meeting(x,y,obj_pirahna)){
@@ -883,7 +885,6 @@ if (place_meeting(x, y, obj_door)) {
     Team.tScore += global.score_win/ds_list_size(Team.players);
     if !(global.win) Team.tScore += global.score_first; //first
     global.win = true;
-	ds_list_destroy(Equipped_objects)
     instance_destroy();
     /*
     //subtract score for each player based on y

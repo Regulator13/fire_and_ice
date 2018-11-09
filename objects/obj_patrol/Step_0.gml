@@ -15,14 +15,3 @@ if (place_free(x, y+1)) {
     hp = -1;
 }
 
-///collisions
-//fireball
-with(instance_place(x, y, obj_ball)) {   
-    other.hp -= abs(attack);
-    instance_destroy();
-}
-
-with(instance_place(x, y, obj_explosion)) {   
-    other.hp -= damage;
-}
-

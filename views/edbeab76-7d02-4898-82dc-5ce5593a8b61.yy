@@ -19,7 +19,8 @@
         "627ddeb2-ce3e-49d0-9d62-b68df551cf00",
         "7f452c9d-9a81-4886-ac76-1102a80e8bf5",
         "1ed72467-896c-4365-9f6f-7201bbcddaf4",
-        "62550a2a-624e-401d-b894-52370d36bc79"
+        "62550a2a-624e-401d-b894-52370d36bc79",
+        "0c9d8010-3893-4f0f-b2c1-97c4f1efe1a2"
     ],
     "filterType": "GMObject",
     "folderName": "srv_basic",

@@ -47,4 +47,4 @@ frame_buffer_max = 4;
 // initiate isPressed variable outside, so they don't automatically reset
 grab_is_pressed = false;
 ice_is_pressed = false;
-fire_is_pressed = false;
+right_action_is_pressed = false;

@@ -8,7 +8,7 @@ input_buffer_max = 4;
 input_freeze = 0; //small amount of time inbetween menu switches
 input_freezeMax = 4;
 score_message = ""; //either restart or continue, used with space key
-tagLine = "Now with#exploding corpses!";
+tagLine = "Now with#hang gliders!";
 version = "1.04.4";
 local_controls = ds_list_create(); //list holding which local players are in
 

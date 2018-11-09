@@ -14,8 +14,8 @@ ice_released = false;
 handicap_released = false;
 grab_pressed = false;
 grab_released = false;
-fire_pressed = false;
-fire_released = false;
+right_action_pressed = false;
+right_action_released = false;
 axis_buffer = 0.4; //buffer till push starts counting
 
 //For joystick input
@@ -55,13 +55,13 @@ switch(player_input) {
         }
 		
         if (Input_player.inputs[RIGHTSELC_KEY] == KEY_PRESSED) {
-            fire_pressed = true;
-            fire_is_pressed = true;
+            right_action_pressed = true;
+            right_action_is_pressed = true;
         }
 		
         if (Input_player.inputs[RIGHTSELC_KEY] == KEY_RELEASED) {
-            fire_released = true;
-            fire_is_pressed = false;
+            right_action_released = true;
+            right_action_is_pressed = false;
         }
 		
         break;
@@ -200,7 +200,7 @@ while(!place_free(x+hspeed,y+vspeed)) {
 }
 
 //Destory blocks if stuck in them
-if (fire_pressed) {
+if (right_action_pressed) {
     with (instance_place(x, y, obj_block)) instance_destroy();
     with (instance_place(x, y, obj_corpse)) instance_destroy();
 }
