@@ -743,6 +743,9 @@ if clinging{
 if climbing{
 	//Make sure the player doesn't fall after they finish climbing
 	alarm[2] = -1
+	//move carried objects with the player
+	Grab_object.x = x
+	Grab_object.y = y - 9
 	
 	if energy >= climbing_cost{
 		//Drop with down key
