@@ -90,6 +90,11 @@ switch(argument2) {
 				if (place_free(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize , dy-gridSize/2, "lay_instances", obj_jetpack);
 			}
 		}
+		
+		//pick axe middle 1/4 chance
+		if !irandom(3){
+			if (place_free(dx - gridSize*2, dy-gridSize)) instance_create_layer(dx - gridSize*2, dy-gridSize/2, "lay_instances", obj_climbing_pick);
+		}
         
 		break;
 		
@@ -146,8 +151,13 @@ switch(argument2) {
 			if (place_free(dx,dy)) instance_create_layer(dx, dy, "lay_instances", obj_blockBig);
 		}
 		
-		//sticky block station
+		//sticky block station right side
 		if (place_free(dx,dy-gridSize)) with(instance_create_layer(dx, dy-gridSize/2, "lay_instances", obj_blockStation)) sticky = true;
+		
+		//pick axe middle 1/4 chance
+		if !irandom(3){
+			if (place_free(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize, dy-gridSize/2, "lay_instances", obj_climbing_pick);
+		}
 		
 		//Create a water spawn below the middle block (50% chance)
 		if place_free(dx - gridSize, dy + gridSize){

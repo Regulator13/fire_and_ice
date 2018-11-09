@@ -1,14 +1,14 @@
 {
-    "id": "e1ed75eb-a7a8-4b8c-aac4-b28d0cff758a",
+    "id": "82cd9874-3fe8-43b0-89b2-baa71d94528e",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "par_item",
+    "name": "obj_climbing_pick",
     "eventList": [
         
     ],
     "maskSpriteId": "00000000-0000-0000-0000-000000000000",
     "overriddenProperties": null,
-    "parentObjectId": "7a60da7f-6ff0-4912-bcf6-83b1ada7123d",
+    "parentObjectId": "e1ed75eb-a7a8-4b8c-aac4-b28d0cff758a",
     "persistent": false,
     "physicsAngularDamping": 0.1,
     "physicsDensity": 0.5,
@@ -24,6 +24,6 @@
     "physicsStartAwake": true,
     "properties": null,
     "solid": false,
-    "spriteId": "00000000-0000-0000-0000-000000000000",
+    "spriteId": "3ea56b59-8239-4a8e-95b9-7ae5779492ef",
     "visible": true
 }

@@ -254,7 +254,11 @@ if (active) {
 				if place_free(x, y + 16) and place_free(x, y + 32){
 					//Make sure the player isn't using a jetpack
 					if not (has_jetpack and fire_is_pressed){
-						scr_cling_to_wall()
+						//if the landing location, and the climbing path are clear
+						if (place_free(x + climb_dir * 4, y - sprite_height - 24) and place_free(x, y - sprite_height - 24) 
+						and !place_meeting(x, y - sprite_height - 12, obj_block)) or scr_has_climbing_pick{
+							scr_cling_to_wall()
+						}
 					}
 				}
 			}
@@ -267,7 +271,11 @@ if (active) {
 		if place_free(x, y + 16) and place_free(x, y + 32){
 			//Make sure the player isn't using a jetpack
 			if not (has_jetpack and fire_is_pressed){
-				scr_cling_to_wall()
+				//if the landing location, and the climbing path are clear
+				if (place_free(x + climb_dir * 4, y - sprite_height - 24) and place_free(x, y - sprite_height - 24) 
+				and !place_meeting(x, y - sprite_height - 12, obj_block)) or scr_has_climbing_pick() {
+					scr_cling_to_wall()
+				}
 			}
 		}
     }
@@ -612,7 +620,7 @@ if (active) {
 
 			//Remove the item from the game
 			with Equipped_objects[| ds_list_size(Equipped_objects) - 1]{
-				active = false
+				visible = false
 				x = 0
 				y = 0
 			}
@@ -737,7 +745,6 @@ if active{
 }
 
 ///Climbing
-//if they are clinging and near the top, allow them to climb
 if clinging{
 	//move carried objects with the player (since the player isn't active)
 	if instance_exists(Grab_object){
@@ -745,22 +752,69 @@ if clinging{
 		Grab_object.y = y - 9
 	}
 	
-	if (Input_player.inputs[UP_KEY] == KEY_PRESSED){
-		//if the landing location, and the climbing path are clear
-			if place_free(x + climb_dir * 4, y - sprite_height - 24) 
-			and place_free(x, y - sprite_height - 24) and !place_meeting(x, y - sprite_height - 12, obj_block){
-			vspeed = -2 //climb speed
-			active = false
-			clinging = false
-			climbing = true
-		}
-	}
-	
 	//Drop with down key
 	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED){
 		clinging = false
 		gravity_incr = 0.4
 		active = true
+	}
+	
+	//Climbing pick
+	if scr_has_climbing_pick(){
+		//don't let the player fall if they have a climbing pick
+		alarm[2] = -1
+		if energy >= climbing_cost*2{
+			//use fire to go up
+			if place_free(x, y - 2){
+				if (Input_player.inputs[RIGHTSELC_KEY] == KEY_ISPRESSED){
+					vspeed = -2
+					energy -= climbing_cost*2
+				}
+			}
+			
+			else vspeed = 0
+			
+			//use ice to go down
+			if place_free(x, y + 2){
+				if (Input_player.inputs[LEFTSELC_KEY] == KEY_ISPRESSED){
+					vspeed = 2
+					energy -= climbing_cost*2
+				}
+			}
+			
+			else vspeed = 0
+			
+			//Let go to stop
+			if(Input_player.inputs[RIGHTSELC_KEY] == KEY_RELEASED) or (Input_player.inputs[LEFTSELC_KEY] == KEY_RELEASED){
+				vspeed = 0
+			}
+		}
+		
+		else vspeed = 0
+		
+		//if the player is no longer touching a wall, make them fall
+		if place_free(x + 2, y) and place_free(x - 2, y){
+			clinging = false
+			climbing = false
+			hspeed = -climb_dir
+			gravity_incr = 0.4
+			//make the player fall for a bit
+			if alarm[1] < 0{
+				alarm[1] = 5
+			}
+		}
+	}
+	
+	//if they are clinging and near the top, allow them to climb
+	if (Input_player.inputs[UP_KEY] == KEY_PRESSED){
+		//if the landing location, and the climbing path are clear
+		if place_free(x + climb_dir * 4, y - sprite_height - 24) 
+		and place_free(x, y - sprite_height - 24) and !place_meeting(x, y - sprite_height - 12, obj_block){	
+			vspeed = -2 //climb speed
+			active = false
+			clinging = false
+			climbing = true
+		}
 	}
 }
 
@@ -789,7 +843,7 @@ if climbing{
 				alarm[3] = 30
 			}
 			
-			//If they jump climb them to the top
+			//If they jump, climb them to the top
 			if(Input_player.inputs[UP_KEY] == KEY_PRESSED) and energy >= climbing_cost * 5{
 				energy -= climbing_cost * 5
 				x += climb_dir * 4
