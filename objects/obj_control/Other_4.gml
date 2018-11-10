@@ -103,7 +103,7 @@ repeat(2){
 
 
 //create 3 left side lasers
-repeat(1) {
+repeat(3) {
     dx = gridSize;
     dy = round(irandom_range(gridSize, room_height - gridSize * 6) / gridSize) * gridSize;
     if (place_free(dx, dy)) and not place_meeting(dx,dy,obj_laser){
@@ -115,7 +115,7 @@ repeat(1) {
 }
 
 //create 3 right side lasers
-repeat(1) {
+repeat(3) {
     dx = room_width-gridSize-16;
     dy = round(irandom_range(gridSize, room_height - gridSize * 6) / gridSize) * gridSize;
     //move left more to accomadate for bigger checking sprite
