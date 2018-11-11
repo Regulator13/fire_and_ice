@@ -24,6 +24,8 @@ if (!global.online) {
 	//Print score screen messages
 	draw_text(room_width/2, 160 + 26*i + 100, string_hash_to_newline("Press SPACE to " + message));
 	draw_text(room_width/2, 160 + 26*i + 132, string_hash_to_newline("Your room seed was: " + string(random_get_seed())));
-	draw_text(room_width/2, 160 + 26*i + 160, string_hash_to_newline("Water Delay: " + string(global.water_delay)));
+	draw_text(room_width/2, 160 + 26*i + 164, string_hash_to_newline("Water Delay: " + string(global.water_delay)));
+	draw_text(room_width/2, 160 + 26*i + 196, string_hash_to_newline("Water Rate: " + string(global.water_rate)));
+	draw_text(room_width/2, 160 + 26*i + 228, string_hash_to_newline("Level: " + string(global.level + 1)));
 }
 

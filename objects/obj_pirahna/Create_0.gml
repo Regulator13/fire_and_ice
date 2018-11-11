@@ -6,7 +6,7 @@ player_input = 0;
 Input_player = noone; //input player local or network
 jumps = 0;
 biting = false; //whether or not character is biting
-grab_object = noone;
+Grab_object = noone;
 holding = 0;
 will_arc = false; //whether or not ball arcs for player
 y_score = room_height; //Heighest y-coordinate the player has reached
@@ -47,4 +47,4 @@ frame_buffer_max = 4;
 // initiate isPressed variable outside, so they don't automatically reset
 grab_is_pressed = false;
 ice_is_pressed = false;
-fire_is_pressed = false;
+right_action_is_pressed = false;
