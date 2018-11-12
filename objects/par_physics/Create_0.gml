@@ -11,6 +11,7 @@ sticky = false;
 stuck = false;
 Holder = noone; //who is holding self
 Team = noone;
+on_body = false //where the object is carried
 
 ///Physics
 mass = 10;

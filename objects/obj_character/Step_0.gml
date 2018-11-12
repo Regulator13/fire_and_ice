@@ -556,10 +556,7 @@ if (active) {
     }
 	
 	//Move the grabbed object with the player
-    if (instance_exists(Grab_object)) {
-	    Grab_object.x = x+hspeed;
-	    Grab_object.y = y-9+vspeed;
-    }
+    scr_carry_object()
 	
 	//If grabbing object, throw it
     if (grab_released) {
@@ -824,10 +821,7 @@ if climbing{
 	//Make sure the player doesn't fall after they finish climbing
 	alarm[2] = -1
 	//move carried objects with the player
-	if instance_exists(Grab_object){
-		Grab_object.x = x
-		Grab_object.y = y - 9
-	}
+	scr_carry_object()
 	
 	if energy >= climbing_cost{
 		//Drop with down key
