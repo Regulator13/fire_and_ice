@@ -66,7 +66,7 @@ if (global.water_delay <= 0) water_buffer = false;
 gridSize = 32; //Set the grid size
 maxY = room_height - gridSize*2; //max y platforms are allowed to generate at
 
-//Ffor each row in the room, create a platform with 1 in 6 chance
+//Ffor each row in the room, create 1 of 6 platforms
 for (i = 3; i < maxY/gridSize; i += 1) {
     for(j = 0; j < 1; j+=1) {
         if (irandom_range(0, 3) > 0) {
@@ -104,7 +104,8 @@ repeat(2){
 		}
 	}
 }
-	
+
+
 //create 3 left side lasers
 repeat(3) {
     dx = gridSize;
@@ -129,7 +130,7 @@ repeat(3) {
 		}
     }
 }
-    
+
 //Finish platform
 var dx = round(irandom_range(gridSize*3, room_width - gridSize*3)/gridSize)*gridSize;
 var dy = gridSize*2;

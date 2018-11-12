@@ -51,7 +51,14 @@ switch(argument2) {
 		break;
 
 	case 1: //five long 'u'
-		if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
+		if (place_free(dx,dy-gridSize)){
+			instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
+		
+			//Sentry on top of left side block
+			if place_free(dx, dy - gridSize*2){
+				instance_create_layer(dx, dy - gridSize - 16, "lay_instances", obj_sentry)
+			}
+		}
 		
 		for (k = 0; k < 5; k += 1) {
 			dx = sx+gridSize*k;
@@ -68,22 +75,38 @@ switch(argument2) {
 		//recharge station middle block
 		if (place_free(dx-gridSize*2,dy-gridSize)) instance_create_layer(dx-gridSize*2, dy-gridSize, "lay_instances", obj_rechargeStation);
 		
+		//hang glider second from right side 1/4 chance
+		if !irandom(3){
+			if (place_free(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize, dy-gridSize/2, "lay_instances", obj_hang_glider);
+		}
+		
 		break;
 		
     case 2: //five long right side 'L'
-        //if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
         for (k = 0; k < 5; k += 1) {
             dx = sx+gridSize*k;
             if (place_free(dx,dy)) instance_create_layer(dx, dy, "lay_instances", obj_blockBig);
             }
 			
-        if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
+        if (place_free(dx,dy-gridSize)){
+			instance_create_layer(dx, dy-gridSize, "lay_instances", obj_blockBig);
+			
+			//Sentry on top of right side block
+			if place_free(dx, dy - gridSize*2){
+				instance_create_layer(dx, dy - gridSize - 16, "lay_instances", obj_sentry)
+			}
+		}
 		
 		//1 in 3 chance of jetpack on right if in second quater from bottom of room
 		if (dy > (room_height / 2)) and (dy < (3 * room_height / 4)){
 			if !irandom(2){
 				if (place_free(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize , dy-gridSize/2, "lay_instances", obj_jetpack);
 			}
+		}
+		
+		//pick axe middle 1/4 chance
+		if !irandom(3){
+			if (place_free(dx - gridSize*2, dy-gridSize)) instance_create_layer(dx - gridSize*2, dy-gridSize/2, "lay_instances", obj_climbing_pick);
 		}
         
 		break;
@@ -128,6 +151,11 @@ switch(argument2) {
 		//patrol
         if (place_free(dx-gridSize*2,dy-gridSize)) instance_create_layer(dx-gridSize, dy-gridSize+16, "lay_instances", obj_patrol);
 		
+		//hang glider second from right side 1/4 chance
+		if !irandom(3){
+			if (place_free(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize, dy-gridSize/2, "lay_instances", obj_hang_glider);
+		}
+		
 		break;
 		
 	case 5: //three long with block
@@ -136,8 +164,13 @@ switch(argument2) {
 			if (place_free(dx,dy)) instance_create_layer(dx, dy, "lay_instances", obj_blockBig);
 		}
 		
-		//sticky block station
+		//sticky block station right side
 		if (place_free(dx,dy-gridSize)) with(instance_create_layer(dx, dy-gridSize/2, "lay_instances", obj_blockStation)) sticky = true;
+		
+		//pick axe middle 1/4 chance
+		if !irandom(3){
+			if (place_free(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize, dy-gridSize/2, "lay_instances", obj_climbing_pick);
+		}
 		
 		//Create a water spawn below the middle block (50% chance)
 		if place_free(dx - gridSize, dy + gridSize){

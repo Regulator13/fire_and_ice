@@ -88,11 +88,21 @@ if (sticky) {
     //if not being held, stick
     if !(instance_exists(Holder)) {
         if(!place_free(x+hspeed, y)) {
-			//stick
-            hspeed = 0;
+			//stick right against block
+            while(!place_free(x+hspeed, y)) {
+		        hspeed = scr_reduce(hspeed);
+		        if hspeed = 0 break;
+		    }
+			
             vspeed = 0;
             active = false; //ignore physics
             stuck = true; //keep solid
+			
+			//If less than half of the block is touching, unstick
+			if scr_check_num_pixels_touching() <= sprite_height / 2{
+				stuck = false
+				active = true
+			}
         }
     }
 }
