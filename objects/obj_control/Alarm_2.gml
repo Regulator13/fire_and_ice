@@ -7,12 +7,13 @@ if animations_on = true{
 
 	// Create rain drop particle
 	prt_rain = part_type_create()
+	prt_speed = 10
 	part_type_shape(prt_rain, pt_shape_line)
 	part_type_color1(prt_rain, c_aqua)
 	part_type_alpha1(prt_rain, 0.2)
 	part_type_orientation(prt_rain, 0, 0, 0, 0, 1)
 	part_type_size(prt_rain, 0.2, 0.2, 0, 0)
-	part_type_speed(prt_rain, 10, 10, 0, 0)
+	part_type_speed(prt_rain, prt_speed, prt_speed, 0, 0)
 	part_type_direction(prt_rain, 270, 270, 0, 0)
 	
 	// Create rain emitter
