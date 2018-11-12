@@ -3,6 +3,13 @@ if(water_buffer = false){
 	water_height += global.water_rate;
 }
 
+//dynamically destroy raindrops at water level
+if rain_active = true{
+	if animations_on = true{
+		part_type_life(raindrop, (room_height - 32 - water_height) / 10, (room_height - 32 - water_height) / 10)
+	}
+}
+
 //Check if all players died
 if (check_win_buffer < 0) {
 	//end the level

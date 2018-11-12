@@ -5,6 +5,7 @@ if (global.online and not global.have_server) instance_destroy();
 //Set rate of water
 water_height = 0;
 water_buffer = true;
+rain_active = false
 
 //Players
 global.players = 0;
