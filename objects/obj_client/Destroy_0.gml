@@ -18,7 +18,6 @@ ds_list_destroy(characterYs);
 ds_list_destroy(characterHPs);
 ds_list_destroy(characterEnergys);
 ds_list_destroy(characterNames);
-ds_list_destroy(lasers);
 
 // clear menu server data
 ds_list_clear(global.Menu.server_data);

@@ -29,19 +29,6 @@ if (view_current == 0) {
             draw_set_alpha(1);
             }
         
-        // draw all lasers
-        draw_set_color(c_red);
-        
-        var laserAmount = ds_list_size(lasers);
-        for (i = 0; i < laserAmount; i += 3) {
-            var lx = ds_list_find_value(lasers, i);
-            var ly = ds_list_find_value(lasers, i+1);
-            var laserX = ds_list_find_value(lasers, i+2);
-            var dir = 1;
-            if (laserX < lx) dir = -1;
-            draw_line_width(lx-8*dir+8, ly+7, laserX, ly+7, 2);
-            }
-        
         // draw water
         draw_set_alpha(.5);
         var buffer = 32;

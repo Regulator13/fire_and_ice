@@ -350,7 +350,7 @@ if (active) {
         if (energy > energy_fire) {
 			//Ignite if holding an object that can blow up
             if (instance_exists(Grab_object)) {
-                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1) { //lasers subtract decimal points
+                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1){
                     Grab_object.ignite = true;
                     Grab_object.hp = Grab_object.hp_normal;
                 }
@@ -432,7 +432,7 @@ if (active) {
         if (energy > energy_fire) {
             // if holding an block, set timer to freeze it
             if (instance_exists(Grab_object)) {
-                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1) { //lasers subtract decimal points
+                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1){
                     Grab_object.will_freeze = true;
                     Grab_object.hp = Grab_object.hp_normal;
                 }

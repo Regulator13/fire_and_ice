@@ -775,14 +775,6 @@
             }
         },
         {
-            "Key": "71c84a26-a0fd-46a8-bc7a-072fc80f0afc",
-            "Value": {
-                "id": "b8f2416e-e82c-4f78-a596-ccad5ed3c0bb",
-                "resourcePath": "sprites\\spr_laser\\spr_laser.yy",
-                "resourceType": "GMSprite"
-            }
-        },
-        {
             "Key": "72ee9273-bafd-44db-aea6-942df836519a",
             "Value": {
                 "id": "932b7026-dd98-42cf-a1b8-d3efc245275b",
@@ -1028,14 +1020,6 @@
                 "id": "d9efa94e-bc4e-4718-a52f-fe78d672907d",
                 "resourcePath": "scripts\\scr_getKeyInput\\scr_getKeyInput.yy",
                 "resourceType": "GMScript"
-            }
-        },
-        {
-            "Key": "a38e5e36-3771-4467-9fa5-5fc57fc9d735",
-            "Value": {
-                "id": "7a71c366-4ed4-4b2e-8128-73bedc82abbc",
-                "resourcePath": "objects\\obj_laser\\obj_laser.yy",
-                "resourceType": "GMObject"
             }
         },
         {
