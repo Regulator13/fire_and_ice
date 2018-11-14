@@ -645,96 +645,93 @@ if (active) {
     }
 }
 
-///REMOVE? This is a duplicated if statment
-if active{
-	///Hp
-	//Hurt the player if they fall below the water
-	if(y > room_height-obj_wall.sprite_height-obj_control.water_height){
-		hp -= .4;
-	}
+///Hp
+//Hurt the player if they fall below the water
+if(y > room_height-obj_wall.sprite_height-obj_control.water_height){
+	hp -= .4;
+}
 
-	//Collision with patrols
-    with (instance_place(x, y, par_enemy)) {
-		if can_attack{
-			other.hp -= dmg;
-			alarm[0] = attack_delay
-			can_attack = false
-		}
-    }
+//Collision with patrols
+with (instance_place(x, y, par_enemy)) {
+	if can_attack{
+		other.hp -= dmg;
+		alarm[0] = attack_delay
+		can_attack = false
+	}
+}
 	
-	//Collision with laser beam
-	with instance_place(x, y, obj_laser_beam){
-		other.hp -= dmg
-		instance_destroy()
-	}
+//Collision with laser beam
+with instance_place(x, y, obj_laser_beam){
+	other.hp -= dmg
+	instance_destroy()
+}
 
-	//Collision with pirahnas
-	if(place_meeting(x,y,obj_pirahna)){
-		hp -= 1;
-	}
+//Collision with pirahnas
+if(place_meeting(x,y,obj_pirahna)){
+	hp -= 1;
+}
 
-	//Collision with blown up big blocks
-	with (instance_place(x, y, obj_blockBig)){
-		if hp <= 0 {
-			other.hp -= 10
-		}
+//Collision with blown up big blocks
+with (instance_place(x, y, obj_blockBig)){
+	if hp <= 0 {
+		other.hp -= 10
 	}
+}
 
-	//Jump on trampolines
-	var min_jump_speed = 3
-	if place_meeting(x, y + vspeed/4, obj_trampoline){		
-		//Bounce
-		if vspeed > min_jump_speed{
-			vspeed *= -1.1
-		}
+//Jump on trampolines
+var min_jump_speed = 3
+if place_meeting(x, y + vspeed/4, obj_trampoline){		
+	//Bounce
+	if vspeed > min_jump_speed{
+		vspeed *= -1.1
 	}
+}
 
-	//Kill the player if they run out of health
-	if(hp < 1) {
-	    //create corpse
-	    with (instance_create_layer(x,y,"lay_instances",obj_corpse)) sprite_index = other.sprite_index;
+//Kill the player if they run out of health
+if(hp < 1) {
+	//create corpse
+	with (instance_create_layer(x,y,"lay_instances",obj_corpse)) sprite_index = other.sprite_index;
 		
-	    //create pirahna
-	    with (instance_create_layer(x,y,"lay_instances",obj_pirahna)) {
-	        player_input = other.player_input;
-	        Input_player = other.Input_player;
-	        input_method = other.input_method;
-	        if (instance_exists(Input_player)) Input_player.gameCharacter = self;
-	    }
-			
-	    //drop object if grabbed
-	    if (instance_exists(Grab_object)) {
-	        //remove Grab_object's Holder
-	        Grab_object.Holder = noone;
-	        Grab_object.active = true;
-	    }
-			
-	    //subtract life from team
-	    Team.tLives -= 1;
-	    if (Team.tLives < 0) Team.tLives = 0;
-		
-	    //destroy self
-	    instance_destroy(self);
+	//create pirahna
+	with (instance_create_layer(x,y,"lay_instances",obj_pirahna)) {
+	    player_input = other.player_input;
+	    Input_player = other.Input_player;
+	    input_method = other.input_method;
+	    if (instance_exists(Input_player)) Input_player.gameCharacter = self;
 	}
+			
+	//drop object if grabbed
+	if (instance_exists(Grab_object)) {
+	    //remove Grab_object's Holder
+	    Grab_object.Holder = noone;
+	    Grab_object.active = true;
+	}
+			
+	//subtract life from team
+	Team.tLives -= 1;
+	if (Team.tLives < 0) Team.tLives = 0;
+		
+	//destroy self
+	instance_destroy(self);
+}
 
-	///Recharge Energy
-	if (place_meeting(x, y, obj_rechargeStation)) {
-	    if (energy < energy_max) {
-	        energy +=1;
-	        }
+///Recharge Energy
+if (place_meeting(x, y, obj_rechargeStation)) {
+	if (energy < energy_max) {
+	    energy +=1;
 	    }
+	}
     
-	//Restore health with heart
-	with(instance_place(x, y, obj_health)) {
-	    //add health
-	    other.hp += value;
-	    //add lives
-	    other.Team.tLives += 1;
-	    //keep in bounds
-	    if (other.hp > other.hp_max) other.hp = other.hp_max;
-	    //destroy
-	    instance_destroy();
-	}
+//Restore health with heart
+with(instance_place(x, y, obj_health)) {
+	//add health
+	other.hp += value;
+	//add lives
+	other.Team.tLives += 1;
+	//keep in bounds
+	if (other.hp > other.hp_max) other.hp = other.hp_max;
+	//destroy
+	instance_destroy();
 }
 
 ///Climbing
