@@ -846,6 +846,7 @@ if (place_meeting(x, y, obj_door)) {
 if (keyboard_check_pressed(ord("U"))) {
     vspeed = -jump_height;
     hp = hp_max;
+	active = true
     }
 
 ///Score
