@@ -11,7 +11,7 @@ sticky = false;
 stuck = false;
 Holder = noone; //who is holding self
 Team = noone;
-on_body = false //where the object is carried
+on_body = false //whether the item is carried above the player or on their body.
 
 ///Physics
 mass = 10;

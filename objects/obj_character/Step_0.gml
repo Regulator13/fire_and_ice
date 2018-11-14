@@ -15,8 +15,6 @@ if (active) {
     handicap_released = false;
     grab_pressed = false;
     grab_released = false;
-	right_action_pressed = false;
-    right_action_released = false;
     right_action_pressed = false;
     right_action_released = false;
 	axis_buffer = 0.4; //buffer till push starts counting
@@ -613,7 +611,7 @@ if (active) {
 			}
         }
     }
-	
+
 	///Gliding
 	if has_hang_glider{
 		if not climbing{
@@ -829,6 +827,7 @@ if (place_meeting(x, y, obj_door)) {
     Team.tScore += global.score_win/ds_list_size(Team.players);
     if !(global.win) Team.tScore += global.score_first; //first
     global.win = true;
+	ds_list_destroy(Equipped_objects)
     instance_destroy();
     /*
     //subtract score for each player based on y
