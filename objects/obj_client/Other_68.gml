@@ -195,13 +195,9 @@ if(client == eventid) {
                                 ds_list_clear(characterEnergys);
                                 ds_list_clear(characterNames);
                                 
-                                // add all lasers into a list
-                                ds_list_clear(lasers);
-                                
                                 // send sprite information
                                 var basicSpritesSize = buffer_read(buff, buffer_u16); //buffer_u16 MAX: ?
                                 var characterSpritesSize = buffer_read(buff, buffer_u8); //buffer_u8 MAX: 255
-                                var lasersSize = buffer_read(buff, buffer_u8); //buffer_u8 MAX: 255
                                 
                                 // send all basic sprites
                                 for (i = 0; i < basicSpritesSize; i++) {
@@ -222,12 +218,6 @@ if(client == eventid) {
                                     ds_list_add(characterNames, buffer_read(buff, buffer_string));  // name
                                     }
                                 
-                                // send all character sprites
-                                for (i = 0; i < lasersSize; i+=3) {
-                                    ds_list_add(lasers, buffer_read(buff, buffer_s16)); // x
-                                    ds_list_add(lasers, buffer_read(buff, buffer_s16)); // y
-                                    ds_list_add(lasers, buffer_read(buff, buffer_s16)); // laserX
-                                    }
                                 /*
                                 show_debug_message("size" + string(basicSpritesSize) + " " + string(characterSpritesSize));
                                 for (i = 0; i < ds_list_size(basicSprites); i++) {

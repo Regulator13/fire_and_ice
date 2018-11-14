@@ -111,18 +111,9 @@
         ds_list_add(other.characterNames, player_name);
         }
     
-    // add all the lasers to send into a list
-    lasers = ds_list_create();
-    
-    // iterate through all the shpaes to send over
-    with (obj_laser) {
-        ds_list_add(other.lasers, x, y, laserX);
-        }
-    
     // send sprite information
     buffer_write(buff, buffer_u16, ds_list_size(basicSprites)); //buffer_u16 MAX: ?
     buffer_write(buff, buffer_u8, ds_list_size(characterSprites)); //buffer_u8 MAX: 255
-    buffer_write(buff, buffer_u8, ds_list_size(lasers)); //buffer_u8 MAX: 255
     
     // send all basic sprites
     for (i = 0; i < ds_list_size(basicSprites); i++) {
@@ -143,13 +134,6 @@
         buffer_write(buff, buffer_string, ds_list_find_value(characterNames, i)); // name
         }
     
-    // send all basic sprites
-    for (i = 0; i < ds_list_size(lasers); i+=3) {
-        buffer_write(buff, buffer_s16, ds_list_find_value(lasers, i));   // x
-        buffer_write(buff, buffer_s16, ds_list_find_value(lasers, i+1)); // y
-        buffer_write(buff, buffer_s16, ds_list_find_value(lasers, i+2)); // laserX
-        }
-    
     // delete the lists
     ds_list_destroy(basicSprites);
     ds_list_destroy(basicImages);
@@ -163,5 +147,3 @@
     ds_list_destroy(characterHPs);
     ds_list_destroy(characterEnergys);
     ds_list_destroy(characterNames);
-    
-    ds_list_destroy(lasers);

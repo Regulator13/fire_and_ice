@@ -2,8 +2,8 @@
 /// @description Check whether the player has a climbing pick or not
 /// @return bool
 
-for (var i=0; i<ds_list_size(other.Equipped_objects); i++){
-	if other.Equipped_objects[| i].object_index == obj_climbing_pick{
+for (var i=0; i<ds_list_size(Equipped_objects); i++){
+	if Equipped_objects[| i].object_index == obj_climbing_pick{
 		return true
 	}
 }

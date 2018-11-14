@@ -5,13 +5,13 @@
     "name": "par_item",
     "eventList": [
         {
-            "id": "5ea2ee0f-f186-4cdf-b89d-75e924a23983",
+            "id": "ac6f7e96-ca3f-46d7-852f-6bcf029f7117",
             "modelName": "GMEvent",
             "mvc": "1.0",
             "IsDnD": false,
             "collisionObjectId": "00000000-0000-0000-0000-000000000000",
             "enumb": 0,
-            "eventtype": 8,
+            "eventtype": 3,
             "m_owner": "e1ed75eb-a7a8-4b8c-aac4-b28d0cff758a"
         }
     ],

@@ -56,7 +56,7 @@ switch(argument2) {
 		
 			//Sentry on top of left side block
 			if place_free(dx, dy - gridSize*2){
-				instance_create_layer(dx, dy - gridSize - 16, "lay_instances", obj_sentry)
+				instance_create_layer(dx + 8, dy - gridSize - 16, "lay_instances", obj_sentry)
 			}
 		}
 		
@@ -93,7 +93,7 @@ switch(argument2) {
 			
 			//Sentry on top of right side block
 			if place_free(dx, dy - gridSize*2){
-				instance_create_layer(dx, dy - gridSize - 16, "lay_instances", obj_sentry)
+				instance_create_layer(dx + 8, dy - gridSize - 16, "lay_instances", obj_sentry)
 			}
 		}
 		

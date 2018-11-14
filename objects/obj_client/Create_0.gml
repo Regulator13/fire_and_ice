@@ -15,9 +15,6 @@ characterHPs = ds_list_create();
 characterEnergys = ds_list_create();
 characterNames = ds_list_create();
 
-// lasers order: x, y, laserX
-lasers = ds_list_create();
-
 // water_height
 water_height = 0;
 
