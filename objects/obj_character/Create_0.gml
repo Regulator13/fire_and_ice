@@ -17,8 +17,10 @@ mouseX = 0; //temporary variable to check if there is any change in the mouse
 player_name = "";
 freeze_holding_buffer_max = 10; //buffer to activate freezing of grabbed object
 freeze_holding_buffer = freeze_holding_buffer_max;
-clinging = false //whether or not the player is clinging to the side of a block
-climbing = false //whether or not the player is climbing up a block
+climbing = false //whether the player is climbing to the side of a block (Pick only)
+hanging = false //whether a player is hanging on an edge
+hanging_tol = 6 //number of pixels a player can be from the top to enter the hanging state
+y_diff = 0 //number of pixels in y direction the current state is from the standing state (for crouching)
 climbing_cost = 0.2 //how much energy it costs per step of climbing
 climb_dir = 0 //direction the player is facing while climbing
 
