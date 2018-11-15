@@ -222,31 +222,3 @@ if (global.continue_game) {
 else{
     global.continue_game = true;
 }
-
-//Destroy water spawns overlapped by blocks
-with obj_water_spawn{
-	if not place_empty(x,y){
-		instance_destroy()
-	}
-}
-
-//destroy overlaping coins
-with obj_score{
-	if not place_empty(x,y){
-		instance_destroy()
-	}
-}
-
-//destroy overlaping recharge stations
-with obj_rechargeStation{
-	if not place_empty(x,y){
-		instance_destroy()
-	}
-}
-
-//destroy overlaping trampolines
-with obj_trampoline{
-	if not place_empty(x,y){
-		instance_destroy()
-	}
-}
