@@ -283,36 +283,6 @@ if (active) {
 		
     //keep gravity in bounds
     if (vspeed > gravity_max) vspeed = gravity_max;
-
-	///Platforms
-	//Match speed of platforms
-	with instance_place(x, y+vspeed, obj_platform){
-		//Vertical
-		if is_vertical{
-			other.y += (vspeed + sign(vspeed)*other.gravity_incr)
-			
-			//apply friction if not stopped
-			if hp < hp_max{
-				if (other.hspeed >= other.fric*3) {
-	                other.hspeed -= other.fric*3;
-	            }
-	            else if (other.hspeed <= (-other.fric*3)) {
-	                other.hspeed += other.fric*3;
-	            }
-	            else if(abs(other.hspeed) < other.fric*3) {
-	                other.hspeed = 0
-				}
-            }
-		}
-	}
-	
-	//Horizontal
-	with instance_place(x, y + 1, obj_platform){
-		if not is_vertical{
-			other.x += hspeed
-		}
-	}
-	
     
     ///Collisions
 	//Horizotal collision
@@ -330,6 +300,10 @@ if (active) {
             break;
         }
     }
+	
+	///Platforms
+	//Match speed of platforms
+	scr_move_with_platform()
 
     ///Fire
     if (right_action_released) {
@@ -775,7 +749,7 @@ if climbing{
 		//If the player is within the hanging tolerance, change their state to hanging
 		with instance_place(x + climb_dir * 4, y, all){
 			with (other){
-				if (other.y > y - y_diff - hanging_tol) and (other.y < y + y_diff + hanging_tol){
+				if (other.y > y + y_diff - hanging_tol) and (other.y < y + y_diff + hanging_tol){
 					if place_free(x + dir * 4, y - hanging_tol - sprite_height){
 						climbing = false
 						scr_enter_hanging()

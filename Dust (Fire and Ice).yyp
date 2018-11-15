@@ -143,6 +143,14 @@
             }
         },
         {
+            "Key": "19794e45-2e6a-4ab2-8c25-441fa6a1559f",
+            "Value": {
+                "id": "8855eaa1-cd96-40db-baae-6063ca2eb2a0",
+                "resourcePath": "scripts\\scr_move_with_platform\\scr_move_with_platform.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "1a4d9bea-763c-4d6c-b324-f580f600b6f7",
             "Value": {
                 "id": "c65fa1b8-eac3-4a57-b7de-addabcf30ead",
@@ -1622,6 +1630,7 @@
         "3936e3de-1cf6-4b3b-bb15-cc02750bfcc4",
         "d6b5ee74-3dbf-4e9b-8a59-c370d6626d23",
         "23404ed5-d823-4033-8212-3c6cfeb5df60",
+        "19794e45-2e6a-4ab2-8c25-441fa6a1559f",
         "de4c6bd1-766e-4e2f-9b2a-cac1b382e984",
         "b07996ac-e970-4468-b980-02380dc9c520",
         "32fca27e-6547-4a3b-8d64-b9c88ecb305b",
