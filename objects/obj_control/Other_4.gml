@@ -66,7 +66,19 @@ if (global.water_delay <= 0) water_buffer = false;
 gridSize = 32; //Set the grid size
 maxY = room_height - gridSize*2; //max y platforms are allowed to generate at
 
-//Ffor each row in the room, create 1 of 6 platforms
+//Finish platform
+var dx = round(irandom_range(gridSize*3, room_width - gridSize*3)/gridSize)*gridSize;
+var dy = gridSize*2;
+var i = 0;
+repeat(3) {
+    instance_create_layer(dx+gridSize*i, dy, "lay_instances", obj_blockBig);
+    i ++;
+}
+
+//create door in middle of finish platform
+instance_create_layer(dx+gridSize+8, dy-gridSize+4, "lay_instances", obj_door);
+
+//for each row in the room, create 1 of 6 platforms
 for (i = 3; i < maxY/gridSize; i += 1) {
     for(j = 0; j < 1; j+=1) {
         if (irandom_range(0, 3) > 0) {
@@ -104,18 +116,6 @@ repeat(2){
 		}
 	}
 }
-
-//Finish platform
-var dx = round(irandom_range(gridSize*3, room_width - gridSize*3)/gridSize)*gridSize;
-var dy = gridSize*2;
-var i = 0;
-repeat(3) {
-    instance_create_layer(dx+gridSize*i, dy, "lay_instances", obj_blockBig);
-    i ++;
-}
-
-//create door in middle of finish platform
-instance_create_layer(dx+gridSize+8, dy-gridSize+4, "lay_instances", obj_door);
 
 ///Platform spawns
 var gridSize = 32
@@ -189,13 +189,6 @@ for (i=0; i<tries; i++){
 	}
 }
 
-//Destroy water spawns overlapped by blocks
-with obj_water_spawn{
-	if not place_free(x,y){
-		instance_destroy()
-	}
-}
-
 ///Generate heart token (extra life) if first time on level
 if (global.continue_game) {
 	//random x and y
@@ -225,6 +218,27 @@ if (global.continue_game) {
 	}
 }
 
-else {
+else{
     global.continue_game = true;
+}
+
+//Destroy water spawns overlapped by blocks
+with obj_water_spawn{
+	if not place_empty(x,y){
+		instance_destroy()
+	}
+}
+
+//destroy overlaping coins
+with obj_score{
+	if not place_empty(x,y){
+		instance_destroy()
+	}
+}
+
+//destroy overlaping recharge stations
+with obj_rechargeStation{
+	if not place_empty(x,y){
+		instance_destroy()
+	}
 }

@@ -2,7 +2,6 @@
 
 // Generate rain particle system
 if animations_on = true{
-	ps_rain = part_system_create()
 	part_system_depth(ps_rain, -50)
 
 	// Create rain drop particle

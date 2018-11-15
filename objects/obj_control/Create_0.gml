@@ -24,6 +24,10 @@ check_win_buffer = 60;
 //whether animations are on or off
 animations_on = true
 
+if animations_on = true{
+	ps_rain = part_system_create()
+}
+
 ///artifacts
 //artifact
 global.score_life = 100; //score required to get a heart
