@@ -81,7 +81,8 @@ instance_create_layer(dx+gridSize+8, dy-gridSize+4, "lay_instances", obj_door);
 //for each row in the room, create 1 of 6 platforms
 for (i = 3; i < maxY/gridSize; i += 1) {
     for(j = 0; j < 1; j+=1) {
-        if (irandom_range(0, 3) > 0) {
+		//Create a platform in that row 75% of the time 
+        if irandom(3){
             dx = round(irandom_range(gridSize, room_width - gridSize)/gridSize)*gridSize;
             dy = i*gridSize;
             scr_platformGenerate(dx, dy, irandom_range(0, 6));
@@ -238,6 +239,13 @@ with obj_score{
 
 //destroy overlaping recharge stations
 with obj_rechargeStation{
+	if not place_empty(x,y){
+		instance_destroy()
+	}
+}
+
+//destroy overlaping trampolines
+with obj_trampoline{
 	if not place_empty(x,y){
 		instance_destroy()
 	}

@@ -21,7 +21,7 @@ switch(argument2) {
             }
 			
         //patrol right side
-        if (place_free(dx-gridSize,dy-gridSize)) instance_create_layer(dx-gridSize, dy-gridSize+16, "lay_instances", obj_patrol);
+        if (place_free(dx-gridSize,dy-gridSize)) instance_create_layer(dx-gridSize * 0.75, dy-gridSize+16, "lay_instances", obj_patrol);
 		
 		//gun second block from left 1/4 chance
 		if !irandom(3){
@@ -149,7 +149,7 @@ switch(argument2) {
 		if (place_free(dx,dy-gridSize)) instance_create_layer(dx, dy-gridSize/2, "lay_instances", obj_blockStation);
 		
 		//patrol
-        if (place_free(dx-gridSize*2,dy-gridSize)) instance_create_layer(dx-gridSize, dy-gridSize+16, "lay_instances", obj_patrol);
+        if (place_free(dx-gridSize*2,dy-gridSize)) instance_create_layer(dx-gridSize * 1.75, dy-gridSize+16, "lay_instances", obj_patrol);
 		
 		//hang glider second from right side 1/4 chance
 		if !irandom(3){
