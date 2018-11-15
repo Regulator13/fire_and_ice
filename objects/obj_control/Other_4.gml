@@ -52,8 +52,12 @@ else {
     /*global.continue_game = true; //set after hearts generation*/
 }
 
+//Set the delay before the rain starts
+alarm_set(2, global.water_delay-100)
+
 //Set the delay before water rises
-alarm_set(0,global.water_delay);
+alarm_set(0, global.water_delay);
+
 
 //If delay already at 0, signal to start raising the water
 if (global.water_delay <= 0) water_buffer = false;
