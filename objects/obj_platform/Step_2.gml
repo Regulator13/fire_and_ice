@@ -77,10 +77,19 @@ if active{
 		}
 		
 		///Turn around at obstacles
-		if !place_free(x + hspeed, y + vspeed){
-			hspeed = 0
-			vspeed = 0
-			dir *= -1
+		with instance_place(x + hspeed, y + vspeed, par_physics){
+			if frozen or stuck{
+				other.hspeed = 0
+				other.vspeed = 0
+				other.dir *= -1
+			}
+		}
+		
+		//Turn around at blocks
+		with instance_place(x + hspeed, y + vspeed, obj_blockBig){
+			other.hspeed = 0
+			other.vspeed = 0
+			other.dir *= -1
 		}
 		
 		///Push characters out of the way to avoid getting stuck
