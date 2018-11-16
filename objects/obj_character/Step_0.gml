@@ -526,50 +526,52 @@ if (active) {
 	
 	//If grabbing object, throw it
     if (grab_released) {
-        if (instance_exists(Grab_object)) {
-            if (holding > 1) {
-                holding = 0;
-                crouch = false;
-				has_jetpack = false
-				has_hang_glider = false
-				gravity_incr = 0.4 //reset gravity from hang glider
-				gravity_max = 10 //reset gravity from hang_glider
+	    if (instance_exists(Grab_object)) {
+			if place_free(Grab_object.x, Grab_object.y){
+	            if (holding > 1) {
+	                holding = 0;
+	                crouch = false;
+					has_jetpack = false
+					has_hang_glider = false
+					gravity_incr = 0.4 //reset gravity from hang glider
+					gravity_max = 10 //reset gravity from hang_glider
 				
-                //throw
-                with(Grab_object) {
-                    //Throw using mouse
-                    if (other.input_method = CONTROLS_MOUSE) {
-                        scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
-                    }
+	                //throw
+	                with(Grab_object) {
+	                    //Throw using mouse
+	                    if (other.input_method = CONTROLS_MOUSE) {
+	                        scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
+	                    }
 					
-					//Throw using arrow keys
-                    else {
-                        dir = other.dir;
-                        vspeed = -(other.strength/mass)*(-other.vaxis1*2);
-                        if (vspeed > -2) vspeed = -2;
-                        //subtract height from distance
-                        xspeed = (other.strength/mass-abs(vspeed/4));
-                        //set only if positive
-                        if (xspeed > 0) hspeed = dir*(xspeed);
-                    }
+						//Throw using arrow keys
+	                    else {
+	                        dir = other.dir;
+	                        vspeed = -(other.strength/mass)*(-other.vaxis1*2);
+	                        if (vspeed > -2) vspeed = -2;
+	                        //subtract height from distance
+	                        xspeed = (other.strength/mass-abs(vspeed/4));
+	                        //set only if positive
+	                        if (xspeed > 0) hspeed = dir*(xspeed);
+	                    }
                     
-                    //activate object
-                    active = true;
-                }
+	                    //activate object
+	                    active = true;
+	                }
     
-                //remove Grab_object's Holder
-                Grab_object.Holder = noone;
-                Grab_object = noone;
+	                //remove Grab_object's Holder
+	                Grab_object.Holder = noone;
+	                Grab_object = noone;
 				
-            }
-            else holding += 1;
-        }
+	            }
+	            else holding += 1;
+	        }
+	    }
 		
-        else {
-            crouch = false;
-            holding = 0;
-        }
-    }
+		else {
+	        crouch = false;
+	        holding = 0;
+		}
+	}
 	
 	///Equip
 	if (right_action_pressed){
