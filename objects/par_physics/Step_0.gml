@@ -39,6 +39,10 @@ if (active){
 			hspeed = 0
 		}
 	}
+	
+	///Move with platforms
+	//match platform speed
+	scr_move_with_platform()
 }
 
 else{

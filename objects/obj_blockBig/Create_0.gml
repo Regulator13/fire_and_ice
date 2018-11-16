@@ -13,7 +13,3 @@ hp = hp_normal;
 ///Physics
 gravity_max = 10;
 gravity_incr = 0.4; //gravity icreasing increment
-
-//destroy overlaping coins
-with(instance_place(x, y, obj_score)) instance_destroy();
-
