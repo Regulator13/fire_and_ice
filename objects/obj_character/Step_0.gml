@@ -772,7 +772,7 @@ if climbing{
 
 if hanging{
 	//The player can lift themselves up
-	if(Input_player.inputs[UP_KEY] == KEY_PRESSED){
+	if(Input_player.inputs[ACTION_KEY] == KEY_PRESSED){
 		if place_free(x + climb_dir * 4, y - sprite_height){
 			if energy >= climbing_cost * 5{
 				hanging = false
