@@ -26,7 +26,7 @@ var rh = 768;
     // join
     var button = instance_create_layer(96+32+200+154+64*2, rh - 32, "lay_instances", obj_button);
     button.action = "directConnect";
-    button.title = "join";
+    button.title = "direct";
     ds_list_add(buttons, button);
     // host
     var button = instance_create_layer(rw - 96, rh - 32, "lay_instances", obj_button);

@@ -75,8 +75,10 @@ with (global.Menu) {
                     
                     break;
                 case STATE_MAIN:
-                    // return to main menu
-                    with (obj_online) event_user(0);
+                    // delete obj_online
+                    instance_destroy(global.InitObject);
+					// go offline
+					global.online = false;
                     
                     // clear previous menu
                     scr_menuClear();

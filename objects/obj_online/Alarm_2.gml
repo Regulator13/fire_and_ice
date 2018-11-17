@@ -3,10 +3,6 @@ var i = iServerName;
 global.ServerName = i.text;
 global.connectip = directIP.text;
 
-// destroy broadcast server
-network_destroy(broadcast_server);
-broadcast_server = -1;
-
 show_debug_message("#######################################");
 show_debug_message("Next room");
 show_debug_message("#######################################");

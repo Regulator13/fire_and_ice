@@ -14,9 +14,6 @@ else {
     global.connectip = "127.0.0.1";
     
     // stop broadcasting
-    // destroy broadcast server
-    network_destroy(broadcast_server);
-    broadcast_server = -1;
     show_debug_message("#######################################");
     show_debug_message("Start game");
     show_debug_message("#######################################");

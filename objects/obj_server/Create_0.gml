@@ -29,7 +29,7 @@ if( server<0 ){
     // If theres already a server running, shut down and delete.
     instance_destroy();
 }
-
+bbj = buffer_create(256,buffer_fixed,1)
 // Setup a timer so we can broadcast the server IP out to local clients looking...
 alarm[0]=60;
 
