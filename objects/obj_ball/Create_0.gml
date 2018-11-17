@@ -10,7 +10,7 @@ mass = 10;
 
 ///animations
 // Particle System
-if !global.online{
+if not global.online{
 	if obj_control.animations_on{
 		ps_spark = part_system_create()
 		part_system_depth(ps_spark, 50)
