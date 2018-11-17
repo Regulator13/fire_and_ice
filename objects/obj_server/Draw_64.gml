@@ -20,7 +20,7 @@ if (serverDebug) {
     draw_set_color(c_red);
     
     // draw the amount of players
-    draw_text(10,10,string_hash_to_newline("players: "+string(global.PlayerTotal)));
+    draw_text(10,10,string_hash_to_newline("players: "+string(global.player_total)));
 	draw_text(10, 30+yOffset*drawOffset++, "Server Socket: " + string(server));
     
 	if count = 0{

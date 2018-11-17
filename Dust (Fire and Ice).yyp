@@ -1447,22 +1447,6 @@
             }
         },
         {
-            "Key": "e561daf4-0dd2-4cf2-a078-b4bddcf13f94",
-            "Value": {
-                "id": "41675ec8-f07d-47e2-8967-ee791634f285",
-                "resourcePath": "views\\e561daf4-0dd2-4cf2-a078-b4bddcf13f94.yy",
-                "resourceType": "GMFolder"
-            }
-        },
-        {
-            "Key": "e726d440-0e17-48c1-86f6-a25b32d4397d",
-            "Value": {
-                "id": "b6c7e1b3-9fc8-4b80-ab89-2d96ff944256",
-                "resourcePath": "views\\e726d440-0e17-48c1-86f6-a25b32d4397d.yy",
-                "resourceType": "GMFolder"
-            }
-        },
-        {
             "Key": "e5b26202-8758-4a26-91b8-7a4ccb6e7325",
             "Value": {
                 "id": "41dc16ee-e622-493f-98cd-a015a5b6f79d",
