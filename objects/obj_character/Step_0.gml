@@ -851,7 +851,7 @@ if (mooch_buffer < 0) {
         if (mooch_proof != other.Team.Team and mooch_proof != -1) {
 			if obj_control.animation_on = true{
 				if global.online{
-		            instance_create_layer(x, y-32, "lay_instances", prt_mooch);
+		            instance_create_layer(x, y-32, "lay_instances", obj_mooch);
 				}
 				else{
 					part_particles_create(obj_particle.ps_mooch, 0, 0, obj_particle.prt_mooch, 1)
