@@ -332,8 +332,8 @@ Reviews must be thorough, even if just to educate the reviewee. Every pull reque
 
 ## Game Testing
 If you want to test the game and suggest improvements, just follow these steps:
-1. Download the latest version from [releases](https://github.com/famegames/fire-and-ice/releases)
-2. Find the `.exe` file and play the game!
+1. Download the latest version from [our website](https://famegamesco.wixsite.com/games/our-games)
+2. Find the application and play the game!
 3. Lots of things need testing:
    * Current game features to make sure they work properly
    * Glitches - try to cheat! If you think you've found a glitch we would love to know
@@ -342,6 +342,5 @@ If you want to test the game and suggest improvements, just follow these steps:
    * Suggestions for new ideas to make the game better or more fun
 4. Once you find what needs changed or have a suggestion [submit an issue](https://github.com/famegames/fire-and-ice/issues/new?template=general-request.md)
 5. Include what you want changed, whether you were playing single player or a network game, and any other relevant information to your change.
-6. __Important__: Label your issue with the `game-tester` label so we know where it came from and to ignore any formatting inconsistencies. The label can be found on the right hand side of the page and is blue.
 
 Note: Unfortunately submitting an issue doesn't guarantee that a change will occur. Your issue may be closed with no action taken. Please don't take this personally, some changes aren't reasonable fits for the game or don't work with the written code. Instead, find another issue, make a different suggestion, and try again.
