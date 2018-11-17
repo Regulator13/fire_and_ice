@@ -23,7 +23,7 @@ if (serverDebug) {
     draw_text(10,10,string_hash_to_newline("players: "+string(global.player_total)));
 	draw_text(10, 30+yOffset*drawOffset++, "Server Socket: " + string(server));
     
-	if count = 0{
+	if count == 0{
 		//Warning
 		draw_text(10, 30+yOffset*drawOffset++, "No clients in iplist!");
 	}
