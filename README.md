@@ -2,11 +2,9 @@
 The official *Dust: Fire and Ice* game and work environment
 
 ## If you want to play the game...
-Check out the latest release on `code` > `releases`
+Check it out on our [website](https://famegamesco.wixsite.com/games/our-games)! You can find _Dust: Fire and Ice_ there. Simply click on the single runtime, download it, and play the application!
 
-![Release Location](https://github.com/famegames/fire-and-ice/blob/master/tutorial_images/Release_location.PNG "Release button is highlighted. You can't miss it. Just scroll up.")
-
-Download the source code and find the `.exe` file. Double click on that and you're playing _Dust: Fire and Ice_!
+_Note:_ Since our game has not been downloaded enough yet, your computer may warn you against it. You'll have to ignore these to play the game.
 
 ## If you want to program the game...
 If you're ready to program, visit [CONTRIBUTING](https://github.com/famegames/fire-and-ice/blob/master/CONTRIBUTING.md). 
