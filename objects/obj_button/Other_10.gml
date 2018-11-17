@@ -108,5 +108,9 @@ switch(action) {
     case "backOnlineLobby":
         scr_stateSwitch(STATE_LOBBY, STATE_ONLINE);
         break;
+	
+	case "quit":
+		game_end();
+		break;
 }
 
