@@ -103,5 +103,12 @@ if active{
 				y += scr_contacty(other.vspeed);
 			}
 		}
+		
+		//Push blocks out of the way to avoid getting stuck if they are below the platform
+		with(instance_place(x, y + vspeed, par_physics)){
+			if y > other.y{
+				y += scr_contacty(other.vspeed);
+			}
+		}
 	}
 }
