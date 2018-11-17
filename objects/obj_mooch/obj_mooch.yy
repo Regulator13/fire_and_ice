@@ -2,7 +2,7 @@
     "id": "1ed72467-896c-4365-9f6f-7201bbcddaf4",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "prt_mooch",
+    "name": "obj_mooch",
     "eventList": [
         {
             "id": "9685ba4c-b1f6-4b96-9faf-15779288aae3",
