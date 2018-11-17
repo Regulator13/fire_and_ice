@@ -96,5 +96,19 @@ if active{
 		with(instance_place(x + hspeed, y, obj_character)){
 			x += scr_contactx(other.hspeed);
 		}
+		
+		///Push characters out of the way to avoid getting stuck if they are below the platform
+		with(instance_place(x, y + vspeed, obj_character)){
+			if y > other.y{
+				y += scr_contacty(other.vspeed);
+			}
+		}
+		
+		//Push blocks out of the way to avoid getting stuck if they are below the platform
+		with(instance_place(x, y + vspeed, par_physics)){
+			if y > other.y{
+				y += scr_contacty(other.vspeed);
+			}
+		}
 	}
 }
