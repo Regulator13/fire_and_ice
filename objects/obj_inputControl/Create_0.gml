@@ -1,15 +1,8 @@
-/// @description input
-
-// set in creation:
-// control - the control index to update
-control = 0;
-// controller - the controller type
-controller = CONTROLS_KEYBOARD;
-// player - player controls being changed
-player = 0;
-// Source - button who created this, used for title chaning
-Source = noone;
+/// @description Set variables
+control = 0; //the control index to update
+controller = CONTROLS_KEYBOARD; //the controller type
+player = 0; //player controls being changed
+Source = noone; //button who created this, used for title chaning
 
 // reset input
 io_clear();
-

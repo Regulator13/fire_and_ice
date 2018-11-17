@@ -15,9 +15,6 @@ characterHPs = ds_list_create();
 characterEnergys = ds_list_create();
 characterNames = ds_list_create();
 
-// lasers order: x, y, laserX
-lasers = ds_list_create();
-
 // water_height
 water_height = 0;
 
@@ -25,7 +22,7 @@ water_height = 0;
 disconnectBuffer = 60;
 
 ///initialize the client
-PlayerName = global.ServerName;   //get the name that was selected (it's a server OR player name)
+player_name = global.ServerName;   //get the name that was selected (it's a server OR player name)
 
 //server IP and port, needed to send packets
 ip = global.connectip;

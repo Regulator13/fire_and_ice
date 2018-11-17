@@ -1,4 +1,2 @@
-/// @description slow down animation
+/// @description Slow down animation
 image_speed = .5;
-
-

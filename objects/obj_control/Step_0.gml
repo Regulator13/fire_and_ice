@@ -1,26 +1,34 @@
-/// @description raise water
-if(water_buffer = false)
-{water_height += global.water_rate;
+/// @description Raise water
+if(water_buffer = false){
+	water_height += global.water_rate;
 }
 
-//check if all players died
-if (checkWinBuffer < 0) {
+//dynamically destroy raindrops at water level
+if rain_active = true{
+	if animations_on = true{
+		part_type_life(prt_rain, (room_height - 32 - water_height) / prt_speed, (room_height - 32 - water_height) / prt_speed)
+	}
+}
+
+//Check if all players died
+if (check_win_buffer < 0) {
+	//end the level
     if not (instance_exists(obj_character)) {
-        //end level
         if (global.win) {
             global.level += 1;
-            }
+        }
+		
         else {
-            global.continueGame = false;
-            }
-        //goto score
+            global.continue_game = false;
+        }
+		
+        //go to the score screen
         if (gotoScore) {
             alarm[1] = 30;
             gotoScore = false;
-            checkWinBuffer = 60;
-            }
+            check_win_buffer = 60;
         }
     }
-else checkWinBuffer --;
+}
 
-
+else check_win_buffer --;

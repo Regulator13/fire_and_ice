@@ -1,78 +1,50 @@
+/// @description Set variables
 event_inherited();
 
-//playerId - player id for score
-playerId = 0;
+player_id = 0; //for score
+player_input = 0;
+Input_player = noone; //input player local or network
+jumps = 0;
+biting = false; //whether or not character is biting
+Grab_object = noone;
+holding = 0;
+will_arc = false; //whether or not ball arcs for player
+y_score = room_height; //Heighest y-coordinate the player has reached
 
-//Set player variables
+///Stats
 hp = 100;
 hp_max = 100;
 energy = 100;
 energy_max = 100;
 strength = 60;
+jumps_max = 1;
+jump_height = 6;
+energy_fire = 5; //energy it takes for a fireball
 
-//jumps - amount of jumps character has
-jumpsMax = 1;
-jumps = 0;
-//jumpHeight - inital vspeed of jump
-jumpHeight = 6;
+///Physics
+gravity_max = 10; 
+gravity_incr = 0.4; //Acceleration while falling
+fric = .4 //friction
 
-//gravity
-gravityMax = 10;
-//gravityI - gravity icreasing increment
-gravityI = 0.4;
-fric = .4 //Set all objects friction
+///Input
+input_buffer = 0; //buffer for joystick input
+input_buffer_max = 10;
+input_method = CONTROLS_KEYBOARD; //input: keyboard, mouse, joystick
 
-//playerInput
-playerInput = 0;
-// InputPlayer - input player local or network
-InputPlayer = noone;
-
-//inputBuffer - buffer for joystick input
-inputBuffer = 0;
-inputBufferMax = 10;
-
-//stop animation
+//Animation
 image_speed = 0;
 image_index = 4;
+mouseX = 0; //x position of mouse if mouse input
+dir = 0; //Direction the character is facing
 //start frames later when biting
 bitingFrame = 9;
-//frameStep - current frame for animation
-frameStep = 0;
-//frameBuffer - slow animation
-frameBuffer = 0;
-frameBufferMax = 4;
-
-//biting - whether or not character is biting
-biting = false;
-
-//grabing
-grabObject = noone;
-
-//holding - 0 for let go next time, 2 to throw
-holding = 0;
-
-//dir - direction of character
-dir = 0;
-
-//energyFire - energy it takes for a fireball
-energyFire = 5;
-
-//willArc - whether or not ball arcs for player
-willArc = false;
-
-//yMin - heighest y value reached
-yMin = room_height;
-
-/// initialize input variables
-
-// inputType - the type of input, keyboard, mouse, joystick
-inputType = CONTROLS_KEYBOARD;
+//frame_step - current frame for animation
+frame_step = 0;
+//frame_buffer - slow animation
+frame_buffer = 0;
+frame_buffer_max = 4;
 
 // initiate isPressed variable outside, so they don't automatically reset
-grabIsPressed = false;
-iceIsPressed = false;
-fireIsPressed = false;
-
-// mouseX - x position of mouse if mouse input
-mouseX = 0;
-
+grab_is_pressed = false;
+ice_is_pressed = false;
+right_action_is_pressed = false;

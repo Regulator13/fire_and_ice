@@ -10,7 +10,7 @@ ds_list_clear(buttons);
 // setup controls menu
 
 // add buttons
-var button = instance_create(room_width/2, room_height-32-48*2, obj_button);
+var button = instance_create_layer(room_width/2, room_height-32-48*2, "lay_instances", obj_button);
 button.action = "valueAction";
 button.valueAction = "changeControlsPlayer";
 button.title = "Player:";
@@ -18,18 +18,18 @@ for (var i = 0; i < global.Menu.controlsMax; i++;)
     ds_list_add(button.values, "Player " + string(i+1));
 button.value = controlSelected;
 ds_list_add(buttons, button);
-var button = instance_create(room_width/2, room_height-32-48*1, obj_button);
+var button = instance_create_layer(room_width/2, room_height-32-48*1, "lay_instances", obj_button);
 button.image_index = 8;
 button.action = "delControls";
 button.title = "reset";
 ds_list_add(buttons, button);
-var button = instance_create(room_width/2, room_height-32, obj_button);
+var button = instance_create_layer(room_width/2, room_height-32, "lay_instances", obj_button);
 button.image_index = 4;
 button.action = "optionsControl";
 button.title = "options";
 ds_list_add(buttons, button);
 // device
-var button = instance_create(room_width/2, 32, obj_button);
+var button = instance_create_layer(room_width/2, 32, "lay_instances", obj_button);
 button.action = "valueAction";
 button.valueAction = "changeControlsController";
 button.title = "Device:";
@@ -52,14 +52,14 @@ switch (controller) {
         var c2 = 4;
         // first column of input
         for (c1y = 0; c1y < c1; c1y++) {
-            var button = instance_create(c1x, cy+by*c1y, obj_controlButton);
+            var button = instance_create_layer(c1x, cy+by*c1y, "lay_instances", obj_controlButton);
             button.key = c1y;
             button.title = scr_getInputName(global.controls[controlSelected, c1y], button.key, controller);
             ds_list_add(buttons, button);
             }
         // secound column of input
         for (c2y = 0; c2y < 4; c2y++) {
-            var button = instance_create(c2x, cy+by*c2y, obj_controlButton);
+            var button = instance_create_layer(c2x, cy+by*c2y, "lay_instances", obj_controlButton);
             button.key = c2y+c2;
             button.title = scr_getInputName(global.controls[controlSelected, c2y+c2], button.key, controller);
             ds_list_add(buttons, button);
@@ -70,14 +70,14 @@ switch (controller) {
         var c2 = 4;
         // first column of input
         for (c1y = 0; c1y < c1; c1y++) {
-            var button = instance_create(c1x, cy+by*c1y, obj_controlButton);
+            var button = instance_create_layer(c1x, cy+by*c1y, "lay_instances", obj_controlButton);
             button.key = c1y;
             button.title = scr_getInputName(global.controls[controlSelected, c1y], button.key, controller);
             ds_list_add(buttons, button);
             }
         // secound column of input
         for (c2y = 0; c2y < 4; c2y++) {
-            var button = instance_create(c2x, cy+by*c2y, obj_controlButton);
+            var button = instance_create_layer(c2x, cy+by*c2y, "lay_instances", obj_controlButton);
             button.key = c2y+c2;
             button.title = scr_getInputName(global.controls[controlSelected, c2y+c2], button.key, controller);
             ds_list_add(buttons, button);

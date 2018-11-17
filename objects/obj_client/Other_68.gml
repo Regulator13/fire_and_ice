@@ -7,7 +7,7 @@ serverIP = ds_map_find_value(async_load, "ip");
 //is this message for our socket?
 if(client == eventid) {
     // if in a state that needs a confirmation
-    if (global.NetworkState == NETWORK_CONNECT || global.NetworkState == NETWORK_LOGIN) {
+    if (global.NetworkState == NETWORK_CONNECT or global.NetworkState == NETWORK_LOGIN) {
         // read buffer data
         var buffer = ds_map_find_value(async_load, "buffer");
         
@@ -32,12 +32,12 @@ if(client == eventid) {
             alarm[0] = disconnectBuffer;
             
             // check if server is confirming a connection
-            if (global.NetworkState == NETWORK_CONNECT && msgId == SERVER_CONNECT) {
+            if (global.NetworkState == NETWORK_CONNECT and msgId == SERVER_CONNECT) {
                 // connection confirmed! move to login state
                 global.NetworkState = NETWORK_LOGIN;
                 }
             // check if server is confirming a login
-            if (global.NetworkState == NETWORK_LOGIN && msgId == SERVER_LOGIN) {
+            if (global.NetworkState == NETWORK_LOGIN and msgId == SERVER_LOGIN) {
                 // connection confirmed! move to login state
                 global.NetworkState = NETWORK_PLAY;
                 }
@@ -83,18 +83,18 @@ if(client == eventid) {
                             // get the amount of players
                             var players = buffer_read(buff,buffer_u8);
                             // temporarily hold server data, local because it will be called a lot of times
-                            serverData = ds_list_create();
+                            server_data = ds_list_create();
                             // read the data
                             for(var i=0;i<players;i++){
-                                ds_list_add(serverData, buffer_read(buff,buffer_u8));       // team
-                                ds_list_add(serverData, buffer_read(buff,buffer_bool));     // ready
-                                ds_list_add(serverData, buffer_read(buff,buffer_string));   // name
-                                ds_list_add(serverData, buffer_read(buff,buffer_string));   // character
+                                ds_list_add(server_data, buffer_read(buff,buffer_u8));       // team
+                                ds_list_add(server_data, buffer_read(buff,buffer_bool));     // ready
+                                ds_list_add(server_data, buffer_read(buff,buffer_string));   // name
+                                ds_list_add(server_data, buffer_read(buff,buffer_string));   // character
                                 }
                             // copy loaded data to menu
-                            ds_list_copy(global.Menu.serverData, serverData);
+                            ds_list_copy(global.Menu.server_data, server_data);
                             // delete temporary list
-                            ds_list_destroy(serverData);
+                            ds_list_destroy(server_data);
                             break;
                         case STATE_PATHS: // paths menu
                             // path updates
@@ -103,18 +103,18 @@ if(client == eventid) {
                                 var paths = buffer_read(buff, buffer_u8);
                                 
                                 // temporarily hold server data, local because it will be called a lot of times
-                                serverData = ds_list_create();
-                                ds_list_add(serverData, buffer_read(buff,buffer_u8));   // selected path
+                                server_data = ds_list_create();
+                                ds_list_add(server_data, buffer_read(buff,buffer_u8));   // selected path
                                 // read the data
                                 for(var i = 0; i < paths; i++){
-                                    ds_list_add(serverData, buffer_read(buff,buffer_string));   // name
-                                    ds_list_add(serverData, buffer_read(buff,buffer_string));   // score
-                                    ds_list_add(serverData, buffer_read(buff,buffer_string));   // length
+                                    ds_list_add(server_data, buffer_read(buff,buffer_string));   // name
+                                    ds_list_add(server_data, buffer_read(buff,buffer_string));   // score
+                                    ds_list_add(server_data, buffer_read(buff,buffer_string));   // length
                                     }
                                 // copy loaded data to menu
-                                ds_list_copy(global.Menu.serverData, serverData);
+                                ds_list_copy(global.Menu.server_data, server_data);
                                 // delete temporary list
-                                ds_list_destroy(serverData);
+                                ds_list_destroy(server_data);
                                 }
                             else {
                                 // switch to path menu
@@ -123,11 +123,11 @@ if(client == eventid) {
                             break;
                         case STATE_GAME:
                             // game updates
-                            if (global.Menu.state == STATE_GAME && room == rm_level) {
+                            if (global.Menu.state == STATE_GAME and room == rm_level) {
                                 // hold space for specific camera x and y
                                 var cameraX = buffer_read(buff, buffer_s16);
                                 var cameraY = buffer_read(buff, buffer_s16);
-                                if (cameraX != -1 && cameraY != -1) {
+                                if (cameraX != -1 and cameraY != -1) {
                                     obj_camera.x = cameraX;
                                     obj_camera.y = cameraY;
                                     }
@@ -139,44 +139,44 @@ if(client == eventid) {
                                 var teams = buffer_read(buff, buffer_u8);
                                 
                                 // temporarily hold server data, local because it will be called a lot of times
-                                serverData = ds_list_create();
+                                server_data = ds_list_create();
                                 
-                                ds_list_add(serverData, teams); // add the amount of teams
+                                ds_list_add(server_data, teams); // add the amount of teams
                                 
                                 // read the team data
                                 for(var i = 0; i < teams; i++){
                                     var  exists = buffer_read(buff, buffer_bool); // whether the team exists
-                                    ds_list_add(serverData, exists); // add whether the teams exists
+                                    ds_list_add(server_data, exists); // add whether the teams exists
                                     
                                     if (exists) {
                                         var players = buffer_read(buff, buffer_u8); // amount of players on team
-                                        ds_list_add(serverData, players); // add amount of players for the team
+                                        ds_list_add(server_data, players); // add amount of players for the team
                                         
-                                        ds_list_add(serverData, buffer_read(buff, buffer_string)); // get team name
-                                        ds_list_add(serverData, buffer_read(buff, buffer_string)); // get team score
-                                        ds_list_add(serverData, buffer_read(buff, buffer_string)); // get team level
-                                        ds_list_add(serverData, buffer_read(buff, buffer_string)); // get team lives
+                                        ds_list_add(server_data, buffer_read(buff, buffer_string)); // get team name
+                                        ds_list_add(server_data, buffer_read(buff, buffer_string)); // get team score
+                                        ds_list_add(server_data, buffer_read(buff, buffer_string)); // get team level
+                                        ds_list_add(server_data, buffer_read(buff, buffer_string)); // get team lives
                                         
                                         for (cp = 0; cp < players; cp++) {
-                                            ds_list_add(serverData, buffer_read(buff, buffer_s16)); // get player sprite
+                                            ds_list_add(server_data, buffer_read(buff, buffer_s16)); // get player sprite
                                             
                                             var characterExists = buffer_read(buff, buffer_bool); // check if player alive
-                                            ds_list_add(serverData, characterExists);   // if character is alive
+                                            ds_list_add(server_data, characterExists);   // if character is alive
                                             if (characterExists) {
-                                                ds_list_add(serverData, buffer_read(buff, buffer_u8));   // hp
-                                                ds_list_add(serverData, buffer_read(buff, buffer_u8));   // energy
+                                                ds_list_add(server_data, buffer_read(buff, buffer_u8));   // hp
+                                                ds_list_add(server_data, buffer_read(buff, buffer_u8));   // energy
                                                 }
                                             }
                                         }
                                     }
                                 
                                 // copy loaded data to menu
-                                ds_list_copy(global.Menu.serverData, serverData);
+                                ds_list_copy(global.Menu.server_data, server_data);
                                 
-                                //for (i = 0; i < ds_list_size(serverData); i++) show_debug_message(string(ds_list_find_value(serverData, i)));
+                                //for (i = 0; i < ds_list_size(server_data); i++) show_debug_message(string(ds_list_find_value(server_data, i)));
                                 
                                 // delete temporary list
-                                ds_list_destroy(serverData);
+                                ds_list_destroy(server_data);
                                 
                                 // gather sprite information
                                 
@@ -195,13 +195,9 @@ if(client == eventid) {
                                 ds_list_clear(characterEnergys);
                                 ds_list_clear(characterNames);
                                 
-                                // add all lasers into a list
-                                ds_list_clear(lasers);
-                                
                                 // send sprite information
                                 var basicSpritesSize = buffer_read(buff, buffer_u16); //buffer_u16 MAX: ?
                                 var characterSpritesSize = buffer_read(buff, buffer_u8); //buffer_u8 MAX: 255
-                                var lasersSize = buffer_read(buff, buffer_u8); //buffer_u8 MAX: 255
                                 
                                 // send all basic sprites
                                 for (i = 0; i < basicSpritesSize; i++) {
@@ -222,12 +218,6 @@ if(client == eventid) {
                                     ds_list_add(characterNames, buffer_read(buff, buffer_string));  // name
                                     }
                                 
-                                // send all character sprites
-                                for (i = 0; i < lasersSize; i+=3) {
-                                    ds_list_add(lasers, buffer_read(buff, buffer_s16)); // x
-                                    ds_list_add(lasers, buffer_read(buff, buffer_s16)); // y
-                                    ds_list_add(lasers, buffer_read(buff, buffer_s16)); // laserX
-                                    }
                                 /*
                                 show_debug_message("size" + string(basicSpritesSize) + " " + string(characterSpritesSize));
                                 for (i = 0; i < ds_list_size(basicSprites); i++) {
@@ -257,49 +247,49 @@ if(client == eventid) {
                             // score screen updates
                             if (global.Menu.state = STATE_SCORE) {
                                 // temporarily hold server data, local because it will be called a lot of times
-                                serverData = ds_list_create();
+                                server_data = ds_list_create();
                                 
-                                ds_list_add(serverData, buffer_read(buff, buffer_string)); // add the message
-                                ds_list_add(serverData, buffer_read(buff, buffer_string)); // add the seed
-                                ds_list_add(serverData, buffer_read(buff, buffer_string)); // add the water delay
+                                ds_list_add(server_data, buffer_read(buff, buffer_string)); // add the message
+                                ds_list_add(server_data, buffer_read(buff, buffer_string)); // add the seed
+                                ds_list_add(server_data, buffer_read(buff, buffer_string)); // add the water delay
                                 
                                 // get the amount of teams
                                 var teams = buffer_read(buff, buffer_u8);
                                 
-                                ds_list_add(serverData, teams); // add the amount of teams
+                                ds_list_add(server_data, teams); // add the amount of teams
                                 
                                 // read the team data
                                 for(var i = 0; i < teams; i++){
                                     var  exists = buffer_read(buff, buffer_bool); // whether the team exists
-                                    ds_list_add(serverData, exists); // add whether the teams exists
+                                    ds_list_add(server_data, exists); // add whether the teams exists
                                     
                                     if (exists) {
                                         var players = buffer_read(buff, buffer_u8); // amount of players on team
-                                        ds_list_add(serverData, players); // add amount of players for the team
+                                        ds_list_add(server_data, players); // add amount of players for the team
                                         
-                                        ds_list_add(serverData, buffer_read(buff, buffer_string)); // get team name
-                                        ds_list_add(serverData, buffer_read(buff, buffer_string)); // get team score
-                                        ds_list_add(serverData, buffer_read(buff, buffer_string)); // get team level
-                                        ds_list_add(serverData, buffer_read(buff, buffer_string)); // get team lives
+                                        ds_list_add(server_data, buffer_read(buff, buffer_string)); // get team name
+                                        ds_list_add(server_data, buffer_read(buff, buffer_string)); // get team score
+                                        ds_list_add(server_data, buffer_read(buff, buffer_string)); // get team level
+                                        ds_list_add(server_data, buffer_read(buff, buffer_string)); // get team lives
                                         
                                         for (cp = 0; cp < players; cp++) {
-                                            ds_list_add(serverData, buffer_read(buff, buffer_s16)); // get player sprite
+                                            ds_list_add(server_data, buffer_read(buff, buffer_s16)); // get player sprite
                                             
                                             var characterExists = buffer_read(buff, buffer_bool); // check if player alive
-                                            ds_list_add(serverData, characterExists);   // if character is alive
+                                            ds_list_add(server_data, characterExists);   // if character is alive
                                             if (characterExists) {
-                                                ds_list_add(serverData, buffer_read(buff, buffer_u8));   // hp
-                                                ds_list_add(serverData, buffer_read(buff, buffer_u8));   // energy
+                                                ds_list_add(server_data, buffer_read(buff, buffer_u8));   // hp
+                                                ds_list_add(server_data, buffer_read(buff, buffer_u8));   // energy
                                                 }
                                             }
                                         }
                                     }
                                 
                                 // copy loaded data to menu
-                                ds_list_copy(global.Menu.serverData, serverData);
+                                ds_list_copy(global.Menu.server_data, server_data);
                                 
                                 // delete temporary list
-                                ds_list_destroy(serverData);
+                                ds_list_destroy(server_data);
                                 }
                             else {
                                 scr_stateSwitch(STATE_GAME, STATE_SCORE);

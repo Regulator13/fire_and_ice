@@ -1,4 +1,4 @@
-/// @description draw input
+/// @description Draw input
 draw_self();
 
 //setup drawing
@@ -10,4 +10,3 @@ draw_text(x, y-16, string_hash_to_newline(input));
 
 //reset
 draw_set_halign(fa_left);
-

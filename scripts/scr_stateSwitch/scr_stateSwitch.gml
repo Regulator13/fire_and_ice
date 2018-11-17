@@ -26,8 +26,8 @@ with (global.Menu) {
                     scr_menuInitLobby(from);
                     
                     // join player
-                    localPlayers[? 0] = instance_create(0, 0, obj_localPlayer);
-                    localPlayers[? 0].controls = 0;
+                    local_players[? 0] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
+                    local_players[? 0].controls = 0;
                     break;
                 }
         case STATE_CONTROLS:
@@ -100,7 +100,7 @@ with (global.Menu) {
                     break;
                 case STATE_ONLINE:
                     // destroy online objects
-                    if (global.haveserver) // check if hosting
+                    if (global.have_server) // check if hosting
                         instance_destroy(obj_server);
                     instance_destroy(obj_client);
                     
@@ -113,7 +113,7 @@ with (global.Menu) {
             switch (to) {
                 case STATE_ONLINE:
                     // destroy online objects
-                    if (global.haveserver) // check if hosting
+                    if (global.have_server) // check if hosting
                         instance_destroy(obj_server);
                     instance_destroy(obj_client);
                     
@@ -133,7 +133,7 @@ with (global.Menu) {
                     room_goto(mnu_main);
                     
                     // destroy online objects
-                    if (global.haveserver) // check if hosting
+                    if (global.have_server) // check if hosting
                         instance_destroy(obj_server);
                     instance_destroy(obj_client);
                     
@@ -160,7 +160,7 @@ with (global.Menu) {
                     room_goto(mnu_main);
                     
                     // destroy online objects
-                    if (global.haveserver) // check if hosting
+                    if (global.have_server) // check if hosting
                         instance_destroy(obj_server);
                     instance_destroy(obj_client);
                     

@@ -1,17 +1,17 @@
 /// @description create character
-if (team.tLives > 0) {
+if (Team.tLives > 0) {
     with (pos_character) {
         other.startX = x;
         other.startY = y;
         
         //create character
-        other.gameCharacter = instance_create(other.startX, other.startY, obj_character);
-        other.gameCharacter.playerInput = other.input; // negative one for client control
-        other.gameCharacter.InputPlayer = other; // set network player for input
-        other.gameCharacter.playerId = other.playerId;
-        other.gameCharacter.team = other.team;
-        other.gameCharacter.playerName = other.name;
-        other.gameCharacter.inputType = other.inputs[KEY_TYPE];
+        other.gameCharacter = instance_create_layer(other.startX, other.startY, "lay_instances", obj_character);
+        other.gameCharacter.player_input = other.input; // negative one for client control
+        other.gameCharacter.Input_player = other; // set network player for input
+        other.gameCharacter.player_id = other.player_id;
+        other.gameCharacter.Team = other.Team;
+        other.gameCharacter.player_name = other.name;
+        other.gameCharacter.input_method = other.inputs[KEY_TYPE];
         
         //get sprite
         other.gameCharacter.sprite_index = other.sprite_index;

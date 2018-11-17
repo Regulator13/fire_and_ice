@@ -1,31 +1,34 @@
-/// @description  initialize self
-
-if (global.online && !global.haveserver) instance_destroy();
+/// @description Initialize self
+//Destroy if no server
+if (global.online and not global.have_server) instance_destroy();
 
 //Set rate of water
 water_height = 0;
 water_buffer = true;
+rain_active = false
 
-//globals
+//Players
 global.players = 0;
+global.player_total = 5;
 
-//player total
-global.playerTotal = 5;
+///Score
+global.score_win = 100; //points for completing the level
+global.score_object = 10; //points for a coin
+global.score_level = 5; //points per level
+global.score_first = 25; //points for completing level first
 
-//score
-global.scoreWin = 100;
-global.scoreObject = 10;
-global.scoreLife = 100; //score required to get a heart
-//global.scoreY = room_height-/100; //not used
-global.scoreLVL = 5;
-global.scoreFirst = 25;
+//small buffer to allow server to catch up
+check_win_buffer = 60;
 
-//global.cooperativeMode
-global.cooperativeMode = false;
-
-// small buffer to allow server to catch up
-checkWinBuffer = 60;
-
+//TODO Move this variable to a button
 //whether animations are on or off
 animations_on = true
+
+if animations_on = true{
+	ps_rain = part_system_create()
+}
+
+///artifacts
+//artifact
+global.score_life = 100; //score required to get a heart
 

@@ -9,12 +9,12 @@
 state = STATE_PATHS;
 
 // create buttons
-if (!global.online || (global.online && global.haveserver)) {
-    var button = instance_create(room_width-96, room_height-32, obj_button);
+if (!global.online or (global.online and global.have_server)) {
+    var button = instance_create_layer(room_width-96, room_height-32, "lay_instances", obj_button);
     button.action = "game";
     button.title = "play";
     ds_list_add(buttons, button);
-    var button = instance_create(room_width/2, room_height-32, obj_button);
+    var button = instance_create_layer(room_width/2, room_height-32, "lay_instances", obj_button);
     button.action = "new";
     button.title = "new";
     ds_list_add(buttons, button);
@@ -26,11 +26,11 @@ if (!global.online || (global.online && global.haveserver)) {
         
         //load path names
         str = ini_read_string("paths", "names", "");
-        if (str != "") ds_list_read(pathNames, str);
+        if (str != "") ds_list_read(path_names, str);
         
         //load paths data
-        for (i = 0; i < ds_list_size(pathNames); i++) {
-            name = ds_list_find_value(pathNames, i);
+        for (i = 0; i < ds_list_size(path_names); i++) {
+            name = ds_list_find_value(path_names, i);
             
             ds_map_add(paths, name, ds_map_create());
             //path in path map
@@ -55,7 +55,7 @@ if (!global.online || (global.online && global.haveserver)) {
         }
         
     // check if any path exists
-    if (ds_list_empty(pathNames)) {
+    if (ds_list_empty(path_names)) {
         //create tutorial path
         scr_createPath("First");
         global.tutorial = true;

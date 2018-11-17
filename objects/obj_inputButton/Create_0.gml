@@ -1,14 +1,10 @@
-/// @description input
+/// @description Clear input
 input = "";
-
 action = "";
-
-// Source - instance id of who created it
-Source = noone;
+Source = noone; //instance id of who created it
 
 //reset keyboard string
 keyboard_string = "";
 
 // reset input
 io_clear();
-

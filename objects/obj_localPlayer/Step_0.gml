@@ -1,5 +1,5 @@
 /// @description  get input
-if (inputBuffer < 0) {
+if (input_buffer < 0) {
     var buffer = false; // whether or not input was put in
     
     // get input
@@ -13,10 +13,14 @@ if (inputBuffer < 0) {
             inputs[ACTION2_KEY] = scr_getKeyInput(global.controls[controls, ACTION2_KEY]);
             inputs[LEFTSELC_KEY] = scr_getKeyInput(global.controls[controls, LEFTSELC_KEY]);
             inputs[RIGHTSELC_KEY] = scr_getKeyInput(global.controls[controls, RIGHTSELC_KEY]);
+			
             // check if there was any input
-            if (keyboard_check(vk_anykey))
+            if (keyboard_check(vk_anykey)){
                 buffer = true;
+			}
+			
             break;
+			
         case CONTROLS_MOUSE:
             inputs[LEFT_KEY] = scr_getKeyInput(global.controls[controls, LEFT_KEY]);
             inputs[RIGHT_KEY] = scr_getKeyInput(global.controls[controls, RIGHT_KEY]);
@@ -26,25 +30,31 @@ if (inputBuffer < 0) {
             inputs[ACTION2_KEY] = scr_getKeyInput(global.controls[controls, ACTION2_KEY]);
             inputs[LEFTSELC_KEY] = scr_getMouseInput(global.controls[controls, LEFTSELC_KEY]);
             inputs[RIGHTSELC_KEY] = scr_getMouseInput(global.controls[controls, RIGHTSELC_KEY]);
+			
             // set mouse position
             mouseX = mouse_x;
             mouseY = mouse_y;
+			
             // check if there was any input
-            if (keyboard_check(vk_anykey) || device_mouse_check_button(0, mb_any))
+            if (keyboard_check(vk_anykey) or device_mouse_check_button(0, mb_any)){
                 buffer = true;
+			}
+			
             break;
+			
         default:
             // joystick input
             break;
-        }
+    }
     
     // reset input buffer if in menu
-    if (global.Menu.state != STATE_GAME && buffer)
-        inputBuffer = inputBufferMax;
+    if (global.Menu.state != STATE_GAME and buffer)
+        input_buffer = input_buffer_max;
     }
+	
 else {
     // tick
-    inputBuffer --;
+    input_buffer --;
     
     // reset input
     inputs[LEFT_KEY] = 0;
@@ -55,5 +65,4 @@ else {
     inputs[ACTION2_KEY] = 0;
     inputs[LEFTSELC_KEY] = 0;
     inputs[RIGHTSELC_KEY] = 0;
-    }
-
+}

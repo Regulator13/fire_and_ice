@@ -1,7 +1,7 @@
 /// @description close server
 
 // destroy server
-global.haveserver = false;
+global.have_server = false;
 
 // destroy network
 network_destroy(server);

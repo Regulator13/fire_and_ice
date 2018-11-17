@@ -1,36 +1,20 @@
 /// @description  Set Physics
-mass = 10;
-//gravity
-gravityMax = 10;
-//gravityI - gravity icreasing increment
-gravityI = 0.4;
-fric = .4 //Set all objects friction
-
-
-//active - whether or not to apply physics
-active = true;
-//frozen - whether or not can move
-frozen = false;
-//willFreeze - freeze while holding
-willFreeze = false;
-//freezeBuffer - countdown till freeze
-freezeBufferMax = 3*30;
-freezeBuffer = freezeBufferMax;
-
-//ignite - used for explosions
-ignite = false;
-
-//sticky
-sticky = false;
-//stuck - whether thing is stuck
-stuck = false;
-
-//holder - who is holding self
-holder = noone;
-
-//team - team object
-team = noone;
-
 event_inherited();
 
+active = true; //whether or not to apply physics
+frozen = false; //whether or not can move
+will_freeze = false; //freeze while holding
+freeze_buffer_max = 3*30; //countdown till freeze
+freeze_buffer = freeze_buffer_max;
+ignite = false; //used for explosions
+sticky = false;
+stuck = false;
+Holder = noone; //who is holding self
+Team = noone;
+on_body = false //whether the item is carried above the player or on their body.
 
+///Physics
+mass = 10;
+gravity_max = 10;
+gravity_incr = 0.4; //downward acceleration
+fric = .4 //friction

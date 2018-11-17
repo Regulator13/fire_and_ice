@@ -32,7 +32,7 @@
     else buffer_write(buff, buffer_u16, 0);
     
     //total number of teams
-    buffer_write(buff, buffer_u8, global.Menu.teamMax); //buffer_u8 MAX: 255
+    buffer_write(buff, buffer_u8, global.Menu.team_max); //buffer_u8 MAX: 255
     
     // delocalize the write buffer
     buffer = buff;
@@ -40,24 +40,24 @@
     with(global.Menu) {
         buff = other.buffer;
         // iterate through each team
-        for (var i = 0; i < teamMax; i++){
-            var team = ds_map_find_value(gameTeams, i);
-            if !(is_undefined(team)) {
+        for (var i = 0; i < team_max; i++){
+            var Team = ds_map_find_value(game_teams, i);
+            if !(is_undefined(Team)) {
                 buffer_write(buff, buffer_bool, true); // team exists
                 
                 // amount of players
-                var size = ds_list_size(team.players);
+                var size = ds_list_size(Team.players);
                 buffer_write(buff, buffer_u8, size); // amount of players
                 
-                buffer_write(buff, buffer_string, team.nickname); // team name
-                buffer_write(buff, buffer_string, string(round(team.tScore))); // team score
-                buffer_write(buff, buffer_string, string(round(team.LVL))); // team top level
-                buffer_write(buff, buffer_string, string(round(team.tLives))); // team lives
+                buffer_write(buff, buffer_string, Team.nickname); // team name
+                buffer_write(buff, buffer_string, string(round(Team.tScore))); // team score
+                buffer_write(buff, buffer_string, string(round(Team.LVL))); // team top level
+                buffer_write(buff, buffer_string, string(round(Team.tLives))); // team lives
                 
                 // players
                 for (cp = 0; cp < size; cp++) {
                     //player
-                    var player = ds_list_find_value(team.players, cp); 
+                    var player = ds_list_find_value(Team.players, cp); 
                     
                     buffer_write(buff, buffer_s16, player.sprite_index); // player character
                     
@@ -108,21 +108,12 @@
         ds_list_add(other.characterYs, y);
         ds_list_add(other.characterHPs, hp);
         ds_list_add(other.characterEnergys, energy);
-        ds_list_add(other.characterNames, playerName);
-        }
-    
-    // add all the lasers to send into a list
-    lasers = ds_list_create();
-    
-    // iterate through all the shpaes to send over
-    with (obj_laser) {
-        ds_list_add(other.lasers, x, y, laserX);
+        ds_list_add(other.characterNames, player_name);
         }
     
     // send sprite information
     buffer_write(buff, buffer_u16, ds_list_size(basicSprites)); //buffer_u16 MAX: ?
     buffer_write(buff, buffer_u8, ds_list_size(characterSprites)); //buffer_u8 MAX: 255
-    buffer_write(buff, buffer_u8, ds_list_size(lasers)); //buffer_u8 MAX: 255
     
     // send all basic sprites
     for (i = 0; i < ds_list_size(basicSprites); i++) {
@@ -143,13 +134,6 @@
         buffer_write(buff, buffer_string, ds_list_find_value(characterNames, i)); // name
         }
     
-    // send all basic sprites
-    for (i = 0; i < ds_list_size(lasers); i+=3) {
-        buffer_write(buff, buffer_s16, ds_list_find_value(lasers, i));   // x
-        buffer_write(buff, buffer_s16, ds_list_find_value(lasers, i+1)); // y
-        buffer_write(buff, buffer_s16, ds_list_find_value(lasers, i+2)); // laserX
-        }
-    
     // delete the lists
     ds_list_destroy(basicSprites);
     ds_list_destroy(basicImages);
@@ -163,5 +147,3 @@
     ds_list_destroy(characterHPs);
     ds_list_destroy(characterEnergys);
     ds_list_destroy(characterNames);
-    
-    ds_list_destroy(lasers);
