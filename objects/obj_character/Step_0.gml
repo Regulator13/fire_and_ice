@@ -268,6 +268,13 @@ if (active) {
 		}
     }
 	
+	///Climb Platforms
+	with instance_place(x + sign(hspeed) * 2, y, obj_platform){
+		with (other){
+			scr_attempt_climbing()
+		}
+    }
+	
 	///Trampoline pushing
 	with(instance_place(x + sign(hspeed)*2, y, obj_trampoline)){
         x += scr_contactx(other.hspeed);
@@ -773,6 +780,12 @@ if climbing{
 }
 
 if hanging{
+	//move carried objects with the player (since the player isn't active)
+	scr_carry_object()
+	
+	//Move with platforms
+	scr_hang_with_platforms()
+	
 	//The player can lift themselves up
 	if(Input_player.inputs[ACTION_KEY] == KEY_PRESSED){
 		if place_free(x + climb_dir * 4, y - sprite_height){
@@ -789,10 +802,10 @@ if hanging{
 		}
 	}
 	
-	//Or they can drop down
-	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED){
+	//Drop down with down key OR if whatever they are hanging onto disappears
+	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) or place_free(x + climb_dir * 3, y){
 		hanging = false
-		alarm[1] = 5
+		active = true
 		gravity_incr = 0.4
 	}
 }
