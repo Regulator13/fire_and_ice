@@ -767,6 +767,14 @@
             }
         },
         {
+            "Key": "6eb633a1-5603-4463-bdde-47080f9f1593",
+            "Value": {
+                "id": "72197c54-b25c-4979-8f27-5bd68e5ce548",
+                "resourcePath": "scripts\\scr_collision_rectangle_list\\scr_collision_rectangle_list.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "6fffbe29-134f-4513-b373-39d0084f19f1",
             "Value": {
                 "id": "f21f603f-e009-46d3-9fff-41b77a15143d",
@@ -1004,6 +1012,14 @@
                 "id": "6cda1abd-2dd0-477b-926c-93ee4d04a904",
                 "resourcePath": "views\\930d022e-3ecc-47ea-9ef5-39b22dc35ca0.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "937cab27-8742-4c35-a74d-7a33d19533e6",
+            "Value": {
+                "id": "96bda493-dc84-4173-b164-709d250ea8c0",
+                "resourcePath": "objects\\obj_particle\\obj_particle.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1668,7 +1684,8 @@
         "574d82f7-b8f5-4893-a962-0e12294ba17c",
         "f0cd12bd-8ef2-447c-a95c-1c52139d925b",
         "35ec6861-fd7c-4131-b65c-fcf1405b4a62",
-        "7f35dcad-20e1-4a1a-adb8-4b543641b20a"
+        "7f35dcad-20e1-4a1a-adb8-4b543641b20a",
+        "6eb633a1-5603-4463-bdde-47080f9f1593"
     ],
     "tutorial": ""
 }

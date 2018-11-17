@@ -849,8 +849,15 @@ if (mooch_buffer < 0) {
     with (instance_place(x, y+16, obj_block)) {
         // mooch
         if (mooch_proof != other.Team.Team and mooch_proof != -1) {
-            instance_create_layer(x, y-32, "lay_instances", prt_mooch);
-            other.mooch_buffer = other.mooch_buffer_max;
+			if obj_control.animation_on = true{
+				if global.online{
+		            instance_create_layer(x, y-32, "lay_instances", prt_mooch);
+				}
+				else{
+					part_particles_create(obj_particle.ps_mooch, 0, 0, obj_particle.prt_mooch, 1)
+					other.mooch_buffer = other.mooch_buffer_max;
+				}
+			}
         }
     }
 }
