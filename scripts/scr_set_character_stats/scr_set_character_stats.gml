@@ -27,7 +27,7 @@ switch index{
 		other.gameCharacter.energy_max = 100
 		other.gameCharacter.energy_fire = 5
 		other.gameCharacter.mass = 13
-		other.gameCharacter.strength = 60
+		other.gameCharacter.strength = 12
 		other.gameCharacter.jump_height = 7.1
 		other.gameCharacter.jumps_max = 1
 
@@ -41,7 +41,7 @@ switch index{
 		other.gameCharacter.energy_max = 90
 		other.gameCharacter.energy_fire = 5
 		other.gameCharacter.mass = 16
-		other.gameCharacter.strength = 80
+		other.gameCharacter.strength = 16
 		other.gameCharacter.jump_height = 6.8
 		other.gameCharacter.jumps_max = 1
 		
@@ -55,7 +55,7 @@ switch index{
 		other.gameCharacter.energy_max = 95
 		other.gameCharacter.energy_fire = 5
 		other.gameCharacter.mass = 12
-		other.gameCharacter.strength = 60
+		other.gameCharacter.strength = 12
 		other.gameCharacter.jump_height = 7.5
 		other.gameCharacter.jumps_max = 1
 		
@@ -69,7 +69,7 @@ switch index{
 		other.gameCharacter.energy_max = 105
 		other.gameCharacter.energy_fire = 5
 		other.gameCharacter.mass = 13
-		other.gameCharacter.strength = 40
+		other.gameCharacter.strength = 8
 		other.gameCharacter.jump_height = 7.3
 		other.gameCharacter.jumps_max = 1
 		
@@ -83,7 +83,7 @@ switch index{
 		other.gameCharacter.energy_max = 115
 		other.gameCharacter.energy_fire = 5
 		other.gameCharacter.mass = 15
-		other.gameCharacter.strength = 45
+		other.gameCharacter.strength = 9
 		other.gameCharacter.jump_height = 7.0
 		other.gameCharacter.jumps_max = 1
 		
@@ -96,7 +96,7 @@ switch index{
 		other.gameCharacter.energy_max = 100
 		other.gameCharacter.energy_fire = 5
 		other.gameCharacter.mass = 15
-		other.gameCharacter.strength = 60
+		other.gameCharacter.strength = 12
 		other.gameCharacter.jump_height = 7.1
 		other.gameCharacter.jumps_max = 1
 		

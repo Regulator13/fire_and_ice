@@ -227,12 +227,12 @@ if (active) {
 			if !place_free(x, y + 2){
 				//Subtract mass from jump_height
 				if instance_exists(Grab_object){
-					if strength >= (Grab_object.mass * 10/3){
+					if strength >= Grab_object.mass{
 						vspeed = -jump_height;
 						jumps -= 1;
 					}
 					else{
-						vspeed = -(jump_height - ((Grab_object.mass - strength / (10/3)/3)))
+						vspeed = -(jump_height - (Grab_object.mass - strength)/3)
 						jumps -= 1
 					}
 				}
