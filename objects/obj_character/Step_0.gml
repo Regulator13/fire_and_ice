@@ -211,9 +211,8 @@ if (active) {
     //crouching image
     if (crouch){
 		image_index += crouch_frame;
-		y_diff = 9
+		y_diff = 8
 	}
-	
 	else y_diff = 0
 	
 	///Score
@@ -250,9 +249,11 @@ if (active) {
         if (id != other.Grab_object and not frozen and !stuck) {
             x+=scr_contactx(other.hspeed);
         }
-		
-		///Climb blocks
-		if (id != other.Grab_object) and (frozen or stuck){
+	}
+	
+	//Climb blocks/corpses
+	with(instance_place(x + dir * 2, y, par_physics)){
+		if (id != other.Grab_object){
 			//Change the character's variables
 			with (other){
 				scr_attempt_climbing()
@@ -261,28 +262,28 @@ if (active) {
 	}
 	
 	///Climb blockBigs
-	with instance_place(x + sign(hspeed) * 2, y, obj_blockBig){
+	with instance_place(x + dir * 2, y, obj_blockBig){
 		with (other){
 			scr_attempt_climbing()
 		}
     }
 	
 	///Climb Walls
-	with instance_place(x + sign(hspeed) * 2, y, obj_wall){
+	with instance_place(x + dir * 2, y, obj_wall){
 		with (other){
 			scr_attempt_climbing()
 		}
     }
 	
 	///Climb Platforms
-	with instance_place(x + sign(hspeed) * 2, y, obj_platform){
+	with instance_place(x + dir * 2, y, obj_platform){
 		with (other){
 			scr_attempt_climbing()
 		}
     }
 	
 	///Trampoline pushing
-	with(instance_place(x + sign(hspeed)*2, y, obj_trampoline)){
+	with(instance_place(x + sign(hspeed) * 2, y, obj_trampoline)){
         x += scr_contactx(other.hspeed);
     }
 
@@ -728,6 +729,7 @@ if climbing{
 	
 	//Drop with down key
 	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED){
+		x -= climb_dir * 3
 		climbing = false
 		gravity_incr = 0.4
 		active = true
@@ -762,8 +764,8 @@ if climbing{
 		//If the player is within the hanging tolerance, change their state to hanging
 		with instance_place(x + climb_dir * 4, y, all){
 			with (other){
-				if (other.y > y + y_diff - hanging_tol) and (other.y < y + y_diff + hanging_tol){
-					if place_free(x + dir * 4, y - hanging_tol - sprite_height){
+				if (y + y_diff > other.y - hanging_tol) and (y + y_diff < other.y + hanging_tol){
+					if place_free(x + dir * 4, other.y - sprite_height){
 						climbing = false
 						scr_enter_hanging()
 					}
@@ -775,13 +777,10 @@ if climbing{
 	else vspeed = 0
 		
 	//if the player is no longer touching a wall, make them fall
-	if place_free(x + 2, y) and place_free(x - 2, y){
+	if place_free(x + 3, y + y_diff) and place_free(x - 3, y + y_diff){
 		climbing = false
 		gravity_incr = 0.4
-		//make the player fall for a bit
-		if alarm[1] < 0{
-			alarm[1] = 5
-		}
+		active = true
 	}
 }
 
@@ -791,6 +790,14 @@ if hanging{
 	
 	//Move with platforms
 	scr_hang_with_platforms()
+	
+	//Drop down with down key OR if whatever they are hanging onto disappears
+	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) or place_free(x + climb_dir * 3, y){
+		x -= climb_dir * 3
+		hanging = false
+		active = true
+		gravity_incr = 0.4
+	}
 	
 	//The player can lift themselves up
 	if(Input_player.inputs[ACTION_KEY] == KEY_PRESSED){
@@ -806,13 +813,6 @@ if hanging{
 				alarm[1] = 5
 			}
 		}
-	}
-	
-	//Drop down with down key OR if whatever they are hanging onto disappears
-	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) or place_free(x + climb_dir * 3, y){
-		hanging = false
-		active = true
-		gravity_incr = 0.4
 	}
 }
 	

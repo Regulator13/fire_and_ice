@@ -69,7 +69,7 @@ switch index{
 		other.gameCharacter.energy_max = 105
 		other.gameCharacter.energy_fire = 5
 		other.gameCharacter.mass = 13
-		other.gameCharacter.strength = 8
+		other.gameCharacter.strength = 9
 		other.gameCharacter.jump_height = 7.3
 		other.gameCharacter.jumps_max = 1
 		
@@ -83,7 +83,7 @@ switch index{
 		other.gameCharacter.energy_max = 115
 		other.gameCharacter.energy_fire = 5
 		other.gameCharacter.mass = 15
-		other.gameCharacter.strength = 9
+		other.gameCharacter.strength = 10
 		other.gameCharacter.jump_height = 7.0
 		other.gameCharacter.jumps_max = 1
 		
