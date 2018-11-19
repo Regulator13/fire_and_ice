@@ -134,7 +134,7 @@ for (i=0; i<tries; i++){
 	var open = true
 	
 	//check if track is free
-	for (j=0; j<8; j++){
+	for (j=-3; j<4; j++){
 		if not place_free(rx, ry - j*gridSize){
 			open = false
 			break

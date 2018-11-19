@@ -70,7 +70,7 @@ switch(argument2) {
 		}
 		
 		//recharge station above middle block (if there is a middle block)
-		if (place_empty(dx-gridSize*2,dy-gridSize) and place_meeting(dx - gridSize, dy, obj_blockBig)) instance_create_layer(dx-gridSize*2, dy-gridSize, "lay_instances", obj_rechargeStation);
+		if (place_empty(dx-gridSize*2,dy-gridSize) and place_meeting(dx - gridSize * 2, dy, obj_blockBig)) instance_create_layer(dx-gridSize*2, dy-gridSize, "lay_instances", obj_rechargeStation);
 		
 		//hang glider second from right side 1/4 chance
 		if !irandom(3){
