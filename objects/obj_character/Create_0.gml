@@ -1,22 +1,27 @@
 /// @description Set variables
 
+///General initializations
 active = true; //Accepting input
 Team = noone; //Belongs to no team
 player_id = 0; //player id for score
 jumps = 0;
 crouch = false;
-Grab_object = noone;
-holding = 0; //holding - 0 for let go next time, 2 to throw
-Equipped_objects = ds_list_create(); //the items that are equipped
 Holder = noone; //who is holding self
 sticky = false; //for grabbing
-has_jetpack = false
-has_hang_glider = false
 y_score = room_height; //The heighest y coordinate the player has reached
 mouseX = 0; //temporary variable to check if there is any change in the mouse
 player_name = "";
 freeze_holding_buffer_max = 10; //buffer to activate freezing of grabbed object
 freeze_holding_buffer = freeze_holding_buffer_max;
+
+///Item initializations
+Grab_object = noone;
+holding = 0; //holding - 0 for let go next time, 2 to throw
+Equipped_objects = ds_list_create(); //the items that are equipped
+has_jetpack = false
+has_hang_glider = false
+
+///Climbing intializations
 climbing = false //whether the player is climbing to the side of a block (Pick only)
 hanging = false //whether a player is hanging on an edge
 hanging_tol = 6 //number of pixels a player can be from the top to enter the hanging state

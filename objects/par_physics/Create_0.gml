@@ -14,7 +14,7 @@ Team = noone;
 on_body = false //whether the item is carried above the player or on their body.
 
 ///Physics
-mass = 10;
+mass = 12;
 gravity_max = 10;
 gravity_incr = 0.4; //downward acceleration
-fric = .4 //friction
+fric = 2 //friction
