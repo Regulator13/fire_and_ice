@@ -1,11 +1,11 @@
 /// @function scr_platformGenerate(dx, dy, range)
 /// @description scr_platform generate
 
-sx = argument0;
-sy = argument1;
-dx = sx;
-dy = sy;
-gridSize = 32;
+var sx = argument0;
+var sy = argument1;
+var dx = sx;
+var dy = sy;
+var gridSize = 32;
 
 switch(argument2) {
 	
@@ -22,7 +22,7 @@ switch(argument2) {
 		
 		//gun second block from left 1/4 chance
 		if !irandom(3){
-			if (place_empty(dx - gridSize*3, dy - gridSize/2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
+			if (place_empty(dx - gridSize*3, dy - gridSize)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
 		}
 		
 		break;
@@ -130,7 +130,7 @@ switch(argument2) {
 		
 		//gun in middle 1/4 chance
 		if !irandom(3){
-			if (place_empty(dx - gridSize*3, dy - gridSize/2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
+			if (place_empty(dx - gridSize*3, dy - gridSize)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
 		}
 	
 		break;

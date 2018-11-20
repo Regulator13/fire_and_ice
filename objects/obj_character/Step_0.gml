@@ -490,10 +490,10 @@ if (active) {
 		
         //If not already holding something, attempt to grab close thing
         if (holding = 0) {
-			Grab_object = (instance_place(x+sign(dir)*4,y,par_physics));
+			Grab_object = (instance_place(x+sign(dir)*6,y,par_physics));
 			
             if !instance_exists(Grab_object){
-				Grab_object = (instance_place(x+sign(dir)*4,y,obj_character));
+				Grab_object = (instance_place(x+sign(dir)*6,y,obj_character));
 			}
 			
 			//Initialize variables for certain objects
@@ -590,8 +590,8 @@ if (active) {
 	///Equip
 	if (right_action_pressed){
         //Attempt to equip the item next to the player
-        if instance_exists(instance_place(x + sign(dir)*4, y, par_item)){
-			ds_list_add(Equipped_objects, instance_place(x + sign(dir)*4, y, par_item));
+        if instance_exists(instance_place(x + sign(dir)*6, y, par_item)){
+			ds_list_add(Equipped_objects, instance_place(x + sign(dir)*6, y, par_item));
 
 			//Remove the item from the game
 			with Equipped_objects[| ds_list_size(Equipped_objects) - 1]{
@@ -740,7 +740,7 @@ if climbing{
 		if place_free(x, y - 2){
 			if (Input_player.inputs[RIGHTSELC_KEY] == KEY_ISPRESSED){
 				vspeed = -2
-				energy -= climbing_cost*2
+				energy -= climbing_cost
 			}
 		}
 			
@@ -750,7 +750,7 @@ if climbing{
 		if place_free(x, y + 2){
 			if (Input_player.inputs[LEFTSELC_KEY] == KEY_ISPRESSED){
 				vspeed = 2
-				energy -= climbing_cost*2
+				energy -= climbing_cost
 			}
 		}
 			
@@ -802,16 +802,13 @@ if hanging{
 	//The player can lift themselves up
 	if(Input_player.inputs[ACTION_KEY] == KEY_PRESSED){
 		if place_free(x + climb_dir * 4, y - sprite_height){
-			if energy >= climbing_cost * 5{
-				hanging = false
-				energy -= climbing_cost * 5
-				x += climb_dir * 4
-				y -= sprite_height - y_diff
-				//apply gravity again after it was lost
-				gravity_incr = 0.4
-				//give a short pause before allowing players to move again
-				alarm[1] = 5
-			}
+			hanging = false
+			x += climb_dir * 4
+			y -= sprite_height - y_diff
+			//apply gravity again after it was lost
+			gravity_incr = 0.4
+			//give a short pause before allowing players to move again
+			alarm[1] = 5
 		}
 	}
 }
