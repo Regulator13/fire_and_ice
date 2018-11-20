@@ -13,6 +13,7 @@ mouseX = 0; //temporary variable to check if there is any change in the mouse
 player_name = "";
 freeze_holding_buffer_max = 10; //buffer to activate freezing of grabbed object
 freeze_holding_buffer = freeze_holding_buffer_max;
+can_throw = true
 
 ///Item initializations
 Grab_object = noone;
@@ -66,9 +67,8 @@ input_buffer = 0; //buffer for joystick input
 input_buffer_max = 10;
 input_method = CONTROLS_KEYBOARD; //the type of input: keyboard, mouse, joystick
 // initiate isPressed variable outside, so they don't automatically reset
-grab_is_pressed = false;
 right_action_is_pressed = false;
-ice_is_pressed = false;
+left_action_is_pressed = false;
 right_action_is_pressed = false;
 
 

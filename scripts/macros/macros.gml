@@ -38,3 +38,5 @@
 #macro CONTROLS_GP2 1
 #macro CONTROLS_GP3 2
 #macro CONTROLS_GP4 3
+
+#macro GRAB_TOL 6 
