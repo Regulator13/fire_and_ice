@@ -71,27 +71,32 @@ if (will_freeze) {
 //explode
 if (ignite){
 	//once timer is out
-    if (freeze_buffer < 0*30) {
-        if global.online{
-			instance_create_layer(x+sprite_width/2, y+sprite_height/2, "lay_instances", obj_explosion);
+    if (freeze_buffer < 0*30){
+		if Holder == noone{
+	        if global.online{
+				instance_create_layer(x+sprite_width/2, y+sprite_height/2, "lay_instances", obj_explosion);
+			}
+			else{
+				part_particles_create(obj_particle.ps_explosion, x + 8, y + 8, obj_particle.prt_explosion, 1)
+				//Create explosion and deal damage to all those in rectangle
+				Collided = scr_collision_rectangle_list(x - (32 - sprite_width/2), y - (32 - sprite_height/2), x + (32 - sprite_width/2), y + (32 - sprite_height/2), par_block, false, true)
+		        if !ds_list_empty(Collided){
+					for (var i=0; i<ds_list_size(Collided); i++){
+						Collided[| i].hp -= 10 //explosion damage
+						if Collided[| i].object_index == obj_water_spawn instance_destroy(Collided[| i])
+						else if Collided[| i].object_index == obj_rechargeStation instance_destroy(Collided[| i])
+					}
+				}
+				ds_list_destroy(Collided)
+			}
+		
+	        instance_destroy();
 		}
 		else{
-			part_particles_create(obj_particle.ps_explosion, x + 8, y + 8, obj_particle.prt_explosion, 1)
-			//Create explosion and deal damage to all those in rectangle
-			Collided = scr_collision_rectangle_list(x - (32 - sprite_width/2), y - (32 - sprite_height/2), x + (32 - sprite_width/2), y + (32 - sprite_height/2), par_block, false, true)
-	        if !ds_list_empty(Collided){
-				for (var i=0; i<ds_list_size(Collided); i++){
-					Collided[| i].hp -= 10 //explosion damage
-					if Collided[| i].object_index == obj_water_spawn instance_destroy(Collided[| i])
-					else if Collided[| i].object_index == obj_rechargeStation instance_destroy(Collided[| i])
-				}
-			}
-			ds_list_destroy(Collided)
+			ignite = false
+			freeze_buffer = freeze_buffer_max
 		}
-		
-        instance_destroy();
     }
-	
 	else freeze_buffer -= 1;
 }
 
