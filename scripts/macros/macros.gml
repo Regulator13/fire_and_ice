@@ -40,3 +40,4 @@
 #macro CONTROLS_GP4 3
 
 #macro GRAB_TOL 6 
+#macro PLAYER_TOL 3

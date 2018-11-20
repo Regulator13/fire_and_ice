@@ -1,9 +1,11 @@
 /// @description Input
+var dropped = false //Set true if the player has just dropped from a block to a ledge
+
 if (active) {
 	///Local Initializations
 	var moveSpeed;
     var gravity_max;
-	can_throw = true //Set a marker so the player doesn't throw a ball when doing something else
+	var can_throw = true //Set a marker so the player doesn't throw a ball when doing something else
 	
     ///Input resets
     haxis1 = 0;
@@ -98,6 +100,7 @@ if (active) {
 						x += haxis1
 					}
 				}
+				
 				
 				else{
 					//accelerate
@@ -213,6 +216,50 @@ if (active) {
 	///Score
     //update y_score
     if (y < y_score) y_score = y;
+	
+	///Hang
+	//Use down key to move from the top of a ledge to hanging position
+	if down_pressed > axis_buffer{
+		with instance_place(x, y + 1, par_block){
+			//Hang on right side if right foot is off the side of block
+			if position_empty(other.x + other.sprite_width, other.y + other.sprite_height + 1){
+				//Check to see if the PLAYER can fit, not the par_block
+				with other{
+					if place_free(other.x + sprite_width, y){
+						x = other.x + other.sprite_width - PLAYER_TOL
+						y = other.y - y_diff
+						dir = -1
+						hspeed = 0
+						vspeed = 0
+						climb_dir = dir
+						gravity_incr = 0
+						active = false
+						hanging = true
+						dropped = true
+					}
+				}
+			}
+		
+			//Hang on left side if left foot is off the side of block
+			if position_empty(other.x, other.y + other.sprite_height + 1){
+				//Check to see if the PLAYER can fit, not the par_block
+				with other{
+					if place_free(other.x - sprite_width, y){
+						x = other.x - sprite_width + PLAYER_TOL
+						y = other.y - y_diff
+						dir = 1
+						hspeed = 0
+						vspeed = 0
+						climb_dir = dir
+						gravity_incr = 0
+						active = false
+						hanging = true
+						dropped = true
+					}
+				}
+			}
+		}
+	}
 
     ///Jump
     if (jumps > 0) {
@@ -247,7 +294,7 @@ if (active) {
 	}
 	
 	//Climb blocks/corpses
-	with(instance_place(x + dir * 2, y, par_physics)){
+	with(instance_place(x + dir * 2, y, par_block)){
 		if (id != other.Grab_object){
 			//Change the character's variables
 			with (other){
@@ -255,28 +302,7 @@ if (active) {
 			}
         }
 	}
-	
-	///Climb blockBigs
-	with instance_place(x + dir * 2, y, obj_blockBig){
-		with (other){
-			scr_attempt_climbing()
-		}
-    }
-	
-	///Climb Walls
-	with instance_place(x + dir * 2, y, obj_wall){
-		with (other){
-			scr_attempt_climbing()
-		}
-    }
-	
-	///Climb Platforms
-	with instance_place(x + dir * 2, y, obj_platform){
-		with (other){
-			scr_attempt_climbing()
-		}
-    }
-	
+
     ///Gravity
     if (vspeed < gravity_max) {
         //gravity increment
@@ -802,10 +828,13 @@ if hanging{
 	
 	//Drop down with down key OR if whatever they are hanging onto disappears
 	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) or place_free(x + climb_dir * 3, y){
-		x -= climb_dir * 3
-		hanging = false
-		active = true
-		gravity_incr = 0.4
+		//make sure the player has not just dropped down to the ledge
+		if not dropped{	
+			x -= climb_dir * 3
+			hanging = false
+			active = true
+			gravity_incr = 0.4
+		}
 	}
 	
 	//The player can lift themselves up
