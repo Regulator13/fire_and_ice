@@ -36,7 +36,7 @@ with(button) {
     action = "value";
     title = "Animations";
     ds_list_add(values, "Off", "On");
-    value = ds_list_find_index(values, other.animations_on);
+    value = other.animations_on
 }
 ds_list_add(buttons, button);
 
@@ -50,8 +50,5 @@ for (c2y = 0; c2y < 4; c2y++) {
     }
 break;
 */
-	
-var button = instance_create_layer(room_width/2, room_height-32-48*0, "lay_instances", obj_button);
-button.action = "optionsGameOptions";
-button.title = "options";
-ds_list_add(buttons, button);
+
+scr_create_button(room_width/2, room_height-32-48*0, "optionsGameOptions", "options", false)

@@ -29,6 +29,14 @@ with (global.Menu) {
                     local_players[? 0] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
                     local_players[? 0].controls = 0;
                     break;
+				case STATE_OPTIONS:
+					// clear preivous menu
+                    scr_menuClear();
+                    
+                    // initiate options menu
+                    scr_menuInitOptions();
+					
+					break;
                 }
         case STATE_CONTROLS:
             switch (to) {
@@ -91,12 +99,33 @@ with (global.Menu) {
 			
 		case STATE_OPTIONS:
             switch (to) {
+				case STATE_MAIN:
+					//save options
+					scr_saveOptions();
+					
+					// clear preivous menu
+                    scr_menuClear();
+					
+					// initiate main menu
+                    scr_menuInitMain();
+					
+					break;
+					
                 case STATE_GAME_OPTIONS:
                     // clear preivous menu
                     scr_menuClear();
                     
                     // initiate lobby menu
                     scr_menuInitGameOptions();
+                    
+                    break;
+				
+				case STATE_DEBUGOPTIONS:
+                    // clear preivous menu
+                    scr_menuClear();
+                    
+                    // initiate debug options menu
+                    scr_menuInitDebugOptions();
                     
                     break;
 			}
@@ -139,6 +168,14 @@ with (global.Menu) {
                     // initiate online menu
                     scr_menuInitOnline();
                     break;
+				case STATE_PATHS:
+					// clear preivous menu
+                    scr_menuClear();
+					
+					// initiate path menu
+					scr_menuInitPaths();
+					
+					break;
                 }
             break;
         case STATE_PATHS:

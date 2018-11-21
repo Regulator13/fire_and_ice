@@ -14,16 +14,18 @@ switch(action) {
         with(obj_menu) event_user(1);
         break;
 	
+	//go from the options menu to the state menu
     case "mainOptions":
-        with(obj_menu) event_user(4);
+        scr_stateSwitch(STATE_OPTIONS, STATE_MAIN)
         break;
-		
+	
+	//go from the main menu to the options menu
     case "options":
-        with(obj_menu) event_user(5);
+        scr_stateSwitch(STATE_MAIN, STATE_OPTIONS)
         break;
 		
     case "debugOptions":
-        with(obj_menu) event_user(6);
+        scr_stateSwitch(STATE_OPTIONS, STATE_DEBUGOPTIONS)
         break;
 		
 	
@@ -50,6 +52,11 @@ switch(action) {
 	// go from the game options menu to the options menu
 	case "optionsGameOptions":
 		scr_stateSwitch(STATE_GAME_OPTIONS, STATE_OPTIONS);
+		break;
+	
+	//go from the local lobby to the paths menu
+	case "ready":
+		scr_stateSwitch(STATE_LOBBY, STATE_PATHS);
 		break;
 	
     case "addNickname":

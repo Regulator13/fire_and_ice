@@ -911,7 +911,8 @@ if (mooch_buffer < 0) {
 		            instance_create_layer(x, y-32, "lay_instances", obj_mooch);
 				}
 				else{
-					part_particles_create(obj_particle.ps_mooch, 0, 0, obj_particle.prt_mooch, 1)
+					part_particles_create(obj_particle.ps_mooch, other.x, other.y, obj_particle.prt_mooch, 1)
+						
 					other.mooch_buffer = other.mooch_buffer_max;
 				}
 			}

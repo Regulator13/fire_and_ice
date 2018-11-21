@@ -1,4 +1,7 @@
 /// @description  Create server and initialise map
+
+//global.Server set to id in obj_online
+
 global.counter = 0;
 image_blend = c_red;
 global.have_server = true;
@@ -29,7 +32,7 @@ if( server<0 ){
     // If theres already a server running, shut down and delete.
     instance_destroy();
 }
-bbj = buffer_create(256,buffer_fixed,1)
+
 // Setup a timer so we can broadcast the server IP out to local clients looking...
 alarm[0]=60;
 
