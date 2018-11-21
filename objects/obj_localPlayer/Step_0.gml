@@ -3,7 +3,8 @@ if (input_buffer < 0) {
     var buffer = false; // whether or not input was put in
     
     // get input
-    switch (global.controls[controls, KEY_TYPE]) {
+	var input = global.controls[controls, KEY_TYPE]
+    switch (input) {
         case CONTROLS_KEYBOARD:
             inputs[LEFT_KEY] = scr_getKeyInput(global.controls[controls, LEFT_KEY]);
             inputs[RIGHT_KEY] = scr_getKeyInput(global.controls[controls, RIGHT_KEY]);
@@ -44,6 +45,19 @@ if (input_buffer < 0) {
 			
         default:
             // joystick input
+			inputs[LEFT_KEY] = scr_getGamePadInput(global.controls[controls, LEFT_KEY], input);
+            inputs[RIGHT_KEY] = scr_getGamePadInput(global.controls[controls, RIGHT_KEY], input);
+            inputs[UP_KEY] = scr_getGamePadInput(global.controls[controls, UP_KEY], input);
+            inputs[DOWN_KEY] = scr_getGamePadInput(global.controls[controls, DOWN_KEY], input);
+            inputs[ACTION_KEY] = scr_getGamePadInput(global.controls[controls, ACTION_KEY], input);
+            inputs[ACTION2_KEY] = scr_getGamePadInput(global.controls[controls, ACTION2_KEY], input);
+            inputs[LEFTSELC_KEY] = scr_getGamePadInput(global.controls[controls, LEFTSELC_KEY], input);
+            inputs[RIGHTSELC_KEY] = scr_getGamePadInput(global.controls[controls, RIGHTSELC_KEY], input);
+			
+			//aiming
+			gamepad_aimx = gamepad_axis_value(input, gp_axisrh)
+			gamepad_aimy = gamepad_axis_value(input, gp_axisrv)
+			
             break;
     }
     
