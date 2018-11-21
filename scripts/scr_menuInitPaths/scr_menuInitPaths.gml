@@ -5,19 +5,10 @@
 / Return     : void
 */
 
-// set state
-state = STATE_PATHS;
-
 // create buttons
 if (!global.online or (global.online and global.have_server)) {
-    var button = instance_create_layer(room_width-96, room_height-32, "lay_instances", obj_button);
-    button.action = "game";
-    button.title = "play";
-    ds_list_add(buttons, button);
-    var button = instance_create_layer(room_width/2, room_height-32, "lay_instances", obj_button);
-    button.action = "new";
-    button.title = "new";
-    ds_list_add(buttons, button);
+	scr_create_button(room_width-96, room_height-32, STATE_GAME, "play", false)
+	scr_create_button(room_width/2, room_height-32, "new", "new", false)
     
     //load paths
     if (file_exists("paths.ini")) {

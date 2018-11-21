@@ -18,7 +18,7 @@ var s = 48//spacing between the buttons
 //create buttons
 scr_create_button(cx, room_height-hb+s*by++, "delOptions", "delete options", true)
 scr_create_button(cx, room_height-hb+s*by++, "delMissions", "delete paths", true)
-scr_create_button(cx, room_height-hb+s*by++, "optionsDebug", "options", false)
+scr_create_button(cx, room_height-hb+s*by++, "back", "options", false)
 
 //reset selected
 selected = b-1

@@ -1,11 +1,4 @@
 /// @description change to controls menu
-state = STATE_CONTROLS;
-
-//clear buttons
-for (var i = 0; i < ds_list_size(buttons); i++) {
-    with(ds_list_find_value(buttons, i)) instance_destroy();
-    }
-ds_list_clear(buttons);
 
 // setup controls menu
 
@@ -18,16 +11,10 @@ for (var i = 0; i < global.Menu.controlsMax; i++;)
     ds_list_add(button.values, "Player " + string(i+1));
 button.value = controlSelected;
 ds_list_add(buttons, button);
-var button = instance_create_layer(room_width/2, room_height-32-48*1, "lay_instances", obj_button);
-button.image_index = 8;
-button.action = "delControls";
-button.title = "reset";
-ds_list_add(buttons, button);
-var button = instance_create_layer(room_width/2, room_height-32, "lay_instances", obj_button);
-button.image_index = 4;
-button.action = "optionsControl";
-button.title = "options";
-ds_list_add(buttons, button);
+
+scr_create_button(room_width/2, room_height-32-48*1, "delControls", "reset", false)
+scr_create_button(room_width/2, room_height-32, "back", "options", false)
+
 // device
 var button = instance_create_layer(room_width/2, 32, "lay_instances", obj_button);
 button.action = "valueAction";
