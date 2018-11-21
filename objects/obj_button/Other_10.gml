@@ -52,6 +52,11 @@ switch(action) {
 		scr_stateSwitch(STATE_GAME_OPTIONS, STATE_OPTIONS);
 		break;
 	
+	//go from the local lobby to the paths menu
+	case "ready":
+		scr_stateSwitch(STATE_LOBBY, STATE_PATHS);
+		break;
+	
     case "addNickname":
         with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputButton)) action = "addNickname";
         break;

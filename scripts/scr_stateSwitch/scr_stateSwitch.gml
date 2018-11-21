@@ -139,6 +139,14 @@ with (global.Menu) {
                     // initiate online menu
                     scr_menuInitOnline();
                     break;
+				case STATE_PATHS:
+					// clear preivous menu
+                    scr_menuClear();
+					
+					// initiate path menu
+					scr_menuInitPaths();
+					
+					break;
                 }
             break;
         case STATE_PATHS:

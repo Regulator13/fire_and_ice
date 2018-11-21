@@ -151,7 +151,7 @@ if !(instance_exists(obj_inputButton)){
                             show_debug_message("All ready!");
                             
                             // switch to path menu
-                            event_user(1);
+                            scr_stateSwitch(STATE_LOBBY, STATE_PATHS)
                         }
                     }
                 }
