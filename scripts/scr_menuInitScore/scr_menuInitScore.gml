@@ -5,9 +5,6 @@
 / Return     : void
 */
 
-// set state
-state = STATE_SCORE;
-
 // goto score screen
 room_goto(rm_score);
 

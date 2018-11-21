@@ -15,6 +15,16 @@ var to = argument1;
 
 // switch menu state
 with (global.Menu) {
+	//check if going back one state
+	if ds_stack_top(state_queue) = to
+		ds_stack_pop(state_queue)//delete last entry
+	else
+		ds_stack_push(state_queue, from)//add new entry
+	
+	//set state
+	state = to;
+
+	//switch state
     switch (from) {
         case STATE_MAIN:
             switch (to) {
@@ -35,6 +45,14 @@ with (global.Menu) {
                     
                     // initiate options menu
                     scr_menuInitOptions();
+					
+					break;
+				case STATE_ONLINE:
+					// clear preivous menu
+                    scr_menuClear();
+                    
+                    // initiate menu
+                    scr_menuInitOnline();
 					
 					break;
                 }
@@ -128,6 +146,15 @@ with (global.Menu) {
                     scr_menuInitDebugOptions();
                     
                     break;
+				
+				case STATE_CONTROLS:
+                    // clear preivous menu
+                    scr_menuClear();
+                    
+                    // initiate debug options menu
+					scr_menuInitControls();
+					
+					break;
 			}
             break;
 			
@@ -180,6 +207,9 @@ with (global.Menu) {
             break;
         case STATE_PATHS:
             switch (to) {
+				case STATE_GAME:
+					event_user(2);
+					break;
                 case STATE_ONLINE:
                     // destroy online objects
                     if (global.have_server) // check if hosting

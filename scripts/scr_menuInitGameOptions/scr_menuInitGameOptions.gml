@@ -5,9 +5,6 @@
 / Return     : void
 */
 
-// set state
-state = STATE_GAME_OPTIONS;
-
 //reset selected
 selected = 0;
 
@@ -51,4 +48,4 @@ for (c2y = 0; c2y < 4; c2y++) {
 break;
 */
 
-scr_create_button(room_width/2, room_height-32-48*0, "optionsGameOptions", "options", false)
+scr_create_button(room_width/2, room_height-32-48*0, "back", "options", false)

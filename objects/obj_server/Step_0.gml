@@ -1,7 +1,4 @@
 /// @description  client messages
-buffer_seek(bbj, buffer_seek_start, 0);
-buffer_write(bbj, buffer_s8, CLIENT_CONNECT);
-
     // once a frame, we send clients any priority message, if not in game
     var count = ds_list_size(iplist); // get the amount of clients connected
 

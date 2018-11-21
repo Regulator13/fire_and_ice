@@ -1,6 +1,7 @@
 /// @description Set variables
 global.paused = false; //whether game is paused
 state = STATE_MAIN; //current game state
+state_queue = ds_stack_create()//holds states in order visited for universal back button
 buttons = ds_list_create(); //holds menu buttons
 selected = 0; //selected button
 input_buffer = 0; //small buffer to slow down gamepad input
