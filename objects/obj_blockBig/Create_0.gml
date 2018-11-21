@@ -1,6 +1,7 @@
 /// @description Set variables
 //Keep in bounds
 if (x > room_width-sprite_width) instance_destroy();
+climbable = true //this object can be climbed
 
 ///Animation
 image_speed = 0;
