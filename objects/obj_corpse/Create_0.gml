@@ -9,7 +9,3 @@ image_index = 4;
 hp_normal = 3;
 hp_max = 4;
 hp = hp_normal;
-
-///Physics
-mass = 20
-fric = 2 //friction

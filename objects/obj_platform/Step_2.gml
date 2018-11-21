@@ -13,8 +13,8 @@ if active{
 		///Vertical
 		if is_vertical{
 			//calculate bounds of movement
-			var upper_bound = start_y - (hp_max - hp) * grid_size * 2
-			var lower_bound = start_y
+			var upper_bound = start_y - (hp_max - hp) * grid_size
+			var lower_bound = start_y + (hp_max - hp) * grid_size
 		
 			//move
 			vspeed = dir * move_speed

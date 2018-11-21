@@ -68,7 +68,7 @@ maxY = room_height - gridSize*2; //max y platforms are allowed to generate at
 
 //Finish platform
 var dx = round(irandom_range(gridSize*3, room_width - gridSize*3)/gridSize)*gridSize;
-var dy = gridSize*2;
+var dy = gridSize*3;
 var i = 0;
 repeat(3) {
     instance_create_layer(dx+gridSize*i, dy, "lay_instances", obj_blockBig);
@@ -79,7 +79,8 @@ repeat(3) {
 instance_create_layer(dx+gridSize+8, dy-gridSize+4, "lay_instances", obj_door);
 
 //for each row in the room, create 1 of 6 platforms
-for (i = 3; i < maxY/gridSize; i += 1) {
+for (i = 4; i < maxY/gridSize; i += 1) {
+	//Up to 2 platforms per row
     for(j = 0; j < 1; j+=1) {
 		//Create a platform in that row 75% of the time 
         if irandom(3){
@@ -91,7 +92,7 @@ for (i = 3; i < maxY/gridSize; i += 1) {
 }
 
 //create additional platforms every 4 blocks with chance 1 in 5 (Mandatories)
-for (i = 3; i < maxY/gridSize; i += 4) {
+for (i = 4; i < maxY/gridSize; i += 4) {
     for(j = 0; j < 1; j+=1) {
         dx = round(irandom_range(gridSize, room_width - gridSize)/gridSize)*gridSize;
         dy = i*gridSize;
@@ -134,7 +135,7 @@ for (i=0; i<tries; i++){
 	var open = true
 	
 	//check if track is free
-	for (j=0; j<8; j++){
+	for (j=-3; j<4; j++){
 		if not place_free(rx, ry - j*gridSize){
 			open = false
 			break

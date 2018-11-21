@@ -24,7 +24,7 @@ energy_fire = 5; //energy it takes for a fireball
 ///Physics
 gravity_max = 10; 
 gravity_incr = 0.4; //Acceleration while falling
-fric = .4 //friction
+fric = 2 //friction
 
 ///Input
 input_buffer = 0; //buffer for joystick input

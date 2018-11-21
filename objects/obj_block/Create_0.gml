@@ -11,9 +11,5 @@ hp_normal = 3;
 hp_max= 4;
 hp = hp_normal;
 
-///Physics
-mass = 12
-fric = 2 //friction
-
 ///Animation
 image_speed = 0;
