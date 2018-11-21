@@ -14,8 +14,10 @@ switch(action) {
         with(obj_menu) event_user(1);
         break;
 	
+	//go from the options menu to the state menu
     case "mainOptions":
-        with(obj_menu) event_user(4);
+        scr_stateSwitch(STATE_OPTIONS, STATE_MAIN)
+		
         break;
 		
     case "options":

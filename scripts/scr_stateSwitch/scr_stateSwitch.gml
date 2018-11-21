@@ -91,6 +91,18 @@ with (global.Menu) {
 			
 		case STATE_OPTIONS:
             switch (to) {
+				case STATE_MAIN:
+					//save options
+					scr_saveOptions();
+					
+					// clear preivous menu
+                    scr_menuClear();
+					
+					// initiate main menu
+                    scr_menuInitMain();
+					
+					break;
+					
                 case STATE_GAME_OPTIONS:
                     // clear preivous menu
                     scr_menuClear();

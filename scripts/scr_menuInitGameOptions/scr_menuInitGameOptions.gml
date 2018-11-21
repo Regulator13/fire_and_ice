@@ -50,8 +50,5 @@ for (c2y = 0; c2y < 4; c2y++) {
     }
 break;
 */
-	
-var button = instance_create_layer(room_width/2, room_height-32-48*0, "lay_instances", obj_button);
-button.action = "optionsGameOptions";
-button.title = "options";
-ds_list_add(buttons, button);
+
+scr_create_button(room_width/2, room_height-32-48*0, "optionsGameOptions", "options")
