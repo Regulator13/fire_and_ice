@@ -1,4 +1,7 @@
 /// @description Input
+//Make sure the player doesn't go past the top
+if y < 6 y = 6
+
 var dropped = false //Set true if the player has just dropped from a block to a ledge
 
 if (active) {
@@ -241,7 +244,7 @@ if (active) {
 			}
 		
 			//Hang on left side if left foot is off the side of block
-			if position_empty(other.x, other.y + other.sprite_height + 1){
+			else if position_empty(other.x, other.y + other.sprite_height + 1){
 				//Check to see if the PLAYER can fit, not the par_block
 				with other{
 					if place_free(other.x - sprite_width, y){
@@ -293,7 +296,7 @@ if (active) {
         }
 	}
 	
-	//Climb blocks/corpses
+	//Climb everything
 	with(instance_place(x + dir * 2, y, par_block)){
 		if (id != other.Grab_object){
 			//Change the character's variables
@@ -915,5 +918,4 @@ if (mooch_buffer < 0) {
         }
     }
 }
-
 else mooch_buffer--;
