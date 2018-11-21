@@ -23,7 +23,6 @@ var hb = 32*(b+1)+16//height buffer from the bottom of the room
 var by = 0//y buffer between buttons, incremented each button
 var s = 48//spacing between the buttons
 
-    
 scr_create_button(cx, room_height-hb+s*by++, STATE_CONTROLS, "controls", false)
 scr_create_button(cx, room_height-hb+s*by++, STATE_DEBUGOPTIONS, "debug", false)
 scr_create_button(cx, room_height-hb+s*by++, STATE_GAME_OPTIONS, "game options", true)

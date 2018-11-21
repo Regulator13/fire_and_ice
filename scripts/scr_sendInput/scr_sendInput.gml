@@ -44,13 +44,26 @@
             break;
         default:
             // joystick input
+			var device = global.controls[controls, KEY_TYPE]
+			for (var i = 0; i < amount-1; i++) {
+                // input the input state
+                var input = scr_getGamePadInput(global.controls[controls, i], device);
+                buffer_write(buff, buffer_s8, input);
+                }
         }
     // send type
     buffer_write(buff, buffer_s8, global.controls[controls, KEY_TYPE]);
     
-    // write the mousX and mouseY
-    buffer_write(buff, buffer_u16, mouse_x);
-    buffer_write(buff, buffer_u16, mouse_y);
+	if global.controls[controls, KEY_TYPE] != CONTROLS_KEYBOARD and global.controls[controls, KEY_TYPE] != CONTROLS_MOUSE {
+	    //write gamepad aiming
+		buffer_write(buff, buffer_s8, gamepad_axis_value(input, gp_axisrh));
+	    buffer_write(buff, buffer_s8, gamepad_axis_value(input, gp_axisrv));
+	}
+	else {
+		// write the mousX and mouseY
+	    buffer_write(buff, buffer_u16, mouse_x);
+	    buffer_write(buff, buffer_u16, mouse_y);
+	}
 
     // Send this to the server
     network_send_udp(client,ip,port,buff,buffer_tell(buff));

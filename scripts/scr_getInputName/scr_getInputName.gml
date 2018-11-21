@@ -23,4 +23,6 @@ switch (controller) {
             return(scr_getKeyName(code));
         else 
             return(scr_getMouseName(code));
+	default:
+		return(scr_getGamePadName(code));
     }

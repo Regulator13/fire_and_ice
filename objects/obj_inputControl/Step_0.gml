@@ -37,6 +37,24 @@ switch(controller) {
             }
         }
         break;
+	
+	default:
+        //check for button presses
+		var i
+		for (i = gp_face1; i <= gp_padr; i++) {
+			if (gamepad_button_check_pressed(controller, i)) {
+				scr_changeControl(i, control, controller, player, Source);
+				instance_destroy();
+			}
+        }
+		//check left axis
+		for (i = gp_axislh; i <= gp_axislv; i++) {
+			if abs(gamepad_axis_value(controller, i)) > GAMEPAD_AXIS_TOL {
+				scr_changeControl(i*sign(gamepad_axis_value(controller, i)), control, controller, player, Source);
+				instance_destroy();
+			}
+        }
+        break;
 }
         
 // escape
