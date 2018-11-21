@@ -36,4 +36,14 @@ switch (controller) {
         global.controls[player, RIGHTSELC_KEY] = mb_right;   // fire
         global.controls[player, KEY_TYPE] = CONTROLS_MOUSE;
         break;
+	default:
+		global.controls[player, LEFT_KEY] = -gp_axislh;
+        global.controls[player, RIGHT_KEY] = gp_axislh;
+        global.controls[player, UP_KEY] = -gp_axislv;
+        global.controls[player, DOWN_KEY] = gp_axislv;
+        global.controls[player, ACTION_KEY] = -gp_axislv;      // jump
+        global.controls[player, ACTION2_KEY] = gp_face1;     // selection
+        global.controls[player, LEFTSELC_KEY] = gp_shoulderrb;     // ice
+        global.controls[player, RIGHTSELC_KEY] = gp_shoulderlb;   // fire
+        global.controls[player, KEY_TYPE] = controller;
     }

@@ -98,7 +98,7 @@ with (global.Menu) {
                     
                     // initiate lobby menu
                     scr_menuInitLobby(from);
-                    
+                    show_debug_message(string(state))
                     break;
                 case STATE_MAIN:
                     // delete obj_online

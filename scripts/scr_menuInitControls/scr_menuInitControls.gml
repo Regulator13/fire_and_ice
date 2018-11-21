@@ -70,6 +70,24 @@ switch (controller) {
             ds_list_add(buttons, button);
             }
         break;
+    default:
+        var c1 = 4;
+        var c2 = 4;
+        // first column of input
+        for (c1y = 0; c1y < c1; c1y++) {
+            var button = instance_create_layer(c1x, cy+by*c1y, "lay_instances", obj_controlButton);
+            button.key = c1y;
+            button.title = scr_getInputName(global.controls[controlSelected, c1y], button.key, controller);
+            ds_list_add(buttons, button);
+            }
+        // secound column of input
+        for (c2y = 0; c2y < 4; c2y++) {
+            var button = instance_create_layer(c2x, cy+by*c2y, "lay_instances", obj_controlButton);
+            button.key = c2y+c2;
+            button.title = scr_getInputName(global.controls[controlSelected, c2y+c2], button.key, controller);
+            ds_list_add(buttons, button);
+            }
+        break;
     }
 
 

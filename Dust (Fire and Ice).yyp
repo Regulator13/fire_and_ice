@@ -199,6 +199,14 @@
             }
         },
         {
+            "Key": "20a16339-9bab-4f5c-9834-69816474cb40",
+            "Value": {
+                "id": "ed3ae101-f892-4297-9f55-c67676140038",
+                "resourcePath": "scripts\\scr_getGamePadName\\scr_getGamePadName.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "211c10df-1e9d-48c6-be2b-ee2b5ac02050",
             "Value": {
                 "id": "f8a27ddc-a79e-486b-ab7a-38ee14d402ae",
@@ -532,6 +540,14 @@
                 "id": "74fe5bf4-b516-401b-8a15-2e7c25aa7bfb",
                 "resourcePath": "sprites\\spr_pirahna\\spr_pirahna.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "4ec99d49-d5b4-4688-a3b1-105dc818a9fe",
+            "Value": {
+                "id": "b274af0a-c469-41c9-ae33-3410dcdfa8e6",
+                "resourcePath": "scripts\\scr_getGamePadInput\\scr_getGamePadInput.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -1471,6 +1487,14 @@
             }
         },
         {
+            "Key": "d870b712-0cce-4edd-b63b-f0158ddeb5b8",
+            "Value": {
+                "id": "776b827e-aa05-4afe-bf1f-cab18e3a3a13",
+                "resourcePath": "views\\d870b712-0cce-4edd-b63b-f0158ddeb5b8.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "d9f5d4f4-756d-4df8-8ff8-3450a64c410f",
             "Value": {
                 "id": "e8903007-7a67-4b9b-9c40-e8d3eb210f73",
@@ -1726,15 +1750,7 @@
         "4657b8b4-6a89-4c07-9379-43e9e7c2a135",
         "d8171654-192f-4f40-9e42-e227b93ccee4",
         "5724717e-a243-409c-8076-46339c019db6",
-        "b8f568ef-7e0a-4fae-8c5a-a9d171a4e144",
-        "6bd590a4-0611-48a8-94e8-9d77403e7cdc",
-        "f34c411f-acba-4f4b-951f-cbfe9872f120",
-        "5df34f72-ff57-4b69-894a-8b6f074e147e",
-        "cd5fa726-8583-438c-8f5b-8ca7348a2e52",
-        "a02888bc-7f0a-4256-95f0-6a792e6b92d4",
-        "4b8b7b78-0f28-4fe8-8bb4-d9d1615d64c9",
         "6102138b-386e-4add-8ebf-3c738ab11067",
-        "f065f706-1cfe-4c15-9dcd-0811e9b0c1ff",
         "404ad3f4-e47f-4aca-abde-35f95540000f",
         "04860cdd-6e52-44bf-b76e-5e0bf0a3f5d9",
         "206ca331-578c-4fee-8a12-b13bd0830f5e",
@@ -1745,6 +1761,16 @@
         "19794e45-2e6a-4ab2-8c25-441fa6a1559f",
         "24ae33c0-bcc8-48ec-bc89-df0531cb9124",
         "6eb633a1-5603-4463-bdde-47080f9f1593",
+        "b8f568ef-7e0a-4fae-8c5a-a9d171a4e144",
+        "6bd590a4-0611-48a8-94e8-9d77403e7cdc",
+        "5df34f72-ff57-4b69-894a-8b6f074e147e",
+        "f34c411f-acba-4f4b-951f-cbfe9872f120",
+        "20a16339-9bab-4f5c-9834-69816474cb40",
+        "cd5fa726-8583-438c-8f5b-8ca7348a2e52",
+        "a02888bc-7f0a-4256-95f0-6a792e6b92d4",
+        "4ec99d49-d5b4-4688-a3b1-105dc818a9fe",
+        "f065f706-1cfe-4c15-9dcd-0811e9b0c1ff",
+        "4b8b7b78-0f28-4fe8-8bb4-d9d1615d64c9",
         "b74416d6-fa98-4f0d-a011-864c74d2cd8a",
         "82ced23f-fd7d-477d-aba6-97b938799fa1",
         "b99fdab3-4586-43bd-ae3c-953324460de1",
