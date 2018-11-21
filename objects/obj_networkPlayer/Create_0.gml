@@ -32,6 +32,9 @@ inputs = array_create(array_length_2d(global.controls, 0));
 // mouse input
 mouseX = 0;
 mouseY = 0;
+//gamepad aiming
+gamepad_aimx = 0//value -1 to 1, right joystick
+gamepad_aimy = 0//value -1 to 1, right joystick
 
 // currentRTT - store the current round trip time for messages
 currentRTT = 0;

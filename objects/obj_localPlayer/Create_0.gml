@@ -20,6 +20,9 @@ inputs = array_create(array_length_2d(global.controls, controls));
 // mouse input
 mouseX = 0;
 mouseY = 0;
+//gamepad aiming
+gamepad_aimx = 0//value -1 to 1, right joystick
+gamepad_aimy = 0//value -1 to 1, right joystick
  
 input_buffer = 0; //small buffer to slow down gamepad input
 input_buffer_max = 4;
