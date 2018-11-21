@@ -88,6 +88,36 @@ with (global.Menu) {
                     break;
                 }
             break;
+			
+		case STATE_OPTIONS:
+            switch (to) {
+                case STATE_GAME_OPTIONS:
+                    // clear preivous menu
+                    scr_menuClear();
+                    
+                    // initiate lobby menu
+                    scr_menuInitGameOptions();
+                    
+                    break;
+			}
+            break;
+			
+		case STATE_GAME_OPTIONS:
+            switch (to) {
+                case STATE_OPTIONS:
+					//save the changes
+					scr_saveGameOptions()
+					
+                    // clear preivous menu
+                    scr_menuClear();
+					
+                    // initiate lobby menu
+                    scr_menuInitOptions();
+                    
+                    break;
+			}
+            break;
+			
         case STATE_LOBBY:
             switch (to) {
                 case STATE_MAIN:

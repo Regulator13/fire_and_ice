@@ -20,11 +20,10 @@ global.score_first = 25; //points for completing level first
 //small buffer to allow server to catch up
 check_win_buffer = 60;
 
-//TODO Move this variable to a button
-//whether animations are on or off
-animations_on = true
+///Animations
+ps_rain = noone
 
-if animations_on = true{
+if global.Menu.animations_on = true{
 	ps_rain = part_system_create()
 }
 
