@@ -119,7 +119,7 @@ if (active) {
 			}
 	        //Find direction player is facing
 	        if (hspeed != 0) dir = sign(hspeed);
-			else dir = 0
+			else if input_method != CONTROLS_KEYBOARD dir = 0 //Keyboard controls use direction to show aim reticule
 	    }
 		
 		//Apply friction if not moving
@@ -163,7 +163,7 @@ if (active) {
 				
 				//Change player's direction
 				if hspeed != 0 dir = sign(hspeed)
-				else dir = 0
+				else if input_method != CONTROLS_KEYBOARD dir = 0 //Keyboard controls use direction to show aim reticule
 			}
 		}
 	}
@@ -224,40 +224,42 @@ if (active) {
 	//Use down key to move from the top of a ledge to hanging position
 	if down_pressed > axis_buffer{
 		with instance_place(x, y + 1, par_block){
-			//Hang on right side if right foot is off the side of block
-			if position_empty(other.x + other.sprite_width, other.y + other.sprite_height + 1){
-				//Check to see if the PLAYER can fit, not the par_block
-				with other{
-					if place_free(other.x + sprite_width, y){
-						x = other.x + other.sprite_width - PLAYER_TOL
-						y = other.y - y_diff
-						dir = -1
-						hspeed = 0
-						vspeed = 0
-						climb_dir = dir
-						gravity_incr = 0
-						active = false
-						hanging = true
-						dropped = true
+			if self != other.Grab_object{
+				//Hang on right side if right foot is off the side of block
+				if position_empty(other.x + other.sprite_width, other.y + other.sprite_height + 1){
+					//Check to see if the PLAYER can fit, not the par_block
+					with other{
+						if place_free(other.x + sprite_width, y){
+							x = other.x + other.sprite_width - PLAYER_TOL
+							y = other.y - y_diff
+							dir = -1
+							hspeed = 0
+							vspeed = 0
+							climb_dir = dir
+							gravity_incr = 0
+							active = false
+							hanging = true
+							dropped = true
+						}
 					}
 				}
-			}
 		
-			//Hang on left side if left foot is off the side of block
-			else if position_empty(other.x, other.y + other.sprite_height + 1){
-				//Check to see if the PLAYER can fit, not the par_block
-				with other{
-					if place_free(other.x - sprite_width, y){
-						x = other.x - sprite_width + PLAYER_TOL
-						y = other.y - y_diff
-						dir = 1
-						hspeed = 0
-						vspeed = 0
-						climb_dir = dir
-						gravity_incr = 0
-						active = false
-						hanging = true
-						dropped = true
+				//Hang on left side if left foot is off the side of block
+				else if position_empty(other.x, other.y + other.sprite_height + 1){
+					//Check to see if the PLAYER can fit, not the par_block
+					with other{
+						if place_free(other.x - sprite_width, y){
+							x = other.x - sprite_width + PLAYER_TOL
+							y = other.y - y_diff
+							dir = 1
+							hspeed = 0
+							vspeed = 0
+							climb_dir = dir
+							gravity_incr = 0
+							active = false
+							hanging = true
+							dropped = true
+						}
 					}
 				}
 			}
@@ -296,9 +298,9 @@ if (active) {
         }
 	}
 	
-	//Climb everything
+	//Climb blocks
 	with(instance_place(x + dir * 2, y, par_block)){
-		if (id != other.Grab_object){
+		if (id != other.Grab_object and climbable){
 			//Change the character's variables
 			with (other){
 				scr_attempt_climbing()
@@ -439,6 +441,13 @@ if (active) {
 	//Move the grabbed object with the player
     scr_carry_object()
 	
+	///Aim with keyboard
+	if input_method == CONTROLS_KEYBOARD{
+		if Input_player.inputs[UP_KEY] == KEY_ISPRESSED{
+			aim_direction = scr_change_keyboard_aim(aim_direction)
+		}
+	}
+	
 	//If grabbing object, throw it
     if (left_action_released) {
 		//Grab onto a trampoline if nearby
@@ -478,19 +487,13 @@ if (active) {
 	                //throw
 	                with(Grab_object) {
 	                    //Throw using mouse
-	                    if (other.input_method = CONTROLS_MOUSE) {
+	                    if (other.input_method == CONTROLS_MOUSE) {
 	                        scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
 	                    }
 					
 						//Throw using arrow keys
-	                    else {
-	                        dir = other.dir;
-	                        vspeed = -(other.strength/mass)*(-other.vaxis1*2);
-	                        if (vspeed > -2) vspeed = -2;
-	                        //subtract height from distance
-	                        xspeed = (other.strength/mass-abs(vspeed/4));
-	                        //set only if positive
-	                        if (xspeed > 0) hspeed = dir*(xspeed);
+	                    else if (other.input_method == CONTROLS_KEYBOARD) {
+	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
 	                    }
                     
 	                    //activate object
@@ -589,16 +592,10 @@ if (active) {
 						scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
                     }
 					
-					//Otherwise based on arrow keys
-                    else {
-                        dir = other.dir;
-                        vspeed = -(other.strength/mass)*(-other.vaxis1*2);
-                        if (vspeed > -2) vspeed = -2;
-                        //subtract height from distance
-                        xspeed = (other.strength/mass-abs(vspeed/4));
-                        //set only if positive
-                        if (xspeed > 0) hspeed = dir*(xspeed);
-                    }
+                    //Throw using arrow keys
+	                else if (other.input_method == CONTROLS_KEYBOARD) {
+	                    scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
+	                }
                     
                     //Initialize fireball variables
                     sprite_index = spr_ballFire;
@@ -631,15 +628,9 @@ if (active) {
 		                }
 					
 						//Throw using arrow keys
-		                else {
-		                    dir = other.dir;
-		                    vspeed = -(other.strength/mass)*(-other.vaxis1*2);
-		                    if (vspeed > -2) vspeed = -2;
-		                    //subtract height from distance
-		                    xspeed = (other.strength/mass-abs(vspeed/4));
-		                    //set only if positive
-		                    if (xspeed > 0) hspeed = dir*(xspeed);
-		                }
+	                    else if (other.input_method == CONTROLS_KEYBOARD) {
+	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
+	                    }
                         
 		                //activate object
 		                active = true;

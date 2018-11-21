@@ -66,6 +66,9 @@ Input_player = noone; //player object where to get input from, local or network
 input_buffer = 0; //buffer for joystick input
 input_buffer_max = 10;
 input_method = CONTROLS_KEYBOARD; //the type of input: keyboard, mouse, joystick
+//keyboard aiming variable
+aim_direction = 0
+
 // initiate isPressed variable outside, so they don't automatically reset
 right_action_is_pressed = false;
 left_action_is_pressed = false;
