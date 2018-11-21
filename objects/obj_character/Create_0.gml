@@ -71,8 +71,8 @@ right_action_is_pressed = false;
 left_action_is_pressed = false;
 right_action_is_pressed = false;
 //gamepad aiming
-gamepad_aimx//value -1 to 1, right joystick
-gamepad_aimy//value -1 to 1, right joystick
+gamepad_aimx = 0//value -1 to 1, right joystick
+gamepad_aimy = 0//value -1 to 1, right joystick
 
 
 
