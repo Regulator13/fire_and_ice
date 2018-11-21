@@ -647,6 +647,14 @@
             }
         },
         {
+            "Key": "5fc42685-a048-4827-bc9b-b8f67f8e2287",
+            "Value": {
+                "id": "e4b14e8d-0b3e-4669-822e-003d8ac3ff16",
+                "resourcePath": "scripts\\scr_menuInitGameOptions\\scr_menuInitGameOptions.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "60652ac6-b533-48b9-af7d-ed87d2fa695d",
             "Value": {
                 "id": "65abcf12-8ad1-4136-87ed-7e0b1d8c8954",
@@ -1191,6 +1199,14 @@
             }
         },
         {
+            "Key": "b4352722-c2a4-4d46-9145-ef1be333caa4",
+            "Value": {
+                "id": "81b9a080-62b6-4a69-a972-8b787c0ecb01",
+                "resourcePath": "scripts\\scr_saveGameOptions\\scr_saveGameOptions.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "b49c5459-7116-4878-b7f9-9b1abd240760",
             "Value": {
                 "id": "610a413a-2443-4200-b3b9-626da4192aa8",
@@ -1705,9 +1721,11 @@
         "eecd94a0-3726-4c56-b162-e3a328524082",
         "1cfeb7df-ceef-46bc-9ca5-1153a4f7cc6d",
         "87777f0d-381c-46fb-af09-4076c4459205",
+        "5fc42685-a048-4827-bc9b-b8f67f8e2287",
         "f00035fe-567a-4023-9694-a8d7c2cd8e36",
         "6c8b1acf-5d68-4e82-a0bf-e2448861b527",
         "e938da85-51f6-435c-818e-61a352801293",
+        "b4352722-c2a4-4d46-9145-ef1be333caa4",
         "61146ab1-516a-4d3f-8c86-08b9018666a5",
         "0e90997c-a9d2-4c5e-b19a-b4ae7e5dadec",
         "789f2c97-26e8-4fa1-8076-cf7e8b90bea5",

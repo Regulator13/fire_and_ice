@@ -25,6 +25,7 @@ switch(action) {
     case "debugOptions":
         with(obj_menu) event_user(6);
         break;
+		
 	
 	//go from the debug menu to options menu
     case "optionsDebug":
@@ -40,6 +41,16 @@ switch(action) {
     case "optionsControl":
         scr_stateSwitch(STATE_CONTROLS, STATE_OPTIONS);
         break;
+		
+	// go from the options menu to the game options menu		
+    case "gameOptionsOptions":
+        scr_stateSwitch(STATE_OPTIONS, STATE_GAME_OPTIONS);
+        break;
+		
+	// go from the game options menu to the options menu
+	case "optionsGameOptions":
+		scr_stateSwitch(STATE_GAME_OPTIONS, STATE_OPTIONS);
+		break;
 	
     case "addNickname":
         with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputButton)) action = "addNickname";

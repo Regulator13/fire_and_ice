@@ -12,6 +12,7 @@
 #macro KEY_TYPE 8
 #macro INPUT_CMD 0
 #macro PING_CMD 1
+#macro STATE_GAME_OPTIONS -6
 #macro STATE_ONLINE -5
 #macro STATE_CONTROLS -4
 #macro STATE_DEBUGOPTIONS -3

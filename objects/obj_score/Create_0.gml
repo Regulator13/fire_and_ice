@@ -8,7 +8,7 @@ if (place_meeting(x,y,obj_blockBig)) instance_destroy();
 if (place_meeting(x,y,obj_wall)) instance_destroy();
 
 ///animate
-if obj_control.animations_on = true{
+if global.Menu.animations_on = true{
 	image_speed = 0.5;
 }
 
