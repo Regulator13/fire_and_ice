@@ -10,10 +10,13 @@ alarm[0] = 6*30 //destroy the ball after 6 seconds
 //Physics
 mass = 10;
 
-///animations
+///Animations
+ps_spark = noone
+emt_spark = noone
+
 // Particle System
 if not global.online{
-	if obj_control.animations_on{
+	if global.Menu.animations_on{
 		ps_spark = part_system_create()
 		part_system_depth(ps_spark, 50)
 	 	// Particle Sparks

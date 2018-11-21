@@ -40,11 +40,16 @@ readys = ds_list_create();
 ini_open("options.ini");
 
 //load data
-section = string("default");
-var str;
+section = "default";
 
 //set gameMode
 gameMode = ini_read_string(section, "gameMode", "Normal");
+
+///Game options menu
+section = "gameOptions"
+
+//load game options
+animations_on = ini_read_real(section, "animations_on", true);
 
 //close file
 ini_close(); 
