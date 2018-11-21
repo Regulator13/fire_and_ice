@@ -1,11 +1,11 @@
 /// @function scr_platformGenerate(dx, dy, range)
 /// @description scr_platform generate
 
-sx = argument0;
-sy = argument1;
-dx = sx;
-dy = sy;
-gridSize = 32;
+var sx = argument0;
+var sy = argument1;
+var dx = sx;
+var dy = sy;
+var gridSize = 32;
 
 switch(argument2) {
 	
@@ -22,7 +22,7 @@ switch(argument2) {
 		
 		//gun second block from left 1/4 chance
 		if !irandom(3){
-			if (place_empty(dx - gridSize*3, dy - gridSize/2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
+			if (place_empty(dx - gridSize*3, dy - gridSize)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
 		}
 		
 		break;
@@ -35,8 +35,8 @@ switch(argument2) {
 			}
 		}
 
-		//recharge station
-		if (place_empty(dx-gridSize,dy-gridSize)) instance_create_layer(dx-gridSize, dy-gridSize, "lay_instances", obj_rechargeStation);
+		//recharge station above middle block (If there is a middle block)
+		if (place_empty(dx-gridSize,dy-gridSize) and place_meeting(dx - gridSize, dy, obj_blockBig)) instance_create_layer(dx-gridSize, dy-gridSize, "lay_instances", obj_rechargeStation);
 		
 		//1 in 3 chance of jetpack on right if in second quater from bottom of room
 		if (dy > (room_height / 2)) and (dy < (3 * room_height / 4)){
@@ -69,8 +69,8 @@ switch(argument2) {
 			if (place_empty(dx - gridSize*3, dy - gridSize/2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_trampoline);
 		}
 		
-		//recharge station middle block
-		if (place_empty(dx-gridSize*2,dy-gridSize)) instance_create_layer(dx-gridSize*2, dy-gridSize, "lay_instances", obj_rechargeStation);
+		//recharge station above middle block (if there is a middle block)
+		if (place_empty(dx-gridSize*2,dy-gridSize) and place_meeting(dx - gridSize * 2, dy, obj_blockBig)) instance_create_layer(dx-gridSize*2, dy-gridSize, "lay_instances", obj_rechargeStation);
 		
 		//hang glider second from right side 1/4 chance
 		if !irandom(3){
@@ -121,8 +121,8 @@ switch(argument2) {
 			if (place_empty(dx, dy-gridSize)) instance_create_layer(dx, dy-gridSize/2, "lay_instances", obj_trampoline);
 		}
 		
-		//Create a water spawn below the second block from right (50% chance)
-		if place_empty(dx - gridSize, dy + gridSize){
+		//Create a water spawn below the second block from right (if there is a block) (50% chance)
+		if place_empty(dx - gridSize, dy + gridSize) and place_meeting(dx - gridSize, dy, obj_blockBig){
 			if !irandom(1){
 				instance_create_layer(dx - gridSize, dy + gridSize, "lay_instances", obj_water_spawn)
 			}
@@ -130,7 +130,7 @@ switch(argument2) {
 		
 		//gun in middle 1/4 chance
 		if !irandom(3){
-			if (place_empty(dx - gridSize*3, dy - gridSize/2)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
+			if (place_empty(dx - gridSize*3, dy - gridSize)) instance_create_layer(dx - gridSize*3, dy-gridSize/2, "lay_instances", obj_gun);
 		}
 	
 		break;
@@ -169,8 +169,8 @@ switch(argument2) {
 			if (place_empty(dx - gridSize, dy-gridSize)) instance_create_layer(dx - gridSize, dy-gridSize/2, "lay_instances", obj_climbing_pick);
 		}
 		
-		//Create a water spawn below the middle block (50% chance)
-		if place_empty(dx - gridSize, dy + gridSize){
+		//Create a water spawn below the middle block (if there is a middle block) (50% chance)
+		if place_empty(dx - gridSize, dy + gridSize) and place_meeting(dx - gridSize, dy, obj_blockBig){
 			if !irandom(1){
 				instance_create_layer(dx - gridSize, dy + gridSize, "lay_instances", obj_water_spawn)
 			}

@@ -1,11 +1,6 @@
 /// @description Turn around
 event_inherited();
 
-//die if no block below
-if (place_free(x, y+1)) {
-    hp = 1;
-}
-
 //if a player is nearby shoot
 for(var i=0; i<instance_number(obj_character); i++) {
     with (instance_find(obj_character,i)){

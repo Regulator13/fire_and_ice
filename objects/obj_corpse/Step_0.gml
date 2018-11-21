@@ -3,18 +3,38 @@ event_inherited();
 
 
 //Countdown particle
-if (freeze_buffer < freeze_buffer_max and freeze_buffer >= 1*30) {
-    switch (freeze_buffer) {
-        case 3*30-1:
-            with (instance_create_layer(x+8, y-16, "lay_instances", prt_countdown)) image_index = 0;
-            break;
-        case 2*30:
-            with (instance_create_layer(x+8, y-16, "lay_instances", prt_countdown)) image_index = 1;
-            break;
-        case 1*30:
-            with (instance_create_layer(x+8, y-16, "lay_instances", prt_countdown)) image_index = 2;
-            break;
-    }
+if not global.online{
+	if (freeze_buffer < freeze_buffer_max and freeze_buffer >= 1*20) {
+		switch (freeze_buffer) {
+			case 3 * 20 - 1:
+				part_particles_create(obj_particle.ps_countdown, x, y - 16, obj_particle.prt_countdown3, 1)
+				break;
+			
+			case 2 * 20:
+				part_particles_create(obj_particle.ps_countdown, x, y - 16, obj_particle.prt_countdown2, 1)
+				break;
+				
+			case 1 * 20:
+				part_particles_create(obj_particle.ps_countdown, x, y - 16, obj_particle.prt_countdown1, 1)
+				break;
+		}
+	}
+}
+
+else{
+	if (freeze_buffer < freeze_buffer_max and freeze_buffer >= 1*20) {
+	    switch (freeze_buffer) {
+	        case 3*20-1:
+	            with (instance_create_layer(x, y-16, "lay_instances", prt_countdown)) image_index = 0;
+	            break;
+	        case 2*20:
+	            with (instance_create_layer(x, y-16, "lay_instances", prt_countdown)) image_index = 1;
+	            break;
+	        case 1*20:
+	            with (instance_create_layer(x, y-16, "lay_instances", prt_countdown)) image_index = 2;
+	            break;
+	    }
+	}
 }
 
 //keep hp in bounds
@@ -51,12 +71,33 @@ if (will_freeze) {
 //explode
 if (ignite){
 	//once timer is out
-    if (freeze_buffer < 0*30) {
-        instance_create_layer(x+sprite_width/2, y+sprite_height/2, "lay_instances", obj_explosion);
-        instance_destroy();
+    if (freeze_buffer < 0*30){
+		if Holder == noone{
+	        if global.online{
+				instance_create_layer(x+sprite_width/2, y+sprite_height/2, "lay_instances", obj_explosion);
+			}
+			else{
+				part_particles_create(obj_particle.ps_explosion, x + 8, y + 8, obj_particle.prt_explosion, 1)
+				//Create explosion and deal damage to all those in rectangle
+				Collided = scr_collision_rectangle_list(x - (32 - sprite_width/2), y - (32 - sprite_height/2), x + (32 - sprite_width/2), y + (32 - sprite_height/2), par_block, false, true)
+		        if !ds_list_empty(Collided){
+					for (var i=0; i<ds_list_size(Collided); i++){
+						Collided[| i].hp -= 10 //explosion damage
+						if Collided[| i].object_index == obj_water_spawn instance_destroy(Collided[| i])
+						else if Collided[| i].object_index == obj_rechargeStation instance_destroy(Collided[| i])
+					}
+				}
+				ds_list_destroy(Collided)
+			}
+		
+	        instance_destroy();
+		}
+		else{
+			ignite = false
+			freeze_buffer = freeze_buffer_max
+		}
     }
-	
-else freeze_buffer -= 1;
+	else freeze_buffer -= 1;
 }
 
 //freeze

@@ -8,4 +8,10 @@ if (place_meeting(x,y,obj_blockBig)) instance_destroy();
 if (place_meeting(x,y,obj_wall)) instance_destroy();
 
 ///animate
-image_speed = 0.5;
+if obj_control.animations_on = true{
+	image_speed = 0.5;
+}
+
+else{
+	image_speed = 0
+}
