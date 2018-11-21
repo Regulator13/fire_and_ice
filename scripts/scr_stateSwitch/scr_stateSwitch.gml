@@ -29,6 +29,14 @@ with (global.Menu) {
                     local_players[? 0] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
                     local_players[? 0].controls = 0;
                     break;
+				case STATE_OPTIONS:
+					// clear preivous menu
+                    scr_menuClear();
+                    
+                    // initiate options menu
+                    scr_menuInitOptions();
+					
+					break;
                 }
         case STATE_CONTROLS:
             switch (to) {
@@ -109,6 +117,15 @@ with (global.Menu) {
                     
                     // initiate lobby menu
                     scr_menuInitGameOptions();
+                    
+                    break;
+				
+				case STATE_DEBUGOPTIONS:
+                    // clear preivous menu
+                    scr_menuClear();
+                    
+                    // initiate debug options menu
+                    scr_menuInitDebugOptions();
                     
                     break;
 			}

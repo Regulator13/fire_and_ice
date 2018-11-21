@@ -1663,6 +1663,14 @@
             }
         },
         {
+            "Key": "f9544f84-4558-438c-b70e-b3845e603755",
+            "Value": {
+                "id": "dddf1dd5-2636-4363-bd55-1aac23247034",
+                "resourcePath": "scripts\\scr_menuInitDebugOptions\\scr_menuInitDebugOptions.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "f9bdc3db-06f9-4632-b057-3367747c49d7",
             "Value": {
                 "id": "4198f659-165e-445b-ab95-6a61cb1f9de8",
@@ -1730,6 +1738,7 @@
         "1cfeb7df-ceef-46bc-9ca5-1153a4f7cc6d",
         "87777f0d-381c-46fb-af09-4076c4459205",
         "5fc42685-a048-4827-bc9b-b8f67f8e2287",
+        "f9544f84-4558-438c-b70e-b3845e603755",
         "f00035fe-567a-4023-9694-a8d7c2cd8e36",
         "6c8b1acf-5d68-4e82-a0bf-e2448861b527",
         "e938da85-51f6-435c-818e-61a352801293",

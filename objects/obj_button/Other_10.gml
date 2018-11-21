@@ -17,15 +17,15 @@ switch(action) {
 	//go from the options menu to the state menu
     case "mainOptions":
         scr_stateSwitch(STATE_OPTIONS, STATE_MAIN)
-		
         break;
-		
+	
+	//go from the main menu to the options menu
     case "options":
-        with(obj_menu) event_user(5);
+        scr_stateSwitch(STATE_MAIN, STATE_OPTIONS)
         break;
 		
     case "debugOptions":
-        with(obj_menu) event_user(6);
+        scr_stateSwitch(STATE_OPTIONS, STATE_DEBUGOPTIONS)
         break;
 		
 	
