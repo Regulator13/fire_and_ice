@@ -45,7 +45,7 @@
         default:
             // joystick input
 			var device = global.controls[controls, KEY_TYPE]
-			for (var i = 0; i < amount-1; i++;) {
+			for (var i = 0; i < amount-1; i++) {
                 // input the input state
                 var input = scr_getGamePadInput(global.controls[controls, i], device);
                 buffer_write(buff, buffer_s8, input);
