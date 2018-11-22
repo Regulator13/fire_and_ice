@@ -8,6 +8,7 @@ is_vertical = true //whether the platform is vertical or horizontal
 move_speed = 2 //the platform's move speed
 active = true //whether the platform is moving
 turn_around_delay = 15 //Number of step the platform will stop before turning around
+climbable = true //this object can be climbed
 alarm[1] = 0
 
 ///Animation
