@@ -240,6 +240,10 @@ if (active) {
 							active = false
 							hanging = true
 							dropped = true
+							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
+								alarm[2] = gamepad_drop_delay
+								gamepad_can_drop = false
+							}
 						}
 					}
 				}
@@ -259,6 +263,10 @@ if (active) {
 							active = false
 							hanging = true
 							dropped = true
+							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
+								alarm[2] = gamepad_drop_delay
+								gamepad_can_drop = false
+							}
 						}
 					}
 				}
@@ -495,6 +503,11 @@ if (active) {
 	                    else if (other.input_method == CONTROLS_KEYBOARD) {
 	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
 	                    }
+						
+						//Throw using the gamepad right joystick
+						else{
+							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy)
+						}
                     
 	                    //activate object
 	                    active = true;
@@ -596,6 +609,11 @@ if (active) {
 	                else if (other.input_method == CONTROLS_KEYBOARD) {
 	                    scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
 	                }
+					
+					//Throw using the gamepad right joystick
+					else{
+						scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy)
+					}
                     
                     //Initialize fireball variables
                     sprite_index = spr_ballFire;
@@ -631,6 +649,11 @@ if (active) {
 	                    else if (other.input_method == CONTROLS_KEYBOARD) {
 	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
 	                    }
+						
+						//Throw using the gamepad right joystick
+						else{
+							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy)
+						}
                         
 		                //activate object
 		                active = true;
@@ -758,10 +781,16 @@ if climbing{
 	
 	//Drop with down key
 	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED){
-		x -= climb_dir * 3
-		climbing = false
-		gravity_incr = 0.4
-		active = true
+		//Make sure a player using the gamepad controls hasn't just dropped to hanging
+		if input_method == CONTROLS_KEYBOARD or input_method == CONTROLS_MOUSE or gamepad_can_drop{
+			//make sure the player has not just dropped down to the ledge
+			if not dropped{	
+				x -= climb_dir * 3
+				climbing = false
+				gravity_incr = 0.4
+				active = true
+			}
+		}
 	}
 	
 	if energy >= climbing_cost*2{
@@ -822,12 +851,15 @@ if hanging{
 	
 	//Drop down with down key OR if whatever they are hanging onto disappears
 	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) or place_free(x + climb_dir * 3, y){
-		//make sure the player has not just dropped down to the ledge
-		if not dropped{	
-			x -= climb_dir * 3
-			hanging = false
-			active = true
-			gravity_incr = 0.4
+		//Make sure a player using the gamepad controls hasn't just dropped to hanging
+		if input_method == CONTROLS_KEYBOARD or input_method == CONTROLS_MOUSE or gamepad_can_drop{
+			//make sure the player has not just dropped down to the ledge
+			if not dropped{	
+				x -= climb_dir * 3
+				hanging = false
+				active = true
+				gravity_incr = 0.4
+			}
 		}
 	}
 	

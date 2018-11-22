@@ -14,6 +14,8 @@ player_name = "";
 freeze_holding_buffer_max = 10; //buffer to activate freezing of grabbed object
 freeze_holding_buffer = freeze_holding_buffer_max;
 can_throw = true
+gamepad_drop_delay = 5 //Number of steps to wait before allowing the player to drop from hanging after dropping off an edge
+gamepad_can_drop = true //Whether the player can drop down from a ledge when using the gamepad
 
 ///Item initializations
 Grab_object = noone;

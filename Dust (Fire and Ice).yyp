@@ -655,6 +655,14 @@
             }
         },
         {
+            "Key": "5e466542-7d5e-43c5-b342-ff0a1cdecc85",
+            "Value": {
+                "id": "ef3fb831-85f0-4c3d-9057-8f4ab5b5e868",
+                "resourcePath": "scripts\\scr_throw_using_gamepad\\scr_throw_using_gamepad.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "5f0bd23c-73cd-4de6-89dc-404d6db6109b",
             "Value": {
                 "id": "7304caf4-e0cc-4c93-b16d-3c8aa168e453",
@@ -1774,6 +1782,7 @@
         "b74416d6-fa98-4f0d-a011-864c74d2cd8a",
         "82ced23f-fd7d-477d-aba6-97b938799fa1",
         "b99fdab3-4586-43bd-ae3c-953324460de1",
+        "5e466542-7d5e-43c5-b342-ff0a1cdecc85",
         "de4c6bd1-766e-4e2f-9b2a-cac1b382e984",
         "b07996ac-e970-4468-b980-02380dc9c520",
         "32fca27e-6547-4a3b-8d64-b9c88ecb305b",
