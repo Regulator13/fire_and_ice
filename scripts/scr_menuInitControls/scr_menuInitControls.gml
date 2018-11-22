@@ -20,7 +20,7 @@ var button = instance_create_layer(room_width/2, 32, "lay_instances", obj_button
 button.action = "valueAction";
 button.valueAction = "changeControlsController";
 button.title = "Device:";
-ds_list_add(button.values, "Joystick 1", "Joystick 2", "Joystick 3", "Joystick 4", "Keyboard", "Keyboard+Mouse");
+ds_list_add(button.values, "Joystick 1", "Joystick 2", "Joystick 3", "Joystick 4", "Joystick 5", "Keyboard", "Keyboard+Mouse");
 button.value = global.controls[controlSelected, KEY_TYPE];
 ds_list_add(buttons, button);
 
