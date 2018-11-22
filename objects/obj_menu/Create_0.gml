@@ -89,7 +89,7 @@ server_data = ds_list_create();
 
 ///Controls
 controlSelected = 0; // selected controls in the controls menu DESCR?
-controlsMax = 2; //the amount of controls DESCR?
+controlsMax = 7; //the amount of controls DESCR?
 
 //If player previously inputted controls, use those
 if (file_exists("controls.ini")) {
@@ -101,6 +101,11 @@ else {
     scr_setControlsDefault(0, CONTROLS_MOUSE);
     //second player's controls
     scr_setControlsDefault(1, CONTROLS_KEYBOARD);
+	scr_setControlsDefault(2, CONTROLS_GP1);
+	scr_setControlsDefault(3, CONTROLS_GP2);
+	scr_setControlsDefault(4, CONTROLS_GP3);
+	scr_setControlsDefault(5, CONTROLS_GP4);
+	scr_setControlsDefault(6, CONTROLS_GP5);
     scr_saveControls();
 }
 
