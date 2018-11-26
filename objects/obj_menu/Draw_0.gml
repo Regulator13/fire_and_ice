@@ -242,7 +242,7 @@ if (state == STATE_GAME) {
 	                //draw background
 	                var size = team_players-1;
 	                yscale = 1+size*.5;
-	                draw_sprite_ext(spr_HUD, -1, cx, cy, 1, yscale, 0, c_white, 1);
+	                draw_sprite_ext(spr_hud, -1, cx, cy, 1, yscale, 0, c_white, 1);
 	                //setup drawing
 	                draw_set_font(fnt_command);
 	                draw_set_colour(c_white);
@@ -287,7 +287,7 @@ if (state == STATE_GAME) {
 	                //draw background
 	                var size = ds_list_size(Team.players)-1;
 	                yscale = 1+size*.5;
-	                draw_sprite_ext(spr_HUD, -1, cx, cy, 1, yscale, 0, c_white, 1);
+	                draw_sprite_ext(spr_hud, -1, cx, cy, 1, yscale, 0, c_white, 1);
 	                //setup drawing
 	                draw_set_font(fnt_command);
 	                draw_set_colour(c_white);
@@ -376,7 +376,7 @@ if (global.online) {
                 //draw background
                 var size = team_players-1;
                 yscale = 1+size*.5;
-                draw_sprite_ext(spr_HUD, -1, cx, cy, 1, yscale, 0, c_white, 1);
+                draw_sprite_ext(spr_hud, -1, cx, cy, 1, yscale, 0, c_white, 1);
 				
                 //setup drawing
                 draw_set_font(fnt_command);

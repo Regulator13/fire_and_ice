@@ -9,7 +9,7 @@
         "a9b595d4-514b-4295-901a-9ea5f6735e6d"
     ],
     "filterType": "GMObject",
-    "folderName": "obj_inputButton",
+    "folderName": "input_button",
     "isDefaultView": false,
     "localisedFolderName": ""
 }

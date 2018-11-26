@@ -616,7 +616,7 @@ if (active) {
 					}
                     
                     //Initialize fireball variables
-                    sprite_index = spr_ballFire;
+                    sprite_index = spr_ball_fire;
                     attack = 1;
                     Source = other.id;
 					
@@ -659,7 +659,7 @@ if (active) {
 		                active = true;
                         
 		                //Initialize iceball stats
-		                sprite_index = spr_ballIce;
+		                sprite_index = spr_ball_ice;
 		                attack = -1; //add one health
 		                Source = other.id;
 						
