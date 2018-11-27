@@ -23,15 +23,15 @@ else{
 	if (freeze_buffer < freeze_buffer_max and freeze_buffer >= 1*20) {
 	    switch (freeze_buffer) {
 	        case 3*20-1:
-	            with (instance_create_layer(x, y-16, "lay_instances", prt_countdown)) image_index = 0;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 0;
 	            break;
 			
 	        case 2*20:
-	            with (instance_create_layer(x, y-16, "lay_instances", prt_countdown)) image_index = 1;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 1;
 	            break;
 			
 	        case 1*20:
-	            with (instance_create_layer(x, y-16, "lay_instances", prt_countdown)) image_index = 2;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 2;
 	            break;
 	    }
 	}
