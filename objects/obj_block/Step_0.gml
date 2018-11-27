@@ -123,7 +123,7 @@ image_index = hp;
 ///Sticky Blocks
 if (sticky) {
 	//REMOVE? Couldn't the sprite be set upon creation in obj_blockStation?
-    sprite_index = spr_blockSticky;
+    sprite_index = spr_block_sticky;
     fric = 4; //increase friction because its "sticky"
     
     //if not being held, stick
