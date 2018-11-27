@@ -13,9 +13,9 @@ switch(global.NetworkState) {
             var message = network_send_udp(client,ip,port,buff,buffer_tell(buff));
 			
             if(message < 0){ //network_send_udp returns number less than zero if message fails
-                if !(instance_exists(obj_inputMessage)) {
+                if !(instance_exists(obj_input_message)) {
                 //if we can't connect, show and error and restart... could be more graceful :)
-                with (instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputMessage)) {
+                with (instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_input_message)) {
                     prompt = "ERROR: Can not connect to server";
                     ds_list_add(actions, "backOnlineLobby");
                     ds_list_add(actionTitles, "Back");
@@ -28,8 +28,8 @@ switch(global.NetworkState) {
             }
         else {
             // time for connect ran out
-            if !(instance_exists(obj_inputMessage)) {
-            with (instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputMessage)) {
+            if !(instance_exists(obj_input_message)) {
+            with (instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_input_message)) {
                 prompt = "ERROR: Connection time ran out";
                 ds_list_add(actions, "backOnlineLobby");
                 ds_list_add(actionTitles, "Back");
@@ -41,11 +41,11 @@ switch(global.NetworkState) {
         break;
     case(NETWORK_LOGIN): //login 
         //client has connected to the server, so send our "player name"
-        scr_sendLogin(player_name);
+        scr_send_login(player_name);
         //break
         break;
     case(NETWORK_PLAY): //game is running
-        scr_sendKeepAlive();
+        scr_send_keep_alive();
         
         //break
         break;
@@ -54,7 +54,7 @@ switch(global.NetworkState) {
 }
 /// client input
 if (global.NetworkState == NETWORK_PLAY) {
-    scr_sendInput();
+    scr_send_input();
     /*
     with(global.Menu) {
         switch(state) {

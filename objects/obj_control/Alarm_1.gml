@@ -10,4 +10,4 @@ for (var i=0; i<obj_menu.team_max; i++){
 }
 
 //switch to score menu
-scr_stateSwitch(STATE_GAME, STATE_SCORE);
+scr_state_switch(STATE_GAME, STATE_SCORE);

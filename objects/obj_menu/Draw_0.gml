@@ -32,7 +32,7 @@ for (var i=0; i<ds_list_size(buttons); i++){
         draw_set_halign(fa_center);
         draw_text(button.x, button.y, string_hash_to_newline(button.title));
         draw_set_halign(fa_right);
-        draw_text(button.x-77-48, button.y, string_hash_to_newline(scr_keyToTitle(button.key)));
+        draw_text(button.x-77-48, button.y, string_hash_to_newline(scr_key_to_title(button.key)));
     }
 	
 	//Draw defualt button
@@ -127,7 +127,7 @@ if (state == STATE_LOBBY) {
         draw_set_halign(fa_center);
         draw_set_font(fnt_buttons);
         var controls = 0;
-        var prompt = scr_getInputName(global.controls[controls, LEFTSELC_KEY], LEFTSELC_KEY, global.controls[controls, KEY_TYPE]);
+        var prompt = scr_get_input_name(global.controls[controls, LEFTSELC_KEY], LEFTSELC_KEY, global.controls[controls, KEY_TYPE]);
         draw_text(room_width/2, room_height-80, string_hash_to_newline("Press " + prompt + " to ready up!"));
     }
 	
@@ -146,7 +146,7 @@ if (state == STATE_LOBBY) {
             draw_sprite(spr_lobby, 1, 264, 46 + bh*i);
             draw_set_halign(fa_center);
             var controls = local_controls[| i];
-            var prompt = scr_getInputName(global.controls[controls, LEFTSELC_KEY], LEFTSELC_KEY, global.controls[controls, KEY_TYPE]);
+            var prompt = scr_get_input_name(global.controls[controls, LEFTSELC_KEY], LEFTSELC_KEY, global.controls[controls, KEY_TYPE]);
             draw_text(room_width/2, 40 + bh*di+bh/2, string_hash_to_newline("Press " + prompt + " to ready up!"));
             // increment draw index
             di++
@@ -159,7 +159,7 @@ if (state == STATE_LOBBY) {
                 // if player is not yet in print prompt.
                 draw_rectangle(32, 33 + bh*di, room_width-32, 33+bh+bh*di, true);
                 var controls = i;
-                var prompt = scr_getInputName(global.controls[controls, ACTION2_KEY], ACTION2_KEY, global.controls[controls, KEY_TYPE]);
+                var prompt = scr_get_input_name(global.controls[controls, ACTION2_KEY], ACTION2_KEY, global.controls[controls, KEY_TYPE]);
                 draw_text(room_width/2, 40-16+ bh*di+bh/2, string_hash_to_newline("Press " + prompt + " to ready up!"));
                 // increment draw index
                 di++

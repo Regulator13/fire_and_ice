@@ -712,7 +712,7 @@ if(place_meeting(x,y,obj_pirahna)){
 }
 
 //Collision with blown up big blocks
-with (instance_place(x, y, obj_blockBig)){
+with (instance_place(x, y, obj_block_big)){
 	if hp <= 0 {
 		other.hp -= 10
 	}
@@ -756,7 +756,7 @@ if(hp < 1) {
 }
 
 ///Recharge Energy
-if (place_meeting(x, y, obj_rechargeStation)) {
+if (place_meeting(x, y, obj_recharge_station)) {
 	if (energy < energy_max) {
 	    energy +=1;
 	    }

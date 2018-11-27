@@ -19,7 +19,7 @@ v2.15.0
 - Added universal back buttons
 - Added universal state switch button
 - Cleaned up menu initiation scripts
-- Moved all state switches to scr_stateSwitch
+- Moved all state switches to scr_state_switch
 
 11/20/18
 v2.14.6

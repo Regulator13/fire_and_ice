@@ -84,7 +84,7 @@ if (ignite){
 					for (var i=0; i<ds_list_size(Collided); i++){
 						Collided[| i].hp -= 10 //explosion damage
 						if Collided[| i].object_index == obj_water_spawn instance_destroy(Collided[| i])
-						else if Collided[| i].object_index == obj_rechargeStation instance_destroy(Collided[| i])
+						else if Collided[| i].object_index == obj_recharge_station instance_destroy(Collided[| i])
 					}
 				}
 				ds_list_destroy(Collided)

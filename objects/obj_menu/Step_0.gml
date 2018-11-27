@@ -1,7 +1,7 @@
 /// @description Input
 
 // check if game is paused
-if !(instance_exists(obj_inputButton)){
+if !(instance_exists(obj_input_button)){
     var haxis = 0; //left or right
     var vaxis = 0; //up or down
     var action = false; //clicking
@@ -37,10 +37,10 @@ if !(instance_exists(obj_inputButton)){
 				///REMOVE? This statement could be reduced to if(global.have_server), the first part is always true
                 if (!global.online or global.online and global.have_server) {
                     //select a button from the list of possible buttons with left and right controls
-                    selected = scr_incrementInBounds(selected, haxis, 0, ds_list_size(buttons)-1, true);
+                    selected = scr_increment_in_bounds(selected, haxis, 0, ds_list_size(buttons)-1, true);
 					
                     //select a path from the list of possible paths with up and down controls
-                    path_selected = scr_incrementInBounds(path_selected, vaxis, 0, ds_list_size(path_names)-1, true);
+                    path_selected = scr_increment_in_bounds(path_selected, vaxis, 0, ds_list_size(path_names)-1, true);
                     
                     //press button
                     if (action) {
@@ -75,7 +75,7 @@ if !(instance_exists(obj_inputButton)){
                                 if (keyboard_check_released(global.controls[i, ACTION2_KEY])) {
                                     //join lobby
                                     if (is_undefined(local_players[? i])) {
-                                        local_players[? i] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
+                                        local_players[? i] = instance_create_layer(0, 0, "lay_instances", obj_local_player);
                                         local_players[? i].controls = i;
 										
                                         // update the controls
@@ -84,7 +84,7 @@ if !(instance_exists(obj_inputButton)){
                                     
 									//leave lobby
 									else {
-                                        scr_joinLobby(local_players[? i]);
+                                        scr_join_lobby(local_players[? i]);
                                         instance_destroy(local_players[? i]);
                                         ds_map_delete(local_players, i);
                                     }
@@ -97,7 +97,7 @@ if !(instance_exists(obj_inputButton)){
                                 if (gamepad_button_check_released(global.controls[i, KEY_TYPE], global.controls[i, ACTION2_KEY])) {
                                     // join lobby
                                     if (is_undefined(local_players[? i])) {
-                                        local_players[? i] = instance_create_layer(0, 0, "lay_instances", obj_localPlayer);
+                                        local_players[? i] = instance_create_layer(0, 0, "lay_instances", obj_local_player);
                                         local_players[? i].controls = i;
                                     }
                                     
@@ -119,18 +119,18 @@ if !(instance_exists(obj_inputButton)){
                             var playerIndex = ds_list_find_index(players, Local.connectID);
                             
                             // teams
-                            var newTeam = scr_incrementInBounds(ds_list_find_value(teams, playerIndex), vaxis, 0, team_max, true);
+                            var newTeam = scr_increment_in_bounds(ds_list_find_value(teams, playerIndex), vaxis, 0, team_max, true);
                             ds_list_replace(teams, playerIndex, newTeam);
 							
                             // characters
                             var classValue = ds_list_find_value(classes, playerIndex);
-                            var classIndex = scr_incrementInBounds(ds_list_find_index(class_options, classValue), haxis, 0, ds_list_size(class_options)-1, true);
+                            var classIndex = scr_increment_in_bounds(ds_list_find_index(class_options, classValue), haxis, 0, ds_list_size(class_options)-1, true);
                             ds_list_replace(classes, playerIndex, ds_list_find_value(class_options, classIndex));
 							
                             // ready up
                             if (Local.inputs[LEFTSELC_KEY]) {
                                 ds_list_replace(readys, playerIndex, scr_toggle(ds_list_find_value(readys, playerIndex)));
-                                Local.inputs[LEFTSELC_KEY] = scr_toggleKey(Local.inputs[LEFTSELC_KEY]);
+                                Local.inputs[LEFTSELC_KEY] = scr_toggle_key(Local.inputs[LEFTSELC_KEY]);
                             }
                         }
                     }
@@ -151,7 +151,7 @@ if !(instance_exists(obj_inputButton)){
                             show_debug_message("All ready!");
                             
                             // switch to path menu
-                            scr_stateSwitch(STATE_LOBBY, STATE_PATHS)
+                            scr_state_switch(STATE_LOBBY, STATE_PATHS)
                         }
                     }
                 }
@@ -182,28 +182,28 @@ if !(instance_exists(obj_inputButton)){
                 if (!is_undefined(button)) {
 					//Select up or down
                     if (instance_exists(button) and button.action == "value" or button.action == "valueAction"){
-                        selected = scr_incrementInBounds(selected, vaxis, 0, ds_list_size(buttons)-1, true);
+                        selected = scr_increment_in_bounds(selected, vaxis, 0, ds_list_size(buttons)-1, true);
 					}
 					
 					//DESCR?
                     else{
-                        selected = scr_incrementInBounds(selected, haxis+vaxis, 0, ds_list_size(buttons)-1, true);
+                        selected = scr_increment_in_bounds(selected, haxis+vaxis, 0, ds_list_size(buttons)-1, true);
 					}
                 }
 				
                 //DESCR?
 				else{
-                    selected = scr_incrementInBounds(selected, haxis+vaxis, 0, ds_list_size(buttons)-1, true);
+                    selected = scr_increment_in_bounds(selected, haxis+vaxis, 0, ds_list_size(buttons)-1, true);
 				}
                                 
                 //DESCR?
                 if (ds_list_size(buttons) > 0 and instance_exists(button)) {
                     if (button.action == "value") {
-                        button.value = scr_incrementInBounds(button.value, haxis, 0, ds_list_size(button.values)-1, true);
+                        button.value = scr_increment_in_bounds(button.value, haxis, 0, ds_list_size(button.values)-1, true);
                     }
 					
                     else if (button.action == "valueAction") {
-                        button.value = scr_incrementInBounds(button.value, haxis, 0, ds_list_size(button.values)-1, true);
+                        button.value = scr_increment_in_bounds(button.value, haxis, 0, ds_list_size(button.values)-1, true);
                         // if value changed do action
                         if (haxis != 0)
                             with (button) event_user(1);
@@ -261,40 +261,40 @@ switch(state) {
                 if (inst.inputs[UP_KEY] == KEY_PRESSED) {
                     vaxis = -1;
                     // unpress key
-                    inst.inputs[UP_KEY] = scr_toggleKey(inst.inputs[UP_KEY]);
+                    inst.inputs[UP_KEY] = scr_toggle_key(inst.inputs[UP_KEY]);
                 }
 				
                 if (inst.inputs[DOWN_KEY] == KEY_PRESSED) {
                     vaxis = 1;
                     // unpress key
-                    inst.inputs[DOWN_KEY] = scr_toggleKey(inst.inputs[DOWN_KEY]);
+                    inst.inputs[DOWN_KEY] = scr_toggle_key(inst.inputs[DOWN_KEY]);
                 }
 				
                 if (inst.inputs[LEFT_KEY] == KEY_PRESSED) {
                     haxis = -1;
                     // unpress key
-                    inst.inputs[LEFT_KEY] = scr_toggleKey(inst.inputs[LEFT_KEY]);
+                    inst.inputs[LEFT_KEY] = scr_toggle_key(inst.inputs[LEFT_KEY]);
                 }
 				
                 if (inst.inputs[RIGHT_KEY] == KEY_PRESSED) {
                     haxis = 1;
                     // unpress key
-                    inst.inputs[RIGHT_KEY] = scr_toggleKey(inst.inputs[RIGHT_KEY]);
+                    inst.inputs[RIGHT_KEY] = scr_toggle_key(inst.inputs[RIGHT_KEY]);
                 }
 				
                 if (inst.inputs[LEFTSELC_KEY] == KEY_PRESSED) {
                     ds_list_replace(readys, playerIndex, scr_toggle(ds_list_find_value(readys, playerIndex)));
                     // unpress key
-                    inst.inputs[LEFTSELC_KEY] = scr_toggleKey(inst.inputs[LEFTSELC_KEY]);
+                    inst.inputs[LEFTSELC_KEY] = scr_toggle_key(inst.inputs[LEFTSELC_KEY]);
                 }
                 
                 // teams
-                var newTeam = scr_incrementInBounds(ds_list_find_value(teams, playerIndex), vaxis, 0, team_max, true);
+                var newTeam = scr_increment_in_bounds(ds_list_find_value(teams, playerIndex), vaxis, 0, team_max, true);
                 ds_list_replace(teams, playerIndex, newTeam);
 				
                 // characters
                 var classValue = ds_list_find_value(classes, playerIndex);
-                var classIndex = scr_incrementInBounds(ds_list_find_index(class_options, classValue), haxis, 0, ds_list_size(class_options)-1, true);
+                var classIndex = scr_increment_in_bounds(ds_list_find_index(class_options, classValue), haxis, 0, ds_list_size(class_options)-1, true);
                 ds_list_replace(classes, playerIndex, ds_list_find_value(class_options, classIndex));
             }
 			
@@ -315,7 +315,7 @@ switch(state) {
                     show_debug_message("All ready!");
                     
                     // switch to path menu
-                    scr_stateSwitch(STATE_LOBBY, STATE_PATHS)
+                    scr_state_switch(STATE_LOBBY, STATE_PATHS)
                 }
             }
         }

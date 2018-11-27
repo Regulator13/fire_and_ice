@@ -24,7 +24,7 @@ if(client == eventid) {
         var sequence = buffer_read(buffer, buffer_u8);
         
         // if more recent message, check
-        if (scr_sequenceMoreRecent(sequence, sequenceIn, SEQUENCE_MAX)) { //this package is newer and therefore requires an update, 65,535 is for buffer_u16
+        if (scr_sequence_more_recent(sequence, sequenceIn, SEQUENCE_MAX)) { //this package is newer and therefore requires an update, 65,535 is for buffer_u16
             // update sequenceIn
             sequenceIn = sequence;
             
@@ -67,7 +67,7 @@ if(client == eventid) {
             if (msgId == SERVER_PLAY) { //server message, low priority
                 //read sequence
                 var sequence = buffer_read(buff, buffer_u8);
-                if (scr_sequenceMoreRecent(sequence, sequenceIn, SEQUENCE_MAX)) { //this package is newer and therefore requires an update, 65,535 is for buffer_u16
+                if (scr_sequence_more_recent(sequence, sequenceIn, SEQUENCE_MAX)) { //this package is newer and therefore requires an update, 65,535 is for buffer_u16
                     //update sequenceIn
                     sequenceIn = sequence;
                     
@@ -240,7 +240,7 @@ if(client == eventid) {
                                 }
                             else if (global.Menu.state == STATE_SCORE) {
                                 // switch to game menu
-                                scr_stateSwitch(STATE_SCORE, STATE_GAME);
+                                scr_state_switch(STATE_SCORE, STATE_GAME);
                                 }
                             break;
                         case STATE_SCORE: // score screen
@@ -292,7 +292,7 @@ if(client == eventid) {
                                 ds_list_destroy(server_data);
                                 }
                             else {
-                                scr_stateSwitch(STATE_GAME, STATE_SCORE);
+                                scr_state_switch(STATE_GAME, STATE_SCORE);
                                 }
                             break;
                         }
