@@ -22,5 +22,5 @@ if !(global.gameStart) {
     ds_map_replace(global.path, "score", highScore);
     
 	//save ALL paths
-    scr_savePath();
+    scr_save_path();
 }

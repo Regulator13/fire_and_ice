@@ -1,6 +1,6 @@
 /// @description  destroy created objects
 // save player name
-scr_savePlayer();
+scr_save_player();
 
 // destroy ds_lists
 ds_list_destroy(serverlist);

@@ -14,7 +14,7 @@ version = "2.15.0";
 local_controls = ds_list_create(); //list holding which local players are in
 
 ///First menu
-scr_menuInitMain();
+scr_menu_init_main();
 
 ///Set player variables
 players = ds_list_create();
@@ -93,20 +93,20 @@ controlsMax = 7; //the amount of controls DESCR?
 
 //If player previously inputted controls, use those
 if (file_exists("controls.ini")) {
-    scr_loadControls();
+    scr_load_controls();
 }
 
 //Otherwise use the default controls
 else {
-    scr_setControlsDefault(0, CONTROLS_MOUSE);
+    scr_set_controls_default(0, CONTROLS_MOUSE);
     //second player's controls
-    scr_setControlsDefault(1, CONTROLS_KEYBOARD);
-	scr_setControlsDefault(2, CONTROLS_GP1);
-	scr_setControlsDefault(3, CONTROLS_GP2);
-	scr_setControlsDefault(4, CONTROLS_GP3);
-	scr_setControlsDefault(5, CONTROLS_GP4);
-	scr_setControlsDefault(6, CONTROLS_GP5);
-    scr_saveControls();
+    scr_set_controls_default(1, CONTROLS_KEYBOARD);
+	scr_set_controls_default(2, CONTROLS_GP1);
+	scr_set_controls_default(3, CONTROLS_GP2);
+	scr_set_controls_default(4, CONTROLS_GP3);
+	scr_set_controls_default(5, CONTROLS_GP4);
+	scr_set_controls_default(6, CONTROLS_GP5);
+    scr_save_controls();
 }
 
 ///Tutorial

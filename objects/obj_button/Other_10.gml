@@ -2,11 +2,11 @@
 switch(action) {
 	/*
     case "addNickname":
-        with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputButton)) action = "addNickname";
+        with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_input_button)) action = "addNickname";
         break;
 	
     case "delNickname":
-        with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputButton)) action = "delNickname";
+        with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_input_button)) action = "delNickname";
         break;
 	*/
     case "delOptions":
@@ -40,7 +40,7 @@ switch(action) {
 	
 	//new path
     case "new":
-        with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_inputButton)) action = "createPath";
+        with(instance_create_layer(room_width/2, room_height/2, "lay_instances", obj_input_button)) action = "createPath";
         break;
 	
 	//quit
@@ -50,12 +50,12 @@ switch(action) {
 	
 	//universal back button
 	case "back":
-		scr_stateSwitch(global.Menu.state, ds_stack_top(global.Menu.state_queue))
+		scr_state_switch(global.Menu.state, ds_stack_top(global.Menu.state_queue))
 		break
 		
 	//universal state switch button
 	default:
-		scr_stateSwitch(global.Menu.state, action)
+		scr_state_switch(global.Menu.state, action)
 		break
 }
 

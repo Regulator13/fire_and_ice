@@ -8,7 +8,7 @@
         switch(global.Menu.state) {
             case STATE_LOBBY:
                 // write the lobby information to the sending buffer
-                scr_writeLobby();
+                scr_write_lobby();
                 
                 // check for clients to send confirmations
                 for (i = 0; i < count; i++) { 
@@ -35,17 +35,17 @@
                         buffer_write(buff, buffer_u8, 0);//sequenceOut); Written in send buffer
                         
                         // send confirmation to the client
-                        scr_sendBuffer(ip, i, buff);
+                        scr_send_buffer(ip, i, buff);
                         }
                     else {
                         // send pre_written lobby data
-                        scr_sendBuffer(ip, i, gameBuffer);
+                        scr_send_buffer(ip, i, gameBuffer);
                         }
                     }
                 break;
             case STATE_PATHS:
                 // write the path information to the sending buffer
-                scr_writePaths();
+                scr_write_paths();
                 
                 // check for clients to send information
                 for (i = 0; i < count; i++) { 
@@ -58,13 +58,13 @@
                     // check if client is logged in
                     if (message == SERVER_PLAY) {
                         // send pre_written data
-                        scr_sendBuffer(ip, i, gameBuffer);
+                        scr_send_buffer(ip, i, gameBuffer);
                         }
                     }
                 break;
             case STATE_GAME:
                 // write the game information to the sending buffer
-                scr_writeGame();
+                scr_write_game();
                 
                 // check for clients to send information
                 for (i = 0; i < count; i++) { 
@@ -77,16 +77,16 @@
                     // check if client is logged in
                     if (message == SERVER_PLAY) {
                         // update the buffer with client specific information
-                        scr_writeGameUpdate(ip, i);
+                        scr_write_game_update(ip, i);
                         
                         // send pre_written data
-                        scr_sendBuffer(ip, i, gameBuffer);
+                        scr_send_buffer(ip, i, gameBuffer);
                         }
                     }
                 break;
             case STATE_SCORE:
                 // write the score information to the sending buffer
-                scr_writeScore();
+                scr_write_score();
                 
                 // check for clients to send information
                 for (i = 0; i < count; i++) { 
@@ -99,7 +99,7 @@
                     // check if client is logged in
                     if (message == SERVER_PLAY) {
                         // send pre_written data
-                        scr_sendBuffer(ip, i, gameBuffer);
+                        scr_send_buffer(ip, i, gameBuffer);
                         }
                     }
                 break;
