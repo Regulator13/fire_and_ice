@@ -86,7 +86,7 @@ if active{
 		}
 		
 		//Turn around at blocks
-		with instance_place(x + hspeed, y + vspeed, obj_blockBig){
+		with instance_place(x + hspeed, y + vspeed, obj_block_big){
 			other.hspeed = 0
 			other.vspeed = 0
 			other.dir *= -1

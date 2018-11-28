@@ -17,5 +17,5 @@ var long = argument4
 button = instance_create_layer(_x, _y, "lay_instances", obj_button)
 button.action = action
 button.title = title
-if long button.sprite_index = spr_buttonLong
+if long button.sprite_index = spr_button_long
 ds_list_add(buttons, button)
