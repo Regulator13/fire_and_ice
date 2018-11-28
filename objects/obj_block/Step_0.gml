@@ -23,15 +23,15 @@ else{
 	if (freeze_buffer < freeze_buffer_max and freeze_buffer >= 1*20) {
 	    switch (freeze_buffer) {
 	        case 3*20-1:
-	            with (instance_create_layer(x, y-16, "lay_instances", prt_countdown)) image_index = 0;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 0;
 	            break;
 			
 	        case 2*20:
-	            with (instance_create_layer(x, y-16, "lay_instances", prt_countdown)) image_index = 1;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 1;
 	            break;
 			
 	        case 1*20:
-	            with (instance_create_layer(x, y-16, "lay_instances", prt_countdown)) image_index = 2;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 2;
 	            break;
 	    }
 	}
@@ -85,7 +85,7 @@ if (ignite) {
 					for (var i=0; i<ds_list_size(Collided); i++){
 						Collided[| i].hp -= 10 //explosion damage
 						if Collided[| i].object_index == obj_water_spawn instance_destroy(Collided[| i])
-						else if Collided[| i].object_index == obj_rechargeStation instance_destroy(Collided[| i])
+						else if Collided[| i].object_index == obj_recharge_station instance_destroy(Collided[| i])
 					}
 				}
 				ds_list_destroy(Collided)
@@ -123,7 +123,7 @@ image_index = hp;
 ///Sticky Blocks
 if (sticky) {
 	//REMOVE? Couldn't the sprite be set upon creation in obj_blockStation?
-    sprite_index = spr_blockSticky;
+    sprite_index = spr_block_sticky;
     fric = 4; //increase friction because its "sticky"
     
     //if not being held, stick
