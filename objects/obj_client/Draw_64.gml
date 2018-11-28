@@ -23,11 +23,11 @@ if (clientDebug) {
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Socket In: " + string(socketIn)));
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Server IP: " + string(serverIP)));
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Sequence In: " + string(sequenceIn)));
-    draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("msgID In: " + scr_msg_id_to_String(msgIDin)));
+    draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("msgID In: " + scr_msgIDtoString(msgIDin)));
     drawOffset++;// skip a space
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Client State Info:"));
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Client Socket: " + string(client)));
-    draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Network State: " + scr_network_state_to_string(global.NetworkState)));
+    draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Network State: " + scr_networkStateToString(global.NetworkState)));
 	draw_text(10, 30+yOffset*drawOffset++, "Sending IP: " + string(ip) + " Sending Port: " + string(port))
     
     // reset alpha

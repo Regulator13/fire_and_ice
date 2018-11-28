@@ -18,7 +18,7 @@ for (i = 0; i < count; i++) {
     var inst = ds_map_find_value(Clients, ip);
     
     // remove network player from lobby
-    scr_join_lobby(inst);
+    scr_joinLobby(inst);
     
     // destroy the persistent network player object
     instance_destroy(inst);

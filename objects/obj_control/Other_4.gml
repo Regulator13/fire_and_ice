@@ -71,7 +71,7 @@ var dx = round(irandom_range(gridSize*3, room_width - gridSize*3)/gridSize)*grid
 var dy = gridSize*3;
 var i = 0;
 repeat(3) {
-    instance_create_layer(dx+gridSize*i, dy, "lay_instances", obj_block_big);
+    instance_create_layer(dx+gridSize*i, dy, "lay_instances", obj_blockBig);
     i ++;
 }
 
@@ -86,7 +86,7 @@ for (i = 4; i < maxY/gridSize; i += 1) {
         if irandom(3){
             dx = round(irandom_range(gridSize, room_width - gridSize)/gridSize)*gridSize;
             dy = i*gridSize;
-            scr_platform_generate(dx, dy, irandom_range(0, 6));
+            scr_platformGenerate(dx, dy, irandom_range(0, 6));
         }
     }
 }
@@ -96,7 +96,7 @@ for (i = 4; i < maxY/gridSize; i += 4) {
     for(j = 0; j < 1; j+=1) {
         dx = round(irandom_range(gridSize, room_width - gridSize)/gridSize)*gridSize;
         dy = i*gridSize;
-        scr_platform_generate(dx, dy, irandom_range(0, 5));
+        scr_platformGenerate(dx, dy, irandom_range(0, 5));
     }
 }
 
@@ -104,7 +104,7 @@ for (i = 4; i < maxY/gridSize; i += 4) {
 repeat(4) {
     dx = round(irandom_range(gridSize*4, room_height - gridSize*4)/gridSize)*gridSize;
     dy = room_height-gridSize-16;
-    if (place_free(dx, dy-16)) with instance_create_layer(dx, dy, "lay_instances", obj_block_station) sticky = true;
+    if (place_free(dx, dy-16)) with instance_create_layer(dx, dy, "lay_instances", obj_blockStation) sticky = true;
 }
 
 //bottom trampoline creation - up to two with a 50% chance for each
@@ -209,7 +209,7 @@ if (global.continue_game) {
     
 	    //check if can place
 	    if (place_free(rx, ry)) {
-	        if (place_meeting(rx, ry+gridSize, obj_block_big)) {
+	        if (place_meeting(rx, ry+gridSize, obj_blockBig)) {
 	            instance_create_layer(rx+gridSize/2, ry+gridSize/2, "lay_instances", obj_health);
 	            tries -= 1;
 	        }
