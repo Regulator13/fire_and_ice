@@ -11,15 +11,15 @@ var msgId = buffer_read(buff, buffer_s8);
 switch (msgId) {
     case CLIENT_CONNECT:
         // client connecting
-        scr_connect_client();
+        scr_connectClient();
         break;
     case CLIENT_LOGIN:
         // client logging in
-        scr_login_client();
+        scr_loginClient();
         break;
     case CLIENT_PLAY:
         //all other sockets are connected client sockets, and we have recieved commands from them.
-        scr_server_received_data();
+        scr_serverRecievedData();
         break;
     }
 

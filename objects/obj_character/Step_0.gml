@@ -616,7 +616,7 @@ if (active) {
 					}
                     
                     //Initialize fireball variables
-                    sprite_index = spr_ball_fire;
+                    sprite_index = spr_ballFire;
                     attack = 1;
                     Source = other.id;
 					
@@ -659,7 +659,7 @@ if (active) {
 		                active = true;
                         
 		                //Initialize iceball stats
-		                sprite_index = spr_ball_ice;
+		                sprite_index = spr_ballIce;
 		                attack = -1; //add one health
 		                Source = other.id;
 						
@@ -712,7 +712,7 @@ if(place_meeting(x,y,obj_pirahna)){
 }
 
 //Collision with blown up big blocks
-with (instance_place(x, y, obj_block_big)){
+with (instance_place(x, y, obj_blockBig)){
 	if hp <= 0 {
 		other.hp -= 10
 	}
@@ -756,7 +756,7 @@ if(hp < 1) {
 }
 
 ///Recharge Energy
-if (place_meeting(x, y, obj_recharge_station)) {
+if (place_meeting(x, y, obj_rechargeStation)) {
 	if (energy < energy_max) {
 	    energy +=1;
 	    }
