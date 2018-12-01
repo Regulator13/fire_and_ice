@@ -737,6 +737,7 @@ if(hp < 1) {
 	    player_input = other.player_input;
 	    Input_player = other.Input_player;
 	    input_method = other.input_method;
+		Team = other.Team
 	    if (instance_exists(Input_player)) Input_player.gameCharacter = self;
 	}
 			
