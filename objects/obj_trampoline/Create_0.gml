@@ -1,4 +1,6 @@
 /// @description Set variables
+event_inherited()
+
 being_pulled = false
 Puller = noone
 

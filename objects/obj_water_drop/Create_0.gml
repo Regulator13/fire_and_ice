@@ -1,4 +1,6 @@
 /// @description Set variables
+event_inherited()
+
 active = true; //whether or not to apply physics
 frozen = false; //whether or not can move
 

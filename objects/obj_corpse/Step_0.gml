@@ -116,4 +116,12 @@ else {
 	frozen = false;
 }
 
+//If frozen player's cannot pass through them
+if frozen{
+	can_pass_through = false
+}
+else{
+	can_pass_through = true
+}
+
 image_index = hp;

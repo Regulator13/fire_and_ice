@@ -1,4 +1,6 @@
 /// @description Collisions
+event_inherited()
+
 //die
 if(hp <= 0){
 	instance_create_layer(x, y, "lay_instances", obj_corpse);

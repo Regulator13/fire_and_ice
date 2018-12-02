@@ -1,4 +1,6 @@
 /// @description Destory if out of room
+event_inherited()
+
 if (x > room_width) instance_destroy();
 
 sticky = false; //whether or not blocks created by this are sticky

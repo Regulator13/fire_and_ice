@@ -1,5 +1,6 @@
 /// @description Set variables
 event_inherited();
+
 climbable = true //this object can be climbed
 
 ///Animation

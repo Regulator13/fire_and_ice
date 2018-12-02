@@ -1,4 +1,6 @@
 /// @description Set variables
+event_inherited()
+
 damage = 1;
 
 ///Animation
