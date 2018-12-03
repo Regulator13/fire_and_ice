@@ -153,9 +153,11 @@ if (sticky) {
 //If frozen or stuck player's cannot pass through them
 if frozen or stuck{
 	can_pass_through = false
+	climbable = true
 }
 else{
 	can_pass_through = true
+	climbable = false
 }
 
 /// explosions

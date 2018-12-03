@@ -1,7 +1,7 @@
 /// @description Set variables
 event_inherited();
 
-climbable = true //this object can be climbed
+climbable = false //this object cannot be climbed (unless frozen)
 
 ///Animation
 image_speed = 0;

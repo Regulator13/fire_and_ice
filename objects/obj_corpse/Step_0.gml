@@ -119,9 +119,11 @@ else {
 //If frozen player's cannot pass through them
 if frozen{
 	can_pass_through = false
+	climbable = true
 }
 else{
 	can_pass_through = true
+	climbable = false
 }
 
 image_index = hp;
