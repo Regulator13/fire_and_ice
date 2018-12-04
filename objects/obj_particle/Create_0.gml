@@ -1,5 +1,4 @@
 /// @description Create particles
-can_pass_through = true //Players can pass through this object
 /// Create mandatory particle systems
 // countdown particle system
 ps_countdown = part_system_create()

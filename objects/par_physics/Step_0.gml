@@ -3,6 +3,7 @@
 if (active){
 	//set solid
 	if (!place_meeting(x, y, obj_character)) solid = true;
+	else solid = false
 	
 	// Apply gravity (and jumping)
 	if (vspeed < gravity_max) {

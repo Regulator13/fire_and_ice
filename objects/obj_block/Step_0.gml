@@ -148,17 +148,6 @@ if (sticky) {
     }
 }
 
-<<<<<<< HEAD
-//If frozen or stuck player's cannot pass through them
-if frozen or stuck{
-	can_pass_through = false
-}
-else{
-	can_pass_through = true
-}
-
-=======
->>>>>>> parent of 49768a3... Players can now walk through blocks
 /// explosions
 with(instance_place(x, y, obj_explosion)) {   
     other.hp -= damage;

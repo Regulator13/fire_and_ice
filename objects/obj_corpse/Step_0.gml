@@ -116,15 +116,4 @@ else {
 	frozen = false;
 }
 
-<<<<<<< HEAD
-//If frozen player's cannot pass through them
-if frozen{
-	can_pass_through = false
-}
-else{
-	can_pass_through = true
-}
-
-=======
->>>>>>> parent of 49768a3... Players can now walk through blocks
 image_index = hp;

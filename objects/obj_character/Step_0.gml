@@ -600,6 +600,11 @@ if (active) {
 			else if can_throw{
 				//Throw
                 with(instance_create_layer(x + 4, y + 4, "lay_instances", obj_ball)) {
+					//Initialize fireball variables
+                    sprite_index = spr_ball_fire;
+                    attack = 1;
+                    Source = other.id;
+					
 					//if carrying a gun give the ball special stats
 					scr_use_gun()
 					
@@ -618,11 +623,6 @@ if (active) {
 						scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy, other.has_gun)
 					}
                     
-                    //Initialize fireball variables
-                    sprite_index = spr_ball_fire;
-                    attack = 1;
-                    Source = other.id;
-                    
                     //handicap
                     if (other.will_arc) arc = true;
                 }
@@ -640,6 +640,14 @@ if (active) {
 				//Throw
 		        if (energy > energy_fire) {
 		            with(instance_create_layer(x + 4, y + 4, "lay_instances", obj_ball)) {
+						//Initialize iceball stats
+		                sprite_index = spr_ball_ice;
+		                attack = -1; //add one health
+		                Source = other.id;
+						
+						//if carrying a gun give the ball special stats
+						scr_use_gun()
+						
 		                //Throw using mouse
 		                if (other.input_method == CONTROLS_MOUSE) {
 		                    scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir, other.has_gun)
@@ -657,14 +665,6 @@ if (active) {
                         
 		                //activate object
 		                active = true;
-                        
-		                //Initialize iceball stats
-		                sprite_index = spr_ball_ice;
-		                attack = -1; //add one health
-		                Source = other.id;
-						
-						//if carrying a gun give the ball special stats
-						scr_use_gun()
                         
 		                //handicap
 		                if (other.will_arc) arc = true;
