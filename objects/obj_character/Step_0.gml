@@ -546,17 +546,17 @@ if (active) {
 	                with(Grab_object) {
 	                    //Throw using mouse
 	                    if (other.input_method == CONTROLS_MOUSE) {
-	                        scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
+	                        scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir, false)
 	                    }
 					
 						//Throw using arrow keys
 	                    else if (other.input_method == CONTROLS_KEYBOARD) {
-	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
+	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir, false)
 	                    }
 						
 						//Throw using the gamepad right joystick
 						else{
-							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy)
+							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy, false)
 						}
                     
 	                    //activate object
@@ -649,29 +649,29 @@ if (active) {
 			//If the player isn't doing something else instead
 			else if can_throw{
 				//Throw
-                with(instance_create_layer(x,y,"lay_instances",obj_ball)) {
+                with(instance_create_layer(x + 4, y + 4, "lay_instances", obj_ball)) {
+					//if carrying a gun give the ball special stats
+					scr_use_gun()
+					
                     //direction of throwing based on mouse
                     if (other.input_method = CONTROLS_MOUSE) {
-						scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
+						scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir, other.has_gun)
                     }
 					
                     //Throw using arrow keys
 	                else if (other.input_method == CONTROLS_KEYBOARD) {
-	                    scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
+	                    scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir, other.has_gun)
 	                }
 					
 					//Throw using the gamepad right joystick
 					else{
-						scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy)
+						scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy, other.has_gun)
 					}
                     
                     //Initialize fireball variables
                     sprite_index = spr_ball_fire;
                     attack = 1;
                     Source = other.id;
-					
-					//if carrying a gun give the ball special stats
-					scr_use_gun()
                     
                     //handicap
                     if (other.will_arc) arc = true;
@@ -689,20 +689,20 @@ if (active) {
 			if can_throw{
 				//Throw
 		        if (energy > energy_fire) {
-		            with(instance_create_layer(x,y,"lay_instances",obj_ball)) {
+		            with(instance_create_layer(x + 4, y + 4, "lay_instances", obj_ball)) {
 		                //Throw using mouse
 		                if (other.input_method == CONTROLS_MOUSE) {
-		                    scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
+		                    scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir, other.has_gun)
 		                }
 					
 						//Throw using arrow keys
 	                    else if (other.input_method == CONTROLS_KEYBOARD) {
-	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
+	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir, other.has_gun)
 	                    }
 						
 						//Throw using the gamepad right joystick
 						else{
-							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy)
+							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy, other.has_gun)
 						}
                         
 		                //activate object
@@ -846,9 +846,9 @@ if climbing{
 	
 	if energy >= climbing_cost*2{
 		//use fire to go up
-		if place_free(x, y - 2){
+		if place_free(x, y - 1){
 			if (Input_player.inputs[RIGHTSELC_KEY] == KEY_ISPRESSED){
-				vspeed = -2
+				vspeed = -1
 				energy -= climbing_cost
 			}
 		}
@@ -856,9 +856,9 @@ if climbing{
 		else vspeed = 0
 			
 		//use ice to go down
-		if place_free(x, y + 2){
+		if place_free(x, y + 1){
 			if (Input_player.inputs[LEFTSELC_KEY] == KEY_ISPRESSED){
-				vspeed = 2
+				vspeed = 1
 				energy -= climbing_cost
 			}
 		}

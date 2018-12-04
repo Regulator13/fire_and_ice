@@ -22,6 +22,7 @@ can_pass_through = true
 Grab_object = noone;
 holding = 0; //holding - 0 for let go next time, 2 to throw
 Equipped_objects = ds_list_create(); //the items that are equipped
+has_gun = false //Set for aiming purposes without gun
 has_jetpack = false
 has_hang_glider = false
 

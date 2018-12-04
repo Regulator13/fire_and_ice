@@ -1,6 +1,7 @@
 /// @description Initialize self
 //Destroy if no server
 if (global.online and not global.have_server) instance_destroy();
+can_pass_through = true //Players can pass through this object
 
 //Set rate of water
 water_height = 0;
