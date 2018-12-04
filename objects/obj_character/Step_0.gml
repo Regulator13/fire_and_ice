@@ -872,9 +872,20 @@ if hanging{
 			y -= sprite_height - y_diff
 			//apply gravity again after it was lost
 			gravity_incr = 0.4
-			//give a short pause before allowing players to move again
-			alarm[1] = 5
+			active = true
 		}
+		//If the player is hanging on a platform make an exception to allow climbing while moving downard
+		else if instance_place(x + climb_dir * 4, y, obj_platform){
+			if place_free(x + climb_dir * 4, y - sprite_height - obj_platform.move_speed){
+				hanging = false
+				x += climb_dir * 4
+				y -= sprite_height - y_diff
+				//apply gravity again after it was lost
+				gravity_incr = 0.4
+				active = true
+			}
+		}
+				
 	}
 }
 	
