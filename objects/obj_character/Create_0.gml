@@ -16,7 +16,6 @@ freeze_holding_buffer = freeze_holding_buffer_max;
 can_throw = true
 gamepad_drop_delay = 5 //Number of steps to wait before allowing the player to drop from hanging after dropping off an edge
 gamepad_can_drop = true //Whether the player can drop down from a ledge when using the gamepad
-can_pass_through = true
 
 ///Item initializations
 Grab_object = noone;

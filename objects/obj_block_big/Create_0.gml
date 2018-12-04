@@ -1,10 +1,7 @@
 /// @description Set variables
-event_inherited()
-
 //Keep in bounds
 if (x > room_width-sprite_width) instance_destroy();
 climbable = true //this object can be climbed
-can_pass_through = false //Players cannot pass through this object
 
 ///Animation
 image_speed = 0;

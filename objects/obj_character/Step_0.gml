@@ -297,14 +297,14 @@ if (active) {
 			}
 	    }
     }
-/*
+
     ///Block collisions
     with(instance_place(x + sign(hspeed) * 2, y, par_physics)){
 		//Push blocks
         if (id != other.Grab_object and not frozen and !stuck) {
             x+=scr_contactx(other.hspeed);
         }
-	*/
+	}
 	
 	//Climb blocks
 	with(instance_place(x + dir * 2, y, par_block)){
@@ -327,70 +327,20 @@ if (active) {
     
     ///Collisions
 	//Horizotal collision
-	//Make a list of collisions, if you can't move through all of them, stop
-	Collided = ds_list_create()
-	num = 0
-	while instance_place(x + hspeed, y, all){
-		var inst = instance_place(x + hspeed, y, all){
-			if instance_exists(inst){
-				Collided[| num] = inst
-				num++
-				instance_deactivate_object(inst)
-			}
-		}
-	}
-	
-	if not ds_list_empty(Collided){
-		for(i=0; i<num; i++){
-			instance_activate_object(Collided[| i])
-			with Collided[| i]{
-				if not can_pass_through{
-					with other{ //Change the player's speed
-						while(!place_free(x + hspeed, y)){
-						    hspeed = scr_reduce(hspeed);
-						    if hspeed == 0 break;
-						}
-					}
-				}
-			}
-		}
-	}
-	ds_list_destroy(Collided)
+    while(!place_free(x+hspeed, y)) {
+        hspeed = scr_reduce(hspeed);
+        if hspeed = 0 break;
+    }
 	
 	//Vertical collision
-	//Make a list of collisions, if you can't move through all of them, stop
-	Collided = ds_list_create()
-	num = 0
-	while instance_place(x + hspeed, y + vspeed, all){
-		var inst = instance_place(x + hspeed, y + vspeed, all){
-			if instance_exists(inst){
-				Collided[| num] = inst
-				num++
-				instance_deactivate_object(inst)
-			}
-		}
-	}
-	
-	if not ds_list_empty(Collided){
-		for(i=0; i<num; i++){
-			instance_activate_object(Collided[| i])
-			with Collided[| i]{
-				if not can_pass_through{
-					with other{ //Change the player's speed
-						while(!place_free(x + hspeed, y + vspeed)) {
-						    vspeed = scr_reduce(vspeed);
-						    if vspeed == 0 {
-						        //reset jumps
-						        jumps = jumps_max;
-						        break;
-							}
-						}
-					}
-				}
-			}
+    while(!place_free(x+hspeed,y+vspeed)) {
+        vspeed = scr_reduce(vspeed);
+        if vspeed = 0 {
+            //reset jumps
+            jumps = jumps_max;
+            break;
         }
     }
-	ds_list_destroy(Collided)
 	
 	///Platforms
 	//Match speed of platforms

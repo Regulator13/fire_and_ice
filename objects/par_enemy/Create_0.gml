@@ -1,6 +1,4 @@
 /// @description Set Variables
-event_inherited()
-
 hp = 5;
 dmg = 0;
 

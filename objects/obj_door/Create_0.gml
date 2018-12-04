@@ -1,6 +1,4 @@
 /// @description Set variables
-event_inherited()
-
 ///Animation
 image_speed = 0;
 imageOpen = 7; //image where door is fully open

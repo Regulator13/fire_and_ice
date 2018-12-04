@@ -1,6 +1,4 @@
 /// @description Set variables
-event_inherited()
-
 hp = 3
 hp_max = 3
 dir = -1
@@ -11,7 +9,6 @@ move_speed = 2 //the platform's move speed
 active = true //whether the platform is moving
 turn_around_delay = 15 //Number of step the platform will stop before turning around
 climbable = true //this object can be climbed
-can_pass_through = false //Players cannot pass through this object
 alarm[1] = 0
 
 ///Animation

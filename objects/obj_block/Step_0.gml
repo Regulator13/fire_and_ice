@@ -129,27 +129,26 @@ if (sticky) {
     //if not being held, stick
     if !(instance_exists(Holder)) {
         if(!place_free(x+hspeed, y)) {
-			if not instance_place(x+hspeed, y, obj_character){
-				//stick right against block
-	            while(!place_free(x+hspeed, y)) {
-			        hspeed = scr_reduce(hspeed);
-			        if hspeed = 0 break;
-			    }
+			//stick right against block
+            while(!place_free(x+hspeed, y)) {
+		        hspeed = scr_reduce(hspeed);
+		        if hspeed = 0 break;
+		    }
 			
-	            vspeed = 0;
-	            active = false; //ignore physics
-	            stuck = true; //keep solid
+            vspeed = 0;
+            active = false; //ignore physics
+            stuck = true; //keep solid
 			
-				//If less than half of the block is touching, unstick
-				if scr_check_num_pixels_touching() <= sprite_height / 2{
-					stuck = false
-					active = true
-				}
-	        }
-		}
+			//If less than half of the block is touching, unstick
+			if scr_check_num_pixels_touching() <= sprite_height / 2{
+				stuck = false
+				active = true
+			}
+        }
     }
 }
 
+<<<<<<< HEAD
 //If frozen or stuck player's cannot pass through them
 if frozen or stuck{
 	can_pass_through = false
@@ -160,6 +159,8 @@ else{
 	climbable = false
 }
 
+=======
+>>>>>>> parent of 49768a3... Players can now walk through blocks
 /// explosions
 with(instance_place(x, y, obj_explosion)) {   
     other.hp -= damage;
