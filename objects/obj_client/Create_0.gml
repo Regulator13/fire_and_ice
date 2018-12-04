@@ -32,7 +32,7 @@ port = 6510;
 var alignment = 1;
 buff = buffer_create(256, buffer_grow, alignment);
 //create a UDP socket
-client = network_create_socket(global.ServerType);
+client = network_create_socket(global.ServerType); //Value less than zero if it fails
 //remember this socket ID so the server can ignore it (if we have a local server)
 
 // remember client id

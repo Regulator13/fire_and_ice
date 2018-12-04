@@ -1,5 +1,4 @@
 /// @description Draw the sprite
-
-if obj_control.animations_on or animation_end{
+if global.Menu.animations_on or animation_end{
 	event_inherited();
 }

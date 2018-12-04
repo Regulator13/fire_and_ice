@@ -1,6 +1,7 @@
 /// @description Set variables
 global.paused = false; //whether game is paused
 state = STATE_MAIN; //current game state
+state_queue = ds_stack_create()//holds states in order visited for universal back button
 buttons = ds_list_create(); //holds menu buttons
 selected = 0; //selected button
 input_buffer = 0; //small buffer to slow down gamepad input
@@ -9,11 +10,11 @@ input_freeze = 0; //small amount of time inbetween menu switches
 input_freezeMax = 4;
 score_message = ""; //either restart or continue, used with space key
 tagLine = "Now with#hang gliders!";
-version = "1.04.4";
+version = "2.15.0";
 local_controls = ds_list_create(); //list holding which local players are in
 
 ///First menu
-scr_menuInitMain();
+scr_menu_init_main();
 
 ///Set player variables
 players = ds_list_create();
@@ -40,11 +41,16 @@ readys = ds_list_create();
 ini_open("options.ini");
 
 //load data
-section = string("default");
-var str;
+section = "default";
 
 //set gameMode
 gameMode = ini_read_string(section, "gameMode", "Normal");
+
+///Game options menu
+section = "gameOptions"
+
+//load game options
+animations_on = ini_read_real(section, "animations_on", true);
 
 //close file
 ini_close(); 
@@ -83,19 +89,24 @@ server_data = ds_list_create();
 
 ///Controls
 controlSelected = 0; // selected controls in the controls menu DESCR?
-controlsMax = 2; //the amount of controls DESCR?
+controlsMax = 7; //the amount of controls DESCR?
 
 //If player previously inputted controls, use those
 if (file_exists("controls.ini")) {
-    scr_loadControls();
+    scr_load_controls();
 }
 
 //Otherwise use the default controls
 else {
-    scr_setControlsDefault(0, CONTROLS_MOUSE);
+    scr_set_controls_default(0, CONTROLS_MOUSE);
     //second player's controls
-    scr_setControlsDefault(1, CONTROLS_KEYBOARD);
-    scr_saveControls();
+    scr_set_controls_default(1, CONTROLS_KEYBOARD);
+	scr_set_controls_default(2, CONTROLS_GP1);
+	scr_set_controls_default(3, CONTROLS_GP2);
+	scr_set_controls_default(4, CONTROLS_GP3);
+	scr_set_controls_default(5, CONTROLS_GP4);
+	scr_set_controls_default(6, CONTROLS_GP5);
+    scr_save_controls();
 }
 
 ///Tutorial

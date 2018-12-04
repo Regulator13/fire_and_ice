@@ -19,3 +19,13 @@ while(!place_free(x+hspeed,y+vspeed)){
 	
     if vspeed = 0 break;
 }
+
+//Be pulled or pushed
+if being_pulled{
+	hspeed = Puller.hspeed
+	if (not place_meeting(x + GRAB_TOL, y, Puller)) and (not place_meeting(x - GRAB_TOL, y, Puller)){
+		hspeed = 0
+		Puller = noone
+		being_pulled = false
+	}
+}

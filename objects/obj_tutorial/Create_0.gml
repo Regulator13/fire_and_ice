@@ -11,11 +11,11 @@ alarm[0] = showTime;
 var control = global.Menu.local_controls[| 0];
 
 //set which controls to display in message
-var left = scr_getInputName(global.controls[control, LEFT_KEY], LEFT_KEY, global.controls[control, KEY_TYPE]);
-var right = scr_getInputName(global.controls[control, RIGHT_KEY], RIGHT_KEY, global.controls[control, KEY_TYPE]);
-var jump = scr_getInputName(global.controls[control, ACTION_KEY], ACTION_KEY, global.controls[control, KEY_TYPE]);
-var ice = scr_getInputName(global.controls[control, LEFTSELC_KEY], LEFTSELC_KEY, global.controls[control, KEY_TYPE]);
-var fire = scr_getInputName(global.controls[control, RIGHTSELC_KEY], RIGHTSELC_KEY, global.controls[control, KEY_TYPE]);
+var left = scr_get_input_name(global.controls[control, LEFT_KEY], LEFT_KEY, global.controls[control, KEY_TYPE]);
+var right = scr_get_input_name(global.controls[control, RIGHT_KEY], RIGHT_KEY, global.controls[control, KEY_TYPE]);
+var jump = scr_get_input_name(global.controls[control, ACTION_KEY], ACTION_KEY, global.controls[control, KEY_TYPE]);
+var ice = scr_get_input_name(global.controls[control, LEFTSELC_KEY], LEFTSELC_KEY, global.controls[control, KEY_TYPE]);
+var fire = scr_get_input_name(global.controls[control, RIGHTSELC_KEY], RIGHTSELC_KEY, global.controls[control, KEY_TYPE]);
 var aim;
 switch (global.controls[control, KEY_TYPE]) {
     case CONTROLS_MOUSE:
@@ -23,8 +23,8 @@ switch (global.controls[control, KEY_TYPE]) {
         break
 		
     case CONTROLS_KEYBOARD:
-        var up = scr_getInputName(global.controls[control, UP_KEY], UP_KEY, global.controls[control, KEY_TYPE]);
-        var down = scr_getInputName(global.controls[control, DOWN_KEY], DOWN_KEY, global.controls[control, KEY_TYPE]);
+        var up = scr_get_input_name(global.controls[control, UP_KEY], UP_KEY, global.controls[control, KEY_TYPE]);
+        var down = scr_get_input_name(global.controls[control, DOWN_KEY], DOWN_KEY, global.controls[control, KEY_TYPE]);
         aim = up + " and " + down;
 }
 

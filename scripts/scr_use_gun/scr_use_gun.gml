@@ -9,6 +9,8 @@ for (var i=0; i<ds_list_size(other.Equipped_objects); i++){
 		attack *= other.Equipped_objects[| i].dmg
 		//Make the bullet not fall
 		gravity_incr = 0
+		//Tell the player they have a gun
+		other.has_gun = true
 		break
 	}
 }

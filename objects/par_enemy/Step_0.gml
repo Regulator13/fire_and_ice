@@ -1,4 +1,6 @@
 /// @description Collisions
+event_inherited()
+
 //die
 if(hp <= 0){
 	instance_create_layer(x, y, "lay_instances", obj_corpse);
@@ -14,4 +16,9 @@ with(instance_place(x, y, obj_ball)) {
 
 with(instance_place(x, y, obj_explosion)) {   
     other.hp -= damage;
+}
+
+//die if no block below
+if (place_free(x, y+1)) {
+    hp = -1;
 }

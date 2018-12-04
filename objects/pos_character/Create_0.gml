@@ -1,4 +1,5 @@
 /// @description Create player
+can_pass_through = true
 /*
 with (instance_create_layer(x, y, "lay_instances", obj_character)) {
     //set id

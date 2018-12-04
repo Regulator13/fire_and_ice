@@ -1,4 +1,7 @@
 /// @description  Create server and initialise map
+
+//global.Server set to id in obj_online
+
 global.counter = 0;
 image_blend = c_red;
 global.have_server = true;

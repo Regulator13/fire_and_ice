@@ -7,7 +7,7 @@ if (clientDebug) {
     // set draw offset
     var drawOffset = 0;
     var yOffset = 20;
-    var count = 9;
+    var count = 10;
     
     // draw background
     draw_rectangle(0, 0, 500, count*yOffset+30+10, false);
@@ -23,11 +23,12 @@ if (clientDebug) {
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Socket In: " + string(socketIn)));
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Server IP: " + string(serverIP)));
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Sequence In: " + string(sequenceIn)));
-    draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("msgID In: " + scr_msgIDtoString(msgIDin)));
+    draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("msgID In: " + scr_msg_id_to_String(msgIDin)));
     drawOffset++;// skip a space
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Client State Info:"));
     draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Client Socket: " + string(client)));
-    draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Network State: " + scr_networkStateToString(global.NetworkState)));
+    draw_text(10, 30+yOffset*drawOffset++, string_hash_to_newline("Network State: " + scr_network_state_to_string(global.NetworkState)));
+	draw_text(10, 30+yOffset*drawOffset++, "Sending IP: " + string(ip) + " Sending Port: " + string(port))
     
     // reset alpha
     draw_set_alpha(1);

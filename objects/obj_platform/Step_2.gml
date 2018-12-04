@@ -13,8 +13,8 @@ if active{
 		///Vertical
 		if is_vertical{
 			//calculate bounds of movement
-			var upper_bound = start_y - (hp_max - hp) * grid_size * 2
-			var lower_bound = start_y
+			var upper_bound = start_y - (hp_max - hp) * grid_size
+			var lower_bound = start_y + (hp_max - hp) * grid_size
 		
 			//move
 			vspeed = dir * move_speed
@@ -86,7 +86,7 @@ if active{
 		}
 		
 		//Turn around at blocks
-		with instance_place(x + hspeed, y + vspeed, obj_blockBig){
+		with instance_place(x + hspeed, y + vspeed, obj_block_big){
 			other.hspeed = 0
 			other.vspeed = 0
 			other.dir *= -1
@@ -95,6 +95,20 @@ if active{
 		///Push characters out of the way to avoid getting stuck
 		with(instance_place(x + hspeed, y, obj_character)){
 			x += scr_contactx(other.hspeed);
+		}
+		
+		///Push characters out of the way to avoid getting stuck if they are below the platform
+		with(instance_place(x, y + vspeed, obj_character)){
+			if y > other.y{
+				y += scr_contacty(other.vspeed);
+			}
+		}
+		
+		//Push blocks out of the way to avoid getting stuck if they are below the platform
+		with(instance_place(x, y + vspeed, par_physics)){
+			if y > other.y{
+				y += scr_contacty(other.vspeed);
+			}
 		}
 	}
 }

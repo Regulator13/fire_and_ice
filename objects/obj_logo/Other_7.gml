@@ -1,5 +1,5 @@
 /// @description Pause
-if (sprite_index == spr_bubblelogo) {
+if (sprite_index == spr_bubble_logo) {
     //end
     alarm[0] = 30;
     image_speed = 0;

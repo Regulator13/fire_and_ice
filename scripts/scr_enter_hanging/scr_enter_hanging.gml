@@ -9,4 +9,3 @@ climb_dir = dir
 gravity_incr = 0
 active = false
 hanging = true
-scr_carry_object()

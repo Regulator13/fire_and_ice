@@ -9,7 +9,7 @@ for (i = 0; i < amount; i++;) {
         
     // drop player
     show_debug_message(" + " +string(Local.connectID));
-    scr_joinLobby(Local);
+    scr_join_lobby(Local);
 	
     // destroy player object
     instance_destroy(Local);

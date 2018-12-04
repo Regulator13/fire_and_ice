@@ -37,7 +37,7 @@ if (!global.online) {
         Local.input = 1; //ds_list_find_value(players, connectID);
         Local.Team = ds_list_find_value(teams, Local.player_id); //temporary
         Local.character = ds_list_find_value(classes, Local.player_id);
-        Local.sprite_index = scr_getSprite(Local.character);
+        Local.sprite_index = scr_get_character_sprite(Local.character);
 		
         //Team
         var Team = ds_map_find_value(game_teams, Local.Team);
@@ -72,7 +72,7 @@ else if (global.have_server) {
             player.input = -1; //ds_list_find_value(players, connectID);
             player.Team = ds_list_find_value(other.teams, player.player_id); //temporary
             player.character = ds_list_find_value(other.classes, player.player_id);
-            player.sprite_index = scr_getSprite(player.character);
+            player.sprite_index = scr_get_character_sprite(player.character);
 			
             //team
             var Team = ds_map_find_value(other.game_teams, player.Team);

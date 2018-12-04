@@ -7,6 +7,7 @@ with instance_place(x, y + obj_platform.move_speed + 1, obj_platform){
 	if is_vertical{
 		other.y += vspeed
 		
+		
 		//If stuck in platform move up
 		while place_meeting(x, y + vspeed, other){
 			other.y -= 1
@@ -25,3 +26,4 @@ with instance_place(x, y + obj_platform.move_speed + 1, obj_platform){
 		other.x += hspeed
 	}
 }
+		
