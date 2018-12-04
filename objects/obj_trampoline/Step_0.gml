@@ -22,7 +22,12 @@ while(!place_free(x+hspeed,y+vspeed)){
 
 //Be pulled or pushed
 if being_pulled{
-	hspeed = Puller.hspeed
+	//Move with player unless going into a solid object
+	if place_free(x + Puller.hspeed, y){
+		hspeed = Puller.hspeed
+	}
+	
+	//When the player is not nearby, stop moving with the player
 	if (not place_meeting(x + GRAB_TOL, y, Puller)) and (not place_meeting(x - GRAB_TOL, y, Puller)){
 		hspeed = 0
 		Puller = noone
