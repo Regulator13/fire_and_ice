@@ -6,21 +6,11 @@
 //Assign parameters
 var index = argument0
 
-
-/*
-Assignments:
-	grinch - 5
-	yeti - 7
-	reindeer - 9
-	nutcracker - 10
-	santa - 11
-*/
-
 //Give stats
 switch index{
 	
 	//grinch
-	case 5:
+	case spr_grinch:
 		other.gameCharacter.hp = 100
 		other.gameCharacter.hp_max = 100
 		other.gameCharacter.energy = 100
@@ -34,7 +24,7 @@ switch index{
 		break
 	
 	//yeti
-	case 7:
+	case spr_yeti:
 		other.gameCharacter.hp = 120
 		other.gameCharacter.hp_max = 120
 		other.gameCharacter.energy = 90
@@ -48,7 +38,7 @@ switch index{
 		break
 	
 	//reindeer
-	case 9:
+	case spr_reindeer:
 		other.gameCharacter.hp = 80
 		other.gameCharacter.hp_max = 80
 		other.gameCharacter.energy = 95
@@ -62,7 +52,7 @@ switch index{
 		break
 	
 	//nutcracker
-	case 10:
+	case spr_nutcracker:
 		other.gameCharacter.hp = 100
 		other.gameCharacter.hp_max = 100
 		other.gameCharacter.energy = 105
@@ -76,7 +66,7 @@ switch index{
 		break
 		
 	//santa
-	case 11:
+	case spr_santa:
 		other.gameCharacter.hp = 95
 		other.gameCharacter.hp_max = 95
 		other.gameCharacter.energy = 115
