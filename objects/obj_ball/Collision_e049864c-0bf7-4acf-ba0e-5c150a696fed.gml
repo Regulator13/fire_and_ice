@@ -5,7 +5,7 @@ if not other.frozen{
 	if attack < 0{
 		with other{
 			frozen = true
-			sprite_index = spr_frozen_water_source
+			image_index = 1
 		}
 	}
 }
@@ -15,7 +15,7 @@ if other.frozen{
 	if attack > 0{
 		with other{
 			frozen = false
-			sprite_index = spr_water_spawn
+			image_index = 0
 		}
 	}
 }
