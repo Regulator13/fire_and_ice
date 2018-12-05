@@ -35,6 +35,7 @@ if (active) {
         case 1:
             // local input
             if(Input_player.inputs[LEFT_KEY]) haxis1 = -1;
+			if haxis1 = -1 show_debug_message("Left pressed")
             if(Input_player.inputs[RIGHT_KEY]) haxis1 = 1;
             if(Input_player.inputs[UP_KEY] == KEY_PRESSED) vaxis1 = -1;
             if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) vaxis1 = 1;
@@ -95,26 +96,24 @@ if (active) {
 	if not place_free(x, y + 1){
 		//Move if joystick is pushed far enough
 	    if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
-			if (!left_action_is_pressed and !right_action_is_pressed) or has_jetpack{
-				//down key to inch sideways
-				if down_pressed > axis_buffer{
-					if place_free(x + haxis1, y + vspeed){
-						hspeed = 0
-						x += haxis1
-					}
+			//down key to inch sideways
+			if down_pressed > axis_buffer{
+				if place_free(x + haxis1, y + vspeed){
+					hspeed = 0
+					x += haxis1
+				}
+			}
+				
+				
+			else{
+				//accelerate
+				if abs(hspeed) < moveSpeed{
+					hspeed += haxis1*acceleration
 				}
 				
-				
+				//move once fully accelerated
 				else{
-					//accelerate
-					if abs(hspeed) < moveSpeed{
-						hspeed += haxis1*acceleration
-					}
-				
-					//move once fully accelerated
-					else{
-						hspeed = haxis1*moveSpeed
-					}
+					hspeed = haxis1*moveSpeed
 				}
 			}
 	        //Find direction player is facing
@@ -143,28 +142,26 @@ if (active) {
 	//If in the air
 	else{
 		if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
-	        if (!left_action_is_pressed and !right_action_is_pressed) or has_jetpack{
-				//If moving from a stop in air
-				if hspeed == 0{
-					hspeed += haxis1 * drag
-				}
-					
-				//If going the same direction
-				if sign(hspeed) == sign(haxis1){
-					if abs(hspeed) < moveSpeed{
-						hspeed += sign(hspeed) * drag
-					}
-				}
-					
-				//If opposing direction
-				if sign(hspeed) != sign(haxis1){
-					hspeed = (abs(hspeed) - drag) * sign(hspeed)
-				}
-				
-				//Change player's direction
-				if hspeed != 0 dir = sign(hspeed)
-				else if input_method != CONTROLS_KEYBOARD dir = 0 //Keyboard controls use direction to show aim reticule
+			//If moving from a stop in air
+			if hspeed == 0{
+				hspeed += haxis1 * drag
 			}
+					
+			//If going the same direction
+			if sign(hspeed) == sign(haxis1){
+				if abs(hspeed) < moveSpeed{
+					hspeed += sign(hspeed) * drag
+				}
+			}
+					
+			//If opposing direction
+			if sign(hspeed) != sign(haxis1){
+				hspeed = (abs(hspeed) - drag) * sign(hspeed)
+			}
+				
+			//Change player's direction
+			if hspeed != 0 dir = sign(hspeed)
+			else if input_method != CONTROLS_KEYBOARD dir = 0 //Keyboard controls use direction to show aim reticule
 		}
 	}
 	

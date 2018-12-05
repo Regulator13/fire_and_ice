@@ -56,5 +56,4 @@ if not has_gun{
 	//Add on extra vspeed to compensate for x_distance
 	var gravity_incr = 0.4
 	vspeed -= (x_distance / max(abs(hspeed), 3)) * (gravity_incr / 2)
-	show_debug_message("No gun")
 }
