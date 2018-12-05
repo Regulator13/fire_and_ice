@@ -179,7 +179,7 @@ if (active) {
             mouseX = Input_player.mouseX;
         }
     }
-             
+
     ///Image
     switch (dir) {
         case 0:
@@ -195,7 +195,7 @@ if (active) {
             image_index = 4 + frame_step;
             break;
         }
-    
+
     ///Animatation
     if (hspeed != 0) {
         if (frame_buffer < 0) {
@@ -205,7 +205,7 @@ if (active) {
 		
         else frame_buffer --;
     }
-	
+
     //keep animation in bounds
     if (frame_step > 3) frame_step = 0;
 	
@@ -235,10 +235,13 @@ if (active) {
 							dir = -1
 							hspeed = 0
 							vspeed = 0
-							climb_dir = dir
-							gravity_incr = 0
-							active = false
-							hanging = true
+							//If the players feet is not touching the ground
+							if place_free(x, y + 1){
+								climb_dir = dir
+								gravity_incr = 0
+								active = false
+								hanging = true
+							}
 							dropped = true
 							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
 								alarm[2] = gamepad_drop_delay
@@ -247,7 +250,7 @@ if (active) {
 						}
 					}
 				}
-		
+
 				//Hang on left side if left foot is off the side of block
 				else if position_empty(other.x, other.y + other.sprite_height + 1){
 					//Check to see if the PLAYER can fit, not the par_block
@@ -258,10 +261,13 @@ if (active) {
 							dir = 1
 							hspeed = 0
 							vspeed = 0
-							climb_dir = dir
-							gravity_incr = 0
-							active = false
-							hanging = true
+							//If the players feet is not touching the ground
+							if place_free(x, y + 1){
+								climb_dir = dir
+								gravity_incr = 0
+								active = false
+								hanging = true
+							}
 							dropped = true
 							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
 								alarm[2] = gamepad_drop_delay
@@ -305,7 +311,7 @@ if (active) {
             x+=scr_contactx(other.hspeed);
         }
 	}
-	
+
 	//Climb blocks
 	with(instance_place(x + dir * 2, y, par_block)){
 		if (id != other.Grab_object and climbable){
@@ -321,17 +327,17 @@ if (active) {
         //gravity increment
         vspeed += gravity_incr
         }
-		
+
     //keep gravity in bounds
     if (vspeed > gravity_max) vspeed = gravity_max;
-    
+
     ///Collisions
 	//Horizotal collision
     while(!place_free(x+hspeed, y)) {
         hspeed = scr_reduce(hspeed);
         if hspeed = 0 break;
     }
-	
+
 	//Vertical collision
     while(!place_free(x+hspeed,y+vspeed)) {
         vspeed = scr_reduce(vspeed);
@@ -341,11 +347,11 @@ if (active) {
             break;
         }
     }
-	
+
 	///Platforms
 	//Match speed of platforms
 	scr_move_with_platform()
-	
+
 	//Jetpack flying
 	if right_action_is_pressed and has_jetpack and Grab_object.working{
 		if energy >= Grab_object.jetpack_cost{
@@ -396,7 +402,7 @@ if (active) {
         crouch = true;
 		
         //If not already holding something, attempt to grab close thing
-		if (place_meeting(x + sign(dir) * GRAB_TOL, y, par_physics)) {
+		if (place_meeting(x + sign(dir) * GRAB_TOL, y, par_physics)) and not place_meeting(x + sign(dir) * GRAB_TOL, y, obj_ball){
 			
 	        if (holding = 0) {
 		
@@ -719,11 +725,13 @@ with (instance_place(x, y, obj_block_big)){
 }
 
 //Jump on trampolines
-var min_jump_speed = 3
-if place_meeting(x, y + vspeed/4, obj_trampoline){		
-	//Bounce
-	if vspeed > min_jump_speed{
-		vspeed *= -1.1
+min_jump_speed = 3
+with instance_place(x, y + vspeed/4, obj_trampoline){
+	if not toppled{
+		//Bounce
+		if other.vspeed > other.min_jump_speed{
+			other.vspeed *= -1.1
+		}
 	}
 }
 

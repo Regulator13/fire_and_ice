@@ -122,7 +122,7 @@ for (var i=0; i<4; i++){
 	    dy = room_height-gridSize-32
 		
 		if (place_empty(dx, dy)){
-			instance_create_layer(dx, dy+16, "lay_instances", obj_trampoline)
+			instance_create_layer(dx, dy + 16, "lay_instances", obj_trampoline)
 		}
 		
 		//If not yet out of tries, attempt to spawn the block again

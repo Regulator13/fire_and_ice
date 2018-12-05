@@ -140,7 +140,7 @@ if (sticky) {
             stuck = true; //keep solid
 			
 			//If less than half of the block is touching, unstick
-			if scr_check_num_pixels_touching() <= sprite_height / 2{
+			if scr_num_pixels_touching_sides() <= sprite_height / 2{
 				stuck = false
 				active = true
 			}
