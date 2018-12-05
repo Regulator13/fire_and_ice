@@ -14,4 +14,4 @@ What is your idea?
 If you think it would help, explain why you believe this is a good or necessary change.
 
 **Steps to Implement**
-Do you have a plan of how to implement this? If, so describe.
+Do you have a plan of how to implement this? If so, describe.
