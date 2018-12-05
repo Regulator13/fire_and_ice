@@ -209,3 +209,12 @@ if (right_action_pressed) {
 if(y > room_height-obj_wall.sprite_height-obj_control.water_height){
     jumps = jumps_max;
 }
+
+//Pick up coins
+with (instance_place(x, y, obj_score)) {
+    //add score
+    with (other) Team.tScore += round(global.score_object/ds_list_size(Team.players));
+	
+    //destroy self
+    instance_destroy();
+}

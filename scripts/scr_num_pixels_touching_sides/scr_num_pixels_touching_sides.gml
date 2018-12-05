@@ -1,5 +1,5 @@
-/// @function scr_check_num_pixels_touching()
-/// @description  checks how many pixels are in contact with a solid object
+/// @function scr_num_pixels_touching_sides()
+/// @description  checks how many pixels are in contact with a solid object on either side
 /// @return  Int - number of pixels attached
 
 var count = 0 //number of pixels touching

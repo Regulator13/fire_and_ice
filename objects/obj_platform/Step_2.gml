@@ -92,6 +92,16 @@ if active{
 			other.dir *= -1
 		}
 		
+		//Turn around at player if the player is pushed against something
+		with instance_place(x + hspeed, y + vspeed, obj_character){
+			//Check if the player will be pushed into something solid next step
+			if not place_free(x + other.hspeed, y + other.vspeed){
+				other.hspeed = 0
+				other.vspeed = 0
+				other.dir *= -1
+			}
+		}
+		
 		///Push characters out of the way to avoid getting stuck
 		with(instance_place(x + hspeed, y, obj_character)){
 			x += scr_contactx(other.hspeed);

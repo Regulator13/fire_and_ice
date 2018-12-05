@@ -33,8 +33,8 @@ if (input_buffer < 0) {
             inputs[RIGHTSELC_KEY] = scr_get_mouse_input(global.controls[controls, RIGHTSELC_KEY]);
 			
             // set mouse position
-            mouseX = mouse_x;
-            mouseY = mouse_y;
+            mouseX = window_view_mouse_get_x(0);
+            mouseY = window_view_mouse_get_y(0);
 			
             // check if there was any input
             if (keyboard_check(vk_anykey) or device_mouse_check_button(0, mb_any)){

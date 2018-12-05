@@ -101,21 +101,35 @@ for (i = 4; i < maxY/gridSize; i += 4) {
 }
 
 //floor block generators - guarenteed 4 sticky block generators
-repeat(4) {
+var tries = 100
+for (var i=0; i<4; i++){
     dx = round(irandom_range(gridSize*4, room_height - gridSize*4)/gridSize)*gridSize;
     dy = room_height-gridSize-16;
-    if (place_free(dx, dy-16)) with instance_create_layer(dx, dy, "lay_instances", obj_block_station) sticky = true;
+    if (place_empty(dx, dy-16)) with instance_create_layer(dx, dy, "lay_instances", obj_block_station) sticky = true;
+	
+	//If not yet out of tries, attempt to spawn the block again
+	else if tries > 0{
+		i -= 1
+	}
+	tries -= 1
 }
 
 //bottom trampoline creation - up to two with a 50% chance for each
-repeat(2){
+var tries = 100
+for (var i=0; i<4; i++){
 	if !irandom(1){
 		dx = round(irandom_range(gridSize*3, room_height - gridSize*4)/gridSize)*gridSize
 	    dy = room_height-gridSize-32
 		
-		if (place_free(dx, dy)){
-			instance_create_layer(dx, dy+16, "lay_instances", obj_trampoline)
+		if (place_empty(dx, dy)){
+			instance_create_layer(dx, dy + 16, "lay_instances", obj_trampoline)
 		}
+		
+		//If not yet out of tries, attempt to spawn the block again
+		else if tries > 0{
+			i -= 1
+		}
+		tries -= 1
 	}
 }
 
@@ -136,7 +150,7 @@ for (i=0; i<tries; i++){
 	
 	//check if track is free
 	for (j=-3; j<4; j++){
-		if not place_free(rx, ry - j*gridSize){
+		if not place_empty(rx, ry - j*gridSize){
 			open = false
 			break
 		}
@@ -163,7 +177,7 @@ for (i=0; i<tries; i++){
 	
 	//check if track is free
 	for (j=-3; j<4; j++){
-		if not place_free(rx + j*gridSize, ry){
+		if not place_empty(rx + j*gridSize, ry){
 			open = false
 			break
 		}
@@ -171,7 +185,7 @@ for (i=0; i<tries; i++){
 	
 	//check if above track is free
 	for (j=-3; j<4; j++){
-		if not place_free(rx + j*gridSize, ry - gridSize){
+		if not place_empty(rx + j*gridSize, ry - gridSize){
 			open = false
 		}
 	}
@@ -208,7 +222,7 @@ if (global.continue_game) {
 	    ry = round(irandom_range(0, room_height)/gridSize)*gridSize;
     
 	    //check if can place
-	    if (place_free(rx, ry)) {
+	    if (place_empty(rx, ry)) {
 	        if (place_meeting(rx, ry+gridSize, obj_block_big)) {
 	            instance_create_layer(rx+gridSize/2, ry+gridSize/2, "lay_instances", obj_health);
 	            tries -= 1;

@@ -2,7 +2,8 @@
 event_inherited();
 
 ///Stats
-hspeed = 3;
+move_speed = 3;
+dir = 1 //Set the direction of the patrol 1 = right, -1 = left
 dmg = 10;
 can_attack = true
 attack_delay = 20

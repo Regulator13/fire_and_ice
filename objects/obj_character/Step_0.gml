@@ -179,7 +179,7 @@ if (active) {
             mouseX = Input_player.mouseX;
         }
     }
-             
+
     ///Image
     switch (dir) {
         case 0:
@@ -195,7 +195,7 @@ if (active) {
             image_index = 4 + frame_step;
             break;
         }
-    
+
     ///Animatation
     if (hspeed != 0) {
         if (frame_buffer < 0) {
@@ -205,7 +205,7 @@ if (active) {
 		
         else frame_buffer --;
     }
-	
+
     //keep animation in bounds
     if (frame_step > 3) frame_step = 0;
 	
@@ -235,10 +235,13 @@ if (active) {
 							dir = -1
 							hspeed = 0
 							vspeed = 0
-							climb_dir = dir
-							gravity_incr = 0
-							active = false
-							hanging = true
+							//If the players feet is not touching the ground
+							if place_free(x, y + 1){
+								climb_dir = dir
+								gravity_incr = 0
+								active = false
+								hanging = true
+							}
 							dropped = true
 							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
 								alarm[2] = gamepad_drop_delay
@@ -247,7 +250,7 @@ if (active) {
 						}
 					}
 				}
-		
+
 				//Hang on left side if left foot is off the side of block
 				else if position_empty(other.x, other.y + other.sprite_height + 1){
 					//Check to see if the PLAYER can fit, not the par_block
@@ -258,10 +261,13 @@ if (active) {
 							dir = 1
 							hspeed = 0
 							vspeed = 0
-							climb_dir = dir
-							gravity_incr = 0
-							active = false
-							hanging = true
+							//If the players feet is not touching the ground
+							if place_free(x, y + 1){
+								climb_dir = dir
+								gravity_incr = 0
+								active = false
+								hanging = true
+							}
 							dropped = true
 							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
 								alarm[2] = gamepad_drop_delay
@@ -305,7 +311,7 @@ if (active) {
             x+=scr_contactx(other.hspeed);
         }
 	}
-	
+
 	//Climb blocks
 	with(instance_place(x + dir * 2, y, par_block)){
 		if (id != other.Grab_object and climbable){
@@ -321,17 +327,17 @@ if (active) {
         //gravity increment
         vspeed += gravity_incr
         }
-		
+
     //keep gravity in bounds
     if (vspeed > gravity_max) vspeed = gravity_max;
-    
+
     ///Collisions
 	//Horizotal collision
     while(!place_free(x+hspeed, y)) {
         hspeed = scr_reduce(hspeed);
         if hspeed = 0 break;
     }
-	
+
 	//Vertical collision
     while(!place_free(x+hspeed,y+vspeed)) {
         vspeed = scr_reduce(vspeed);
@@ -341,11 +347,11 @@ if (active) {
             break;
         }
     }
-	
+
 	///Platforms
 	//Match speed of platforms
 	scr_move_with_platform()
-	
+
 	//Jetpack flying
 	if right_action_is_pressed and has_jetpack and Grab_object.working{
 		if energy >= Grab_object.jetpack_cost{
@@ -396,7 +402,7 @@ if (active) {
         crouch = true;
 		
         //If not already holding something, attempt to grab close thing
-		if (place_meeting(x + sign(dir) * GRAB_TOL, y, par_physics)) {
+		if (place_meeting(x + sign(dir) * GRAB_TOL, y, par_physics)) and not place_meeting(x + sign(dir) * GRAB_TOL, y, obj_ball){
 			
 	        if (holding = 0) {
 		
@@ -496,17 +502,17 @@ if (active) {
 	                with(Grab_object) {
 	                    //Throw using mouse
 	                    if (other.input_method == CONTROLS_MOUSE) {
-	                        scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
+	                        scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir, false)
 	                    }
 					
 						//Throw using arrow keys
 	                    else if (other.input_method == CONTROLS_KEYBOARD) {
-	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
+	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir, false)
 	                    }
 						
 						//Throw using the gamepad right joystick
 						else{
-							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy)
+							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy, false)
 						}
                     
 	                    //activate object
@@ -599,29 +605,29 @@ if (active) {
 			//If the player isn't doing something else instead
 			else if can_throw{
 				//Throw
-                with(instance_create_layer(x,y,"lay_instances",obj_ball)) {
-                    //direction of throwing based on mouse
-                    if (other.input_method = CONTROLS_MOUSE) {
-						scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
-                    }
-					
-                    //Throw using arrow keys
-	                else if (other.input_method == CONTROLS_KEYBOARD) {
-	                    scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
-	                }
-					
-					//Throw using the gamepad right joystick
-					else{
-						scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy)
-					}
-                    
-                    //Initialize fireball variables
+                with(instance_create_layer(x + 4, y + 4, "lay_instances", obj_ball)) {
+					//Initialize fireball variables
                     sprite_index = spr_ball_fire;
                     attack = 1;
                     Source = other.id;
 					
 					//if carrying a gun give the ball special stats
-					scr_use_gun()
+					var has_gun = scr_use_gun()
+					
+                    //direction of throwing based on mouse
+                    if (other.input_method = CONTROLS_MOUSE) {
+						scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir, has_gun)
+                    }
+					
+                    //Throw using arrow keys
+	                else if (other.input_method == CONTROLS_KEYBOARD) {
+	                    scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir, has_gun)
+	                }
+					
+					//Throw using the gamepad right joystick
+					else{
+						scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy, has_gun)
+					}
                     
                     //handicap
                     if (other.will_arc) arc = true;
@@ -639,32 +645,32 @@ if (active) {
 			if can_throw{
 				//Throw
 		        if (energy > energy_fire) {
-		            with(instance_create_layer(x,y,"lay_instances",obj_ball)) {
-		                //Throw using mouse
-		                if (other.input_method == CONTROLS_MOUSE) {
-		                    scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir)
-		                }
-					
-						//Throw using arrow keys
-	                    else if (other.input_method == CONTROLS_KEYBOARD) {
-	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir)
-	                    }
-						
-						//Throw using the gamepad right joystick
-						else{
-							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy)
-						}
-                        
-		                //activate object
-		                active = true;
-                        
-		                //Initialize iceball stats
+		            with(instance_create_layer(x + 4, y + 4, "lay_instances", obj_ball)) {
+						//Initialize iceball stats
 		                sprite_index = spr_ball_ice;
 		                attack = -1; //add one health
 		                Source = other.id;
 						
 						//if carrying a gun give the ball special stats
-						scr_use_gun()
+						var has_gun = scr_use_gun()
+						
+		                //Throw using mouse
+		                if (other.input_method == CONTROLS_MOUSE) {
+		                    scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir, has_gun)
+		                }
+					
+						//Throw using arrow keys
+	                    else if (other.input_method == CONTROLS_KEYBOARD) {
+	                        scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir, has_gun)
+	                    }
+						
+						//Throw using the gamepad right joystick
+						else{
+							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy, has_gun)
+						}
+                        
+		                //activate object
+		                active = true;
                         
 		                //handicap
 		                if (other.will_arc) arc = true;
@@ -719,11 +725,13 @@ with (instance_place(x, y, obj_block_big)){
 }
 
 //Jump on trampolines
-var min_jump_speed = 3
-if place_meeting(x, y + vspeed/4, obj_trampoline){		
-	//Bounce
-	if vspeed > min_jump_speed{
-		vspeed *= -1.1
+min_jump_speed = 3
+with instance_place(x, y + vspeed/4, obj_trampoline){
+	if not toppled{
+		//Bounce
+		if other.vspeed > other.min_jump_speed{
+			other.vspeed *= -1.1
+		}
 	}
 }
 
@@ -737,6 +745,7 @@ if(hp < 1) {
 	    player_input = other.player_input;
 	    Input_player = other.Input_player;
 	    input_method = other.input_method;
+		Team = other.Team
 	    if (instance_exists(Input_player)) Input_player.gameCharacter = self;
 	}
 			
@@ -795,9 +804,9 @@ if climbing{
 	
 	if energy >= climbing_cost*2{
 		//use fire to go up
-		if place_free(x, y - 2){
+		if place_free(x, y - 1){
 			if (Input_player.inputs[RIGHTSELC_KEY] == KEY_ISPRESSED){
-				vspeed = -2
+				vspeed = -1
 				energy -= climbing_cost
 			}
 		}
@@ -805,9 +814,9 @@ if climbing{
 		else vspeed = 0
 			
 		//use ice to go down
-		if place_free(x, y + 2){
+		if place_free(x, y + 1){
 			if (Input_player.inputs[LEFTSELC_KEY] == KEY_ISPRESSED){
-				vspeed = 2
+				vspeed = 1
 				energy -= climbing_cost
 			}
 		}
@@ -871,9 +880,20 @@ if hanging{
 			y -= sprite_height - y_diff
 			//apply gravity again after it was lost
 			gravity_incr = 0.4
-			//give a short pause before allowing players to move again
-			alarm[1] = 5
+			active = true
 		}
+		//If the player is hanging on a platform make an exception to allow climbing while moving downard
+		else if instance_place(x + climb_dir * 4, y, obj_platform){
+			if place_free(x + climb_dir * 4, y - sprite_height - obj_platform.move_speed){
+				hanging = false
+				x += climb_dir * 4
+				y -= sprite_height - y_diff
+				//apply gravity again after it was lost
+				gravity_incr = 0.4
+				active = true
+			}
+		}
+				
 	}
 }
 	

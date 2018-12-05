@@ -17,7 +17,7 @@ for(var i=0; i<instance_number(obj_character); i++) {
 						
 							//Shoot left
 							case -1:
-								with instance_create_layer(x - 5, y, "lay_instances", obj_laser_beam){
+								with instance_create_layer(x + sprite_width/2, y, "lay_instances", obj_laser_beam){
 									hspeed = other.dir*10
 								}
 							
@@ -25,7 +25,7 @@ for(var i=0; i<instance_number(obj_character); i++) {
 						
 							//Shoot right
 							case 1:
-								with instance_create_layer(x + sprite_width + 5, y, "lay_instances", obj_laser_beam){
+								with instance_create_layer(x + sprite_width/2, y, "lay_instances", obj_laser_beam){
 									hspeed = other.dir*10
 								}
 							

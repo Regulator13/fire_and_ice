@@ -17,9 +17,9 @@ switch (controller) {
     case CONTROLS_KEYBOARD:
         global.controls[player, LEFT_KEY] = vk_left;
         global.controls[player, RIGHT_KEY] = vk_right;
-        global.controls[player, UP_KEY] = vk_up;
+        global.controls[player, UP_KEY] = vk_numpad0;
         global.controls[player, DOWN_KEY] = vk_down;
-        global.controls[player, ACTION_KEY] = vk_numpad0;         // jump
+        global.controls[player, ACTION_KEY] = vk_up;         // jump
         global.controls[player, ACTION2_KEY] = vk_numpad3;   // selection
         global.controls[player, LEFTSELC_KEY] = vk_numpad1;  // ice
         global.controls[player, RIGHTSELC_KEY] = vk_numpad2; // fire
@@ -42,7 +42,7 @@ switch (controller) {
         global.controls[player, UP_KEY] = -gp_axislv;
         global.controls[player, DOWN_KEY] = gp_axislv;
         global.controls[player, ACTION_KEY] = -gp_axislv;      // jump
-        global.controls[player, ACTION2_KEY] = gp_face1;     // selection
+        global.controls[player, ACTION2_KEY] = gp_start;     // selection
         global.controls[player, LEFTSELC_KEY] = gp_shoulderrb;     // ice
         global.controls[player, RIGHTSELC_KEY] = gp_shoulderlb;   // fire
         global.controls[player, KEY_TYPE] = controller;
