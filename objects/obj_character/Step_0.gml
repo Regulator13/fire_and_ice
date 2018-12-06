@@ -311,16 +311,6 @@ if (active) {
         }
 	}
 
-	//Climb blocks that are open and within 2 pixels of the top of the player's head
-	with(instance_position(x + max(dir*sprite_width, 0), y + y_diff, par_block)){
-		if (id != other.Grab_object and climbable){
-			//Change the character's variables
-			with (other){
-				scr_attempt_climbing()
-			}
-        }
-	}
-
     ///Gravity
     if (vspeed < gravity_max) {
         //gravity increment
@@ -347,6 +337,16 @@ if (active) {
         }
     }
 
+	//Climb blocks that are open and within 2 pixels left or right of the top of the player's head
+	with(instance_position(x + max(dir*sprite_width, 0), y + y_diff + 1, par_block)){
+		if (id != other.Grab_object and climbable){
+			//Change the character's variables
+			with (other){
+				scr_attempt_climbing()
+			}
+        }
+	}
+	
 	///Platforms
 	//Match speed of platforms
 	scr_move_with_platform()
