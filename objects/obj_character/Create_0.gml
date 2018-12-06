@@ -44,6 +44,8 @@ jump_height = 8.5
 energy_fire = 5;  //energy cost per fireball
 
 ///Physics
+on_ground = true //initialize the player to be on the ground
+air_dir = 0 //initialize the direction the player is traveling to be straight down
 gravity_max = 10; //maximum speed a player can fall
 gravity_incr = 0.4; //gravity acceleration
 fric = 2 //How quickly the player slows down on land

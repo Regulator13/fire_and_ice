@@ -93,6 +93,7 @@ if (active) {
     ///Find current hspeed
 	//If on the ground
 	if not place_free(x, y + 1){
+		on_ground = true //Used with air_dir to prevent players from changing directions mid-air
 		//Move if joystick is pushed far enough
 	    if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
 			//down key to inch sideways
@@ -140,22 +141,37 @@ if (active) {
 		
 	//If in the air
 	else{
+		//Set the direction the player is traveling if its the player just entered the air
+		if on_ground air_dir = sign(hspeed)
+		on_ground = false
+		
 		if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
 			//If moving from a stop in air
-			if hspeed == 0{
+			if hspeed == 0 and air_dir == 0{
+				hspeed += haxis1 * drag
+				air_dir = sign(hspeed)
+			}
+			
+			//If moving from a stop in air
+			if hspeed == 0 and sign(haxis1) == air_dir{
 				hspeed += haxis1 * drag
 			}
-					
+
 			//If going the same direction
-			if sign(hspeed) == sign(haxis1){
+			if sign(haxis1) == air_dir{
 				if abs(hspeed) < moveSpeed{
 					hspeed += sign(hspeed) * drag
 				}
 			}
-					
+
 			//If opposing direction
-			if sign(hspeed) != sign(haxis1){
-				hspeed = (abs(hspeed) - drag) * sign(hspeed)
+			if sign(haxis1) == -air_dir{
+				if (abs(hspeed) - drag) > 0{
+					hspeed = (abs(hspeed) - drag) * sign(hspeed)
+				}
+				else{
+					hspeed = 0
+				}
 			}
 				
 			//Change player's direction
@@ -727,6 +743,7 @@ with (instance_place(x, y, obj_block_big)){
 min_jump_speed = 3
 with instance_place(x, y + vspeed/4, obj_trampoline){
 	if not toppled{
+		other.on_ground = true //Act as if the player had just touched the ground
 		//Bounce
 		if other.vspeed > other.min_jump_speed{
 			other.vspeed *= -1.1
