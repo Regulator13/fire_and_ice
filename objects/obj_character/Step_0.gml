@@ -220,17 +220,18 @@ if (active) {
 	//Use down key to move from the top of a ledge to hanging position
 	if down_pressed > axis_buffer{
 		//Check if there is a block under the player's left side
-		var Inst = instance_position(x, y + sprite_height + 1, par_block)
+		var Inst = instance_position(x + 4, y + sprite_height + 1, par_block)
 		//Otherwise check if there is ablock under the player's right side
 		if Inst == noone{
-			Inst = instance_position(x + sprite_width, y + sprite_height + 1, par_block)
+			Inst = instance_position(x - 4 + sprite_width, y + sprite_height + 1, par_block)
 		}
 		
 		//If there is a block below the player, climb down
 		if Inst != noone{
 			//Hang on right side if right foot is off the side of block
 			if position_empty(x + sprite_width, y + sprite_height + 1){
-				if place_free(Inst.x + Inst.sprite_width, Inst.y){
+				//If there is room to climb down
+				if place_free(Inst.x + Inst.sprite_width, Inst.y) and place_free(Inst.x + Inst.sprite_width, Inst.y - sprite_height){
 					x = Inst.x + Inst.sprite_width - PLAYER_TOL
 					y = Inst.y - y_diff
 					dir = -1
@@ -253,7 +254,8 @@ if (active) {
 
 			//Hang on left side if left foot is off the side of block
 			else if position_empty(x, y + sprite_height + 1){
-				if place_free(Inst.x - sprite_width, Inst.y){
+				//If there is room to climb down
+				if place_free(Inst.x - sprite_width, Inst.y) and place_free(Inst.x - sprite_width, Inst.y - sprite_height){
 					x = Inst.x - sprite_width + PLAYER_TOL
 					y = Inst.y - y_diff
 					dir = 1
@@ -297,7 +299,6 @@ if (active) {
 					vspeed = -jump_height;
 					jumps -= 1;
 				}
-				show_debug_message(string(vspeed))
 			}
 	    }
     }
@@ -311,7 +312,7 @@ if (active) {
 	}
 
 	//Climb blocks that are open and within 2 pixels of the top of the player's head
-	with(instance_position(x + max(dir*sprite_width, 0) + dir * 2, y + y_diff, par_block)){
+	with(instance_position(x + max(dir*sprite_width, 0), y + y_diff, par_block)){
 		if (id != other.Grab_object and climbable){
 			//Change the character's variables
 			with (other){
@@ -862,7 +863,7 @@ if hanging{
 		if input_method == CONTROLS_KEYBOARD or input_method == CONTROLS_MOUSE or gamepad_can_drop{
 			//make sure the player has not just dropped down to the ledge
 			if not dropped{	
-				x -= climb_dir * 5
+				x -= climb_dir * (2 + PLAYER_TOL)
 				hanging = false
 				active = true
 				gravity_incr = 0.4
@@ -872,7 +873,13 @@ if hanging{
 	
 	//The player can lift themselves up
 	if(Input_player.inputs[ACTION_KEY] == KEY_PRESSED){
-		if place_free(x + climb_dir * 4, y - sprite_height){
+		//Climb if there is a pushable object on top of the ledge (climb_dir * 12 to make sure the block isn't hanging over the ledge)
+		var Inst = instance_position(x + max(climb_dir*sprite_width, 0) + climb_dir * 12, y - sprite_height/2, par_physics)
+		if Inst != noone{
+			//Only push the block if it is in the way
+			if abs(Inst.x - x) <= sprite_width + 4{
+				Inst.x += climb_dir * 4
+			}
 			hanging = false
 			x += climb_dir * 4
 			y -= sprite_height - y_diff
@@ -880,8 +887,31 @@ if hanging{
 			gravity_incr = 0.4
 			active = true
 		}
+		
+		//Climb if the ledge is open
+		else if place_free(x + climb_dir * 4, y - sprite_height){
+			hanging = false
+			x += climb_dir * 4
+			y -= sprite_height - y_diff
+			//apply gravity again after it was lost
+			gravity_incr = 0.4
+			active = true
+		}
+		
 		//If the player is hanging on a platform make an exception to allow climbing while moving downard
 		else if instance_place(x + climb_dir * 4, y, obj_platform){
+			//Move whatever is on the platform
+			if Inst != noone{
+				if abs(Inst.x - x) <= sprite_width + 4{
+					Inst.x += climb_dir * 4
+				}
+				hanging = false
+				x += climb_dir * 4
+				y -= sprite_height - y_diff
+				//apply gravity again after it was lost
+				gravity_incr = 0.4
+				active = true
+			}
 			if place_free(x + climb_dir * 4, y - sprite_height - obj_platform.move_speed){
 				hanging = false
 				x += climb_dir * 4
@@ -890,8 +920,7 @@ if hanging{
 				gravity_incr = 0.4
 				active = true
 			}
-		}
-				
+		}	
 	}
 }
 	

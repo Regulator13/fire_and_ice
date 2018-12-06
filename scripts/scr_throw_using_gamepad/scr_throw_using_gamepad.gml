@@ -31,8 +31,8 @@ if slope < min_slope{
 }
 						
 //Normalize the slope from -1 to 1
-vspeed = ((strength*5 / mass) + logn(max_slope, slope) * (strength*5 / mass)) * dirY
-hspeed = (2*(strength*5 / mass) - abs(vspeed)) * dirX 
+vspeed = ((strength*4 / mass) + logn(max_slope, slope) * (strength*4 / mass)) * dirY
+hspeed = (2*(strength*4 / mass) - abs(vspeed)) * dirX 
 
 //If the player does not have a gun equipped, improve their aiming
 if not has_gun{

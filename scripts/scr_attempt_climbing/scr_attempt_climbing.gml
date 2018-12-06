@@ -14,9 +14,10 @@ if place_free(x, y + 16) and place_free(x, y + 32){
 			}
 						
 			//if the player is near the top allow them to hang onto the ledge
-			if (y + y_diff > other.y - hanging_tol) and (y + y_diff < other.y + hanging_tol){
-				//Must add block width when facing negative direction
-				if position_empty(other.x - min(dir*other.sprite_width, 0) + dir * 4, other.y - sprite_height){
+			if y + y_diff < other.y + hanging_tol{
+				//Must add block width when facing negative direction and subtract player width in the positive direction
+				if place_free(other.x - min(dir*other.sprite_width, 0) - max(dir*sprite_width, 0) + dir * 4, other.y - sprite_height)
+				or instance_position(other.x - min(dir*other.sprite_width, 0) + dir * 4, other.y - sprite_height/2, par_physics) != noone{
 					scr_enter_hanging()
 				}
 			}
