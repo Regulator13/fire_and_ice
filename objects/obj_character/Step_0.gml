@@ -93,7 +93,7 @@ if (active) {
     ///Find current hspeed
 	//If on the ground
 	if not place_free(x, y + 1){
-		on_ground = true //Used with air_dir to prevent players from changing directions mid-air
+		can_change_dir = true //Used with air_dir to prevent players from changing directions mid-air
 		//Move if joystick is pushed far enough
 	    if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
 			//down key to inch sideways
@@ -142,8 +142,8 @@ if (active) {
 	//If in the air
 	else{
 		//Set the direction the player is traveling if its the player just entered the air
-		if on_ground air_dir = sign(hspeed)
-		on_ground = false
+		if can_change_dir air_dir = sign(hspeed)
+		can_change_dir = false
 		
 		if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
 			//If moving from a stop in air
@@ -370,6 +370,7 @@ if (active) {
 	//Jetpack flying
 	if right_action_is_pressed and has_jetpack and Grab_object.working{
 		if energy >= Grab_object.jetpack_cost{
+			can_change_dir = true //Allow the player to change directions mid-air while flying
 			if vspeed > -10{
 				//Floating
 				if vspeed > -3{
@@ -570,6 +571,7 @@ if (active) {
 		if not climbing{
 			if vspeed > 0{
 				Grab_object.falling = false //for animation
+				can_change_dir = true //Allow the player to change directions mid-air while gliding
 				gravity_incr = 0.02
 				gravity_max = 1
 			}
@@ -743,7 +745,7 @@ with (instance_place(x, y, obj_block_big)){
 min_jump_speed = 3
 with instance_place(x, y + vspeed/4, obj_trampoline){
 	if not toppled{
-		other.on_ground = true //Act as if the player had just touched the ground
+		other.can_change_dir = true //Act as if the player had just touched the ground
 		//Bounce
 		if other.vspeed > other.min_jump_speed{
 			other.vspeed *= -1.1
@@ -960,6 +962,7 @@ if (place_meeting(x, y, obj_door)) {
 //TODO Add cheat enabled button
 ///Cheats
 if (keyboard_check_pressed(ord("U"))) {
+	can_change_dir = true //Allow the player to change directions mid-air while cheating
     vspeed = -jump_height;
     hp = hp_max;
 	active = true

@@ -15,6 +15,9 @@ if place_free(x, y + 16) and place_free(x, y + 32){
 						
 			//if the player is near the top allow them to hang onto the ledge
 			if y + y_diff < other.y + hanging_tol{
+				//Automatically turn to face the wall
+				if other.x > x dir = 1
+				else dir = -1
 				//Must add block width when facing negative direction and subtract player width in the positive direction
 				if place_free(other.x - min(dir*other.sprite_width, 0) - max(dir*sprite_width, 0) + dir * 4, other.y - sprite_height)
 				or instance_position(other.x - min(dir*other.sprite_width, 0) + dir * 4, other.y - sprite_height/2, par_physics) != noone{
