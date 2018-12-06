@@ -30,8 +30,8 @@ else{
 }
 
 //Normalize the slope
-vspeed = (dcos(angle) * (strength*5 / mass)*2) * dirY
-hspeed = (2*(strength*5 / mass) - abs(vspeed)) * dirX
+vspeed = (dcos(angle) * (strength*4 / mass)*2) * dirY
+hspeed = (2*(strength*4 / mass) - abs(vspeed)) * dirX
 
 //If the player does not have a gun equipped, improve their aiming
 if not has_gun{

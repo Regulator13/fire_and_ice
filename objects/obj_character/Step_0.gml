@@ -95,26 +95,24 @@ if (active) {
 	if not place_free(x, y + 1){
 		//Move if joystick is pushed far enough
 	    if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
-			if (!left_action_is_pressed and !right_action_is_pressed) or has_jetpack{
-				//down key to inch sideways
-				if down_pressed > axis_buffer{
-					if place_free(x + haxis1, y + vspeed){
-						hspeed = 0
-						x += haxis1
-					}
+			//down key to inch sideways
+			if down_pressed > axis_buffer{
+				if place_free(x + haxis1, y + vspeed){
+					hspeed = 0
+					x += haxis1
+				}
+			}
+				
+				
+			else{
+				//accelerate
+				if abs(hspeed) < moveSpeed{
+					hspeed += haxis1*acceleration
 				}
 				
-				
+				//move once fully accelerated
 				else{
-					//accelerate
-					if abs(hspeed) < moveSpeed{
-						hspeed += haxis1*acceleration
-					}
-				
-					//move once fully accelerated
-					else{
-						hspeed = haxis1*moveSpeed
-					}
+					hspeed = haxis1*moveSpeed
 				}
 			}
 	        //Find direction player is facing
@@ -143,28 +141,26 @@ if (active) {
 	//If in the air
 	else{
 		if !(haxis1 > -axis_buffer and haxis1 < axis_buffer and vaxis1 > -axis_buffer and vaxis1 < axis_buffer) {
-	        if (!left_action_is_pressed and !right_action_is_pressed) or has_jetpack{
-				//If moving from a stop in air
-				if hspeed == 0{
-					hspeed += haxis1 * drag
-				}
-					
-				//If going the same direction
-				if sign(hspeed) == sign(haxis1){
-					if abs(hspeed) < moveSpeed{
-						hspeed += sign(hspeed) * drag
-					}
-				}
-					
-				//If opposing direction
-				if sign(hspeed) != sign(haxis1){
-					hspeed = (abs(hspeed) - drag) * sign(hspeed)
-				}
-				
-				//Change player's direction
-				if hspeed != 0 dir = sign(hspeed)
-				else if input_method != CONTROLS_KEYBOARD dir = 0 //Keyboard controls use direction to show aim reticule
+			//If moving from a stop in air
+			if hspeed == 0{
+				hspeed += haxis1 * drag
 			}
+					
+			//If going the same direction
+			if sign(hspeed) == sign(haxis1){
+				if abs(hspeed) < moveSpeed{
+					hspeed += sign(hspeed) * drag
+				}
+			}
+					
+			//If opposing direction
+			if sign(hspeed) != sign(haxis1){
+				hspeed = (abs(hspeed) - drag) * sign(hspeed)
+			}
+				
+			//Change player's direction
+			if hspeed != 0 dir = sign(hspeed)
+			else if input_method != CONTROLS_KEYBOARD dir = 0 //Keyboard controls use direction to show aim reticule
 		}
 	}
 	
@@ -223,57 +219,59 @@ if (active) {
 	///Hang
 	//Use down key to move from the top of a ledge to hanging position
 	if down_pressed > axis_buffer{
-		with instance_place(x, y + 1, par_block){
-			if self != other.Grab_object{
-				//Hang on right side if right foot is off the side of block
-				if position_empty(other.x + other.sprite_width, other.y + other.sprite_height + 1){
-					//Check to see if the PLAYER can fit, not the par_block
-					with other{
-						if place_free(other.x + sprite_width, y){
-							x = other.x + other.sprite_width - PLAYER_TOL
-							y = other.y - y_diff
-							dir = -1
-							hspeed = 0
-							vspeed = 0
-							//If the players feet is not touching the ground
-							if place_free(x, y + 1){
-								climb_dir = dir
-								gravity_incr = 0
-								active = false
-								hanging = true
-							}
-							dropped = true
-							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
-								alarm[2] = gamepad_drop_delay
-								gamepad_can_drop = false
-							}
-						}
+		//Check if there is a block under the player's left side
+		var Inst = instance_position(x + 4, y + sprite_height + 1, par_block)
+		//Otherwise check if there is a block under the player's right side
+		if Inst == noone{
+			Inst = instance_position(x - 4 + sprite_width, y + sprite_height + 1, par_block)
+		}
+		
+		//If there is a block below the player, climb down
+		if Inst != noone{
+			//Hang on right side if right foot is off the side of block
+			if position_empty(x + sprite_width, y + sprite_height + 1){
+				//If there is room to climb down
+				if place_free(Inst.x + Inst.sprite_width, Inst.y) and place_free(Inst.x + Inst.sprite_width, Inst.y - sprite_height){
+					x = Inst.x + Inst.sprite_width - PLAYER_TOL
+					y = Inst.y - y_diff
+					dir = -1
+					hspeed = 0
+					vspeed = 0
+					//If the players feet is not touching the ground
+					if place_free(x, y + 1){
+						climb_dir = dir
+						gravity_incr = 0
+						active = false
+						hanging = true
+					}
+					dropped = true
+					if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
+						alarm[2] = gamepad_drop_delay
+						gamepad_can_drop = false
 					}
 				}
+			}
 
-				//Hang on left side if left foot is off the side of block
-				else if position_empty(other.x, other.y + other.sprite_height + 1){
-					//Check to see if the PLAYER can fit, not the par_block
-					with other{
-						if place_free(other.x - sprite_width, y){
-							x = other.x - sprite_width + PLAYER_TOL
-							y = other.y - y_diff
-							dir = 1
-							hspeed = 0
-							vspeed = 0
-							//If the players feet is not touching the ground
-							if place_free(x, y + 1){
-								climb_dir = dir
-								gravity_incr = 0
-								active = false
-								hanging = true
-							}
-							dropped = true
-							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
-								alarm[2] = gamepad_drop_delay
-								gamepad_can_drop = false
-							}
-						}
+			//Hang on left side if left foot is off the side of block
+			else if position_empty(x, y + sprite_height + 1){
+				//If there is room to climb down
+				if place_free(Inst.x - sprite_width, Inst.y) and place_free(Inst.x - sprite_width, Inst.y - sprite_height){
+					x = Inst.x - sprite_width + PLAYER_TOL
+					y = Inst.y - y_diff
+					dir = 1
+					hspeed = 0
+					vspeed = 0
+					//If the players feet is not touching the ground
+					if place_free(x, y + 1){
+						climb_dir = dir
+						gravity_incr = 0
+						active = false
+						hanging = true
+					}
+					dropped = true
+					if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
+						alarm[2] = gamepad_drop_delay
+						gamepad_can_drop = false
 					}
 				}
 			}
@@ -288,11 +286,12 @@ if (active) {
 				//Subtract mass from jump_height
 				if instance_exists(Grab_object){
 					if strength >= Grab_object.mass{
-						vspeed = -jump_height;
+						//Jump a little higher to make up for crouching
+						vspeed = -(jump_height + 0.5);
 						jumps -= 1;
 					}
 					else{
-						vspeed = -(jump_height - (Grab_object.mass - strength)/3)
+						vspeed = -(jump_height + 0.5 - (Grab_object.mass - strength)/3)
 						jumps -= 1
 					}
 				}
@@ -312,8 +311,8 @@ if (active) {
         }
 	}
 
-	//Climb blocks
-	with(instance_place(x + dir * 2, y, par_block)){
+	//Climb blocks that are open and within 2 pixels of the top of the player's head
+	with(instance_position(x + max(dir*sprite_width, 0), y + y_diff, par_block)){
 		if (id != other.Grab_object and climbable){
 			//Change the character's variables
 			with (other){
@@ -794,7 +793,7 @@ if climbing{
 		if input_method == CONTROLS_KEYBOARD or input_method == CONTROLS_MOUSE or gamepad_can_drop{
 			//make sure the player has not just dropped down to the ledge
 			if not dropped{	
-				x -= climb_dir * 3
+				x -= climb_dir * 5
 				climbing = false
 				gravity_incr = 0.4
 				active = true
@@ -859,12 +858,12 @@ if hanging{
 	scr_hang_with_platforms()
 	
 	//Drop down with down key OR if whatever they are hanging onto disappears
-	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) or place_free(x + climb_dir * 3, y){
+	if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) or place_free(x + climb_dir * 4, y){
 		//Make sure a player using the gamepad controls hasn't just dropped to hanging
 		if input_method == CONTROLS_KEYBOARD or input_method == CONTROLS_MOUSE or gamepad_can_drop{
 			//make sure the player has not just dropped down to the ledge
 			if not dropped{	
-				x -= climb_dir * 3
+				x -= climb_dir * (2 + PLAYER_TOL)
 				hanging = false
 				active = true
 				gravity_incr = 0.4
@@ -874,7 +873,13 @@ if hanging{
 	
 	//The player can lift themselves up
 	if(Input_player.inputs[ACTION_KEY] == KEY_PRESSED){
-		if place_free(x + climb_dir * 4, y - sprite_height){
+		//Climb if there is a pushable object on top of the ledge (climb_dir * 12 to make sure the block isn't hanging over the ledge)
+		var Inst = instance_position(x + max(climb_dir*sprite_width, 0) + climb_dir * 12, y - sprite_height/2, par_physics)
+		if Inst != noone{
+			//Only push the block if it is in the way
+			if abs(Inst.x - x) <= sprite_width + 4{
+				Inst.x += climb_dir * 4
+			}
 			hanging = false
 			x += climb_dir * 4
 			y -= sprite_height - y_diff
@@ -882,8 +887,31 @@ if hanging{
 			gravity_incr = 0.4
 			active = true
 		}
+		
+		//Climb if the ledge is open
+		else if place_free(x + climb_dir * 4, y - sprite_height){
+			hanging = false
+			x += climb_dir * 4
+			y -= sprite_height - y_diff
+			//apply gravity again after it was lost
+			gravity_incr = 0.4
+			active = true
+		}
+		
 		//If the player is hanging on a platform make an exception to allow climbing while moving downard
 		else if instance_place(x + climb_dir * 4, y, obj_platform){
+			//Move whatever is on the platform
+			if Inst != noone{
+				if abs(Inst.x - x) <= sprite_width + 4{
+					Inst.x += climb_dir * 4
+				}
+				hanging = false
+				x += climb_dir * 4
+				y -= sprite_height - y_diff
+				//apply gravity again after it was lost
+				gravity_incr = 0.4
+				active = true
+			}
 			if place_free(x + climb_dir * 4, y - sprite_height - obj_platform.move_speed){
 				hanging = false
 				x += climb_dir * 4
@@ -892,8 +920,7 @@ if hanging{
 				gravity_incr = 0.4
 				active = true
 			}
-		}
-				
+		}	
 	}
 }
 	

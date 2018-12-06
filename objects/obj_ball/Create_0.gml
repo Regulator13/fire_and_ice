@@ -8,7 +8,7 @@ arc = false; //whether or not ball will arc
 alarm[0] = 6*30 //destroy the ball after 6 seconds
 
 //Physics
-mass = 10;
+mass = 12;
 
 ///Animations
 ps_spark = noone
