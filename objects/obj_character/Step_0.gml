@@ -221,7 +221,7 @@ if (active) {
 	if down_pressed > axis_buffer{
 		//Check if there is a block under the player's left side
 		var Inst = instance_position(x + 4, y + sprite_height + 1, par_block)
-		//Otherwise check if there is ablock under the player's right side
+		//Otherwise check if there is a block under the player's right side
 		if Inst == noone{
 			Inst = instance_position(x - 4 + sprite_width, y + sprite_height + 1, par_block)
 		}
