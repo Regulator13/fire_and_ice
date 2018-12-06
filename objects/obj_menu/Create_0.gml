@@ -51,6 +51,7 @@ section = "gameOptions"
 
 //load game options
 animations_on = ini_read_real(section, "animations_on", true);
+water_on = ini_read_real(section, "water_on", true)
 
 //close file
 ini_close(); 

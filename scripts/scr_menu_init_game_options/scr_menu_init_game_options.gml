@@ -37,6 +37,15 @@ with(button) {
 }
 ds_list_add(buttons, button);
 
+var button = instance_create_layer(c1x, cy+by*c1y++, "lay_instances", obj_button);
+with(button) {
+    action = "value";
+    title = "Water";
+    ds_list_add(values, "Off", "On");
+    value = other.water_on
+}
+ds_list_add(buttons, button);
+
 /*
 // secound column of input
 for (c2y = 0; c2y < 4; c2y++) {

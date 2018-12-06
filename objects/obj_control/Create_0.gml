@@ -23,7 +23,7 @@ check_win_buffer = 60;
 ///Animations
 ps_rain = noone
 
-if global.Menu.animations_on = true{
+if global.Menu.animations_on and global.Menu.water_on{
 	ps_rain = part_system_create()
 }
 
