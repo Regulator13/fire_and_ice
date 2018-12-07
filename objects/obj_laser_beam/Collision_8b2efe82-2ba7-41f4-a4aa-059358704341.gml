@@ -1,2 +1,4 @@
 /// @description Destroy self
-instance_destroy()
+if other.solid{
+	instance_destroy()
+}
