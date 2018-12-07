@@ -298,49 +298,41 @@ if (active) {
 		}
 	}
 
-    //Charge up jump
-	if (jumps > 0) {
-	    if (jump_is_pressed) {
-			//Can only jump on ground
-			if !place_free(x, y + 2){
-				if jump_height - 1 >= 2{
-					jump_height -= 1
-				}
-				else jump_height = 2
-			}
-		}
-	}
-
 	///Jump
-	//Can only jump on ground
+	//Can begin jumping on ground
 	if !place_free(x, y + 2){
-	    if (jumps > 0) {
-		    if (jump_released) {
-				//Reduce the jump height to its max if its above the max
-				if jump_height > jump_height_max{
-					jump_height = jump_height_max
-				}
-				//Subtract mass from jump_height_max
-				if instance_exists(Grab_object){
-					if strength >= Grab_object.mass{
-						//Jump a little higher to make up for crouching
-						vspeed = -(jump_height + 0.5);
-						jumps -= 1;
-					}
-					else{
-						vspeed = -(jump_height + 0.5 - (Grab_object.mass - strength)/3)
-						jumps -= 1
-					}
+		if (jump_is_pressed) {
+			jump_height = jump_height_max
+			is_jumping = true
+			//Calculate the maximum jump height
+			//Subtract mass from jump_height
+			if instance_exists(Grab_object){
+				if strength >= Grab_object.mass{
+					//Jump a little higher to make up for crouching
+					jump_height -= .5
 				}
 				else{
-					vspeed = -jump_height;
-					jumps -= 1;
+					jump_height -= 0.5 - (Grab_object.mass - strength)/3
 				}
-				jump_height = jump_height_max + JUMP_BUFFER //Reset the jump height
+			}
+		}
+		jump_timer = jump_timer_max //After the max has been calculated set the jump height to it.
+	}
+	
+	//Continue jumping as long as they hold down
+	if is_jumping{
+		if jump_is_pressed{
+			if jump_timer > 0{
+				vspeed = -jump_height*(2/3)
+				jump_timer -= 1
 			}
 	    }
     }
-	else jump_height = jump_height_max + JUMP_BUFFER //Reset the jump height if you're off the ground
+	
+	//Once they stop jumping they can't start again, even if they have jump_height left
+	if jump_released{
+		is_jumping = false
+	}
 
     ///Block collisions
     with(instance_place(x + sign(hspeed) * 2, y, par_physics)){
@@ -986,7 +978,7 @@ if (place_meeting(x, y, obj_door)) {
 ///Cheats
 if (keyboard_check_pressed(ord("U"))) {
 	can_change_dir = true //Allow the player to change directions mid-air while cheating
-    vspeed = -jump_height_max;
+    vspeed = -jump_height;
     hp = hp_max;
 	active = true
     }

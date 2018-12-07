@@ -163,7 +163,7 @@ if (y < y_score){
 //Jump
 if (jumps > 0) {
     if (jump_pressed) {
-        vspeed = -jump_height_max;
+        vspeed = -jump_height;
         jumps -= 1;
     }
 }

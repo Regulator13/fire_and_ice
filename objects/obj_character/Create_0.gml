@@ -40,11 +40,14 @@ energy_max = 100;
 strength = 90;
 mass = 24;
 jumps_max = 1
-jump_height = 0 //How high the player will jump when they release the jump key
 jump_height_max = 8.5
+jump_height = jump_height_max
+jump_timer_max = 10 //Max number of steps a player can hold for jump height
+jump_timer = jump_timer_max //The number of steps the player has jumped
 energy_fire = 5;  //energy cost per fireball
 
 ///Physics
+is_jumping = false //whether the player is currently jumping or not
 can_change_dir = true //initialize the player to be on the ground
 air_dir = 0 //initialize the direction the player is traveling to be straight down
 gravity_max = 10; //maximum speed a player can fall
