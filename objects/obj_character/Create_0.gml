@@ -40,7 +40,8 @@ energy_max = 100;
 strength = 90;
 mass = 24;
 jumps_max = 1
-jump_height = 8.5
+jump_height = 0 //How high the player will jump when they release the jump key
+jump_height_max = 8.5
 energy_fire = 5;  //energy cost per fireball
 
 ///Physics
@@ -49,7 +50,7 @@ air_dir = 0 //initialize the direction the player is traveling to be straight do
 gravity_max = 10; //maximum speed a player can fall
 gravity_incr = 0.4; //gravity acceleration
 fric = 2 //How quickly the player slows down on land
-drag = 0.3 //Set how quickly player's can change directions in air
+drag = 0.15 //Set how quickly player's can change directions in air
 acceleration = 0.5 //Set how quickly the player starts moving
 will_arc = true; //Will the fireball arc
 
@@ -77,6 +78,7 @@ aim_direction = 0
 right_action_is_pressed = false;
 left_action_is_pressed = false;
 right_action_is_pressed = false;
+jump_is_pressed = false;
 
 
 

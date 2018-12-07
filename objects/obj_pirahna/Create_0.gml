@@ -18,7 +18,7 @@ energy = 100;
 energy_max = 100;
 strength = 60;
 jumps_max = 1;
-jump_height = 6;
+jump_height_max = 6;
 energy_fire = 5; //energy it takes for a fireball
 
 ///Physics
