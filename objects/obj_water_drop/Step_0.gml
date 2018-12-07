@@ -5,7 +5,7 @@ if image_index = image_number - 2{
 	animation_end = true
 	gravity_incr = 0.4
 	image_speed = 0
-	image_index = 9
+	image_index = 8
 	vspeed = 2
 }
 

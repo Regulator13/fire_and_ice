@@ -122,8 +122,14 @@ image_index = hp;
 
 ///Sticky Blocks
 if (sticky) {
-	//REMOVE? Couldn't the sprite be set upon creation in obj_blockStation?
-    sprite_index = spr_block_sticky;
+		if global.Menu.animations_on = true{
+		if image_index <= 1{
+			image_index += 1
+		}
+		if image_index >= 5{
+			image_index -= 1
+		}
+	}
     fric = 4; //increase friction because its "sticky"
     
     //if not being held, stick
