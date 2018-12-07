@@ -113,7 +113,7 @@ if (ignite){
 		//If the player hasn't released it cancel the countdown.
 		if Holder == noone{
 			//Start the explosion countdown
-			image_index = 0 //Set the sprite to be the darkest red
+			hp = 0 //Set the sprite to be the darkest red
 			if ignite_buffer < 0*20{
 		        if global.online{
 					instance_create_layer(x+sprite_width/2, y+sprite_height/2, "lay_instances", obj_explosion);
