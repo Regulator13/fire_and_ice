@@ -43,5 +43,5 @@
 #macro STATE_GAME 2
 #macro STATE_SCORE 3
 
-#macro GRAB_TOL 6   //maximum number of pixels away a player's hit box can be and still grab an object
+#macro GRAB_TOL 3   //maximum number of pixels away a player's hit box can be and still grab an object
 #macro PLAYER_TOL 3 //number of pixels on either side of the character sprite before the hit box

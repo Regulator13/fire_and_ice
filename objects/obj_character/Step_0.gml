@@ -301,7 +301,7 @@ if (active) {
 	///Jump
 	//Can begin jumping on ground
 	if !place_free(x, y + 2){
-		if (jump_is_pressed) {
+		if (jump_pressed) {
 			jump_height = jump_height_max
 			is_jumping = true
 			//Calculate the maximum jump height
@@ -329,7 +329,7 @@ if (active) {
 	    }
     }
 	
-	//Once they stop jumping they can't start again, even if they have jump_height left
+	//Once they stop jumping they can't start again, even if they have jump_timer left
 	if jump_released{
 		is_jumping = false
 	}
@@ -914,45 +914,25 @@ if hanging{
 			if abs(Inst.x - x) <= sprite_width + 4{
 				Inst.x += climb_dir * 4
 			}
-			hanging = false
-			x += climb_dir * 4
-			y -= sprite_height - y_diff
-			//apply gravity again after it was lost
-			gravity_incr = 0.4
-			active = true
+			scr_climb()
 		}
 		
 		//Climb if the ledge is open
 		else if place_free(x + climb_dir * 4, y - sprite_height){
-			hanging = false
-			x += climb_dir * 4
-			y -= sprite_height - y_diff
-			//apply gravity again after it was lost
-			gravity_incr = 0.4
-			active = true
+			scr_climb()
 		}
 		
-		//If the player is hanging on a platform make an exception to allow climbing while moving downard
+		//If the player is hanging on a platform make an exception to allow climbing while moving downward
 		else if instance_place(x + climb_dir * 4, y, obj_platform){
 			//Move whatever is on the platform
 			if Inst != noone{
 				if abs(Inst.x - x) <= sprite_width + 4{
 					Inst.x += climb_dir * 4
 				}
-				hanging = false
-				x += climb_dir * 4
-				y -= sprite_height - y_diff
-				//apply gravity again after it was lost
-				gravity_incr = 0.4
-				active = true
+				scr_climb()
 			}
 			if place_free(x + climb_dir * 4, y - sprite_height - obj_platform.move_speed){
-				hanging = false
-				x += climb_dir * 4
-				y -= sprite_height - y_diff
-				//apply gravity again after it was lost
-				gravity_incr = 0.4
-				active = true
+				scr_climb()
 			}
 		}	
 	}
