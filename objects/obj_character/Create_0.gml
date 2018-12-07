@@ -27,7 +27,6 @@ has_hang_glider = false
 ///Climbing intializations
 climbing = false //whether the player is climbing to the side of a block (Pick only)
 hanging = false //whether a player is hanging on an edge
-hanging_tol = 6 //number of pixels a player can be from the top to enter the hanging state
 y_diff = 0 //number of pixels in y direction the current state is from the standing state (for crouching)
 climbing_cost = 0.4 //how much energy it costs per step of climbing
 climb_dir = 0 //direction the player is facing while climbing

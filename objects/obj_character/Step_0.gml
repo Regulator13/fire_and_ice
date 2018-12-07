@@ -40,6 +40,7 @@ if (active) {
             if(Input_player.inputs[UP_KEY] == KEY_PRESSED) vaxis1 = -1;
             if(Input_player.inputs[DOWN_KEY] == KEY_PRESSED) vaxis1 = 1;
 			if(Input_player.inputs[DOWN_KEY]) down_pressed = 1;
+			
             if(Input_player.inputs[ACTION_KEY] == KEY_PRESSED) {
                 jump_pressed = true
 				jump_is_pressed = true
@@ -53,9 +54,7 @@ if (active) {
                 left_action_pressed = true;
                 left_action_is_pressed = true;
             }
-			
             else if(Input_player.inputs[LEFTSELC_KEY] == KEY_RELEASED) {
-                left_action_pressed = false;
                 left_action_released = true;
                 left_action_is_pressed = false;
             }
@@ -64,7 +63,6 @@ if (active) {
                 right_action_pressed = true;
                 right_action_is_pressed = true;
             }
-			
             else if (Input_player.inputs[RIGHTSELC_KEY] == KEY_RELEASED) {
                 right_action_released = true;
                 right_action_is_pressed = false;
@@ -329,6 +327,7 @@ if (active) {
 				vspeed = -jump_height
 				jump_timer -= 1
 			}
+			else is_jumping = false
 	    }
     }
 	
@@ -865,9 +864,10 @@ if climbing{
 		}
 		
 		//If the player is within the hanging tolerance, change their state to hanging
-		with instance_place(x + climb_dir * 4, y, all){
+		with instance_place(x + max(climb_dir * sprite_width, 0) + climb_dir * 4, y, all){
+			//Change the player's stats
 			with (other){
-				if (y + y_diff > other.y - hanging_tol) and (y + y_diff < other.y + hanging_tol){
+				if (y + y_diff >= other.y) and (y + y_diff < other.y + HANGING_TOL){
 					if place_free(x + dir * 4, other.y - sprite_height){
 						climbing = false
 						scr_enter_hanging()
