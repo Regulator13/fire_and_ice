@@ -309,10 +309,10 @@ if (active) {
 			if instance_exists(Grab_object){
 				if strength >= Grab_object.mass{
 					//Jump a little higher to make up for crouching
-					jump_height -= .5
+					jump_height += 0.3
 				}
 				else{
-					jump_height -= 0.5 - (Grab_object.mass - strength)/3
+					jump_height += 0.3 - (Grab_object.mass - strength)/3
 				}
 			}
 		}
@@ -323,7 +323,7 @@ if (active) {
 	if is_jumping{
 		if jump_is_pressed{
 			if jump_timer > 0{
-				vspeed = -jump_height*(2/3)
+				vspeed = -jump_height
 				jump_timer -= 1
 			}
 	    }
