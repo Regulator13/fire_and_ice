@@ -6,8 +6,8 @@
 if place_free(x, y + 16) and place_free(x, y + 32){
 	//Make sure the player isn't using a jetpack
 	if not (has_jetpack and right_action_is_pressed){
-		//Make sure the player isn't just touching the block with their feet
-		if y > other.y - HANGING_TOL - y_diff{
+		//Make sure the player is below the block and wouldn't be able to grab the ledge on the next step
+		if y > other.y - HANGING_TOL - y_diff and (y + vspeed < other.y - HANGING_TOL - y_diff or y + vspeed > other.y + HANGING_TOL - y_diff){
 			//Stick to the block with a pick
 			if scr_has_climbing_pick(){
 				scr_cling_to_wall()
