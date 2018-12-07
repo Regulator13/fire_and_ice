@@ -246,52 +246,55 @@ if (active) {
 			Inst = instance_position(x - 4 + sprite_width, y + sprite_height + 1, par_block)
 		}
 		
-		//If there is a block below the player, climb down
+		//If there is a block below the player attempt to climb down
 		if Inst != noone{
-			//Hang on right side if right foot is off the side of block
-			if position_empty(x + sprite_width, y + sprite_height + 1){
-				//If there is room to climb down
-				if place_free(Inst.x + Inst.sprite_width, Inst.y) and place_free(Inst.x + Inst.sprite_width, Inst.y - sprite_height){
-					x = Inst.x + Inst.sprite_width - PLAYER_TOL
-					y = Inst.y - y_diff
-					dir = -1
-					hspeed = 0
-					vspeed = 0
-					//If the players feet is not touching the ground
-					if place_free(x, y + 1){
-						climb_dir = dir
-						gravity_incr = 0
-						active = false
-						hanging = true
-					}
-					dropped = true
-					if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
-						alarm[2] = gamepad_drop_delay
-						gamepad_can_drop = false
+			//If this is something that can be climbed
+			if Inst.climbable{
+				//Hang on right side if right foot is off the side of block
+				if position_empty(x + sprite_width, y + sprite_height + 1){
+					//If there is room to climb down
+					if place_free(Inst.x + Inst.sprite_width, Inst.y) and place_free(Inst.x + Inst.sprite_width, Inst.y - sprite_height){
+						x = Inst.x + Inst.sprite_width - PLAYER_TOL
+						y = Inst.y - y_diff
+						dir = -1
+						hspeed = 0
+						vspeed = 0
+						//If the players feet is not touching the ground
+						if place_free(x, y + 1){
+							climb_dir = dir
+							gravity_incr = 0
+							active = false
+							hanging = true
+						}
+						dropped = true
+						if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
+							alarm[2] = gamepad_drop_delay
+							gamepad_can_drop = false
+						}
 					}
 				}
-			}
 
-			//Hang on left side if left foot is off the side of block
-			else if position_empty(x, y + sprite_height + 1){
-				//If there is room to climb down
-				if place_free(Inst.x - sprite_width, Inst.y) and place_free(Inst.x - sprite_width, Inst.y - sprite_height){
-					x = Inst.x - sprite_width + PLAYER_TOL
-					y = Inst.y - y_diff
-					dir = 1
-					hspeed = 0
-					vspeed = 0
-					//If the players feet is not touching the ground
-					if place_free(x, y + 1){
-						climb_dir = dir
-						gravity_incr = 0
-						active = false
-						hanging = true
-					}
-					dropped = true
-					if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
-						alarm[2] = gamepad_drop_delay
-						gamepad_can_drop = false
+				//Hang on left side if left foot is off the side of block
+				else if position_empty(x, y + sprite_height + 1){
+					//If there is room to climb down
+					if place_free(Inst.x - sprite_width, Inst.y) and place_free(Inst.x - sprite_width, Inst.y - sprite_height){
+						x = Inst.x - sprite_width + PLAYER_TOL
+						y = Inst.y - y_diff
+						dir = 1
+						hspeed = 0
+						vspeed = 0
+						//If the players feet is not touching the ground
+						if place_free(x, y + 1){
+							climb_dir = dir
+							gravity_incr = 0
+							active = false
+							hanging = true
+						}
+						dropped = true
+						if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
+							alarm[2] = gamepad_drop_delay
+							gamepad_can_drop = false
+						}
 					}
 				}
 			}
