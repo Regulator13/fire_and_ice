@@ -82,8 +82,8 @@ instance_create_layer(dx+gridSize+8, dy-gridSize+4, "lay_instances", obj_door);
 for (i = 4; i < maxY/gridSize; i += 1) {
 	//Up to 2 platforms per row
     for(j = 0; j < 1; j+=1) {
-		//Create a platform in that row 75% of the time 
-        if irandom(3){
+		//Create a platform in that row depending on difficulty: Beginner-Expert (100%, 87.5%, 75%, 62.5%, 50%)  
+        if irandom(7) >= global.Menu.difficulty{
             dx = round(irandom_range(gridSize, room_width - gridSize)/gridSize)*gridSize;
             dy = i*gridSize;
             scr_platform_generate(dx, dy, irandom_range(0, 6));
@@ -91,8 +91,8 @@ for (i = 4; i < maxY/gridSize; i += 1) {
     }
 }
 
-//create additional platforms every 4 blocks with chance 1 in 5 (Mandatories)
-for (i = 4; i < maxY/gridSize; i += 4) {
+//create additional platforms every X blocks depending on difficulty (2, 3, 4, 5, 6) (Mandatories)
+for (i = 4; i < maxY/gridSize; i += (global.Menu.difficulty + 2)) {
     for(j = 0; j < 1; j+=1) {
         dx = round(irandom_range(gridSize, room_width - gridSize)/gridSize)*gridSize;
         dy = i*gridSize;
@@ -116,7 +116,7 @@ for (var i=0; i<4; i++){
 
 //bottom trampoline creation - up to two with a 50% chance for each
 var tries = 100
-for (var i=0; i<4; i++){
+for (var i=0; i<2; i++){
 	if !irandom(1){
 		dx = round(irandom_range(gridSize*3, room_height - gridSize*4)/gridSize)*gridSize
 	    dy = room_height-gridSize-32
