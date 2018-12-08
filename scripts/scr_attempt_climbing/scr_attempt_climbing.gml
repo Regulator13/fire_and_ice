@@ -22,8 +22,8 @@ if place_free(x, y + 16) and place_free(x, y + 32){
 				//If the player is between the hanging tolerances
 				if y > other.y - HANGING_TOL - y_diff and y < other.y + HANGING_TOL - y_diff{
 					//Automatically turn to face the wall
-					if other.x > x dir = 1
-					else dir = -1
+					//if other.x > x dir = 1
+					//else dir = -1
 					//Must add block width when facing negative direction and subtract player width in the positive direction
 					if place_free(other.x - min(dir*other.sprite_width, 0) - max(dir*sprite_width, 0) + dir * 4, other.y - sprite_height)
 					or instance_position(other.x - min(dir*other.sprite_width, 0) + dir * 4, other.y - sprite_height/2, par_physics) != noone{

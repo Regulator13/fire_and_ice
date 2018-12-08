@@ -394,7 +394,7 @@ if (active) {
     }
 
 	//Climb blocks that are open and within 2 pixels left or right of the middle of the player
-	with(instance_position(x + max(dir*sprite_width, 0) + dir*2, y + sprite_height/2 + y_diff/2, par_block)){
+	with(instance_position(x + max(dir*sprite_width, 0), y + sprite_height/2 + y_diff/2, par_block)){
 		if (id != other.Grab_object and climbable){
 			//Change the character's variables
 			with (other){
@@ -893,7 +893,7 @@ if climbing{
 		with instance_place(x + max(climb_dir * sprite_width, 0) + climb_dir * 4, y, all){
 			//Change the player's stats
 			with (other){
-				if (y + y_diff >= other.y) and (y + y_diff < other.y + HANGING_TOL){
+				if (y + y_diff >= other.y) and (y + y_diff < other.y + HANGING_TOL/2){
 					if place_free(x + dir * 4, other.y - sprite_height){
 						climbing = false
 						scr_enter_hanging()
