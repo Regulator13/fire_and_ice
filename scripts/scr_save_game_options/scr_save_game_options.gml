@@ -21,9 +21,7 @@ section = string("gameOptions")
 	
 ini_section_delete(section);
 ini_write_real(section, "animations_on", animations_on);
-ini_section_delete(section);
 ini_write_real(section, "water_on", water_on)
-ini_section_delete(section);
 ini_write_real(section, "difficulty", difficulty)
 
 //close file

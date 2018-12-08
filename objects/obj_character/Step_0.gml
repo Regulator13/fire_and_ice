@@ -335,6 +335,14 @@ if (active) {
 	if jump_released{
 		is_jumping = false
 	}
+	
+	//Perform a wall jump if the player just hit a wall
+	if abs(wall_jump_speed) > 0{
+		show_debug_message("Wall Jump!")
+		hspeed = wall_jump_speed
+		vspeed -= 2
+		wall_jump_speed = 0
+	}
 
     ///Block collisions
     with(instance_place(x + sign(hspeed) * 2, y, par_physics)){
@@ -354,6 +362,21 @@ if (active) {
     if (vspeed > gravity_max) vspeed = gravity_max;
 
     ///Collisions
+	//If the player is holding down on the fire button and not using a jetpack perform a wall jump
+	if right_action_is_pressed and not has_jetpack{
+		//Wall jump setup
+		if !place_free(x+hspeed, y){
+			if place_free(x, y + 2) and place_free(x, y + 16){
+				//If the player is clearly attempting a wall jump don't let them shoot a fireball when they release fire
+				dont_fire = true
+				if vspeed < 0 and abs(hspeed) > (moveSpeed - 1){ 
+					wall_jump_speed = -hspeed
+					air_dir *= -1
+				}
+			}
+		}
+	}
+	
 	//Horizotal collision
     while(!place_free(x+hspeed, y)) {
         hspeed = scr_reduce(hspeed);
@@ -370,8 +393,8 @@ if (active) {
         }
     }
 
-	//Climb blocks that are open and within 2 pixels left or right of the top of the player's head
-	with(instance_position(x + max(dir*sprite_width, 0), y + y_diff + 1, par_block)){
+	//Climb blocks that are open and within 2 pixels left or right of the middle of the player
+	with(instance_position(x + max(dir*sprite_width, 0) + dir*2, y + sprite_height/2 + y_diff/2, par_block)){
 		if (id != other.Grab_object and climbable){
 			//Change the character's variables
 			with (other){
@@ -625,51 +648,54 @@ if (active) {
 		
 		//Shoot a fireball
         if (energy > energy_fire) {
-			//Ignite if holding an object that can blow up
-            if (instance_exists(Grab_object)) {
-                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1){
-                    Grab_object.ignite = true;
-                    Grab_object.hp = Grab_object.hp_normal;
-                }
-				
-				//Otherwise perform fire action on it
-                else Grab_object.hp -= 1;
-            }
-			
-			//If the player isn't doing something else instead
-			else if can_throw{
-				//Throw
-                with(instance_create_layer(x + 4, y + 4, "lay_instances", obj_ball)) {
-					//Initialize fireball variables
-                    sprite_index = spr_ball_fire;
-                    attack = 1;
-                    Source = other.id;
-					
-					//if carrying a gun give the ball special stats
-					var has_gun = scr_use_gun()
-					
-                    //direction of throwing based on mouse
-                    if (other.input_method = CONTROLS_MOUSE) {
-						scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir, has_gun)
-                    }
-					
-                    //Throw using arrow keys
-	                else if (other.input_method == CONTROLS_KEYBOARD) {
-	                    scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir, has_gun)
+			if not dont_fire{
+				//Ignite if holding an object that can blow up
+	            if (instance_exists(Grab_object)) {
+	                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1){
+	                    Grab_object.ignite = true;
+	                    Grab_object.hp = Grab_object.hp_normal;
 	                }
+				
+					//Otherwise perform fire action on it
+	                else Grab_object.hp -= 1;
+	            }
+			
+				//If the player isn't doing something else instead
+				else if can_throw{
+					//Throw
+	                with(instance_create_layer(x + 4, y + 4, "lay_instances", obj_ball)) {
+						//Initialize fireball variables
+	                    sprite_index = spr_ball_fire;
+	                    attack = 1;
+	                    Source = other.id;
 					
-					//Throw using the gamepad right joystick
-					else{
-						scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy, has_gun)
-					}
+						//if carrying a gun give the ball special stats
+						var has_gun = scr_use_gun()
+					
+	                    //direction of throwing based on mouse
+	                    if (other.input_method = CONTROLS_MOUSE) {
+							scr_mouse_set_throw_dir(other.strength, mass, other.x, other.y, other.Input_player.mouseX, other.Input_player.mouseY, other.dir, has_gun)
+	                    }
+					
+	                    //Throw using arrow keys
+		                else if (other.input_method == CONTROLS_KEYBOARD) {
+		                    scr_throw_using_keyboard(other.strength, mass, other.aim_direction, other.dir, has_gun)
+		                }
+					
+						//Throw using the gamepad right joystick
+						else{
+							scr_throw_using_gamepad(other.strength, mass, other.Input_player.gamepad_aimx, other.Input_player.gamepad_aimy, has_gun)
+						}
                     
-                    //handicap
-                    if (other.will_arc) arc = true;
-                }
+	                    //handicap
+	                    if (other.will_arc) arc = true;
+	                }
 
-            energy -= energy_fire;
-            }
-        }
+	            energy -= energy_fire;
+	            }
+	        }
+			else dont_fire = false //Reset the dont_fire so the next time the player releases the key they shoot
+		}
     }
 
 	//Ice action

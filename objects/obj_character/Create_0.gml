@@ -14,6 +14,7 @@ player_name = "";
 freeze_holding_buffer_max = 10; //buffer to activate freezing of grabbed object
 freeze_holding_buffer = freeze_holding_buffer_max;
 can_throw = true
+dont_fire = false //Performing a wall jump, don't fire at the next key release
 gamepad_drop_delay = 5 //Number of steps to wait before allowing the player to drop from hanging after dropping off an edge
 gamepad_can_drop = true //Whether the player can drop down from a ledge when using the gamepad
 
@@ -46,6 +47,7 @@ jump_timer = jump_timer_max //The number of steps the player has jumped
 energy_fire = 5;  //energy cost per fireball
 
 ///Physics
+wall_jump_speed = 0 //Set the wall jump speed to be 0
 is_jumping = false //whether the player is currently jumping or not
 can_change_dir = true //initialize the player to be on the ground
 air_dir = 0 //initialize the direction the player is traveling to be straight down
