@@ -234,64 +234,108 @@ if (active) {
     //update y_score
     if (y < y_score) y_score = y;
 	
-	///Hang
-	//Use down key to move from the top of a ledge to hanging position
+	///Hang and pick up objects below
 	if down_pressed > axis_buffer{
-		//Check if there is a block under the player's left side
-		var Inst = instance_position(x + 4, y + sprite_height + 1, par_block)
-		//Otherwise check if there is a block under the player's right side
-		if Inst == noone{
-			Inst = instance_position(x - 4 + sprite_width, y + sprite_height + 1, par_block)
+		var down_grab = false //Check if the player grabbed an object with the down key
+        //If not already holding something, attempt to grab the object below them
+		if (place_meeting(x, y + 1, par_physics)) and not place_meeting(x, y + 1, obj_ball){
+	        if (holding = 0) {
+				Grab_object = (instance_place(x, y + 1, par_physics));
+			
+				//Initialize player variables for certain objects
+				if instance_exists(Grab_object){
+					if not Grab_object.frozen and not Grab_object.stuck{
+						//crouch
+						crouch = true;
+					
+						if Grab_object.object_index == obj_jetpack{
+							has_jetpack = true
+						}
+				
+						if Grab_object.object_index == obj_hang_glider{
+							has_hang_glider = true
+						}
+			
+						//Initialize Grab_object variables
+		                Grab_object.active = false;
+		                Grab_object.Holder = self; //whose holding the item
+						holding = 2; //Throw the item immediately with a left action
+						down_grab = true
+					}
+					else Grab_object = noone;
+				}
+			
+	            if (instance_exists(Grab_object)) {
+	                if (Grab_object.Team == Team or Grab_object.Team == noone) {
+	                    Grab_object.active = false;
+	                    //set Holder
+	                    Grab_object.Holder = self;
+	                    holding = 2;
+	                }
+				
+					else Grab_object = noone;
+	            }
+	        }
 		}
 		
-		//If there is a block below the player attempt to climb down
-		if Inst != noone{
-			//If this is something that can be climbed
-			if Inst.climbable{
-				//Hang on right side if right foot is off the side of block
-				if position_empty(x + sprite_width, y + sprite_height + 1){
-					//If there is room to climb down
-					if place_free(Inst.x + Inst.sprite_width, Inst.y) and place_free(Inst.x + Inst.sprite_width, Inst.y - sprite_height){
-						x = Inst.x + Inst.sprite_width - PLAYER_TOL
-						y = Inst.y - y_diff
-						dir = -1
-						hspeed = 0
-						vspeed = 0
-						//If the players feet is not touching the ground
-						if place_free(x, y + 1){
-							climb_dir = dir
-							gravity_incr = 0
-							active = false
-							hanging = true
-						}
-						dropped = true
-						if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
-							alarm[2] = gamepad_drop_delay
-							gamepad_can_drop = false
+		//Use down key to move from the top of a ledge to hanging position if an object was grabbed
+		if not down_grab{
+			//Check if there is a block under the player's left side
+			var Inst = instance_position(x + 4, y + sprite_height + 1, par_block)
+			//Otherwise check if there is a block under the player's right side
+			if Inst == noone{
+				Inst = instance_position(x - 4 + sprite_width, y + sprite_height + 1, par_block)
+			}
+		
+			//If there is a block below the player attempt to climb down
+			if Inst != noone{
+				//If this is something that can be climbed
+				if Inst.climbable{
+					//Hang on right side if right foot is off the side of block
+					if position_empty(x + sprite_width, y + sprite_height + 1){
+						//If there is room to climb down
+						if place_free(Inst.x + Inst.sprite_width, Inst.y) and place_free(Inst.x + Inst.sprite_width, Inst.y - sprite_height){
+							x = Inst.x + Inst.sprite_width - PLAYER_TOL
+							y = Inst.y - y_diff
+							dir = -1
+							hspeed = 0
+							vspeed = 0
+							//If the players feet is not touching the ground
+							if place_free(x, y + 1){
+								climb_dir = dir
+								gravity_incr = 0
+								active = false
+								hanging = true
+							}
+							dropped = true
+							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
+								alarm[2] = gamepad_drop_delay
+								gamepad_can_drop = false
+							}
 						}
 					}
-				}
 
-				//Hang on left side if left foot is off the side of block
-				else if position_empty(x, y + sprite_height + 1){
-					//If there is room to climb down
-					if place_free(Inst.x - sprite_width, Inst.y) and place_free(Inst.x - sprite_width, Inst.y - sprite_height){
-						x = Inst.x - sprite_width + PLAYER_TOL
-						y = Inst.y - y_diff
-						dir = 1
-						hspeed = 0
-						vspeed = 0
-						//If the players feet is not touching the ground
-						if place_free(x, y + 1){
-							climb_dir = dir
-							gravity_incr = 0
-							active = false
-							hanging = true
-						}
-						dropped = true
-						if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
-							alarm[2] = gamepad_drop_delay
-							gamepad_can_drop = false
+					//Hang on left side if left foot is off the side of block
+					else if position_empty(x, y + sprite_height + 1){
+						//If there is room to climb down
+						if place_free(Inst.x - sprite_width, Inst.y) and place_free(Inst.x - sprite_width, Inst.y - sprite_height){
+							x = Inst.x - sprite_width + PLAYER_TOL
+							y = Inst.y - y_diff
+							dir = 1
+							hspeed = 0
+							vspeed = 0
+							//If the players feet is not touching the ground
+							if place_free(x, y + 1){
+								climb_dir = dir
+								gravity_incr = 0
+								active = false
+								hanging = true
+							}
+							dropped = true
+							if input_method != CONTROLS_MOUSE and input_method != CONTROLS_KEYBOARD{
+								alarm[2] = gamepad_drop_delay
+								gamepad_can_drop = false
+							}
 						}
 					}
 				}
