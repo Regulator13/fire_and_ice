@@ -9,9 +9,11 @@ if place_free(x, y + 16) and place_free(x, y + 32){
 		//Pick axe
 		//Don't stick if attempting a wall jump
 		if not right_action_is_pressed{
-			//Stick to the block with a pick
-			if scr_has_climbing_pick(){
-				scr_cling_to_wall()
+			//Stick to the block with a pick if below it
+			if y + y_diff > other.y{
+				if scr_has_climbing_pick(){
+					scr_cling_to_wall()
+				}
 			}
 		}
 		if vspeed > 0{

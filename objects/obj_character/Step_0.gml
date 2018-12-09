@@ -906,7 +906,7 @@ if climbing{
 	else vspeed = 0
 		
 	//if the player is no longer touching a wall, make them fall
-	if place_free(x + 3, y + y_diff) and place_free(x - 3, y + y_diff){
+	if place_free(x + PLAYER_TOL + 3, y + y_diff) and place_free(x - PLAYER_TOL - 3, y + y_diff){
 		climbing = false
 		gravity_incr = 0.4
 		active = true
