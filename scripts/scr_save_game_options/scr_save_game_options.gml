@@ -9,8 +9,12 @@ animations_on = button.value;
 button = ds_list_find_value(buttons, 1);
 water_on = button.value;
 
-///Difficulty slider
+///Jetpack button
 button = ds_list_find_value(buttons, 2);
+jetpack_on = button.value;
+
+///Difficulty slider
+button = ds_list_find_value(buttons, 3);
 difficulty = button.value;
 
 //open file
@@ -22,6 +26,7 @@ section = string("gameOptions")
 ini_section_delete(section);
 ini_write_real(section, "animations_on", animations_on);
 ini_write_real(section, "water_on", water_on)
+ini_write_real(section, "jetpack_on", jetpack_on)
 ini_write_real(section, "difficulty", difficulty)
 
 //close file

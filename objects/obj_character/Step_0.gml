@@ -389,6 +389,8 @@ if (active) {
         if vspeed = 0 {
             //reset jumps
             jumps = jumps_max;
+			//stop the current jump if the player hits their head on a block
+			is_jumping = false
             break;
         }
     }
@@ -594,7 +596,8 @@ if (active) {
 	if (right_action_released){
         //Attempt to equip the item next to the player
         if instance_exists(instance_place(x + sign(dir) * GRAB_TOL, y, par_item)){
-			can_throw = false
+			can_throw = false //Don't throw a fireball if grabbing an item
+			dont_fire = true //Don't ignite a block/corpse if grabbing an item
 			ds_list_add(Equipped_objects, instance_place(x + sign(dir) * GRAB_TOL, y, par_item));
 
 			//Remove the item from the game
@@ -650,15 +653,17 @@ if (active) {
         if (energy > energy_fire) {
 			if not dont_fire{
 				//Ignite if holding an object that can blow up
-	            if (instance_exists(Grab_object)) {
-	                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1){
-	                    Grab_object.ignite = true;
-	                    Grab_object.hp = Grab_object.hp_normal;
-	                }
+				if can_ignite{
+		            if (instance_exists(Grab_object)){
+		                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1){
+		                    Grab_object.ignite = true;
+		                    Grab_object.hp = Grab_object.hp_normal;
+		                }
 				
-					//Otherwise perform fire action on it
-	                else Grab_object.hp -= 1;
-	            }
+						//Otherwise perform fire action on it
+		                else Grab_object.hp -= 1;
+		            }
+				}
 			
 				//If the player isn't doing something else instead
 				else if can_throw{

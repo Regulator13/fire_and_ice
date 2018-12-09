@@ -49,6 +49,15 @@ ds_list_add(buttons, button);
 var button = instance_create_layer(c1x, cy+by*c1y++, "lay_instances", obj_button);
 with(button) {
     action = "value";
+    title = "Jetpack";
+    ds_list_add(values, "Off", "On");
+    value = other.jetpack_on
+}
+ds_list_add(buttons, button);
+
+var button = instance_create_layer(c1x, cy+by*c1y++, "lay_instances", obj_button);
+with(button) {
+    action = "value";
     title = "Difficulty";
     ds_list_add(values, "Beginner", "Easy", "Normal", "Hard", "Expert");
     value = other.difficulty

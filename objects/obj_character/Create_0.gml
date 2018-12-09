@@ -14,7 +14,7 @@ player_name = "";
 freeze_holding_buffer_max = 10; //buffer to activate freezing of grabbed object
 freeze_holding_buffer = freeze_holding_buffer_max;
 can_throw = true
-dont_fire = false //Performing a wall jump, don't fire at the next key release
+dont_fire = false //Performing a wall jump or grabbing an item, don't fire at the next key release
 gamepad_drop_delay = 5 //Number of steps to wait before allowing the player to drop from hanging after dropping off an edge
 gamepad_can_drop = true //Whether the player can drop down from a ledge when using the gamepad
 
