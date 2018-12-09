@@ -653,17 +653,15 @@ if (active) {
         if (energy > energy_fire) {
 			if not dont_fire{
 				//Ignite if holding an object that can blow up
-				if can_ignite{
-		            if (instance_exists(Grab_object)){
-		                if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1){
-		                    Grab_object.ignite = true;
-		                    Grab_object.hp = Grab_object.hp_normal;
-		                }
-				
-						//Otherwise perform fire action on it
-		                else Grab_object.hp -= 1;
+		        if (instance_exists(Grab_object)){
+		            if (Grab_object.hp > Grab_object.hp_normal-1 or Grab_object.hp < Grab_object.hp_normal+1){
+		                Grab_object.ignite = true;
+		                Grab_object.hp = Grab_object.hp_normal;
 		            }
-				}
+				
+					//Otherwise perform fire action on it
+		            else Grab_object.hp -= 1;
+		        }
 			
 				//If the player isn't doing something else instead
 				else if can_throw{
