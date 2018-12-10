@@ -368,7 +368,8 @@ if (active) {
 	if is_jumping{
 		if jump_is_pressed{
 			if jump_timer > 0{
-				vspeed = -jump_height
+				//Use the timer to smoothly decrease the jump speed
+				vspeed = -(jump_height - jump_timer * gravity_incr / jump_timer_max)
 				jump_timer -= 1
 			}
 			else is_jumping = false
