@@ -14,6 +14,7 @@ player_name = "";
 freeze_holding_buffer_max = 10; //buffer to activate freezing of grabbed object
 freeze_holding_buffer = freeze_holding_buffer_max;
 can_throw = true
+dont_fire = false //Performing a wall jump or grabbing an item, don't fire at the next key release
 gamepad_drop_delay = 5 //Number of steps to wait before allowing the player to drop from hanging after dropping off an edge
 gamepad_can_drop = true //Whether the player can drop down from a ledge when using the gamepad
 
@@ -27,7 +28,6 @@ has_hang_glider = false
 ///Climbing intializations
 climbing = false //whether the player is climbing to the side of a block (Pick only)
 hanging = false //whether a player is hanging on an edge
-hanging_tol = 6 //number of pixels a player can be from the top to enter the hanging state
 y_diff = 0 //number of pixels in y direction the current state is from the standing state (for crouching)
 climbing_cost = 0.4 //how much energy it costs per step of climbing
 climb_dir = 0 //direction the player is facing while climbing
@@ -40,14 +40,21 @@ energy_max = 100;
 strength = 90;
 mass = 24;
 jumps_max = 1
-jump_height = 8.5
+jump_height_max = 8.5
+jump_height = jump_height_max
+jump_timer_max = 10 //Max number of steps a player can hold for jump height
+jump_timer = jump_timer_max //The number of steps the player has jumped
 energy_fire = 5;  //energy cost per fireball
 
 ///Physics
+wall_jump_speed = 0 //Set the wall jump speed to be 0
+is_jumping = false //whether the player is currently jumping or not
+can_change_dir = true //initialize the player to be on the ground
+air_dir = 0 //initialize the direction the player is traveling to be straight down
 gravity_max = 10; //maximum speed a player can fall
 gravity_incr = 0.4; //gravity acceleration
 fric = 2 //How quickly the player slows down on land
-drag = 0.3 //Set how quickly player's can change directions in air
+drag = 0.15 //Set how quickly player's can change directions in air
 acceleration = 0.5 //Set how quickly the player starts moving
 will_arc = true; //Will the fireball arc
 
@@ -75,6 +82,7 @@ aim_direction = 0
 right_action_is_pressed = false;
 left_action_is_pressed = false;
 right_action_is_pressed = false;
+jump_is_pressed = false;
 
 
 

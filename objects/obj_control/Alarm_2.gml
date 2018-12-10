@@ -1,7 +1,7 @@
 /// @description Rain generator
 
 // Generate rain particle system
-if global.Menu.animations_on = true{
+if global.Menu.animations_on and global.Menu.water_on{
 	part_system_depth(ps_rain, -50)
 
 	// Create rain drop particle

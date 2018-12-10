@@ -1,11 +1,11 @@
 /// @description Raise water
-if(water_buffer = false){
+if(water_buffer == false and global.Menu.water_on){
 	water_height += global.water_rate;
 }
 
 //dynamically destroy raindrops at water level
 if rain_active = true{
-	if global.Menu.animations_on = true{
+	if global.Menu.animations_on and global.Menu.water_on{
 		part_type_life(prt_rain, (room_height - 32 - water_height) / prt_speed, (room_height - 32 - water_height) / prt_speed)
 	}
 }
