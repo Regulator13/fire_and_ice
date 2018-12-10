@@ -383,7 +383,6 @@ if (active) {
 	
 	//Perform a wall jump if the player just hit a wall
 	if abs(wall_jump_speed) > 0{
-		show_debug_message("Wall Jump!")
 		hspeed = wall_jump_speed
 		vspeed -= 2
 		wall_jump_speed = 0

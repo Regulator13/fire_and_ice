@@ -19,8 +19,6 @@ if place_free(x, y + 16) and place_free(x, y + 32){
 		if vspeed > 0{
 			//If the player would pass by the exact ledge on the next step
 			if sign(y - other.y + y_diff) != sign(y + vspeed + gravity_incr - other.y + y_diff){
-				show_debug_message("Before: " + string(y-other.y+y_diff))
-				show_debug_message("After: " + string(y + vspeed + gravity_incr - other.y + y_diff))
 				//If the player is between the hanging tolerances
 				if y > other.y - HANGING_TOL - y_diff and y < other.y + HANGING_TOL - y_diff{
 					//Automatically turn to face the wall
