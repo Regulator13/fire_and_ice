@@ -234,18 +234,13 @@ if global.continue_game{
 			//create cage and key if open
 			if open{
 				//Create top layer
-				for (j=0; j<3; j++){
-					instance_create_layer(rx + j*grid_size, ry, "lay_instances", obj_block_big)
-				}
+				instance_create_layer(rx + grid_size, ry, "lay_instances", obj_block_big)
 				//Create middle layer with key
 				instance_create_layer(rx, ry + grid_size, "lay_instances", obj_block_big)
 				instance_create_layer(rx + grid_size  + 8, ry + grid_size + 8, "lay_instances", obj_key)
 				instance_create_layer(rx + grid_size * 2, ry + grid_size, "lay_instances", obj_block_big)
 				//Create bottom layer
-				//Create top layer
-				for (j=0; j<3; j++){
-					instance_create_layer(rx + j*grid_size, ry + grid_size * 2, "lay_instances", obj_block_big)
-				}
+				instance_create_layer(rx + grid_size, ry + grid_size * 2, "lay_instances", obj_block_big)
 				
 				//Save the spawn coordinates to a persistant object if the game restarts.
 				obj_menu.key_x = rx
@@ -269,18 +264,13 @@ else{
 	ry = obj_menu.key_y
 	
 	//Create top layer
-	for (j=0; j<3; j++){
-		instance_create_layer(rx + j*grid_size, ry, "lay_instances", obj_block_big)
-	}
+	instance_create_layer(rx + grid_size, ry, "lay_instances", obj_block_big)
 	//Create middle layer with key
 	instance_create_layer(rx, ry + grid_size, "lay_instances", obj_block_big)
 	instance_create_layer(rx + grid_size  + 8, ry + grid_size + 8, "lay_instances", obj_key)
 	instance_create_layer(rx + grid_size * 2, ry + grid_size, "lay_instances", obj_block_big)
 	//Create bottom layer
-	//Create top layer
-	for (j=0; j<3; j++){
-		instance_create_layer(rx + j*grid_size, ry + grid_size * 2, "lay_instances", obj_block_big)
-	}
+	instance_create_layer(rx + grid_size, ry + grid_size * 2, "lay_instances", obj_block_big)
 }
 
 ///Generate heart token (extra life) if first time on level
