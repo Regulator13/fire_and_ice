@@ -6,6 +6,7 @@ Team = noone; //Belongs to no team
 player_id = 0; //player id for score
 jumps = 0;
 crouch = false;
+on_body = false //The player will be carried above the head
 Holder = noone; //who is holding self
 sticky = false; //for grabbing
 y_score = room_height; //The heighest y coordinate the player has reached

@@ -241,40 +241,34 @@ if (active) {
 		if (place_meeting(x, y + 1, par_physics)) and not place_meeting(x, y + 1, obj_ball){
 	        if (holding = 0) {
 				Grab_object = (instance_place(x, y + 1, par_physics));
-			
+				
 				//Initialize player variables for certain objects
 				if instance_exists(Grab_object){
-					if not Grab_object.frozen and not Grab_object.stuck{
-						//crouch
-						crouch = true;
+					if Grab_object.Holder == noone{
+						//Can't grab frozen or stuck (with the down key)
+						if not Grab_object.frozen and not Grab_object.stuck{
+							//crouch
+							crouch = true;
 					
-						if Grab_object.object_index == obj_jetpack{
-							has_jetpack = true
-						}
+							if Grab_object.object_index == obj_jetpack{
+								has_jetpack = true
+							}
 				
-						if Grab_object.object_index == obj_hang_glider{
-							has_hang_glider = true
-						}
+							if Grab_object.object_index == obj_hang_glider{
+								has_hang_glider = true
+							}
 			
-						//Initialize Grab_object variables
-		                Grab_object.active = false;
-		                Grab_object.Holder = self; //whose holding the item
-						holding = 2; //Throw the item immediately with a left action
-						down_grab = true
+							//Initialize Grab_object variables
+			                Grab_object.active = false;
+			                Grab_object.Holder = self; //whose holding the item
+							holding = 2; //Throw the item immediately with a left action
+							down_grab = true
+						}
+						else Grab_object = noone
 					}
-					else Grab_object = noone;
+					else Grab_object = noone
 				}
-			
-	            if (instance_exists(Grab_object)) {
-	                if (Grab_object.Team == Team or Grab_object.Team == noone) {
-	                    Grab_object.active = false;
-	                    //set Holder
-	                    Grab_object.Holder = self;
-	                    holding = 2;
-	                }
-				
-					else Grab_object = noone;
-	            }
+				else Grab_object = noone
 	        }
 		}
 		
@@ -509,48 +503,56 @@ if (active) {
 	        if (holding = 0) {
 		
 				Grab_object = (instance_place(x+sign(dir) * GRAB_TOL, y, par_physics));
-			
-	            if !instance_exists(Grab_object){
-					Grab_object = (instance_place(x+sign(dir) * GRAB_TOL, y, obj_character));
-				}
-			
-				//Initialize variables for certain objects
+				
 				if instance_exists(Grab_object){
-					if Grab_object.object_index == obj_jetpack{
-						has_jetpack = true
-					}
+					//No grabbing items from other player's hands
+					if Grab_object.Holder == noone{
+						//Initialize variables for certain objects
+						if Grab_object.object_index == obj_jetpack{
+							has_jetpack = true
+						}
 				
-					if Grab_object.object_index == obj_hang_glider{
-						has_hang_glider = true
+						if Grab_object.object_index == obj_hang_glider{
+							has_hang_glider = true
+						}
+			
+						//Initialize Grab_object variables
+			            if Grab_object.frozen = false{
+			                Grab_object.active = false;
+			                //unstick if sticky
+			                if (Grab_object.sticky) Grab_object.stuck = false
+			                Grab_object.Holder = self; //whose holding the item
+			                holding = 1; //Number of items being held
+			            }
+			            else Grab_object = noone
+			        }
+					else Grab_object = noone
+				}
+				else Grab_object = noone
+	        }
+		}
+		///Player carrying
+		if !instance_exists(Grab_object){
+			Grab_object = (instance_place(x+sign(dir) * GRAB_TOL, y, obj_character))
+			//Make sure the player was grabbed
+			if instance_exists(Grab_object){
+				//Make sure the player isn't holding an item
+				if Grab_object.Grab_object == noone{
+					//Make sure the player is on your team
+					if Grab_object.Team != Team{
+						Grab_object = noone
+					}
+					else{
+						with Grab_object{
+							active = false
+						}
+						Grab_object.Holder = self
+						holding = 1
 					}
 				}
-			
-				//Initialize Grab_object variables
-	            if (instance_exists(Grab_object)) {
-	                if (Grab_object.frozen = false) {
-	                    Grab_object.active = false;
-	                    //unstick if sticky
-	                    if (Grab_object.sticky) Grab_object.stuck = false
-	                    Grab_object.Holder = self; //whose holding the item
-	                    holding = 1; //Number of items being held
-	                }
-					
-	                else Grab_object = noone;
-	            }
-			
-	            if (instance_exists(Grab_object)) {
-	                if (Grab_object.Team == Team or Grab_object.Team == noone) {
-	                    Grab_object.active = false;
-	                    //check if sticky
-	                    if (Grab_object.sticky) Grab_object.stuck = false //unstick
-	                    //set Holder
-	                    Grab_object.Holder = self;
-	                    holding = 1;
-	                }
-				
-					else Grab_object = noone;
-	            }
-	        }
+				else Grab_object = noone
+			}
+			else Grab_object = noone
 		}
     }
 	
@@ -889,6 +891,17 @@ with(instance_place(x, y, obj_health)) {
 	if (other.hp > other.hp_max) other.hp = other.hp_max;
 	//destroy
 	instance_destroy();
+}
+
+///Break free from player with down key if grabbed
+if Input_player.inputs[DOWN_KEY] == KEY_PRESSED{
+	if Holder != noone{
+		Holder.Grab_object = noone
+		Holder.holding = 0
+		Holder.crouch = false
+		Holder = noone
+		active = true
+	}
 }
 
 ///Climbing
