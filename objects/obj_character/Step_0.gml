@@ -354,10 +354,10 @@ if (active) {
 			if instance_exists(Grab_object){
 				if strength >= Grab_object.mass{
 					//Jump a little higher to make up for crouching
-					jump_height += 0.3
+					jump_height += 0.4
 				}
 				else{
-					jump_height += 0.3 - (Grab_object.mass - strength)/3
+					jump_height += 0.4 - (Grab_object.mass - strength)/3
 				}
 			}
 		}
@@ -1013,22 +1013,34 @@ if hanging{
 		}	
 	}
 }
+
+///Key
+//Collect the key to unlock the door
+with instance_place(x, y, obj_key){
+	obj_door.is_locked = false
+	obj_door.sprite_index = spr_door
+	instance_destroy()
+}
 	
 ///Win
-if (place_meeting(x, y, obj_door)) {
-    //win score
-    Team.tScore += global.score_win/ds_list_size(Team.players);
-    if !(global.win) Team.tScore += global.score_first; //first
-    global.win = true;
-	ds_list_destroy(Equipped_objects)
-    instance_destroy();
-    /*
-    //subtract score for each player based on y
-    for(var i=0; i<instance_number(obj_player); i++) {
-        with (instance_find(obj_player,i)) global.playerScore[player_id] -= y_score*global.scoreY;
-        }
-    */
-    }
+with (instance_place(x, y, obj_door)){
+	if not is_locked{
+		with other{
+		    //win score
+		    Team.tScore += global.score_win/ds_list_size(Team.players);
+		    if !(global.win) Team.tScore += global.score_first; //first
+		    global.win = true;
+			ds_list_destroy(Equipped_objects)
+		    instance_destroy();
+		    /*
+		    //subtract score for each player based on y
+		    for(var i=0; i<instance_number(obj_player); i++) {
+		        with (instance_find(obj_player,i)) global.playerScore[player_id] -= y_score*global.scoreY;
+		        }
+		    */
+		}
+	}
+}
 
 //TODO Add cheat enabled button
 ///Cheats

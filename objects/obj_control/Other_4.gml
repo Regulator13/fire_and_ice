@@ -149,7 +149,7 @@ for (i=0; i<tries; i++){
 	var open = true
 	
 	//check if track is free
-	for (j=-3; j<4; j++){
+	for (var j=-3; j<4; j++){
 		if not place_empty(rx, ry - j*gridSize){
 			open = false
 			break
@@ -236,6 +236,52 @@ if (global.continue_game) {
 
 else{
     global.continue_game = true;
+}
+
+///If locked door is on spawn a key
+///Platform spawns
+var grid_size = 32
+var tries = 1000
+var rx = 0
+var ry = 0
+
+if global.Menu.locked_door_on{
+	///Key placement
+	for (i=0; i<tries; i++){
+		//set random coordinates
+		rx = round(irandom_range(0, room_width - grid_size*3)/gridSize)*gridSize
+		ry = round(irandom_range(12 * gridSize, room_height - 6 * gridSize)/gridSize)*gridSize;
+		var open = true
+	
+		//check if place is free
+		for (j=0; j<3; j++){
+			for (var k=0; k<3; k++){
+				if not place_empty(rx + j*grid_size, ry + k*grid_size){
+					open = false
+					break
+				}
+			}
+		}
+	
+		//create cage and key if open
+		if open{
+			//Create top layer
+			for (j=0; j<3; j++){
+				instance_create_layer(rx + j*grid_size, ry, "lay_instances", obj_block_big)
+			}
+			//Create middle layer with key
+			instance_create_layer(rx, ry + grid_size, "lay_instances", obj_block_big)
+			instance_create_layer(rx + grid_size  + 8, ry + grid_size + 8, "lay_instances", obj_key)
+			instance_create_layer(rx + grid_size * 2, ry + grid_size, "lay_instances", obj_block_big)
+			//Create bottom layer
+			//Create top layer
+			for (j=0; j<3; j++){
+				instance_create_layer(rx + j*grid_size, ry + grid_size * 2, "lay_instances", obj_block_big)
+			}
+			show_debug_message("Key spawned at: " + string(rx) + ", " + string(ry))
+			break
+		}
+	}
 }
 
 ///If items are off, remove them from the map AFTER level spawn to presever random order
