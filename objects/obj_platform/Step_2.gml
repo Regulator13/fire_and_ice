@@ -7,6 +7,12 @@ if hp == hp_max{
 	hspeed = 0
 	vspeed = 0
 }
+
+//Don't let the platform go past the max distance
+if hp < 0{
+	hp = 0
+}
+
 if active{
 	//If in a moving state
 	if hp < hp_max{
@@ -122,3 +128,7 @@ if active{
 		}
 	}
 }
+
+///Animation
+//If the platform is vertical, subtract 4 frames
+image_index = image_number - 1 - hp - (is_vertical * 4)
