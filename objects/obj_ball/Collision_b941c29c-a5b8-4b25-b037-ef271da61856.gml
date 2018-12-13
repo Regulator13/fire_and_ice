@@ -17,11 +17,11 @@ if other.from_water and attack > 0{
 
 //Do not freeze or burn blocks player's are holding
 else if other.Holder == noone{
-	other.hp -= attack;
 	//If a fireball hits an ignited block, explode it instantly
 	if attack > 0 and other.ignite{
 		other.ignite_buffer = 0
 	}
+	else other.hp -= attack;
 	if (instance_exists(Source)) {
 	    other.mooch_proof = Source.Team.Team;
 	}
