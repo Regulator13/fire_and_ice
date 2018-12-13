@@ -261,11 +261,6 @@ if global.continue_game{
 			}
 		}
 	}
-
-	///If items are off, remove them from the map AFTER level spawn to presever random order
-	if not global.Menu.jetpack_on{
-		instance_destroy(obj_jetpack)
-	}
 }
 
 //If the player has played the level once, spawn the key in the same spot
@@ -315,4 +310,9 @@ if (global.continue_game) {
 
 else{
     global.continue_game = true;
+}
+
+///If items are off, remove them from the map AFTER level spawn to presever random order
+if not global.Menu.jetpack_on{
+	instance_destroy(obj_jetpack)
 }

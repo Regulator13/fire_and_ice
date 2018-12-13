@@ -9,9 +9,8 @@ if hp == hp_max{
 }
 
 //Don't let the platform go past the max distance
-if hp < 0{
-	hp = 0
-}
+if hp < 0 hp = 0
+if hp > hp_max hp = hp_max
 
 if active{
 	//If in a moving state
