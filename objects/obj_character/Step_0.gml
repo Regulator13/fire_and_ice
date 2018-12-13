@@ -834,13 +834,36 @@ with (instance_place(x, y, obj_block_big)){
 }
 
 //Jump on trampolines
-min_jump_speed = 3
+min_jump_speed = 4
 with instance_place(x, y + vspeed/4, obj_trampoline){
-	if not toppled{
+	//Players can use the down key to NOT jump on the trampoline
+	if not toppled and (not(other.down_pressed > other.axis_buffer) or other.has_hang_glider){
 		other.can_change_dir = true //Act as if the player had just touched the ground
 		//Bounce
 		if other.vspeed > other.min_jump_speed{
 			other.vspeed *= -1.1
+		}
+	}
+}
+
+//Push back over toppled trampolines
+with instance_place(x + hspeed, y, obj_trampoline){
+	if toppled{
+		//If the player is off the ground
+		with other{
+			if place_free(x + hspeed, y + 4){
+				//change trampoline's stats
+				with other{
+					//If the player is traveling a direction that would push it upright with a little speed, push it back over
+					if (image_index == 0 and other.hspeed < 2) or (image_index == 1 and other.hspeed > 2){
+						sprite_index = spr_trampoline
+						toppled = false
+						//Center the object for more natural look
+						if image_index == 0 x -= 2/5 * sprite_width
+						else x += 2/5 * sprite_width
+					}
+				}
+			}
 		}
 	}
 }
