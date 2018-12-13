@@ -64,12 +64,32 @@ with(button) {
 }
 ds_list_add(buttons, button);
 
-var button = instance_create_layer(c1x, cy+by*c1y++, "lay_instances", obj_button);
+
+//Second column
+var button = instance_create_layer(c2x, cy+by*c2y++, "lay_instances", obj_button);
 with(button) {
     action = "value";
     title = "Difficulty";
     ds_list_add(values, "Beginner", "Easy", "Normal", "Hard", "Expert");
     value = other.difficulty
+}
+ds_list_add(buttons, button);
+
+var button = instance_create_layer(c2x, cy+by*c2y++, "lay_instances", obj_button);
+with(button) {
+    action = "value";
+    title = "Rain Delay";
+    ds_list_add(values, "300", "400", "600", "800", "1000", "1200", "1400", "1600", "1800", "2000");
+    value = other.starting_water_delay
+}
+ds_list_add(buttons, button);
+
+var button = instance_create_layer(c2x, cy+by*c2y++, "lay_instances", obj_button);
+with(button) {
+    action = "value";
+    title = "Rain Rate";
+    ds_list_add(values, "0.10", "0.12", "0.14", "0.16", "0.18", "0.20", "0.22", "0.24", "0.26", "0.28", "0.30");
+    value = other.starting_water_rate
 }
 ds_list_add(buttons, button);
 

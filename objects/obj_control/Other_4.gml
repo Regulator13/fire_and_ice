@@ -3,8 +3,19 @@
 if (global.gameStart) {
     global.level = 0; //Set level number
     global.continue_game = true; //whether or not can continue
-    global.water_delay = 1000;
-    global.water_rate = .1;
+	
+	//Set water delay from slider
+	var vals = ds_list_create()
+	ds_list_add(vals, 300, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000) 
+	global.water_delay = vals[| global.Menu.starting_water_delay]
+	ds_list_destroy(vals)
+	
+	//Set water rate from slider
+	var vals = ds_list_create()
+	ds_list_add(vals, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 0.26, 0.28, 0.3) 
+	global.water_rate = vals[| global.Menu.starting_water_rate];
+	ds_list_destroy(vals)
+	
     global.gameStart = false;
     }
 
@@ -258,7 +269,7 @@ if global.continue_game{
 }
 
 //If the player has played the level once, spawn the key in the same spot
-else{		
+else if global.Menu.locked_door_on{		
 	//Save the spawn coordinates if the game restarts.
 	rx = obj_menu.key_x
 	ry = obj_menu.key_y
