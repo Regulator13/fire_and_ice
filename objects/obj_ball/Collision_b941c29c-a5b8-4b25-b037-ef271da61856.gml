@@ -21,7 +21,16 @@ else if other.Holder == noone{
 	if attack > 0 and other.ignite{
 		other.ignite_buffer = 0
 	}
-	else other.hp -= attack;
+	else{
+		//If the block is sitting on a platform, trigger the platform instead
+		var Inst_platform = instance_place(x, y + 1, obj_platform)
+		if instance_exists(Inst_platform){
+			Inst_platform.hp -= sign(attack)
+		}
+		//Otherwise burn or freeze the block
+		else other.hp -= attack
+	}
+
 	if (instance_exists(Source)) {
 	    other.mooch_proof = Source.Team.Team;
 	}
