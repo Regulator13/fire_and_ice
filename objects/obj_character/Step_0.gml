@@ -385,7 +385,7 @@ if (active) {
     ///Block collisions
     with(instance_place(x + sign(hspeed) * 2, y, par_physics)){
 		//Push blocks
-        if (id != other.Grab_object and not frozen and !stuck) {
+        if (id != other.Grab_object and not frozen and not ignite and not stuck) {
             x+=scr_contactx(other.hspeed);
         }
 	}

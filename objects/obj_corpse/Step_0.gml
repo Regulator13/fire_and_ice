@@ -121,7 +121,7 @@ if (ignite){
 				else{
 					part_particles_create(obj_particle.ps_explosion, x + 8, y + 8, obj_particle.prt_explosion, 1)
 					//Create explosion and deal damage to all those in rectangle
-					Collided = scr_collision_rectangle_list(x - (32 - sprite_width/2), y - (32 - sprite_height/2), x + (32 - sprite_width/2), y + (32 - sprite_height/2), par_block, false, true)
+					Collided = scr_collision_rectangle_list(x - (32 - sprite_width/2), y - (32 - sprite_height/2), x + (32 + sprite_width/2), y + (32 + sprite_height/2), par_block, false, true)
 			        if !ds_list_empty(Collided){
 						for (var i=0; i<ds_list_size(Collided); i++){
 							Collided[| i].hp -= 10 //explosion damage
