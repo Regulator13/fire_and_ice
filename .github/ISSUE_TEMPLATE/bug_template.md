@@ -11,8 +11,8 @@ Describe the bug.
 What is supposed to happen?
 
 **Steps to Reproduce**
-1. Go to X branch or repository
-2. Play the game in X mode
+1. Master branch
+2. Single player mode
 3. Do X action
 4. Do X action
 

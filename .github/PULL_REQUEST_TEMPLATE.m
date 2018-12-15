@@ -1,4 +1,4 @@
-## Number of Issue Fixed
+## Number of Issue Addressed
 - 
 
 ### Changes Proposed in the Pull Request:
