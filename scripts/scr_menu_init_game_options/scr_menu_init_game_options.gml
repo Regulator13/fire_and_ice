@@ -78,6 +78,15 @@ ds_list_add(buttons, button);
 var button = instance_create_layer(c2x, cy+by*c2y++, "lay_instances", obj_button);
 with(button) {
     action = "value";
+    title = "Recharge Frequency";
+    ds_list_add(values, "None", "Low", "Medium", "High", "Very High");
+    value = other.recharge_frequency
+}
+ds_list_add(buttons, button);
+
+var button = instance_create_layer(c2x, cy+by*c2y++, "lay_instances", obj_button);
+with(button) {
+    action = "value";
     title = "Rain Delay";
     ds_list_add(values, "300", "400", "600", "800", "1000", "1200", "1400", "1600", "1800", "2000");
     value = other.starting_water_delay

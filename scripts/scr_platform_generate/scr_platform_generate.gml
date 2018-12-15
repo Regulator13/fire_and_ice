@@ -36,7 +36,11 @@ switch(argument2) {
 		}
 
 		//recharge station above middle block (If there is a middle block)
-		if (place_empty(dx-gridSize,dy-gridSize) and place_meeting(dx - gridSize, dy, obj_block_big)) instance_create_layer(dx-gridSize, dy-gridSize, "lay_instances", obj_recharge_station);
+		if irandom(9) < global.Menu.recharge_frequency*2{
+			if (place_empty(dx-gridSize,dy-gridSize) and place_meeting(dx - gridSize, dy, obj_block_big)){
+				instance_create_layer(dx-gridSize, dy-gridSize, "lay_instances", obj_recharge_station);
+			}
+		}
 		
 		//1 in 3 chance of jetpack on right if in second quater from bottom of room
 		if (dy > (room_height / 2)) and (dy < (3 * room_height / 4)){
@@ -70,7 +74,11 @@ switch(argument2) {
 		}
 		
 		//recharge station above middle block (if there is a middle block)
-		if (place_empty(dx-gridSize*2,dy-gridSize) and place_meeting(dx - gridSize * 2, dy, obj_block_big)) instance_create_layer(dx-gridSize*2, dy-gridSize, "lay_instances", obj_recharge_station);
+		if irandom(9) < global.Menu.recharge_frequency*2{
+			if (place_empty(dx-gridSize*2,dy-gridSize) and place_meeting(dx - gridSize * 2, dy, obj_block_big)){
+				instance_create_layer(dx-gridSize*2, dy-gridSize, "lay_instances", obj_recharge_station);
+			}
+		}
 		
 		//hang glider second from right side 1/4 chance
 		if !irandom(3){

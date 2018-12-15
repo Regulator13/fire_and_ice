@@ -55,6 +55,7 @@ water_on = ini_read_real(section, "water_on", true)
 jetpack_on = ini_read_real(section, "jetpack_on", true)
 locked_door_on = ini_read_real(section, "locked_door_on", false)
 difficulty = ini_read_real(section, "difficulty", 2)
+recharge_frequency = ini_read_real(section, "recharge_frequency", 2)
 starting_water_delay = ini_read_real(section, "starting_water_delay", 4)
 starting_water_rate = ini_read_real(section, "starting_water_rate", 0)
 
