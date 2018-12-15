@@ -1115,7 +1115,7 @@ if (mooch_buffer < 0) {
     with (instance_place(x, y+16, obj_block)) {
         // mooch
         if (mooch_proof != other.Team.Team and mooch_proof != -1) {
-			if obj_control.animation_on = true{
+			if global.Menu.animations_on = true{
 				if global.online{
 		            instance_create_layer(x, y-32, "lay_instances", obj_mooch);
 				}
