@@ -89,7 +89,8 @@ with(button) {
     action = "value";
     title = "Rain Delay";
     ds_list_add(values, "300", "400", "600", "800", "1000", "1200", "1400", "1600", "1800", "2000");
-    value = other.starting_water_delay
+    value = ds_list_find_index(values, string(global.water_delay))
+	
 }
 ds_list_add(buttons, button);
 
@@ -98,7 +99,7 @@ with(button) {
     action = "value";
     title = "Rain Rate";
     ds_list_add(values, "0.10", "0.12", "0.14", "0.16", "0.18", "0.20", "0.22", "0.24", "0.26", "0.28", "0.30");
-    value = other.starting_water_rate
+	value = ds_list_find_index(values, string(global.water_rate))
 }
 ds_list_add(buttons, button);
 

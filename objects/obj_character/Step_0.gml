@@ -859,8 +859,9 @@ with instance_place(x + hspeed, y, obj_trampoline){
 						sprite_index = spr_trampoline
 						toppled = false
 						//Center the object for more natural look
-						if image_index == 0 x -= 2/5 * sprite_width
-						else x += 2/5 * sprite_width
+						if image_index == 1{
+							x += sprite_width/2
+						}
 					}
 				}
 			}

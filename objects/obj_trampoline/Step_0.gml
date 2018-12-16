@@ -35,21 +35,21 @@ if being_pulled{
 	}
 	
 	//Topple over if pushed too far off a ledge
-	if scr_num_pixels_touching_bottom() < (sprite_width * 2/5){
+	if scr_num_pixels_touching_bottom() < (sprite_width * 0.5){
 		//topple right
 		if position_empty(x + sprite_width, y + sprite_height + 1){
-			x += sprite_width * 2/5
+			x += sprite_width * 0.5
 			sprite_index = spr_trampoline_toppled
 			image_index = 0
 			toppled = true
 		}
 		//topple left
 		else if position_empty(x, y + sprite_height + 1){
-			x -= sprite_width * 2/5
 			sprite_index = spr_trampoline_toppled
 			image_index = 1
 			toppled = true
 		}
+		x = round(x / 16) * 16 //center it on nearest grid size/2
 		hspeed = 0
 		Puller = noone
 		being_pulled = false
