@@ -223,60 +223,38 @@ var rx = 0
 var ry = 0
 
 //If locked_door_on is on, find a place to spawn a key the first time a room is entered
-if global.continue_game{
-	if global.Menu.locked_door_on{
-		///Key placement
-		for (i=0; i<tries; i++){
-			//set random coordinates
-			rx = round(irandom_range(0, room_width - grid_size*3)/gridSize)*gridSize
-			ry = round(irandom_range(6 * gridSize, room_height - 12 * gridSize)/gridSize)*gridSize;
-			var open = true
+if global.Menu.locked_door_on{
+	///Key placement
+	for (i=0; i<tries; i++){
+		//set random coordinates
+		rx = round(irandom_range(0, room_width - grid_size*3)/gridSize)*gridSize
+		ry = round(irandom_range(6 * gridSize, room_height - 12 * gridSize)/gridSize)*gridSize;
+		var open = true
 	
-			//check if place is free
-			for (j=0; j<3; j++){
-				for (var k=0; k<3; k++){
-					if not place_empty(rx + j*grid_size, ry + k*grid_size){
-						open = false
-						break
-					}
+		//check if place is free
+		for (j=0; j<3; j++){
+			for (var k=0; k<3; k++){
+				if not place_empty(rx + j*grid_size, ry + k*grid_size){
+					open = false
+					break
 				}
 			}
+		}
 	
-			//create cage and key if open
-			if open{
-				//Create top layer
-				instance_create_layer(rx + grid_size, ry, "lay_instances", obj_block_big)
-				//Create middle layer with key
-				instance_create_layer(rx, ry + grid_size, "lay_instances", obj_block_big)
-				instance_create_layer(rx + grid_size  + 8, ry + grid_size + 8, "lay_instances", obj_key)
-				instance_create_layer(rx + grid_size * 2, ry + grid_size, "lay_instances", obj_block_big)
-				//Create bottom layer
-				instance_create_layer(rx + grid_size, ry + grid_size * 2, "lay_instances", obj_block_big)
+		//create cage and key if open
+		if open{
+			//Create top layer
+			instance_create_layer(rx + grid_size, ry, "lay_instances", obj_block_big)
+			//Create middle layer with key
+			instance_create_layer(rx, ry + grid_size, "lay_instances", obj_block_big)
+			instance_create_layer(rx + grid_size  + 8, ry + grid_size + 8, "lay_instances", obj_key)
+			instance_create_layer(rx + grid_size * 2, ry + grid_size, "lay_instances", obj_block_big)
+			//Create bottom layer
+			instance_create_layer(rx + grid_size, ry + grid_size * 2, "lay_instances", obj_block_big)
 				
-				//Save the spawn coordinates to a persistant object if the game restarts.
-				obj_menu.key_x = rx
-				obj_menu.key_y = ry
-				
-				break
-			}
+			break
 		}
 	}
-}
-
-//If the player has played the level once, spawn the key in the same spot
-else if global.Menu.locked_door_on{		
-	//Save the spawn coordinates if the game restarts.
-	rx = obj_menu.key_x
-	ry = obj_menu.key_y
-	
-	//Create top layer
-	instance_create_layer(rx + grid_size, ry, "lay_instances", obj_block_big)
-	//Create middle layer with key
-	instance_create_layer(rx, ry + grid_size, "lay_instances", obj_block_big)
-	instance_create_layer(rx + grid_size  + 8, ry + grid_size + 8, "lay_instances", obj_key)
-	instance_create_layer(rx + grid_size * 2, ry + grid_size, "lay_instances", obj_block_big)
-	//Create bottom layer
-	instance_create_layer(rx + grid_size, ry + grid_size * 2, "lay_instances", obj_block_big)
 }
 
 ///Generate heart token (extra life) if first time on level
