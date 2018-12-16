@@ -241,40 +241,34 @@ if (active) {
 		if (place_meeting(x, y + 1, par_physics)) and not place_meeting(x, y + 1, obj_ball){
 	        if (holding = 0) {
 				Grab_object = (instance_place(x, y + 1, par_physics));
-			
+				
 				//Initialize player variables for certain objects
 				if instance_exists(Grab_object){
-					if not Grab_object.frozen and not Grab_object.stuck{
-						//crouch
-						crouch = true;
+					if Grab_object.Holder == noone{
+						//Can't grab frozen or stuck (with the down key)
+						if not Grab_object.frozen and not Grab_object.stuck{
+							//crouch
+							crouch = true;
 					
-						if Grab_object.object_index == obj_jetpack{
-							has_jetpack = true
-						}
+							if Grab_object.object_index == obj_jetpack{
+								has_jetpack = true
+							}
 				
-						if Grab_object.object_index == obj_hang_glider{
-							has_hang_glider = true
-						}
+							if Grab_object.object_index == obj_hang_glider{
+								has_hang_glider = true
+							}
 			
-						//Initialize Grab_object variables
-		                Grab_object.active = false;
-		                Grab_object.Holder = self; //whose holding the item
-						holding = 2; //Throw the item immediately with a left action
-						down_grab = true
+							//Initialize Grab_object variables
+			                Grab_object.active = false;
+			                Grab_object.Holder = self; //whose holding the item
+							holding = 2; //Throw the item immediately with a left action
+							down_grab = true
+						}
+						else Grab_object = noone
 					}
-					else Grab_object = noone;
+					else Grab_object = noone
 				}
-			
-	            if (instance_exists(Grab_object)) {
-	                if (Grab_object.Team == Team or Grab_object.Team == noone) {
-	                    Grab_object.active = false;
-	                    //set Holder
-	                    Grab_object.Holder = self;
-	                    holding = 2;
-	                }
-				
-					else Grab_object = noone;
-	            }
+				else Grab_object = noone
 	        }
 		}
 		
@@ -354,10 +348,10 @@ if (active) {
 			if instance_exists(Grab_object){
 				if strength >= Grab_object.mass{
 					//Jump a little higher to make up for crouching
-					jump_height += 0.3
+					jump_height += 0.4
 				}
 				else{
-					jump_height += 0.3 - (Grab_object.mass - strength)/3
+					jump_height += 0.4 - (Grab_object.mass - strength)/3
 				}
 			}
 		}
@@ -391,7 +385,7 @@ if (active) {
     ///Block collisions
     with(instance_place(x + sign(hspeed) * 2, y, par_physics)){
 		//Push blocks
-        if (id != other.Grab_object and not frozen and !stuck) {
+        if (id != other.Grab_object and not frozen and not ignite and not stuck) {
             x+=scr_contactx(other.hspeed);
         }
 	}
@@ -509,48 +503,56 @@ if (active) {
 	        if (holding = 0) {
 		
 				Grab_object = (instance_place(x+sign(dir) * GRAB_TOL, y, par_physics));
-			
-	            if !instance_exists(Grab_object){
-					Grab_object = (instance_place(x+sign(dir) * GRAB_TOL, y, obj_character));
-				}
-			
-				//Initialize variables for certain objects
+				
 				if instance_exists(Grab_object){
-					if Grab_object.object_index == obj_jetpack{
-						has_jetpack = true
-					}
+					//No grabbing items from other player's hands
+					if Grab_object.Holder == noone{
+						//Initialize variables for certain objects
+						if Grab_object.object_index == obj_jetpack{
+							has_jetpack = true
+						}
 				
-					if Grab_object.object_index == obj_hang_glider{
-						has_hang_glider = true
+						if Grab_object.object_index == obj_hang_glider{
+							has_hang_glider = true
+						}
+			
+						//Initialize Grab_object variables
+			            if Grab_object.frozen = false{
+			                Grab_object.active = false;
+			                //unstick if sticky
+			                if (Grab_object.sticky) Grab_object.stuck = false
+			                Grab_object.Holder = self; //whose holding the item
+			                holding = 1; //Number of items being held
+			            }
+			            else Grab_object = noone
+			        }
+					else Grab_object = noone
+				}
+				else Grab_object = noone
+	        }
+		}
+		///Player carrying
+		if !instance_exists(Grab_object){
+			Grab_object = (instance_place(x+sign(dir) * GRAB_TOL, y, obj_character))
+			//Make sure the player was grabbed
+			if instance_exists(Grab_object){
+				//Make sure the player isn't holding an item
+				if Grab_object.Grab_object == noone{
+					//Make sure the player is on your team
+					if Grab_object.Team != Team{
+						Grab_object = noone
+					}
+					else{
+						with Grab_object{
+							active = false
+						}
+						Grab_object.Holder = self
+						holding = 1
 					}
 				}
-			
-				//Initialize Grab_object variables
-	            if (instance_exists(Grab_object)) {
-	                if (Grab_object.frozen = false) {
-	                    Grab_object.active = false;
-	                    //unstick if sticky
-	                    if (Grab_object.sticky) Grab_object.stuck = false
-	                    Grab_object.Holder = self; //whose holding the item
-	                    holding = 1; //Number of items being held
-	                }
-					
-	                else Grab_object = noone;
-	            }
-			
-	            if (instance_exists(Grab_object)) {
-	                if (Grab_object.Team == Team or Grab_object.Team == noone) {
-	                    Grab_object.active = false;
-	                    //check if sticky
-	                    if (Grab_object.sticky) Grab_object.stuck = false //unstick
-	                    //set Holder
-	                    Grab_object.Holder = self;
-	                    holding = 1;
-	                }
-				
-					else Grab_object = noone;
-	            }
-	        }
+				else Grab_object = noone
+			}
+			else Grab_object = noone
 		}
     }
 	
@@ -832,13 +834,37 @@ with (instance_place(x, y, obj_block_big)){
 }
 
 //Jump on trampolines
-min_jump_speed = 3
+min_jump_speed = 4
 with instance_place(x, y + vspeed/4, obj_trampoline){
-	if not toppled{
+	//Players can use the down key to NOT jump on the trampoline
+	if not toppled and (not(other.down_pressed > other.axis_buffer) or other.has_hang_glider){
 		other.can_change_dir = true //Act as if the player had just touched the ground
 		//Bounce
 		if other.vspeed > other.min_jump_speed{
 			other.vspeed *= -1.1
+		}
+	}
+}
+
+//Push back over toppled trampolines
+with instance_place(x + hspeed, y, obj_trampoline){
+	if toppled{
+		//If the player is off the ground
+		with other{
+			if place_free(x + hspeed, y + 4){
+				//change trampoline's stats
+				with other{
+					//If the player is traveling a direction that would push it upright with a little speed, push it back over
+					if (image_index == 0 and other.hspeed < 2) or (image_index == 1 and other.hspeed > 2){
+						sprite_index = spr_trampoline
+						toppled = false
+						//Center the object for more natural look
+						if image_index == 1{
+							x += sprite_width/2
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -889,6 +915,17 @@ with(instance_place(x, y, obj_health)) {
 	if (other.hp > other.hp_max) other.hp = other.hp_max;
 	//destroy
 	instance_destroy();
+}
+
+///Break free from player with down key if grabbed
+if Input_player.inputs[DOWN_KEY] == KEY_PRESSED{
+	if Holder != noone{
+		Holder.Grab_object = noone
+		Holder.holding = 0
+		Holder.crouch = false
+		Holder = noone
+		active = true
+	}
 }
 
 ///Climbing
@@ -1013,22 +1050,34 @@ if hanging{
 		}	
 	}
 }
+
+///Key
+//Collect the key to unlock the door
+with instance_place(x, y, obj_key){
+	obj_door.is_locked = false
+	obj_door.sprite_index = spr_door
+	instance_destroy()
+}
 	
 ///Win
-if (place_meeting(x, y, obj_door)) {
-    //win score
-    Team.tScore += global.score_win/ds_list_size(Team.players);
-    if !(global.win) Team.tScore += global.score_first; //first
-    global.win = true;
-	ds_list_destroy(Equipped_objects)
-    instance_destroy();
-    /*
-    //subtract score for each player based on y
-    for(var i=0; i<instance_number(obj_player); i++) {
-        with (instance_find(obj_player,i)) global.playerScore[player_id] -= y_score*global.scoreY;
-        }
-    */
-    }
+with (instance_place(x, y, obj_door)){
+	if not is_locked{
+		with other{
+		    //win score
+		    Team.tScore += global.score_win/ds_list_size(Team.players);
+		    if !(global.win) Team.tScore += global.score_first; //first
+		    global.win = true;
+			ds_list_destroy(Equipped_objects)
+		    instance_destroy();
+		    /*
+		    //subtract score for each player based on y
+		    for(var i=0; i<instance_number(obj_player); i++) {
+		        with (instance_find(obj_player,i)) global.playerScore[player_id] -= y_score*global.scoreY;
+		        }
+		    */
+		}
+	}
+}
 
 //TODO Add cheat enabled button
 ///Cheats
@@ -1067,7 +1116,7 @@ if (mooch_buffer < 0) {
     with (instance_place(x, y+16, obj_block)) {
         // mooch
         if (mooch_proof != other.Team.Team and mooch_proof != -1) {
-			if obj_control.animation_on = true{
+			if global.Menu.animations_on = true{
 				if global.online{
 		            instance_create_layer(x, y-32, "lay_instances", obj_mooch);
 				}

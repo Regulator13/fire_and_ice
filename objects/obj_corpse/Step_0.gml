@@ -43,13 +43,13 @@ else{
 	if freeze_buffer < freeze_buffer_max and freeze_buffer >= 1*20{
 	    switch freeze_buffer{
 	        case 3*20-1:
-	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 0;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 2;
 	            break;
 	        case 2*20:
 	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 1;
 	            break;
 	        case 1*20:
-	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 2;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 0;
 	            break;
 	    }
 	}
@@ -57,7 +57,7 @@ else{
 	else if ignite_buffer < ignite_buffer_max and ignite_buffer >= 1*20{
 		switch ignite_buffer{
 			case 3*20-1:
-	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 0;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 2;
 	            break;
 			
 	        case 2*20:
@@ -65,7 +65,7 @@ else{
 	            break;
 			
 	        case 1*20:
-	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 2;
+	            with (instance_create_layer(x, y-16, "lay_instances", obj_countdown)) image_index = 0;
 	            break;
 	    }
 	}
@@ -121,7 +121,7 @@ if (ignite){
 				else{
 					part_particles_create(obj_particle.ps_explosion, x + 8, y + 8, obj_particle.prt_explosion, 1)
 					//Create explosion and deal damage to all those in rectangle
-					Collided = scr_collision_rectangle_list(x - (32 - sprite_width/2), y - (32 - sprite_height/2), x + (32 - sprite_width/2), y + (32 - sprite_height/2), par_block, false, true)
+					Collided = scr_collision_rectangle_list(x - (32 - sprite_width/2), y - (32 - sprite_height/2), x + (32 + sprite_width/2), y + (32 + sprite_height/2), par_block, false, true)
 			        if !ds_list_empty(Collided){
 						for (var i=0; i<ds_list_size(Collided); i++){
 							Collided[| i].hp -= 10 //explosion damage

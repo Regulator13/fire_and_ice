@@ -58,9 +58,48 @@ ds_list_add(buttons, button);
 var button = instance_create_layer(c1x, cy+by*c1y++, "lay_instances", obj_button);
 with(button) {
     action = "value";
+    title = "Locked Door";
+    ds_list_add(values, "Off", "On");
+    value = other.locked_door_on
+}
+ds_list_add(buttons, button);
+
+
+//Second column
+var button = instance_create_layer(c2x, cy+by*c2y++, "lay_instances", obj_button);
+with(button) {
+    action = "value";
     title = "Difficulty";
     ds_list_add(values, "Beginner", "Easy", "Normal", "Hard", "Expert");
     value = other.difficulty
+}
+ds_list_add(buttons, button);
+
+var button = instance_create_layer(c2x, cy+by*c2y++, "lay_instances", obj_button);
+with(button) {
+    action = "value";
+    title = "Recharge Frequency";
+    ds_list_add(values, "None", "Low", "Medium", "High", "Very High");
+    value = other.recharge_frequency
+}
+ds_list_add(buttons, button);
+
+var button = instance_create_layer(c2x, cy+by*c2y++, "lay_instances", obj_button);
+with(button) {
+    action = "value";
+    title = "Rain Delay";
+    ds_list_add(values, "300", "400", "600", "800", "1000", "1200", "1400", "1600", "1800", "2000");
+    value = ds_list_find_index(values, string(global.water_delay))
+	
+}
+ds_list_add(buttons, button);
+
+var button = instance_create_layer(c2x, cy+by*c2y++, "lay_instances", obj_button);
+with(button) {
+    action = "value";
+    title = "Rain Rate";
+    ds_list_add(values, "0.10", "0.12", "0.14", "0.16", "0.18", "0.20", "0.22", "0.24", "0.26", "0.28", "0.30");
+	value = ds_list_find_index(values, string(global.water_rate))
 }
 ds_list_add(buttons, button);
 

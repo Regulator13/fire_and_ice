@@ -13,9 +13,25 @@ water_on = button.value;
 button = ds_list_find_value(buttons, 2);
 jetpack_on = button.value;
 
-///Difficulty slider
+///Locked Door button
 button = ds_list_find_value(buttons, 3);
+locked_door_on = button.value;
+
+///Difficulty slider
+button = ds_list_find_value(buttons, 4);
 difficulty = button.value;
+
+///Recharge Frequency slider
+button = ds_list_find_value(buttons, 5);
+recharge_frequency = button.value;
+
+///Water Delay slider
+button = ds_list_find_value(buttons, 6);
+global.water_delay = real(button.values[| button.value])
+
+///Water Rate slider
+button = ds_list_find_value(buttons, 7);
+global.water_rate = real(button.values[| button.value])
 
 //open file
 ini_open("options.ini");
@@ -27,7 +43,12 @@ ini_section_delete(section);
 ini_write_real(section, "animations_on", animations_on);
 ini_write_real(section, "water_on", water_on)
 ini_write_real(section, "jetpack_on", jetpack_on)
+ini_write_real(section, "locked_door_on", locked_door_on)
 ini_write_real(section, "difficulty", difficulty)
+ini_write_real(section, "recharge_frequency", recharge_frequency)
+ini_write_real(section, "water_delay", global.water_delay)
+ini_write_real(section, "water_rate", global.water_rate)
+
 
 //close file
 ini_close(); 

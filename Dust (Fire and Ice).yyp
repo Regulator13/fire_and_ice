@@ -271,6 +271,14 @@
             }
         },
         {
+            "Key": "24c5830a-3d56-4eb1-97f3-6e27b17d4e10",
+            "Value": {
+                "id": "bc2a8336-0166-424c-ae5a-01f83c0b334c",
+                "resourcePath": "objects\\obj_key\\obj_key.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "25ccf1c9-d143-466b-8d49-28608df7605b",
             "Value": {
                 "id": "0ec02013-3b89-4780-a93c-92d74d9d2df5",
@@ -443,6 +451,14 @@
             "Value": {
                 "id": "783180a0-0b8d-4a98-9a26-11a14bf1f3a8",
                 "resourcePath": "sprites\\spr_climbing_pick\\spr_climbing_pick.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "3fcb6119-85c5-4755-9993-0e3306ff3791",
+            "Value": {
+                "id": "d626394a-c319-4bb8-bcac-c028364c1a83",
+                "resourcePath": "sprites\\spr_key\\spr_key.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -1772,6 +1788,14 @@
                 "id": "ee6ee825-6cd8-49ad-9cfe-b2135d2f74a7",
                 "resourcePath": "objects\\obj_water_drop\\obj_water_drop.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "f26dc71a-87f4-42af-b4f9-941ee69572cc",
+            "Value": {
+                "id": "6a831fdd-e2cc-4c04-b069-e1a892453adc",
+                "resourcePath": "sprites\\spr_door_locked\\spr_door_locked.yy",
+                "resourceType": "GMSprite"
             }
         },
         {

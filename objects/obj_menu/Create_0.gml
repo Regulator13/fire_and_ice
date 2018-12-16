@@ -53,7 +53,11 @@ section = "gameOptions"
 animations_on = ini_read_real(section, "animations_on", true);
 water_on = ini_read_real(section, "water_on", true)
 jetpack_on = ini_read_real(section, "jetpack_on", true)
+locked_door_on = ini_read_real(section, "locked_door_on", false)
 difficulty = ini_read_real(section, "difficulty", 2)
+recharge_frequency = ini_read_real(section, "recharge_frequency", 2)
+global.water_delay = ini_read_real(section, "water_delay", 4)
+global.water_rate = ini_read_real(section, "water_rate", 0)
 
 //close file
 ini_close(); 
