@@ -122,7 +122,7 @@ if !(instance_exists(obj_input_button)){
 				#endregion
             case STATE_GAME:
                 break; //no menu
-            default: //other menus DOES NOT BREAK OUT!
+            default: //other menus
 				#region Get input
 				//gamepad input
 		        for (input = 0; input < 4; input++) {
@@ -192,31 +192,8 @@ if !(instance_exists(obj_input_button)){
                     }
                 }
 				
-				#endregion
-			case STATE_PATHS:
-				#region STATE_PATHS
+				break
 				
-                if (global.have_server) {
-                    //select a button from the list of possible buttons with left and right controls
-                    selected = scr_increment_in_bounds(selected, haxis, 0, ds_list_size(buttons)-1, true);
-					
-                    //select a path from the list of possible paths with up and down controls
-                    path_selected = scr_increment_in_bounds(path_selected, vaxis, 0, ds_list_size(path_names)-1, true);
-                    
-                    //press button
-                    if (action) {
-                        //check if button exists
-                        var button = ds_list_find_value(buttons, selected);
-                        if (ds_list_size(buttons) > 0 and instance_exists(button)) {
-                            with (button) {
-								//perform the buttons action
-                                event_user(0);
-                            }
-                        }
-                    }
-                }
-				
-                break;
 				#endregion
         }
     }
