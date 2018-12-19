@@ -15,7 +15,8 @@ connectID = global.player_total++; //order in which player connected, used in lo
 controls = 0; //input index in controls array
 
 // inputs - array holding the current state of each input
-inputs = array_create(array_length_2d(global.controls, controls));
+inputs_length = array_length_2d(global.controls, controls)
+inputs = array_create(inputs_length);
 
 // mouse input
 mouseX = 0;

@@ -6,71 +6,22 @@ if !(instance_exists(obj_input_button)){
     var vaxis = 0; //up or down
     var action = false; //clicking
     var input; //gamepad input
-    var axis_buffer = 0.4; //buffer till push starts counting
+    var axis_buffer = GAMEPAD_AXIS_TOL; //buffer till push starts counting
     
     //get input
     if (input_buffer < 0) {
-        //gamepad input
-        for (input = 0; input < 4; input++) {
-            haxis = gamepad_axis_value(input, gp_axislh);
-            vaxis = gamepad_axis_value(input, gp_axislv);
-			
-            // axis check
-            if (haxis < axis_buffer and haxis > -axis_buffer) haxis = 0;
-            if (vaxis < axis_buffer and vaxis > -axis_buffer) vaxis = 0;
-			
-            // action
-            if(gamepad_button_check_released(input, gp_face1)) action = true;
-        }
-        
-        //keyboard input
-        if (keyboard_check(vk_left) or keyboard_check(ord("A")) or keyboard_check(ord("J"))) haxis = -1;
-        if (keyboard_check(vk_right) or keyboard_check(ord("D")) or keyboard_check(ord("L"))) haxis = 1;
-        if (keyboard_check(vk_up) or keyboard_check(ord("W")) or keyboard_check(ord("I"))) vaxis = -1;
-        if (keyboard_check(vk_down) or keyboard_check(ord("S")) or keyboard_check(ord("K"))) vaxis = 1;
-        if (keyboard_check_pressed(vk_space) or keyboard_check_pressed(vk_enter)) action = true;  
-        
         //judge input based on current state
         switch(state){
-			//If on the level menu
-            case STATE_PATHS:
-				///REMOVE? This statement could be reduced to if(global.have_server), the first part is always true
-                if (!global.online or global.online and global.have_server) {
-                    //select a button from the list of possible buttons with left and right controls
-                    selected = scr_increment_in_bounds(selected, haxis, 0, ds_list_size(buttons)-1, true);
-					
-                    //select a path from the list of possible paths with up and down controls
-                    path_selected = scr_increment_in_bounds(path_selected, vaxis, 0, ds_list_size(path_names)-1, true);
-                    
-                    //press button
-                    if (action) {
-                        //check if button exists
-                        var button = ds_list_find_value(buttons, selected);
-                        if (ds_list_size(buttons) > 0 and instance_exists(button)) {
-                            with (button) {
-								//perform the buttons action
-                                event_user(0);
-                            }
-                        }
-                    }
-                }
-				
-                //reset buffer if got input
-                if (haxis != 0 or vaxis != 0 or action != false)
-                    input_buffer = input_buffer_max;
-					
-                break;
-			
-			//If in the starting lobby
             case STATE_LOBBY:
+				#region STATE_LOBBY
+				
                 if !(global.online){
                     //number of inputs to check
                     var inputs = array_height_2d(global.controls);
-                    for (i = 0; i < inputs; i++) {
+                    for (var i = 0; i < inputs; i++) {
                         //check for join input from players
                         switch (global.controls[i, KEY_TYPE]) {
                             case CONTROLS_KEYBOARD:
-							
                             case CONTROLS_MOUSE:
                                 if (keyboard_check_released(global.controls[i, ACTION2_KEY])) {
                                     //join lobby
@@ -90,12 +41,11 @@ if !(instance_exists(obj_input_button)){
                                     }
                                 }
 								
-                                break;
-								
+                                break;				
                             default:
-                                // gamepad input
+                                //gamepad input
                                 if (gamepad_button_check_released(global.controls[i, KEY_TYPE], global.controls[i, ACTION2_KEY])) {
-                                    // join lobby
+                                    //join lobby
                                     if (is_undefined(local_players[? i])) {
                                         local_players[? i] = instance_create_layer(0, 0, "lay_instances", obj_local_player);
                                         local_players[? i].controls = i;
@@ -114,8 +64,8 @@ if !(instance_exists(obj_input_button)){
                         var Local = local_players[? i]
                         if (!is_undefined(Local) and instance_exists(Local)) {
                             // set up input
-                            var haxis = Local.inputs[LEFT_KEY]*-1 + Local.inputs[RIGHT_KEY];
-                            var vaxis = Local.inputs[UP_KEY]*-1 + Local.inputs[DOWN_KEY];
+                            var haxis = scr_positive(Local.inputs[LEFT_KEY])*-1 + scr_positive(Local.inputs[RIGHT_KEY]);
+                            var vaxis = scr_positive(Local.inputs[DOWN_KEY])*-1 + scr_positive(Local.inputs[UP_KEY]);
                             var playerIndex = ds_list_find_index(players, Local.connectID);
                             
                             // teams
@@ -169,29 +119,53 @@ if !(instance_exists(obj_input_button)){
                 }
             
                 break;
-				
+				#endregion
             case STATE_GAME:
-                break; // do nothing
+                break; //no menu
+            default: //other menus
+				#region Get input
+				//gamepad input
+		        for (input = 0; input < 4; input++) {
+		            var chaxis = gamepad_axis_value(input, gp_axislh);
+		            var cvaxis = gamepad_axis_value(input, gp_axislv);
 			
-			//if in a different menu
-            default:
+		            // axis check
+		            if (chaxis > axis_buffer or chaxis < -axis_buffer) haxis = 1*sign(chaxis)
+		            if (cvaxis > axis_buffer or cvaxis < -axis_buffer) vaxis = 1*sign(cvaxis)
+			
+		            // action
+		            if(gamepad_button_check_released(input, gp_face1)) action = true;
+		        }
+        
+		        //keyboard input
+		        if (keyboard_check(vk_left) or keyboard_check(ord("A")) or keyboard_check(ord("J"))) haxis = -1;
+		        if (keyboard_check(vk_right) or keyboard_check(ord("D")) or keyboard_check(ord("L"))) haxis = 1;
+		        if (keyboard_check(vk_up) or keyboard_check(ord("W")) or keyboard_check(ord("I"))) vaxis = -1;
+		        if (keyboard_check(vk_down) or keyboard_check(ord("S")) or keyboard_check(ord("K"))) vaxis = 1;
+		        if (keyboard_check_pressed(vk_space) or keyboard_check_pressed(vk_enter)) action = true;  
+        
+				// reset buffer if got input
+		        if (haxis != 0 or vaxis != 0 or action != false){
+		            input_buffer = input_buffer_max;
+				}
+				#endregion
+				#region Default
+				
                 //button controls
                 var button = ds_list_find_value(buttons, selected);
                 
-                // selector
+                //selector
                 if (!is_undefined(button)) {
-					//Select up or down
+					//if on value button limit changes of selection to only down and up to allow left and right to change value
                     if (instance_exists(button) and button.action == "value" or button.action == "valueAction"){
                         selected = scr_increment_in_bounds(selected, vaxis, 0, ds_list_size(buttons)-1, true);
 					}
-					
-					//DESCR?
+					//else allow any direction to change selected button
                     else{
                         selected = scr_increment_in_bounds(selected, haxis+vaxis, 0, ds_list_size(buttons)-1, true);
 					}
                 }
-				
-                //DESCR?
+				//DESCR?
 				else{
                     selected = scr_increment_in_bounds(selected, haxis+vaxis, 0, ds_list_size(buttons)-1, true);
 				}
@@ -218,12 +192,9 @@ if !(instance_exists(obj_input_button)){
                     }
                 }
 				
-                // reset buffer if got input
-                if (haxis != 0 or vaxis != 0 or action != false){
-                    input_buffer = input_buffer_max;
-				}
+				break
 				
-                break;
+				#endregion
         }
     }
 	
