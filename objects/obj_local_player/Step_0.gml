@@ -46,14 +46,18 @@ if (input_buffer < 0) {
         default:
             // joystick input
 			inputs[LEFT_KEY] = scr_get_gamepad_input(global.controls[controls, LEFT_KEY], input);
-            inputs[RIGHT_KEY] = scr_get_gamepad_input(global.controls[controls, RIGHT_KEY], input);
-            inputs[UP_KEY] = scr_get_gamepad_input(global.controls[controls, UP_KEY], input);
-            inputs[DOWN_KEY] = scr_get_gamepad_input(global.controls[controls, DOWN_KEY], input);
-            inputs[ACTION_KEY] = scr_get_gamepad_input(global.controls[controls, ACTION_KEY], input);
-            inputs[ACTION2_KEY] = scr_get_gamepad_input(global.controls[controls, ACTION2_KEY], input);
-            inputs[LEFTSELC_KEY] = scr_get_gamepad_input(global.controls[controls, LEFTSELC_KEY], input);
-            inputs[RIGHTSELC_KEY] = scr_get_gamepad_input(global.controls[controls, RIGHTSELC_KEY], input);
+	        inputs[RIGHT_KEY] = scr_get_gamepad_input(global.controls[controls, RIGHT_KEY], input);
+	        inputs[UP_KEY] = scr_get_gamepad_input(global.controls[controls, UP_KEY], input);
+	        inputs[DOWN_KEY] = scr_get_gamepad_input(global.controls[controls, DOWN_KEY], input);
+	        inputs[ACTION_KEY] = scr_get_gamepad_input(global.controls[controls, ACTION_KEY], input);
+	        inputs[ACTION2_KEY] = scr_get_gamepad_input(global.controls[controls, ACTION2_KEY], input);
+	        inputs[LEFTSELC_KEY] = scr_get_gamepad_input(global.controls[controls, LEFTSELC_KEY], input);
+	        inputs[RIGHTSELC_KEY] = scr_get_gamepad_input(global.controls[controls, RIGHTSELC_KEY], input);
 			
+			//reset input buffer
+			if (scr_array_sum(inputs, inputs_length) != -5) //-5 number for when everything is released
+				buffer = true
+
 			//aiming
 			gamepad_aimx = gamepad_axis_value(input, gp_axisrh)
 			gamepad_aimy = gamepad_axis_value(input, gp_axisrv)
@@ -63,9 +67,8 @@ if (input_buffer < 0) {
     
     // reset input buffer if in menu
     if (global.Menu.state != STATE_GAME and buffer)
-        input_buffer = input_buffer_max;
+        input_buffer = input_buffer_max
     }
-	
 else {
     // tick
     input_buffer --;
